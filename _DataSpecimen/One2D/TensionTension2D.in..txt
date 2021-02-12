@@ -1,0 +1,96 @@
+*HEADING
+simple brick
+*NODE
+**    1,  0.00,  0.00,  0.00
+**    2,  1.00,  0.00,  0.00
+**    3,  1.00,  1.00,  0.00
+**    4,  0.00,  1.00,  0.00
+**
+    1,  0.00,  0.00,  0.00
+    2,  10.0,  0.00,  0.00
+    3,  10.0,  10.0,  0.00
+    4,  0.00,  10.0,  0.00
+*****************************
+*MATERIAL, NAME=MAT1
+*ELASTIC
+   35000., 0.2
+**-----------------------------------------
+*MATERIAL, NAME=MISES
+*MISES
+   35000.,    0.2,   3.5,  4.0,  0.02
+**-----------------------------------------
+*MATERIAL, NAME=ISOD
+*ISODAMAGE
+   35000.,0.2,   35.,3.5,  1,1.2,0.2,2.0,  2,100.e-3,  .0,  0., "crack energy MN/m"
+**-----------------------------------------
+** matrix linear elastic limited tensile strength **************
+*MATERIAL, NAME=ELT
+***ELASTICLT, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.005, PRINCIPAL_STRESS
+*ELASTICLT, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.0075, PRINCIPAL_STRESS
+   29000.,0.2,   3.8,  100.e-3,  0.0,  0.0, "crack energy N/mm", "bulk viscosity", "crack viscosity"  
+**   35000.,    0.2,   3.50,   100.e-3,  0.0,  0.0, "crack energy N/mm", "bulk viscosity", "crack viscosity"
+**-----------------------------------------
+*MATERIAL, NAME=MUPL
+*MICROPLANE_DAMAGE1
+   36200., 0.20, 2, 3.5, 15.0,    0., 0., 2, 100.e-03, 0.
+** 35000., 0.15, 1, 0.9, 3000., 0.0001, 12.. 1., "Leukart damage function"
+**-----------------------------------------
+*MATERIAL, NAME=LUBL
+*LUBLINER
+   36200.,    0.20,   22.9,  32.8,  3.5,   1.16,  0.6667,  160.e-3, 160.e-4,  15., 0.1
+**   36200.,    0.20,   22.9,  32.8,  3.5,   1.16,  0.6667,  160.e-6, 160.e-4,  15., 0.1
+**   39500.,    0.24,   22.9,  32.8,  2.29,   1.16,  0.6667,  160.e-6, 160.e-4,  15., 0.1
+***************************************************
+***SOLID SECTION, ELSET=EL1, MATERIAL=MISES
+***SOLID SECTION, ELSET=EL1, MATERIAL=ISOD
+***SOLID SECTION, ELSET=EL1, MATERIAL=MUPL
+***SOLID SECTION, ELSET=EL1, MATERIAL=LUBL
+*SOLID SECTION, ELSET=EL1, MATERIAL=ELT
+***SOLID SECTION, ELSET=EL1, MATERIAL=MAT1
+ 1.00
+*ELEMENT, TYPE=CPS4, ELSET=EL1
+***ELEMENT, TYPE=CPE4, ELSET=EL1
+    1,   1, 2, 3, 4
+***************************************************
+***************************************************another step following for combined loading
+*STEP
+*STATIC, ARCLENGTH=0.0e-6
+**   0.00002,  1.0, "comment: uniaxial tension only - small elements"
+**   0.0002,   1.0, "comment: uniaxial tension only"
+**   0.00005,   0.2, "comment: biaxial tension with 2nd step - small elements"
+   0.0005,   0.2, "comment: biaxial tension with 2nd step"
+*CONTROLS, , ITOL= 1.e-7, NITER= 50
+*AMPLITUDE, NAME=AMPL0
+ 0.0, 0.0,  1.0, 1.0
+*BOUNDARY, AMPLITUDE=AMPL0
+  1,    1,  0.
+  1,    2,  0.
+  2,    2,  0.
+  4,    1,  0.
+  2,    1,  0.09
+  3,    1,  0.09
+*EL FILE, FREQUENCY=0.1
+*NODE FILE, FREQUENCY=0.1
+*END STEP
+***************************************************another step preceeding for tension preload
+*STEP
+*STATIC, ARCLENGTH=0.0e-6
+**   0.00005,   1.0, "small elements"
+   0.0005,   1.0
+*CONTROLS, , ITOL= 1.e-7, NITER= 50
+*BOUNDARY, OP=NEW
+  1,    1,  0.
+  1,    2,  0.
+  2,    2,  0.
+  4,    1,  0.
+*AMPLITUDE, NAME=AMPL1
+  0.2, 0.0,  1.0, 1.0
+*BOUNDARY, OP=ADD, AMPLITUDE=AMPL1
+  2,    1,  0.0
+  3,    1,  0.0
+  3,    2,  0.09,   "y-tension"
+  4,    2,  0.09,   "y-tension"
+*EL FILE, FREQUENCY=0.05
+*NODE FILE, FREQUENCY=0.05
+*END STEP
+***************************************************

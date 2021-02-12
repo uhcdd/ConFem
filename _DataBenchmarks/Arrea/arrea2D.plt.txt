@@ -1,0 +1,3 @@
+** ScaleElementData,   0.90
+ScaleNodalData,   0.1
+** ScalePstrainData,   600.0

@@ -1,0 +1,74 @@
+*HEADING
+simple panel
+*NODE
+    1,  0.00,  0.00,  0.0
+    2,  1.00,  0.00,  0.0
+    3,  0.00,  1.00,  0.0
+    4,  1.00,  1.00,  0.0
+    5,  0.00, -1.0,   0,0
+    6,  1.00, -1.0,   0,0
+***************************************************
+*SOLID SECTION, ELSET=EL1, MATERIAL=MAT1
+ 1.000
+*MATERIAL, NAME=MAT1
+*DENSITY
+   1.0e-3
+*ELASTIC
+ 100., 0.0
+*MATERIAL, NAME=MAT1M
+*MISES
+   1000.,    0.2,    15.,   16.0,  0.02,   1.e-5
+**   1000.,    0.2,    15.,   16.0,  0.02,   1.e-5
+***ELEMENT, TYPE=CPS3, ELSET=EL1
+**    1,       1,     2,     4
+**    2,       1,     4,     3
+*ELEMENT, TYPE=CPS4, ELSET=EL1
+    1,       1,     2,     4,    3
+***************************************************
+***SOLID SECTION, ELSET=EL2, MATERIAL=MAT2
+** 1.00
+***MATERIAL, NAME=MAT2
+***ELASTIC
+** 10000., 0.2
+***ELEMENT, TYPE=T2D2, ELSET=EL2
+**    3,       5,     1
+**    4,       6,     2
+**    5,       5,     2
+***************************************************
+*STEP
+***STATIC
+**   0.10,   1.0, 0.0005
+**   0.10,   1.0, 0.0005
+*DYNAMIC
+   0.0005,   0.05, 0.0002
+*DAMPING, ALPHA=1.e+1
+***DAMPING, ALPHA=1.e-3, BETA=1.e-3
+***SOLUTION TECHNIQUE, TYPE=QUASI-NEWTON
+*CONTROLS, PARAMETERS=FIELD
+  1.e-5
+*CONTROLS, PARAMETERS=TIME INCREMENTATION
+  100
+*BOUNDARY, OP=NEW
+  1,    1,2,  0.
+  2,    2,2,  0.
+  3,    1,1,  0.
+****  2,    1,1,  0.02
+****  4,    1,1,  0.02
+**  2,    1,2,  0.
+**  3,    1,1,  4.156921938e-2
+**  4,    1,1,  4.156921938e-2
+**  3,    2,2,  0.
+**  4,    2,2,  0.
+*AMPLITUDE, NAME=AMPL0
+ 0.0, 1.0,  1.0, 1.0
+** 0.0, 0.0,  1.0, 1.0
+*CLOAD, AMPLITUDE=AMPL0
+     2, 1,  1.
+     4, 1,  1.
+*EL FILE, FREQUENCY=1.0
+S
+E
+*NODE FILE, FREQUENCY=1.0
+U
+*END STEP
+***************************************************

@@ -1,0 +1,38 @@
+*HEADING
+bond for RC  Tension bar
+*NODE
+        1,       0.0000000,     0.0
+        2,       0.0000000,     0.0
+***************************Verbund*******************************
+*SOLID SECTION, ELSET=bond, MATERIAL=MAT5
+        1.0
+*MATERIAL, NAME=MAT4
+*ELASTIC
+   5.000e+05, 0.
+*MATERIAL, NAME=MAT5
+*SPRING
+**   5.000e+04,   5.000e-04,   6.000e+0,   1.000e-03,   3.000e+00,   1.000e-04,   0.0100e+05
+   5.000e+04,   1.000e-04,   6.000e+0,   1.000e-03,   3.000e+00,   0.0,   1.000e+05
+*ELEMENT, TYPE=S1D2, ELSET=bond
+     201,       1,       2
+************************************************************
+*STEP
+*SOLUTION TECHNIQUE, TYPE=QUASI-NEWTON
+*CONTROLS, PARAMETERS=FIELD
+  1.e-5
+*CONTROLS, PARAMETERS=TIME INCREMENTATION
+  20
+*STATIC
+0.010,  1.0
+**0.010,  1.0
+*AMPLITUDE, NAME=DISPL1
+  0.0, 0.0,  1.0, 1.0
+*BOUNDARY, OP=NEW, AMPLITUDE=DISPL1
+      1, 1, 1,  0.0
+      2, 1, 1,         .0012
+*EL FILE, FREQUENCY=0.5
+S
+E
+*NODE FILE, FREQUENCY=0.5
+U
+*ENDSTEP

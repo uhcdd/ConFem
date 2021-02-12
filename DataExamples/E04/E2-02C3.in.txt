@@ -1,0 +1,51 @@
+*HEADING
+Relaxation and Creep with temperature
+*NODE
+        1,       0.0000000,     0.0
+        2,       0.2000000,     0.0
+        3,        .4000000,     0.0
+        4,        .6000000,     0.0
+        5,        .8000000,     0.0
+        6,       1.0000000,     0.0
+***************************Beton*********************************
+*SOLID SECTION, ELSET=concrete, MATERIAL=MAT1
+    1.0
+*MATERIAL, NAME=MAT1
+*ELASTICLT
+ 30000.0, 0.2, 3.5, 100.0e-6, 1.0e-02, 2.0, 6.931471806e-3, 0, 0.0
+*MATERIAL, NAME=MAT2
+*ELASTIC
+ 30000.0, 0.2
+*ELEMENT, TYPE=T1D2, ELSET=concrete
+       1,       1,       2,	   3.467902
+       2,       2,       3,	   3.531939
+       3,       3,       4,	   3.431148
+       4,       4,       5,	   3.583772
+       5,       5,       6,	   3.517374
+************************************************************
+*STEP
+*CONTROLS, PARAMETERS=FIELD
+  1.e-5
+*CONTROLS, PARAMETERS=TIME INCREMENTATION
+  10
+*STATIC
+10.0,  500.0
+*BOUNDARY
+      1, 1, 1,  0.0
+      6, 1, 1,  0.0
+*AMPLITUDE, NAME=TEMP1
+  0.0, 0.0,  100.0, 1.5, 500., 1.5
+*TEMPERATURE, AMPLITUDE=TEMP1
+        1,       -10.0
+        2,       -10.0
+        3,       -10.0
+        4,       -10.0
+        5,       -10.0
+        6,       -10.0
+*EL FILE, FREQUENCY=0.5
+S
+E
+*NODE FILE, FREQUENCY=0.5
+U
+*ENDSTEP
+************************************************************
