@@ -1,0 +1,10 @@
+ConFem  ../DataExamples/E10/E10-01a
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 20, elems 1, active nodes 4, abs.size 0.21 MItems, rel.size 0.5250 (abs.size/(ndofs**2)
+used material MAT1, spec. inertial mass 2.50e-03, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 1.010025e-14 1.000000e+00    6.689668e-03
+Element Data written 1.000000 1.000000
+Nodal Data written 1.000000 1.000000
+total comp time 0 seconds

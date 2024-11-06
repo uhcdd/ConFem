@@ -1,0 +1,9 @@
+ConFem  ../_DataShellsSlabs/Slab2
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 678, elems 400, nodes 226, rel size 0.0878, abs size 39.4248 MWords
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 4.072198e-13 1.000000e+00    2.551798e-01
+Element Data written 1.000000 1.000000
+Nodal Data written 1.000000 1.000000
+total comp time 3 seconds

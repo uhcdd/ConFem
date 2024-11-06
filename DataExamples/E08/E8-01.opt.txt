@@ -1,0 +1,2 @@
+writeNodes,     81, 1,  p-u, 208, 1, b-u, 209, 1, b-u
+reinforcementDesign, 435, 17.0, 0.075, 0.075, 1.0, 1.0, 7810.

@@ -1,0 +1,11 @@
+ConFem  ../_DataShellsSlabs/HyparRand
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 8900, elems 1694, active nodes 1780, abs.size 2567.48 MItems, rel.size 0.0332 (abs.size/(ndofs**2)
+used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 3.491747e-10 1.000000e+00    5.417727e+01
+Element data written 1.000000
+Nodal data written 1.000000
+Restart data written 1.000000
+total comp time 5 seconds

@@ -1,0 +1,11 @@
+*HEADING
+axisym
+*ELEMENTSET
+ EL1, MAT1, TAX2, 0.1, Line
+[1.0,0.0], [1.1,0.0], [1]
+*MATERIAL
+ MAT1, *ELASTIC, [100000.,0.0, 0.0]
+*BOUNDARYLINE
+ [ [1.0,0.0],[1.1,0.0],1 ] , [2,0.0]
+*CLOAD
+ [1.1, 0.0, 1, 12.56637062]

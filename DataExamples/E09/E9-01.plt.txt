@@ -1,0 +1,4 @@
+*ScaleStress, prop1, 2.0
+*NoPostNode
+*PostElem3D
+*ScaleDispl, 2.0

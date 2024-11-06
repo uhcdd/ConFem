@@ -1,0 +1,9 @@
+ConFem  ../DataExamples/E10/E8-01c
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 80, elems 9, active nodes 16, rel size 0.2719, abs size 1.6992 MWords
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 1.654198e-14 1.000000e+00    1.386936e-02
+Element Data written 1.000000 1.000000
+Nodal Data written 1.000000 1.000000
+total comp time 0 seconds

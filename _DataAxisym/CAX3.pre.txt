@@ -1,0 +1,17 @@
+*HEADING
+axisym
+*ELEMENTSET
+ EL1, MATEL, CAX4, 1.0, Box
+[0.5,0.0], [5.0,0.5], [45, 5]
+*MATERIAL
+ MATEL, *ELASTIC, [30000.,0.2, 0.0]
+*STATIC
+ [1.0, 1.0]
+*BOUNDARYLINE
+ [ [0.5,0.0],[0.5,0.5],5 ] , [1,0.0]
+*BOUNDARY
+ [  0.5, 0., 2, 0. ]
+*CLOAD
+ [5.0, 0.5, 2, -1.0]
+*OPDATA
+ [ writeNodes, [5.,0.5, 2, p-u] ] 

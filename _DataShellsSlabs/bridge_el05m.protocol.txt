@@ -1,0 +1,13 @@
+ConFem  ../_DataShellsSlabs/bridge_el05m
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 4619, elems 870, active nodes 899, abs.size 820.26 MItems, rel.size 0.0394 (abs.size/(ndofs**2)
+used material MAT_EL, spec. inertial mass 0.00e+00, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 1.745596e-12 1.000000e+00    1.379030e-01
+Element data written 1.000000
+Nodal data written 1.000000
+Restart data written 1.000000
+last iteration data
+    1, 1.0000,    1
+total comp time 3 seconds

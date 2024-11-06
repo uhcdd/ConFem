@@ -1,0 +1,127 @@
+ConFem  ../_DataBuckling/a_640_210000
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 3360, elems 640, active nodes 672, abs.size 666.29 MItems, rel.size 0.0604 (abs.size/(ndofs**2)
+used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 8.242301e-14 1.000000e+00    4.217053e-02
+Element data written 1.000000
+Nodal data written 1.000000
+Restart data written 1.000000
+1 step starts, solution type NR
+Eigenvalue analysis: Matrices have been computed
+Eigenvalue analysis: kinematic boundary conditions considered
+Eigenvalue analysis: prereqs for iterations ready
+iter 0, residual 1.935011
+iter 1, residual 0.660664
+iter 2, residual 0.419588
+iter 3, residual 0.307001
+iter 4, residual 0.238840
+iter 5, residual 0.196599
+iter 6, residual 0.171121
+iter 7, residual 0.155126
+iter 8, residual 0.143157
+iter 9, residual 0.131981
+iter 10, residual 0.120366
+iter 11, residual 0.108448
+iter 12, residual 0.098620
+iter 13, residual 0.220385
+iter 14, residual 0.181125
+iter 15, residual 0.133934
+iter 16, residual 0.094305
+iter 17, residual 0.065991
+iter 18, residual 0.047265
+iter 19, residual 0.035568
+iter 20, residual 0.028887
+iter 21, residual 0.026249
+iter 22, residual 0.028446
+iter 23, residual 0.171568
+iter 24, residual 0.124392
+iter 25, residual 0.084731
+iter 26, residual 0.056679
+iter 27, residual 0.038956
+iter 28, residual 0.029509
+iter 29, residual 0.025971
+iter 30, residual 0.024479
+iter 31, residual 0.021770
+iter 32, residual 0.017689
+iter 33, residual 0.013604
+iter 34, residual 0.010360
+iter 35, residual 0.008112
+iter 36, residual 0.006760
+iter 37, residual 0.006130
+iter 38, residual 0.005873
+iter 39, residual 0.005572
+iter 40, residual 0.005118
+iter 41, residual 0.004607
+iter 42, residual 0.004116
+iter 43, residual 0.003671
+iter 44, residual 0.003277
+iter 45, residual 0.002929
+iter 46, residual 0.002623
+iter 47, residual 0.002353
+iter 48, residual 0.002114
+iter 49, residual 0.001901
+iter 50, residual 0.001711
+iter 51, residual 0.001542
+iter 52, residual 0.001389
+iter 53, residual 0.001252
+iter 54, residual 0.001127
+iter 55, residual 0.001013
+iter 56, residual 0.000908
+iter 57, residual 0.000811
+iter 58, residual 0.000720
+iter 59, residual 0.000636
+iter 60, residual 0.000558
+iter 61, residual 0.000486
+iter 62, residual 0.000420
+iter 63, residual 0.000360
+iter 64, residual 0.000306
+iter 65, residual 0.000259
+iter 66, residual 0.000218
+iter 67, residual 0.000183
+iter 68, residual 0.000154
+iter 69, residual 0.000128
+iter 70, residual 0.000108
+iter 71, residual 0.000090
+iter 72, residual 0.000076
+iter 73, residual 0.000064
+iter 74, residual 0.000054
+iter 75, residual 0.000046
+iter 76, residual 0.000039
+iter 77, residual 0.000033
+iter 78, residual 0.000029
+iter 79, residual 0.000025
+iter 80, residual 0.000021
+iter 81, residual 0.000019
+iter 82, residual 0.000016
+iter 83, residual 0.000014
+iter 84, residual 0.000012
+iter 85, residual 0.000011
+iter 86, residual 0.000009
+iter 87, residual 0.000008
+iter 88, residual 0.000007
+iter 89, residual 0.000006
+iter 90, residual 0.000006
+iter 91, residual 0.000005
+iter 92, residual 0.000004
+iter 93, residual 0.000004
+iter 94, residual 0.000003
+iter 95, residual 0.000003
+iter 96, residual 0.000003
+iter 97, residual 0.000002
+iter 98, residual 0.000002
+iter 99, residual 0.000002
+iter 100, residual 0.000002
+iter 101, residual 0.000001
+iter 102, residual 0.000001
+iter 103, residual 0.000001
+iter 104, residual 0.000001
+eigenform 0, value 9.621342, rel. acc 2.352974e-08
+eigenform 1, value 9.621487, rel. acc 2.244630e-07
+eigenform 2, value 9.869514, rel. acc 2.399186e-07
+eigenform 3, value 9.869789, rel. acc 1.427787e-06
+eigenform 4, value 9.873557, rel. acc 9.702400e-08
+Eigenvalue analysis: finished
+Restart data written 1.000000
+total comp time 19 seconds

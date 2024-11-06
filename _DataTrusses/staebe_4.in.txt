@@ -1,0 +1,45 @@
+*HEADING, SPARSE
+2D-TrussLargeDispl
+*NODE
+        1,   0.0,  0.0
+        2,   1.0,  1.0
+        3,   1.0,  0.8
+        4,   2.0,  0.0
+*****************************************************************
+*ELEMENT, TYPE=T2D2, ELSET=PROP1
+      1,     1,     2
+      2,     1,     3
+      3,     2,     3
+      4,     2,     4
+      5,     3,     4
+*****************************************************************
+*MATERIAL, NAME=MAT1
+*DENSITY 
+   10.0
+*ELASTIC
+   1.00000e+04,    0.0,   1.0e-05
+*****************************************************************
+*SOLID SECTION,ELSET=PROP1,MATERIAL=MAT1
+   1.00000e-03
+*****************************************************************
+*STEP, NLGEOM=YES
+*CONTROLS, PARAMETERS=FIELD
+   1.e-4
+*CONTROLS, PARAMETERS=TIME INCREMENTATION
+   25
+*STATIC, ARCLENGTH=0.01
+   0.01,    1.0,   0.01
+*AMPLITUDE, NAME=DISPL1
+  0.0, 0.0,  1.0, 1.0
+*BOUNDARY, OP=NEW, AMPLITUDE=DISPL1
+        1,   1,   2,     0.0
+        4,   1,   2,     0.0
+        2,   2,   2,    -2.0
+***AMPLITUDE, NAME=LOAD1
+**  0.0, 0.0,  1.0, 1.0
+***CLOAD, OP=NEW,  AMPLITUDE=LOAD1
+**        2,   2,   -4.0
+*EL FILE,FREQUENCY=10
+*NODE FILE,FREQUENCY=10
+*END STEP
+*****************************************************************

@@ -1,0 +1,121 @@
+Time   1.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   1.0069e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   1.0069e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   1.0069e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   1.0069e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   1.0069e-04   3.0000e+00
+Time  51.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   1.5909e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   1.5909e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   1.5909e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   1.5909e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   1.5909e-04   3.0000e+00
+Time 101.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   2.0037e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   2.0037e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   2.0037e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   2.0037e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   2.0037e-04   3.0000e+00
+Time 151.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   2.2956e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   2.2956e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   2.2956e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   2.2956e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   2.2956e-04   3.0000e+00
+Time 201.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   2.5020e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   2.5020e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   2.5020e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   2.5020e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   2.5020e-04   3.0000e+00
+Time 251.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   2.6479e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   2.6479e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   2.6479e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   2.6479e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   2.6479e-04   3.0000e+00
+Time 301.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   2.7511e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   2.7511e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   2.7511e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   2.7511e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   2.7511e-04   3.0000e+00
+Time 351.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   2.8240e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   2.8240e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   2.8240e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   2.8240e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   2.8240e-04   3.0000e+00
+Time 401.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   2.8756e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   2.8756e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   2.8756e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   2.8756e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   2.8756e-04   3.0000e+00
+Time 451.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   2.9120e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   2.9120e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   2.9120e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   2.9120e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   2.9120e-04   3.0000e+00
+Time 501.0000
+El      1    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      1      2
+   0.1000   0.0000   2.9378e-04   3.0000e+00
+El      2    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      2      3
+   0.3000   0.0000   2.9378e-04   3.0000e+00
+El      3    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      3      4
+   0.5000   0.0000   2.9378e-04   3.0000e+00
+El      4    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      4      5
+   0.7000   0.0000   2.9378e-04   3.0000e+00
+El      5    T1D2                                concrete                                    MAT3       ELASTIC_VISCO      5      6
+   0.9000   0.0000   2.9378e-04   3.0000e+00

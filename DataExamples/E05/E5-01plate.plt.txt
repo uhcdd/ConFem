@@ -1,0 +1,2 @@
+***ScaleStress, Prop1, 0., Prop2, 0.
+*ScaleDispl, 0.5

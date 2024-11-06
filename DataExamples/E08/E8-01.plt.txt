@@ -1,0 +1,3 @@
+*ScaleDispl2D, 1000.
+*ScaleDispl, 0.5
+*ScaleStress, EL1, 2.0

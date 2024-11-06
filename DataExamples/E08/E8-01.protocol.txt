@@ -1,0 +1,10 @@
+SimFem  ../DataExamples/E08/E8-01
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 414, elems 171, active nodes 207, abs.size 8.70 MItems, rel.size 0.0520 (abs.size/(ndofs**2)
+used element CP*4 [char. length, scaling type, scaling factor] span from el 1,0.500,-1,1.000 to el 3000,0.500,-1,1.000
+used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
+used material MATA, spec. inertial mass 0.00e+00, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 1.00000 iter 0 5.031878e+00
+0   1 1.000 1.00000 iter 1 1.400441e-13
+total comp time 0 seconds

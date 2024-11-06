@@ -1,0 +1,3 @@
+ScaleElementData,   0.20
+ScaleNodalData,   1.0
+*PostElem3D

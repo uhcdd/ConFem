@@ -1,0 +1,66 @@
+*HEADING, SPARSE
+ABAQUS job
+*NODE
+        1,   0.000000,  0.0
+        2,   1.000000,  0.0
+*****************************************************************
+*ELEMENT, TYPE=T1D2, ELSET=PROP1
+***ELEMENT, TYPE=T2D2, ELSET=PROP1
+        1,        1,        2
+*****************************************************************
+*MATERIAL, NAME=MAT1
+*DENSITY
+   0.1
+*ELASTIC
+   10.000,    0.0,   1.0e-05
+*MATERIAL, NAME=MAT3
+*MISES
+   200000.,    0.0,    500.,   600.,  0.02,   1.e-5, 0.2
+*****************************************************************
+*SOLID SECTION,ELSET=PROP1,MATERIAL=MAT3
+   1.0000
+***Step 1 statisch*******************************************************
+*STEP
+Testbeispiel Dynamik - konsistente Massen
+*STATIC
+  0.01, 2.7
+*AMPLITUDE, NAME=LOAD
+  0.0, 0.0,  0.5, 1.0, 1.5, -1.0, 2.7, 1.2 
+*BOUNDARY, OP=NEW, AMPLITUDE=LOAD
+        1,   1,   1,     0.0
+**        1,   2,   2,     0.0
+**        2,   2,   2,     0.0
+        2,   1,   1,     0.006
+*AMPLITUDE, NAME=LOAD0
+  0.0, 0.0,  0.5, 1.0 
+*CLOAD, OP=NEW, AMPLITUDE=LOAD0
+**        2,   1,   0.02
+*EL FILE, FREQUENCY=0.1
+*NODE FILE, FREQUENCY=0.1
+*END STEP
+***Step 2 dynamisch*******************************************************
+***STEP
+**Testbeispiel Dynamik - konsistente Massen
+***CONTROLS, PARAMETERS=FIELD
+**   1.e-5
+***CONTROLS, PARAMETERS=TIME INCREMENTATION
+**   25
+***DYNAMIC, IMPLICIT
+**  0.01, 4.00
+***DAMPING, ALPHA=0.001, BETA=0.0015
+***BOUNDARY, OP=NEW
+**        1,   1,   1,     0.0
+**        1,   2,   2,     0.0
+**        2,   2,   2,     0.0
+****      2,   1,   1,     0.02
+***AMPLITUDE, NAME=LOAD1
+**  0.5, 1.0,  1.5, 1.0,   2.0, 0.,  5.0,  0.
+***CLOAD, OP=NEW, AMPLITUDE=LOAD1
+**        2,   1,   0.1
+***EL FILE, FREQUENCY=0.1
+**S
+**E
+***NODE FILE, FREQUENCY=0.1
+**U
+***END STEP
+**********************************************************

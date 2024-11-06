@@ -1,0 +1,4 @@
+*PostElem3D
+*ScaleStress, EL1, 1.5, EL2, 1.5
+***NoPostElem2D
+*ScaleDispl, 5

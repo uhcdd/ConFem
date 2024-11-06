@@ -1,0 +1,4 @@
+*NoPostNode
+*PostElem3D
+*ScaleStress, Prop1, 3.0
+*ScaleDispl, 0.3

@@ -1,0 +1,11 @@
+ConFem  ../_DataAxisym/TAX13
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 5, elems 1, active nodes 3, abs.size 0.01 MItems, rel.size 0.6000 (abs.size/(ndofs**2)
+used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 1.429658e-12 1.000000e+00    3.639008e-03
+Element data written 1.000000
+Nodal data written 1.000000
+Restart data written 1.000000
+total comp time 0 seconds

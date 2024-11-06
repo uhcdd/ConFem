@@ -1,0 +1,86 @@
+*HEADING
+simple brick
+*NODE
+** units MN, m
+    1,  0.00,  0.00,  0.00
+    2,  0.10,  0.00,  0.00
+    3,  0.10,  0.10,  0.00
+    4,  0.00,  0.10,  0.00
+*****************************
+*MATERIAL, NAME=MAT1
+*ELASTIC
+   35000., 0.2
+**-----------------------------------------
+*MATERIAL, NAME=MISES
+*MISES
+   35000.,    0.2,   3.5,  4.0,  0.02, 1.0e-5
+**-----------------------------------------
+*MATERIAL, NAME=ISOD
+*ISODAMAGE
+   35000.,0.2,   35.,3.5,  1,1.2,0.2,2.0,  2,100.e-6,  .0,  0., "crack energy MN/m"
+**-----------------------------------------
+*MATERIAL, NAME=MIPL
+*MICROPLANE_DAMAGE1
+   35000., 0.20, 2, 3.5, 13.0,    0., 0., 2, 100.e-06, 0., 0.
+** 35000., 0.15, 1, 0.9, 3000., 0.0001, 12.. 1., "Leukart damage function"
+**-----------------------------------------
+*MATERIAL, NAME=LUBL
+*LUBLINER
+**   35000.,0.20, 24.5,35.0,3.5, 1.16,0.6667,  100.e-6,100.e-4,  15.,0.1, 0.0,0.0
+   35000.,0.20, 24.5,35.0,3.5, 1.16,0.6667,  100.e-6,100.e-4,  15.,0.1, 0.4,0.5
+***************************************************
+***SOLID SECTION, ELSET=EL1, MATERIAL=MISES
+*SOLID SECTION, ELSET=EL1, MATERIAL=ISOD
+***SOLID SECTION, ELSET=EL1, MATERIAL=MIPL
+***SOLID SECTION, ELSET=EL1, MATERIAL=LUBL
+ 0.100
+*ELEMENT, TYPE=CPS4, ELSET=EL1
+***ELEMENT, TYPE=CPE4, ELSET=EL1
+    1,   1, 2, 3, 4
+***************************************************another step following for shear
+*STEP
+*STATIC
+   0.02,   1.0
+***CONTROLS, , ITOL= 1.e-7, NITER= 50
+*CONTROLS, PARAMETERS=FIELD
+  1.e-7
+*CONTROLS, PARAMETERS=TIME INCREMENTATION
+  50
+*BOUNDARY
+  1,    1,1,  0.
+  1,    2,2,  0.
+  2,    2,2,  0.
+  4,    1,1,  0.
+*AMPLITUDE, NAME=AMPL0
+ 0.0, 0.0,  1.0, 0.8, "comment: uniaxial tension"
+** 0.0, 0.0,  1.0, -5.0,  "comment: uniaxial compression"
+***CLOAD, AMPLITUDE=AMPL0
+**  3,    2,  0.020
+**  4,    2,  0.020
+*BOUNDARY, AMPLITUDE=AMPL0
+  3,    2,2,  1.20e-5
+  4,    2,2,  1.20e-5
+*EL FILE, FREQUENCY=0.1
+E
+S
+*NODE FILE, FREQUENCY=0.1
+U
+*END STEP
+***************************************************another step preceding tension / compression preload
+*STEP
+*STATIC
+   0.01,   2.0
+*BOUNDARY
+  1,    1,1,  0.
+  1,    2,2,  0.
+  2,    2,2,  0.
+*AMPLITUDE, NAME=AMPL1
+  1.0, 0.0,  2.0, 0.3
+*BOUNDARY, OP=ADD, AMPLITUDE=AMPL1
+  2,    1,1,  0.0
+  3,    1,1,  0.0002
+  4,    1,1,  0.0002
+  3,    2,2,  0.
+  4,    2,2,  0.
+***END STEP
+***************************************************

@@ -1,0 +1,115 @@
+*HEADING
+simple brick
+*NODE
+** large unit m
+    1,  0.00,  0.00,  0.00
+    2,  0.10,  0.00,  0.00
+    3,  0.10,  0.10,  0.00
+    4,  0.00,  0.10,  0.00
+** SMALL
+**    1,  0.00,  0.00,  0.00
+**    2,  0.01,  0.00,  0.00
+**    3,  0.01,  0.01,  0.00
+**    4,  0.00,  0.01,  0.00
+*****************************
+*MATERIAL, NAME=MAT1
+*ELASTIC
+   35000., 0.2
+**-----------------------------------------
+*MATERIAL, NAME=MISES
+*MISES
+   35000.,    0.2,   3.5,  4.0,  0.02, 1.e-5, 0.
+**-----------------------------------------
+**** matrix linear elastic limited tensile strength **************
+***MATERIAL, NAME=ELLT
+*****ELASTIC_SDA, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.01, PRINCIPAL_STRESS
+***ELASTIC_SDA, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.5, PRINCIPAL_STRESS
+**   35000.,    0.2,   3.50,   100.e-6,  0.0,  0.0, "crack energy N/mm", "bulk viscosity", "crack viscosity"
+**-----------------------------------------
+*MATERIAL, NAME=ISOD
+*ISODAMAGE, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.0010, P_RINCIPAL_STRESS
+   35000.,0.2,   35.,3.5,  1,1.2,0.2,2.0,  0,100.e-6,  .0,  0., "crack energy MN/m"
+**   35000.,0.2,   35.,3.5,  1,1.2,0.2,2.0,  3,100.e-6,  .0,  0.0, "crack energy MN/m"
+**-----------------------------------------
+***MATERIAL, NAME=MIPL
+*****MICROPLANE_DAMAGE1, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.001, P_RINCIPAL_STRESS
+***MICROPLANE_DAMAGE1, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.001, P_RINCIPAL_STRESS
+**   35000., 0.20, 2, 3.5, 13.0,    0., 0., 2, 100.e-06, 0., 0.
+****   35000., 0.20, 2, 3.5, 13.0,    0., 0., 3, 100.e-06, 0., 0.
+**** 35000., 0.15, 1, 0.9, 3000., 0.0001, 12.. 1., "Leukart damage function"
+**-----------------------------------------
+*MATERIAL, NAME=LUBL
+*LUBLINER
+     35000.,    0.20,   25.0,  35.0,  3.5,   1.16,  0.6667,  100.e-6, 100.e-4,  15., 0.1, 0.4,0.5
+**  "crack energy N/mm"
+**   36200.,    0.20,   22.9,  32.8,  3.5,   1.16,  0.6667,  160.e-6, 160.e-4,  15., 0.1
+**   39500.,    0.24,   22.9,  32.8,  2.29,   1.16,  0.6667,  160.e-6, 160.e-4,  15., 0.1
+***************************************************
+***SOLID SECTION, ELSET=EL1, MATERIAL=MISES
+*SOLID SECTION, ELSET=EL1, MATERIAL=ISOD
+***SOLID SECTION, ELSET=EL1, MATERIAL=MIPL
+***SOLID SECTION, ELSET=EL1, MATERIAL=LUBL
+***SOLID SECTION, ELSET=EL1, MATERIAL=ELLT
+ 0.10
+*ELEMENT, TYPE=CPS4, ELSET=EL1
+***ELEMENT, TYPE=CPE4, ELSET=EL1
+    1,   1, 2, 3, 4
+***************************************************
+***************************************************another step following for combined loading
+*STEP
+*STATIC
+**   0.0005,   0.5	
+   0.005,   0.5	
+***STATIC, RIKS
+**   0.0005,   0.5, 2.0e-5	
+*CONTROLS, PARAMETERS=FIELD
+  1.e-7
+*CONTROLS, PARAMETERS=TIME INCREMENTATION
+  50
+*AMPLITUDE, NAME=AMPL0
+ 0.0, 0.0,  0.5, 1.5, "comment: uniaxial tension"
+*BOUNDARY
+  1,    1,1,  0.
+  1,    2,2,  0.
+  2,    2,2,  0.
+  4,    1,1,  0.
+*BOUNDARY, AMPLITUDE=AMPL0
+  2,    1,1,  0.1e-4
+  3,    1,1,  0.1e-4
+** SMALL
+**  2,    1,1,  0.01e-4
+**  3,    1,1,  0.01e-4
+*EL FILE, FREQUENCY=0.25
+E
+S
+*NODE FILE, FREQUENCY=0.25
+U
+*END STEP
+***********************************************another step preceeding for tension preload
+*STEP
+*STATIC
+**   0.0005,   6.6,    "small element size LUBL"
+   0.002,   3.0,   "general"
+**
+**   0.0005,   6.6,   "large element size lubliner"
+**   0.020,   6.6,   "large element size, SDA isodamage"
+**   0.0001,   1.1,   "large element size, SDA microplane, does not work really with double cracking"
+*BOUNDARY
+  1,    1,1,  0.
+  1,    2,2,  0.
+  2,    2,2,  0.
+*AMPLITUDE, NAME=AMPL1
+  0.5, 0.0,  2.0, 3.0
+*BOUNDARY, OP=ADD, AMPLITUDE=AMPL1
+  2,    1,1,  0.05e-4,   "additional x-tension"
+  3,    1,1,  0.15e-4,   "additional x-tension + shear"
+  4,    1,1,  0.10e-4,   "shear"
+  3,    2,2,  0.075e-4,   "z-tension"
+  4,    2,2,  0.075e-4,   "z-tension"
+*EL FILE, FREQUENCY=0.5
+E
+S
+*NODE FILE, FREQUENCY=0.5
+U
+*END STEP
+***********************************************

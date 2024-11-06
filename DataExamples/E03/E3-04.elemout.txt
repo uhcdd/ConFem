@@ -1,0 +1,1206 @@
+Time   0.5000
+El      1    T1D2                                concrete                                    MAT1           ELASTICLT      1      3
+   0.0050   0.0000   8.3827e-06   3.0178e-01
+El      2    T1D2                                concrete                                    MAT1           ELASTICLT      3      5
+   0.0150   0.0000   1.6703e-05   6.0130e-01
+El      3    T1D2                                concrete                                    MAT1           ELASTICLT      5      7
+   0.0250   0.0000   2.4602e-05   8.8567e-01
+El      4    T1D2                                concrete                                    MAT1           ELASTICLT      7      9
+   0.0350   0.0000   3.1785e-05   1.1443e+00
+El      5    T1D2                                concrete                                    MAT1           ELASTICLT      9     11
+   0.0450   0.0000   3.8041e-05   1.3695e+00
+El      6    T1D2                                concrete                                    MAT1           ELASTICLT     11     13
+   0.0550   0.0000   4.3218e-05   1.5558e+00
+El      7    T1D2                                concrete                                    MAT1           ELASTICLT     13     15
+   0.0650   0.0000   4.7208e-05   1.6995e+00
+El      8    T1D2                                concrete                                    MAT1           ELASTICLT     15     17
+   0.0750   0.0000   4.9931e-05   1.7975e+00
+El      9    T1D2                                concrete                                    MAT1           ELASTICLT     17     19
+   0.0850   0.0000   5.1322e-05   1.8476e+00
+El     10    T1D2                                concrete                                    MAT1           ELASTICLT     19     21
+   0.0950   0.0000   5.1322e-05   1.8476e+00
+El     11    T1D2                                concrete                                    MAT1           ELASTICLT     21     23
+   0.1050   0.0000   4.9931e-05   1.7975e+00
+El     12    T1D2                                concrete                                    MAT1           ELASTICLT     23     25
+   0.1150   0.0000   4.7208e-05   1.6995e+00
+El     13    T1D2                                concrete                                    MAT1           ELASTICLT     25     27
+   0.1250   0.0000   4.3218e-05   1.5558e+00
+El     14    T1D2                                concrete                                    MAT1           ELASTICLT     27     29
+   0.1350   0.0000   3.8041e-05   1.3695e+00
+El     15    T1D2                                concrete                                    MAT1           ELASTICLT     29     31
+   0.1450   0.0000   3.1785e-05   1.1443e+00
+El     16    T1D2                                concrete                                    MAT1           ELASTICLT     31     33
+   0.1550   0.0000   2.4602e-05   8.8567e-01
+El     17    T1D2                                concrete                                    MAT1           ELASTICLT     33     35
+   0.1650   0.0000   1.6703e-05   6.0130e-01
+El     18    T1D2                                concrete                                    MAT1           ELASTICLT     35     37
+   0.1750   0.0000   8.3827e-06   3.0178e-01
+El     19    T1D2                                concrete                                    MAT1           ELASTICLT     37     39
+   0.1850   0.0000   0.0000e+00   0.0000e+00
+El     20    T1D2                                concrete                                    MAT1           ELASTICLT     39     41
+   0.1950   0.0000   8.3741e-06   3.0147e-01
+El     21    T1D2                                concrete                                    MAT1           ELASTICLT     41     43
+   0.2050   0.0000   1.6756e-05   6.0321e-01
+El     22    T1D2                                concrete                                    MAT1           ELASTICLT     43     45
+   0.2150   0.0000   2.5132e-05   9.0476e-01
+El     23    T1D2                                concrete                                    MAT1           ELASTICLT     45     47
+   0.2250   0.0000   3.3241e-05   1.1967e+00
+El     24    T1D2                                concrete                                    MAT1           ELASTICLT     47     49
+   0.2350   0.0000   4.0807e-05   1.4691e+00
+El     25    T1D2                                concrete                                    MAT1           ELASTICLT     49     51
+   0.2450   0.0000   4.7635e-05   1.7149e+00
+El     26    T1D2                                concrete                                    MAT1           ELASTICLT     51     53
+   0.2550   0.0000   5.3587e-05   1.9291e+00
+El     27    T1D2                                concrete                                    MAT1           ELASTICLT     53     55
+   0.2650   0.0000   5.8570e-05   2.1085e+00
+El     28    T1D2                                concrete                                    MAT1           ELASTICLT     55     57
+   0.2750   0.0000   6.2519e-05   2.2507e+00
+El     29    T1D2                                concrete                                    MAT1           ELASTICLT     57     59
+   0.2850   0.0000   6.5387e-05   2.3539e+00
+El     30    T1D2                                concrete                                    MAT1           ELASTICLT     59     61
+   0.2950   0.0000   6.7134e-05   2.4168e+00
+El     31    T1D2                                concrete                                    MAT1           ELASTICLT     61     63
+   0.3050   0.0000   6.7726e-05   2.4381e+00
+El     32    T1D2                                concrete                                    MAT1           ELASTICLT     63     65
+   0.3150   0.0000   6.7134e-05   2.4168e+00
+El     33    T1D2                                concrete                                    MAT1           ELASTICLT     65     67
+   0.3250   0.0000   6.5387e-05   2.3539e+00
+El     34    T1D2                                concrete                                    MAT1           ELASTICLT     67     69
+   0.3350   0.0000   6.2519e-05   2.2507e+00
+El     35    T1D2                                concrete                                    MAT1           ELASTICLT     69     71
+   0.3450   0.0000   5.8570e-05   2.1085e+00
+El     36    T1D2                                concrete                                    MAT1           ELASTICLT     71     73
+   0.3550   0.0000   5.3587e-05   1.9291e+00
+El     37    T1D2                                concrete                                    MAT1           ELASTICLT     73     75
+   0.3650   0.0000   4.7635e-05   1.7149e+00
+El     38    T1D2                                concrete                                    MAT1           ELASTICLT     75     77
+   0.3750   0.0000   4.0807e-05   1.4691e+00
+El     39    T1D2                                concrete                                    MAT1           ELASTICLT     77     79
+   0.3850   0.0000   3.3241e-05   1.1967e+00
+El     40    T1D2                                concrete                                    MAT1           ELASTICLT     79     81
+   0.3950   0.0000   2.5132e-05   9.0476e-01
+El     41    T1D2                                concrete                                    MAT1           ELASTICLT     81     83
+   0.4050   0.0000   1.6756e-05   6.0321e-01
+El     42    T1D2                                concrete                                    MAT1           ELASTICLT     83     85
+   0.4150   0.0000   8.3741e-06   3.0147e-01
+El     43    T1D2                                concrete                                    MAT1           ELASTICLT     85     87
+   0.4250   0.0000   0.0000e+00   0.0000e+00
+El     44    T1D2                                concrete                                    MAT1           ELASTICLT     87     89
+   0.4350   0.0000   8.3834e-06   3.0180e-01
+El     45    T1D2                                concrete                                    MAT1           ELASTICLT     89     91
+   0.4450   0.0000   1.6484e-05   5.9341e-01
+El     46    T1D2                                concrete                                    MAT1           ELASTICLT     91     93
+   0.4550   0.0000   2.3940e-05   8.6183e-01
+El     47    T1D2                                concrete                                    MAT1           ELASTICLT     93     95
+   0.4650   0.0000   3.0489e-05   1.0976e+00
+El     48    T1D2                                concrete                                    MAT1           ELASTICLT     95     97
+   0.4750   0.0000   3.5944e-05   1.2940e+00
+El     49    T1D2                                concrete                                    MAT1           ELASTICLT     97     99
+   0.4850   0.0000   4.0167e-05   1.4460e+00
+El     50    T1D2                                concrete                                    MAT1           ELASTICLT     99    101
+   0.4950   0.0000   4.3059e-05   1.5501e+00
+El     51    T1D2                                concrete                                    MAT1           ELASTICLT    101    103
+   0.5050   0.0000   4.4539e-05   1.6034e+00
+El     52    T1D2                                concrete                                    MAT1           ELASTICLT    103    105
+   0.5150   0.0000   4.4539e-05   1.6034e+00
+El     53    T1D2                                concrete                                    MAT1           ELASTICLT    105    107
+   0.5250   0.0000   4.3059e-05   1.5501e+00
+El     54    T1D2                                concrete                                    MAT1           ELASTICLT    107    109
+   0.5350   0.0000   4.0167e-05   1.4460e+00
+El     55    T1D2                                concrete                                    MAT1           ELASTICLT    109    111
+   0.5450   0.0000   3.5944e-05   1.2940e+00
+El     56    T1D2                                concrete                                    MAT1           ELASTICLT    111    113
+   0.5550   0.0000   3.0489e-05   1.0976e+00
+El     57    T1D2                                concrete                                    MAT1           ELASTICLT    113    115
+   0.5650   0.0000   2.3940e-05   8.6183e-01
+El     58    T1D2                                concrete                                    MAT1           ELASTICLT    115    117
+   0.5750   0.0000   1.6484e-05   5.9341e-01
+El     59    T1D2                                concrete                                    MAT1           ELASTICLT    117    119
+   0.5850   0.0000   8.3834e-06   3.0180e-01
+El     60    T1D2                                concrete                                    MAT1           ELASTICLT    119    121
+   0.5950   0.0000   0.0000e+00   0.0000e+00
+El     61    T1D2                                concrete                                    MAT1           ELASTICLT    121    123
+   0.6050   0.0000   8.3418e-06   3.0031e-01
+El     62    T1D2                                concrete                                    MAT1           ELASTICLT    123    125
+   0.6150   0.0000   1.6267e-05   5.8561e-01
+El     63    T1D2                                concrete                                    MAT1           ELASTICLT    125    127
+   0.6250   0.0000   2.3435e-05   8.4364e-01
+El     64    T1D2                                concrete                                    MAT1           ELASTICLT    127    129
+   0.6350   0.0000   2.9598e-05   1.0655e+00
+El     65    T1D2                                concrete                                    MAT1           ELASTICLT    129    131
+   0.6450   0.0000   3.4580e-05   1.2449e+00
+El     66    T1D2                                concrete                                    MAT1           ELASTICLT    131    133
+   0.6550   0.0000   3.8251e-05   1.3770e+00
+El     67    T1D2                                concrete                                    MAT1           ELASTICLT    133    135
+   0.6650   0.0000   4.0512e-05   1.4584e+00
+El     68    T1D2                                concrete                                    MAT1           ELASTICLT    135    137
+   0.6750   0.0000   4.1284e-05   1.4862e+00
+El     69    T1D2                                concrete                                    MAT1           ELASTICLT    137    139
+   0.6850   0.0000   4.0512e-05   1.4584e+00
+El     70    T1D2                                concrete                                    MAT1           ELASTICLT    139    141
+   0.6950   0.0000   3.8251e-05   1.3770e+00
+El     71    T1D2                                concrete                                    MAT1           ELASTICLT    141    143
+   0.7050   0.0000   3.4580e-05   1.2449e+00
+El     72    T1D2                                concrete                                    MAT1           ELASTICLT    143    145
+   0.7150   0.0000   2.9598e-05   1.0655e+00
+El     73    T1D2                                concrete                                    MAT1           ELASTICLT    145    147
+   0.7250   0.0000   2.3435e-05   8.4364e-01
+El     74    T1D2                                concrete                                    MAT1           ELASTICLT    147    149
+   0.7350   0.0000   1.6267e-05   5.8561e-01
+El     75    T1D2                                concrete                                    MAT1           ELASTICLT    149    151
+   0.7450   0.0000   8.3418e-06   3.0031e-01
+El     76    T1D2                                concrete                                    MAT1           ELASTICLT    151    153
+   0.7550   0.0000   0.0000e+00   0.0000e+00
+El     77    T1D2                                concrete                                    MAT1           ELASTICLT    153    155
+   0.7650   0.0000   8.3716e-06   3.0138e-01
+El     78    T1D2                                concrete                                    MAT1           ELASTICLT    155    157
+   0.7750   0.0000   1.6752e-05   6.0308e-01
+El     79    T1D2                                concrete                                    MAT1           ELASTICLT    157    159
+   0.7850   0.0000   2.5141e-05   9.0508e-01
+El     80    T1D2                                concrete                                    MAT1           ELASTICLT    159    161
+   0.7950   0.0000   3.3346e-05   1.2005e+00
+El     81    T1D2                                concrete                                    MAT1           ELASTICLT    161    163
+   0.8050   0.0000   4.1080e-05   1.4789e+00
+El     82    T1D2                                concrete                                    MAT1           ELASTICLT    163    165
+   0.8150   0.0000   4.8137e-05   1.7329e+00
+El     83    T1D2                                concrete                                    MAT1           ELASTICLT    165    167
+   0.8250   0.0000   5.4372e-05   1.9574e+00
+El     84    T1D2                                concrete                                    MAT1           ELASTICLT    167    169
+   0.8350   0.0000   5.9690e-05   2.1488e+00
+El     85    T1D2                                concrete                                    MAT1           ELASTICLT    169    171
+   0.8450   0.0000   6.4022e-05   2.3048e+00
+El     86    T1D2                                concrete                                    MAT1           ELASTICLT    171    173
+   0.8550   0.0000   6.7322e-05   2.4236e+00
+El     87    T1D2                                concrete                                    MAT1           ELASTICLT    173    175
+   0.8650   0.0000   6.9554e-05   2.5039e+00
+El     88    T1D2                                concrete                                    MAT1           ELASTICLT    175    177
+   0.8750   0.0000   7.0687e-05   2.5447e+00
+El     89    T1D2                                concrete                                    MAT1           ELASTICLT    177    179
+   0.8850   0.0000   7.0687e-05   2.5447e+00
+El     90    T1D2                                concrete                                    MAT1           ELASTICLT    179    181
+   0.8950   0.0000   6.9554e-05   2.5039e+00
+El     91    T1D2                                concrete                                    MAT1           ELASTICLT    181    183
+   0.9050   0.0000   6.7322e-05   2.4236e+00
+El     92    T1D2                                concrete                                    MAT1           ELASTICLT    183    185
+   0.9150   0.0000   6.4022e-05   2.3048e+00
+El     93    T1D2                                concrete                                    MAT1           ELASTICLT    185    187
+   0.9250   0.0000   5.9690e-05   2.1488e+00
+El     94    T1D2                                concrete                                    MAT1           ELASTICLT    187    189
+   0.9350   0.0000   5.4372e-05   1.9574e+00
+El     95    T1D2                                concrete                                    MAT1           ELASTICLT    189    191
+   0.9450   0.0000   4.8137e-05   1.7329e+00
+El     96    T1D2                                concrete                                    MAT1           ELASTICLT    191    193
+   0.9550   0.0000   4.1080e-05   1.4789e+00
+El     97    T1D2                                concrete                                    MAT1           ELASTICLT    193    195
+   0.9650   0.0000   3.3346e-05   1.2005e+00
+El     98    T1D2                                concrete                                    MAT1           ELASTICLT    195    197
+   0.9750   0.0000   2.5141e-05   9.0508e-01
+El     99    T1D2                                concrete                                    MAT1           ELASTICLT    197    199
+   0.9850   0.0000   1.6752e-05   6.0308e-01
+El    100    T1D2                                concrete                                    MAT1           ELASTICLT    199    201
+   0.9950   0.0000   8.3716e-06   3.0138e-01
+El    101    T1D2                                   reinf                                   MAT31               MISES      2      4
+   0.0050   0.0000   1.4540e-03   2.9080e+02   5.0000e+02
+El    102    T1D2                                   reinf                                   MAT31               MISES      4      6
+   0.0150   0.0000   1.3795e-03   2.7590e+02   5.0000e+02
+El    103    T1D2                                   reinf                                   MAT31               MISES      6      8
+   0.0250   0.0000   1.3088e-03   2.6175e+02   5.0000e+02
+El    104    T1D2                                   reinf                                   MAT31               MISES      8     10
+   0.0350   0.0000   1.2444e-03   2.4889e+02   5.0000e+02
+El    105    T1D2                                   reinf                                   MAT31               MISES     10     12
+   0.0450   0.0000   1.1884e-03   2.3768e+02   5.0000e+02
+El    106    T1D2                                   reinf                                   MAT31               MISES     12     14
+   0.0550   0.0000   1.1420e-03   2.2841e+02   5.0000e+02
+El    107    T1D2                                   reinf                                   MAT31               MISES     14     16
+   0.0650   0.0000   1.1063e-03   2.2126e+02   5.0000e+02
+El    108    T1D2                                   reinf                                   MAT31               MISES     16     18
+   0.0750   0.0000   1.0819e-03   2.1639e+02   5.0000e+02
+El    109    T1D2                                   reinf                                   MAT31               MISES     18     20
+   0.0850   0.0000   1.0695e-03   2.1389e+02   5.0000e+02
+El    110    T1D2                                   reinf                                   MAT31               MISES     20     22
+   0.0950   0.0000   1.0695e-03   2.1389e+02   5.0000e+02
+El    111    T1D2                                   reinf                                   MAT31               MISES     22     24
+   0.1050   0.0000   1.0819e-03   2.1639e+02   5.0000e+02
+El    112    T1D2                                   reinf                                   MAT31               MISES     24     26
+   0.1150   0.0000   1.1063e-03   2.2126e+02   5.0000e+02
+El    113    T1D2                                   reinf                                   MAT31               MISES     26     28
+   0.1250   0.0000   1.1420e-03   2.2841e+02   5.0000e+02
+El    114    T1D2                                   reinf                                   MAT31               MISES     28     30
+   0.1350   0.0000   1.1884e-03   2.3768e+02   5.0000e+02
+El    115    T1D2                                   reinf                                   MAT31               MISES     30     32
+   0.1450   0.0000   1.2444e-03   2.4889e+02   5.0000e+02
+El    116    T1D2                                   reinf                                   MAT31               MISES     32     34
+   0.1550   0.0000   1.3088e-03   2.6175e+02   5.0000e+02
+El    117    T1D2                                   reinf                                   MAT31               MISES     34     36
+   0.1650   0.0000   1.3795e-03   2.7590e+02   5.0000e+02
+El    118    T1D2                                   reinf                                   MAT31               MISES     36     38
+   0.1750   0.0000   1.4540e-03   2.9080e+02   5.0000e+02
+El    119    T1D2                                   reinf                                   MAT31               MISES     38     40
+   0.1850   0.0000   1.5291e-03   3.0581e+02   5.0000e+02
+El    120    T1D2                                   reinf                                   MAT31               MISES     40     42
+   0.1950   0.0000   1.4541e-03   2.9082e+02   5.0000e+02
+El    121    T1D2                                   reinf                                   MAT31               MISES     42     44
+   0.2050   0.0000   1.3790e-03   2.7580e+02   5.0000e+02
+El    122    T1D2                                   reinf                                   MAT31               MISES     44     46
+   0.2150   0.0000   1.3040e-03   2.6080e+02   5.0000e+02
+El    123    T1D2                                   reinf                                   MAT31               MISES     46     48
+   0.2250   0.0000   1.2314e-03   2.4628e+02   5.0000e+02
+El    124    T1D2                                   reinf                                   MAT31               MISES     48     50
+   0.2350   0.0000   1.1636e-03   2.3273e+02   5.0000e+02
+El    125    T1D2                                   reinf                                   MAT31               MISES     50     52
+   0.2450   0.0000   1.1025e-03   2.2050e+02   5.0000e+02
+El    126    T1D2                                   reinf                                   MAT31               MISES     52     54
+   0.2550   0.0000   1.0492e-03   2.0984e+02   5.0000e+02
+El    127    T1D2                                   reinf                                   MAT31               MISES     54     56
+   0.2650   0.0000   1.0046e-03   2.0091e+02   5.0000e+02
+El    128    T1D2                                   reinf                                   MAT31               MISES     56     58
+   0.2750   0.0000   9.6920e-04   1.9384e+02   5.0000e+02
+El    129    T1D2                                   reinf                                   MAT31               MISES     58     60
+   0.2850   0.0000   9.4352e-04   1.8870e+02   5.0000e+02
+El    130    T1D2                                   reinf                                   MAT31               MISES     60     62
+   0.2950   0.0000   9.2787e-04   1.8557e+02   5.0000e+02
+El    131    T1D2                                   reinf                                   MAT31               MISES     62     64
+   0.3050   0.0000   9.2257e-04   1.8451e+02   5.0000e+02
+El    132    T1D2                                   reinf                                   MAT31               MISES     64     66
+   0.3150   0.0000   9.2787e-04   1.8557e+02   5.0000e+02
+El    133    T1D2                                   reinf                                   MAT31               MISES     66     68
+   0.3250   0.0000   9.4352e-04   1.8870e+02   5.0000e+02
+El    134    T1D2                                   reinf                                   MAT31               MISES     68     70
+   0.3350   0.0000   9.6920e-04   1.9384e+02   5.0000e+02
+El    135    T1D2                                   reinf                                   MAT31               MISES     70     72
+   0.3450   0.0000   1.0046e-03   2.0091e+02   5.0000e+02
+El    136    T1D2                                   reinf                                   MAT31               MISES     72     74
+   0.3550   0.0000   1.0492e-03   2.0984e+02   5.0000e+02
+El    137    T1D2                                   reinf                                   MAT31               MISES     74     76
+   0.3650   0.0000   1.1025e-03   2.2050e+02   5.0000e+02
+El    138    T1D2                                   reinf                                   MAT31               MISES     76     78
+   0.3750   0.0000   1.1636e-03   2.3273e+02   5.0000e+02
+El    139    T1D2                                   reinf                                   MAT31               MISES     78     80
+   0.3850   0.0000   1.2314e-03   2.4628e+02   5.0000e+02
+El    140    T1D2                                   reinf                                   MAT31               MISES     80     82
+   0.3950   0.0000   1.3040e-03   2.6080e+02   5.0000e+02
+El    141    T1D2                                   reinf                                   MAT31               MISES     82     84
+   0.4050   0.0000   1.3790e-03   2.7580e+02   5.0000e+02
+El    142    T1D2                                   reinf                                   MAT31               MISES     84     86
+   0.4150   0.0000   1.4541e-03   2.9082e+02   5.0000e+02
+El    143    T1D2                                   reinf                                   MAT31               MISES     86     88
+   0.4250   0.0000   1.5291e-03   3.0581e+02   5.0000e+02
+El    144    T1D2                                   reinf                                   MAT31               MISES     88     90
+   0.4350   0.0000   1.4540e-03   2.9080e+02   5.0000e+02
+El    145    T1D2                                   reinf                                   MAT31               MISES     90     92
+   0.4450   0.0000   1.3815e-03   2.7629e+02   5.0000e+02
+El    146    T1D2                                   reinf                                   MAT31               MISES     92     94
+   0.4550   0.0000   1.3147e-03   2.6294e+02   5.0000e+02
+El    147    T1D2                                   reinf                                   MAT31               MISES     94     96
+   0.4650   0.0000   1.2560e-03   2.5121e+02   5.0000e+02
+El    148    T1D2                                   reinf                                   MAT31               MISES     96     98
+   0.4750   0.0000   1.2072e-03   2.4144e+02   5.0000e+02
+El    149    T1D2                                   reinf                                   MAT31               MISES     98    100
+   0.4850   0.0000   1.1694e-03   2.3387e+02   5.0000e+02
+El    150    T1D2                                   reinf                                   MAT31               MISES    100    102
+   0.4950   0.0000   1.1435e-03   2.2869e+02   5.0000e+02
+El    151    T1D2                                   reinf                                   MAT31               MISES    102    104
+   0.5050   0.0000   1.1302e-03   2.2604e+02   5.0000e+02
+El    152    T1D2                                   reinf                                   MAT31               MISES    104    106
+   0.5150   0.0000   1.1302e-03   2.2604e+02   5.0000e+02
+El    153    T1D2                                   reinf                                   MAT31               MISES    106    108
+   0.5250   0.0000   1.1435e-03   2.2869e+02   5.0000e+02
+El    154    T1D2                                   reinf                                   MAT31               MISES    108    110
+   0.5350   0.0000   1.1694e-03   2.3387e+02   5.0000e+02
+El    155    T1D2                                   reinf                                   MAT31               MISES    110    112
+   0.5450   0.0000   1.2072e-03   2.4144e+02   5.0000e+02
+El    156    T1D2                                   reinf                                   MAT31               MISES    112    114
+   0.5550   0.0000   1.2560e-03   2.5121e+02   5.0000e+02
+El    157    T1D2                                   reinf                                   MAT31               MISES    114    116
+   0.5650   0.0000   1.3147e-03   2.6294e+02   5.0000e+02
+El    158    T1D2                                   reinf                                   MAT31               MISES    116    118
+   0.5750   0.0000   1.3815e-03   2.7629e+02   5.0000e+02
+El    159    T1D2                                   reinf                                   MAT31               MISES    118    120
+   0.5850   0.0000   1.4540e-03   2.9080e+02   5.0000e+02
+El    160    T1D2                                   reinf                                   MAT31               MISES    120    122
+   0.5950   0.0000   1.5291e-03   3.0581e+02   5.0000e+02
+El    161    T1D2                                   reinf                                   MAT31               MISES    122    124
+   0.6050   0.0000   1.4544e-03   2.9087e+02   5.0000e+02
+El    162    T1D2                                   reinf                                   MAT31               MISES    124    126
+   0.6150   0.0000   1.3834e-03   2.7668e+02   5.0000e+02
+El    163    T1D2                                   reinf                                   MAT31               MISES    126    128
+   0.6250   0.0000   1.3192e-03   2.6384e+02   5.0000e+02
+El    164    T1D2                                   reinf                                   MAT31               MISES    128    130
+   0.6350   0.0000   1.2640e-03   2.5280e+02   5.0000e+02
+El    165    T1D2                                   reinf                                   MAT31               MISES    130    132
+   0.6450   0.0000   1.2194e-03   2.4388e+02   5.0000e+02
+El    166    T1D2                                   reinf                                   MAT31               MISES    132    134
+   0.6550   0.0000   1.1865e-03   2.3731e+02   5.0000e+02
+El    167    T1D2                                   reinf                                   MAT31               MISES    134    136
+   0.6650   0.0000   1.1663e-03   2.3325e+02   5.0000e+02
+El    168    T1D2                                   reinf                                   MAT31               MISES    136    138
+   0.6750   0.0000   1.1594e-03   2.3187e+02   5.0000e+02
+El    169    T1D2                                   reinf                                   MAT31               MISES    138    140
+   0.6850   0.0000   1.1663e-03   2.3325e+02   5.0000e+02
+El    170    T1D2                                   reinf                                   MAT31               MISES    140    142
+   0.6950   0.0000   1.1865e-03   2.3731e+02   5.0000e+02
+El    171    T1D2                                   reinf                                   MAT31               MISES    142    144
+   0.7050   0.0000   1.2194e-03   2.4388e+02   5.0000e+02
+El    172    T1D2                                   reinf                                   MAT31               MISES    144    146
+   0.7150   0.0000   1.2640e-03   2.5280e+02   5.0000e+02
+El    173    T1D2                                   reinf                                   MAT31               MISES    146    148
+   0.7250   0.0000   1.3192e-03   2.6384e+02   5.0000e+02
+El    174    T1D2                                   reinf                                   MAT31               MISES    148    150
+   0.7350   0.0000   1.3834e-03   2.7668e+02   5.0000e+02
+El    175    T1D2                                   reinf                                   MAT31               MISES    150    152
+   0.7450   0.0000   1.4544e-03   2.9087e+02   5.0000e+02
+El    176    T1D2                                   reinf                                   MAT31               MISES    152    154
+   0.7550   0.0000   1.5291e-03   3.0581e+02   5.0000e+02
+El    177    T1D2                                   reinf                                   MAT31               MISES    154    156
+   0.7650   0.0000   1.4541e-03   2.9082e+02   5.0000e+02
+El    178    T1D2                                   reinf                                   MAT31               MISES    156    158
+   0.7750   0.0000   1.3790e-03   2.7581e+02   5.0000e+02
+El    179    T1D2                                   reinf                                   MAT31               MISES    158    160
+   0.7850   0.0000   1.3039e-03   2.6078e+02   5.0000e+02
+El    180    T1D2                                   reinf                                   MAT31               MISES    160    162
+   0.7950   0.0000   1.2304e-03   2.4609e+02   5.0000e+02
+El    181    T1D2                                   reinf                                   MAT31               MISES    162    164
+   0.8050   0.0000   1.1612e-03   2.3224e+02   5.0000e+02
+El    182    T1D2                                   reinf                                   MAT31               MISES    164    166
+   0.8150   0.0000   1.0980e-03   2.1960e+02   5.0000e+02
+El    183    T1D2                                   reinf                                   MAT31               MISES    166    168
+   0.8250   0.0000   1.0422e-03   2.0843e+02   5.0000e+02
+El    184    T1D2                                   reinf                                   MAT31               MISES    168    170
+   0.8350   0.0000   9.9453e-04   1.9891e+02   5.0000e+02
+El    185    T1D2                                   reinf                                   MAT31               MISES    170    172
+   0.8450   0.0000   9.5574e-04   1.9115e+02   5.0000e+02
+El    186    T1D2                                   reinf                                   MAT31               MISES    172    174
+   0.8550   0.0000   9.2619e-04   1.8524e+02   5.0000e+02
+El    187    T1D2                                   reinf                                   MAT31               MISES    174    176
+   0.8650   0.0000   9.0620e-04   1.8124e+02   5.0000e+02
+El    188    T1D2                                   reinf                                   MAT31               MISES    176    178
+   0.8750   0.0000   8.9605e-04   1.7921e+02   5.0000e+02
+El    189    T1D2                                   reinf                                   MAT31               MISES    178    180
+   0.8850   0.0000   8.9605e-04   1.7921e+02   5.0000e+02
+El    190    T1D2                                   reinf                                   MAT31               MISES    180    182
+   0.8950   0.0000   9.0620e-04   1.8124e+02   5.0000e+02
+El    191    T1D2                                   reinf                                   MAT31               MISES    182    184
+   0.9050   0.0000   9.2619e-04   1.8524e+02   5.0000e+02
+El    192    T1D2                                   reinf                                   MAT31               MISES    184    186
+   0.9150   0.0000   9.5574e-04   1.9115e+02   5.0000e+02
+El    193    T1D2                                   reinf                                   MAT31               MISES    186    188
+   0.9250   0.0000   9.9453e-04   1.9891e+02   5.0000e+02
+El    194    T1D2                                   reinf                                   MAT31               MISES    188    190
+   0.9350   0.0000   1.0422e-03   2.0843e+02   5.0000e+02
+El    195    T1D2                                   reinf                                   MAT31               MISES    190    192
+   0.9450   0.0000   1.0980e-03   2.1960e+02   5.0000e+02
+El    196    T1D2                                   reinf                                   MAT31               MISES    192    194
+   0.9550   0.0000   1.1612e-03   2.3224e+02   5.0000e+02
+El    197    T1D2                                   reinf                                   MAT31               MISES    194    196
+   0.9650   0.0000   1.2304e-03   2.4609e+02   5.0000e+02
+El    198    T1D2                                   reinf                                   MAT31               MISES    196    198
+   0.9750   0.0000   1.3039e-03   2.6078e+02   5.0000e+02
+El    199    T1D2                                   reinf                                   MAT31               MISES    198    200
+   0.9850   0.0000   1.3790e-03   2.7581e+02   5.0000e+02
+El    200    T1D2                                   reinf                                   MAT31               MISES    200    202
+   0.9950   0.0000   1.4541e-03   2.9082e+02   5.0000e+02
+El    201    S1D2                                    bond                                    MAT5              SPRING      1      2
+   0.0000   0.0000  -1.0664e-04  -5.9995e+00
+El    202    S1D2                                    bond                                    MAT5              SPRING      3      4
+   0.0100   0.0000  -9.2180e-05  -5.9520e+00
+El    203    S1D2                                    bond                                    MAT5              SPRING      5      6
+   0.0200   0.0000  -7.8552e-05  -5.6517e+00
+El    204    S1D2                                    bond                                    MAT5              SPRING      7      8
+   0.0300   0.0000  -6.5711e-05  -5.1400e+00
+El    205    S1D2                                    bond                                    MAT5              SPRING      9     10
+   0.0400   0.0000  -5.3584e-05  -4.4765e+00
+El    206    S1D2                                    bond                                    MAT5              SPRING     11     12
+   0.0500   0.0000  -4.2081e-05  -3.7049e+00
+El    207    S1D2                                    bond                                    MAT5              SPRING     13     14
+   0.0600   0.0000  -3.1092e-05  -2.8558e+00
+El    208    S1D2                                    bond                                    MAT5              SPRING     15     16
+   0.0700   0.0000  -2.0501e-05  -1.9488e+00
+El    209    S1D2                                    bond                                    MAT5              SPRING     17     18
+   0.0800   0.0000  -1.0181e-05  -9.9531e-01
+El    210    S1D2                                    bond                                    MAT5              SPRING     19     20
+   0.0900   0.0000  -4.0658e-20  -4.0658e-15
+El    211    S1D2                                    bond                                    MAT5              SPRING     21     22
+   0.1000   0.0000   1.0181e-05   9.9531e-01
+El    212    S1D2                                    bond                                    MAT5              SPRING     23     24
+   0.1100   0.0000   2.0501e-05   1.9488e+00
+El    213    S1D2                                    bond                                    MAT5              SPRING     25     26
+   0.1200   0.0000   3.1092e-05   2.8558e+00
+El    214    S1D2                                    bond                                    MAT5              SPRING     27     28
+   0.1300   0.0000   4.2081e-05   3.7049e+00
+El    215    S1D2                                    bond                                    MAT5              SPRING     29     30
+   0.1400   0.0000   5.3584e-05   4.4765e+00
+El    216    S1D2                                    bond                                    MAT5              SPRING     31     32
+   0.1500   0.0000   6.5711e-05   5.1400e+00
+El    217    S1D2                                    bond                                    MAT5              SPRING     33     34
+   0.1600   0.0000   7.8552e-05   5.6517e+00
+El    218    S1D2                                    bond                                    MAT5              SPRING     35     36
+   0.1700   0.0000   9.2180e-05   5.9520e+00
+El    219    S1D2                                    bond                                    MAT5              SPRING     37     38
+   0.1800   0.0000   1.0664e-04   5.9995e+00
+El    220    S1D2                                    bond                                    MAT5              SPRING     39     40
+   0.1900   0.0000  -1.2477e-04  -5.9933e+00
+El    221    S1D2                                    bond                                    MAT5              SPRING     41     42
+   0.2000   0.0000  -1.1032e-04  -5.9988e+00
+El    222    S1D2                                    bond                                    MAT5              SPRING     43     44
+   0.2100   0.0000  -9.6692e-05  -5.9913e+00
+El    223    S1D2                                    bond                                    MAT5              SPRING     45     46
+   0.2200   0.0000  -8.3904e-05  -5.8011e+00
+El    224    S1D2                                    bond                                    MAT5              SPRING     47     48
+   0.2300   0.0000  -7.1922e-05  -5.4136e+00
+El    225    S1D2                                    bond                                    MAT5              SPRING     49     50
+   0.2400   0.0000  -6.0694e-05  -4.8855e+00
+El    226    S1D2                                    bond                                    MAT5              SPRING     51     52
+   0.2500   0.0000  -5.0145e-05  -4.2594e+00
+El    227    S1D2                                    bond                                    MAT5              SPRING     53     54
+   0.2600   0.0000  -4.0189e-05  -3.5661e+00
+El    228    S1D2                                    bond                                    MAT5              SPRING     55     56
+   0.2700   0.0000  -3.0730e-05  -2.8261e+00
+El    229    S1D2                                    bond                                    MAT5              SPRING     57     58
+   0.2800   0.0000  -2.1663e-05  -2.0521e+00
+El    230    S1D2                                    bond                                    MAT5              SPRING     59     60
+   0.2900   0.0000  -1.2882e-05  -1.2507e+00
+El    231    S1D2                                    bond                                    MAT5              SPRING     61     62
+   0.3000   0.0000  -4.2742e-06  -4.2361e-01
+El    232    S1D2                                    bond                                    MAT5              SPRING     63     64
+   0.3100   0.0000   4.2742e-06   4.2361e-01
+El    233    S1D2                                    bond                                    MAT5              SPRING     65     66
+   0.3200   0.0000   1.2882e-05   1.2507e+00
+El    234    S1D2                                    bond                                    MAT5              SPRING     67     68
+   0.3300   0.0000   2.1663e-05   2.0521e+00
+El    235    S1D2                                    bond                                    MAT5              SPRING     69     70
+   0.3400   0.0000   3.0730e-05   2.8261e+00
+El    236    S1D2                                    bond                                    MAT5              SPRING     71     72
+   0.3500   0.0000   4.0189e-05   3.5661e+00
+El    237    S1D2                                    bond                                    MAT5              SPRING     73     74
+   0.3600   0.0000   5.0145e-05   4.2594e+00
+El    238    S1D2                                    bond                                    MAT5              SPRING     75     76
+   0.3700   0.0000   6.0694e-05   4.8855e+00
+El    239    S1D2                                    bond                                    MAT5              SPRING     77     78
+   0.3800   0.0000   7.1922e-05   5.4136e+00
+El    240    S1D2                                    bond                                    MAT5              SPRING     79     80
+   0.3900   0.0000   8.3904e-05   5.8011e+00
+El    241    S1D2                                    bond                                    MAT5              SPRING     81     82
+   0.4000   0.0000   9.6692e-05   5.9913e+00
+El    242    S1D2                                    bond                                    MAT5              SPRING     83     84
+   0.4100   0.0000   1.1032e-04   5.9988e+00
+El    243    S1D2                                    bond                                    MAT5              SPRING     85     86
+   0.4200   0.0000   1.2477e-04   5.9933e+00
+El    244    S1D2                                    bond                                    MAT5              SPRING     87     88
+   0.4300   0.0000  -9.8134e-05  -5.9972e+00
+El    245    S1D2                                    bond                                    MAT5              SPRING     89     90
+   0.4400   0.0000  -8.3678e-05  -5.7956e+00
+El    246    S1D2                                    bond                                    MAT5              SPRING     91     92
+   0.4500   0.0000  -7.0028e-05  -5.3352e+00
+El    247    S1D2                                    bond                                    MAT5              SPRING     93     94
+   0.4600   0.0000  -5.7121e-05  -4.6868e+00
+El    248    S1D2                                    bond                                    MAT5              SPRING     95     96
+   0.4700   0.0000  -4.4865e-05  -3.9033e+00
+El    249    S1D2                                    bond                                    MAT5              SPRING     97     98
+   0.4800   0.0000  -3.3153e-05  -3.0226e+00
+El    250    S1D2                                    bond                                    MAT5              SPRING     99    100
+   0.4900   0.0000  -2.1861e-05  -2.0696e+00
+El    251    S1D2                                    bond                                    MAT5              SPRING    101    102
+   0.5000   0.0000  -1.0857e-05  -1.0595e+00
+El    252    S1D2                                    bond                                    MAT5              SPRING    103    104
+   0.5100   0.0000  -2.0892e-12  -2.0892e-07
+El    253    S1D2                                    bond                                    MAT5              SPRING    105    106
+   0.5200   0.0000   1.0857e-05   1.0595e+00
+El    254    S1D2                                    bond                                    MAT5              SPRING    107    108
+   0.5300   0.0000   2.1861e-05   2.0696e+00
+El    255    S1D2                                    bond                                    MAT5              SPRING    109    110
+   0.5400   0.0000   3.3153e-05   3.0226e+00
+El    256    S1D2                                    bond                                    MAT5              SPRING    111    112
+   0.5500   0.0000   4.4865e-05   3.9033e+00
+El    257    S1D2                                    bond                                    MAT5              SPRING    113    114
+   0.5600   0.0000   5.7121e-05   4.6868e+00
+El    258    S1D2                                    bond                                    MAT5              SPRING    115    116
+   0.5700   0.0000   7.0028e-05   5.3352e+00
+El    259    S1D2                                    bond                                    MAT5              SPRING    117    118
+   0.5800   0.0000   8.3678e-05   5.7956e+00
+El    260    S1D2                                    bond                                    MAT5              SPRING    119    120
+   0.5900   0.0000   9.8134e-05   5.9972e+00
+El    261    S1D2                                    bond                                    MAT5              SPRING    121    122
+   0.6000   0.0000  -9.3612e-05  -5.9679e+00
+El    262    S1D2                                    bond                                    MAT5              SPRING    123    124
+   0.6100   0.0000  -7.9152e-05  -5.6704e+00
+El    263    S1D2                                    bond                                    MAT5              SPRING    125    126
+   0.6200   0.0000  -6.5481e-05  -5.1290e+00
+El    264    S1D2                                    bond                                    MAT5              SPRING    127    128
+   0.6300   0.0000  -5.2523e-05  -4.4108e+00
+El    265    S1D2                                    bond                                    MAT5              SPRING    129    130
+   0.6400   0.0000  -4.0179e-05  -3.5653e+00
+El    266    S1D2                                    bond                                    MAT5              SPRING    131    132
+   0.6500   0.0000  -2.8331e-05  -2.6271e+00
+El    267    S1D2                                    bond                                    MAT5              SPRING    133    134
+   0.6600   0.0000  -1.6848e-05  -1.6185e+00
+El    268    S1D2                                    bond                                    MAT5              SPRING    135    136
+   0.6700   0.0000  -5.5904e-06  -5.5244e-01
+El    269    S1D2                                    bond                                    MAT5              SPRING    137    138
+   0.6800   0.0000   5.5904e-06   5.5244e-01
+El    270    S1D2                                    bond                                    MAT5              SPRING    139    140
+   0.6900   0.0000   1.6848e-05   1.6185e+00
+El    271    S1D2                                    bond                                    MAT5              SPRING    141    142
+   0.7000   0.0000   2.8331e-05   2.6271e+00
+El    272    S1D2                                    bond                                    MAT5              SPRING    143    144
+   0.7100   0.0000   4.0179e-05   3.5653e+00
+El    273    S1D2                                    bond                                    MAT5              SPRING    145    146
+   0.7200   0.0000   5.2523e-05   4.4108e+00
+El    274    S1D2                                    bond                                    MAT5              SPRING    147    148
+   0.7300   0.0000   6.5481e-05   5.1290e+00
+El    275    S1D2                                    bond                                    MAT5              SPRING    149    150
+   0.7400   0.0000   7.9152e-05   5.6704e+00
+El    276    S1D2                                    bond                                    MAT5              SPRING    151    152
+   0.7500   0.0000   9.3612e-05   5.9679e+00
+El    277    S1D2                                    bond                                    MAT5              SPRING    153    154
+   0.7600   0.0000  -1.2789e-04  -5.9915e+00
+El    278    S1D2                                    bond                                    MAT5              SPRING    155    156
+   0.7700   0.0000  -1.1343e-04  -5.9980e+00
+El    279    S1D2                                    bond                                    MAT5              SPRING    157    158
+   0.7800   0.0000  -9.9811e-05  -6.0000e+00
+El    280    S1D2                                    bond                                    MAT5              SPRING    159    160
+   0.7900   0.0000  -8.7023e-05  -5.8696e+00
+El    281    S1D2                                    bond                                    MAT5              SPRING    161    162
+   0.8000   0.0000  -7.5052e-05  -5.5331e+00
+El    282    S1D2                                    bond                                    MAT5              SPRING    163    164
+   0.8100   0.0000  -6.3851e-05  -5.0491e+00
+El    283    S1D2                                    bond                                    MAT5              SPRING    165    166
+   0.8200   0.0000  -5.3352e-05  -4.4622e+00
+El    284    S1D2                                    bond                                    MAT5              SPRING    167    168
+   0.8300   0.0000  -4.3474e-05  -3.8051e+00
+El    285    S1D2                                    bond                                    MAT5              SPRING    169    170
+   0.8400   0.0000  -3.4126e-05  -3.1002e+00
+El    286    S1D2                                    bond                                    MAT5              SPRING    171    172
+   0.8500   0.0000  -2.5209e-05  -2.3617e+00
+El    287    S1D2                                    bond                                    MAT5              SPRING    173    174
+   0.8600   0.0000  -1.6620e-05  -1.5976e+00
+El    288    S1D2                                    bond                                    MAT5              SPRING    175    176
+   0.8700   0.0000  -8.2537e-06  -8.1062e-01
+El    289    S1D2                                    bond                                    MAT5              SPRING    177    178
+   0.8800   0.0000   1.3010e-18   1.3010e-13
+El    290    S1D2                                    bond                                    MAT5              SPRING    179    180
+   0.8900   0.0000   8.2537e-06   8.1062e-01
+El    291    S1D2                                    bond                                    MAT5              SPRING    181    182
+   0.9000   0.0000   1.6620e-05   1.5976e+00
+El    292    S1D2                                    bond                                    MAT5              SPRING    183    184
+   0.9100   0.0000   2.5209e-05   2.3617e+00
+El    293    S1D2                                    bond                                    MAT5              SPRING    185    186
+   0.9200   0.0000   3.4126e-05   3.1002e+00
+El    294    S1D2                                    bond                                    MAT5              SPRING    187    188
+   0.9300   0.0000   4.3474e-05   3.8051e+00
+El    295    S1D2                                    bond                                    MAT5              SPRING    189    190
+   0.9400   0.0000   5.3352e-05   4.4622e+00
+El    296    S1D2                                    bond                                    MAT5              SPRING    191    192
+   0.9500   0.0000   6.3851e-05   5.0491e+00
+El    297    S1D2                                    bond                                    MAT5              SPRING    193    194
+   0.9600   0.0000   7.5052e-05   5.5331e+00
+El    298    S1D2                                    bond                                    MAT5              SPRING    195    196
+   0.9700   0.0000   8.7023e-05   5.8696e+00
+El    299    S1D2                                    bond                                    MAT5              SPRING    197    198
+   0.9800   0.0000   9.9811e-05   6.0000e+00
+El    300    S1D2                                    bond                                    MAT5              SPRING    199    200
+   0.9900   0.0000   1.1343e-04   5.9980e+00
+El    301    S1D2                                    bond                                    MAT5              SPRING    201    202
+   1.0000   0.0000   1.2789e-04   5.9915e+00
+Time   1.0000
+El      1    T1D2                                concrete                                    MAT1           ELASTICLT      1      3
+   0.0050   0.0000   8.2595e-06   2.9734e-01
+El      2    T1D2                                concrete                                    MAT1           ELASTICLT      3      5
+   0.0150   0.0000   1.6575e-05   5.9669e-01
+El      3    T1D2                                concrete                                    MAT1           ELASTICLT      5      7
+   0.0250   0.0000   2.4928e-05   8.9742e-01
+El      4    T1D2                                concrete                                    MAT1           ELASTICLT      7      9
+   0.0350   0.0000   3.3305e-05   1.1990e+00
+El      5    T1D2                                concrete                                    MAT1           ELASTICLT      9     11
+   0.0450   0.0000   4.1688e-05   1.5008e+00
+El      6    T1D2                                concrete                                    MAT1           ELASTICLT     11     13
+   0.0550   0.0000   4.9576e-05   1.7847e+00
+El      7    T1D2                                concrete                                    MAT1           ELASTICLT     13     15
+   0.0650   0.0000   5.6192e-05   2.0229e+00
+El      8    T1D2                                concrete                                    MAT1           ELASTICLT     15     17
+   0.0750   0.0000   6.0971e-05   2.1949e+00
+El      9    T1D2                                concrete                                    MAT1           ELASTICLT     17     19
+   0.0850   0.0000   6.3505e-05   2.2862e+00
+El     10    T1D2                                concrete                                    MAT1           ELASTICLT     19     21
+   0.0950   0.0000   6.3505e-05   2.2862e+00
+El     11    T1D2                                concrete                                    MAT1           ELASTICLT     21     23
+   0.1050   0.0000   6.0971e-05   2.1949e+00
+El     12    T1D2                                concrete                                    MAT1           ELASTICLT     23     25
+   0.1150   0.0000   5.6192e-05   2.0229e+00
+El     13    T1D2                                concrete                                    MAT1           ELASTICLT     25     27
+   0.1250   0.0000   4.9576e-05   1.7847e+00
+El     14    T1D2                                concrete                                    MAT1           ELASTICLT     27     29
+   0.1350   0.0000   4.1688e-05   1.5008e+00
+El     15    T1D2                                concrete                                    MAT1           ELASTICLT     29     31
+   0.1450   0.0000   3.3305e-05   1.1990e+00
+El     16    T1D2                                concrete                                    MAT1           ELASTICLT     31     33
+   0.1550   0.0000   2.4928e-05   8.9742e-01
+El     17    T1D2                                concrete                                    MAT1           ELASTICLT     33     35
+   0.1650   0.0000   1.6575e-05   5.9669e-01
+El     18    T1D2                                concrete                                    MAT1           ELASTICLT     35     37
+   0.1750   0.0000   8.2595e-06   2.9734e-01
+El     19    T1D2                                concrete                                    MAT1           ELASTICLT     37     39
+   0.1850   0.0000   0.0000e+00   0.0000e+00
+El     20    T1D2                                concrete                                    MAT1           ELASTICLT     39     41
+   0.1950   0.0000   8.1312e-06   2.9272e-01
+El     21    T1D2                                concrete                                    MAT1           ELASTICLT     41     43
+   0.2050   0.0000   1.6343e-05   5.8833e-01
+El     22    T1D2                                concrete                                    MAT1           ELASTICLT     43     45
+   0.2150   0.0000   2.4618e-05   8.8625e-01
+El     23    T1D2                                concrete                                    MAT1           ELASTICLT     45     47
+   0.2250   0.0000   3.2942e-05   1.1859e+00
+El     24    T1D2                                concrete                                    MAT1           ELASTICLT     47     49
+   0.2350   0.0000   4.1300e-05   1.4868e+00
+El     25    T1D2                                concrete                                    MAT1           ELASTICLT     49     51
+   0.2450   0.0000   4.9677e-05   1.7884e+00
+El     26    T1D2                                concrete                                    MAT1           ELASTICLT     51     53
+   0.2550   0.0000   5.8060e-05   2.0902e+00
+El     27    T1D2                                concrete                                    MAT1           ELASTICLT     53     55
+   0.2650   0.0000   6.6022e-05   2.3768e+00
+El     28    T1D2                                concrete                                    MAT1           ELASTICLT     55     57
+   0.2750   0.0000   7.2896e-05   2.6243e+00
+El     29    T1D2                                concrete                                    MAT1           ELASTICLT     57     59
+   0.2850   0.0000   7.8193e-05   2.8149e+00
+El     30    T1D2                                concrete                                    MAT1           ELASTICLT     59     61
+   0.2950   0.0000   8.1557e-05   2.9360e+00
+El     31    T1D2                                concrete                                    MAT1           ELASTICLT     61     63
+   0.3050   0.0000   8.2728e-05   2.9782e+00
+El     32    T1D2                                concrete                                    MAT1           ELASTICLT     63     65
+   0.3150   0.0000   8.1557e-05   2.9360e+00
+El     33    T1D2                                concrete                                    MAT1           ELASTICLT     65     67
+   0.3250   0.0000   7.8193e-05   2.8149e+00
+El     34    T1D2                                concrete                                    MAT1           ELASTICLT     67     69
+   0.3350   0.0000   7.2896e-05   2.6243e+00
+El     35    T1D2                                concrete                                    MAT1           ELASTICLT     69     71
+   0.3450   0.0000   6.6022e-05   2.3768e+00
+El     36    T1D2                                concrete                                    MAT1           ELASTICLT     71     73
+   0.3550   0.0000   5.8060e-05   2.0902e+00
+El     37    T1D2                                concrete                                    MAT1           ELASTICLT     73     75
+   0.3650   0.0000   4.9677e-05   1.7884e+00
+El     38    T1D2                                concrete                                    MAT1           ELASTICLT     75     77
+   0.3750   0.0000   4.1300e-05   1.4868e+00
+El     39    T1D2                                concrete                                    MAT1           ELASTICLT     77     79
+   0.3850   0.0000   3.2942e-05   1.1859e+00
+El     40    T1D2                                concrete                                    MAT1           ELASTICLT     79     81
+   0.3950   0.0000   2.4618e-05   8.8625e-01
+El     41    T1D2                                concrete                                    MAT1           ELASTICLT     81     83
+   0.4050   0.0000   1.6343e-05   5.8833e-01
+El     42    T1D2                                concrete                                    MAT1           ELASTICLT     83     85
+   0.4150   0.0000   8.1312e-06   2.9272e-01
+El     43    T1D2                                concrete                                    MAT1           ELASTICLT     85     87
+   0.4250   0.0000   0.0000e+00   0.0000e+00
+El     44    T1D2                                concrete                                    MAT1           ELASTICLT     87     89
+   0.4350   0.0000   8.3020e-06   2.9887e-01
+El     45    T1D2                                concrete                                    MAT1           ELASTICLT     89     91
+   0.4450   0.0000   1.6648e-05   5.9933e-01
+El     46    T1D2                                concrete                                    MAT1           ELASTICLT     91     93
+   0.4550   0.0000   2.5021e-05   9.0075e-01
+El     47    T1D2                                concrete                                    MAT1           ELASTICLT     93     95
+   0.4650   0.0000   3.3404e-05   1.2025e+00
+El     48    T1D2                                concrete                                    MAT1           ELASTICLT     95     97
+   0.4750   0.0000   4.1422e-05   1.4912e+00
+El     49    T1D2                                concrete                                    MAT1           ELASTICLT     97     99
+   0.4850   0.0000   4.8220e-05   1.7359e+00
+El     50    T1D2                                concrete                                    MAT1           ELASTICLT     99    101
+   0.4950   0.0000   5.3161e-05   1.9138e+00
+El     51    T1D2                                concrete                                    MAT1           ELASTICLT    101    103
+   0.5050   0.0000   5.5791e-05   2.0085e+00
+El     52    T1D2                                concrete                                    MAT1           ELASTICLT    103    105
+   0.5150   0.0000   5.5791e-05   2.0085e+00
+El     53    T1D2                                concrete                                    MAT1           ELASTICLT    105    107
+   0.5250   0.0000   5.3161e-05   1.9138e+00
+El     54    T1D2                                concrete                                    MAT1           ELASTICLT    107    109
+   0.5350   0.0000   4.8220e-05   1.7359e+00
+El     55    T1D2                                concrete                                    MAT1           ELASTICLT    109    111
+   0.5450   0.0000   4.1422e-05   1.4912e+00
+El     56    T1D2                                concrete                                    MAT1           ELASTICLT    111    113
+   0.5550   0.0000   3.3404e-05   1.2025e+00
+El     57    T1D2                                concrete                                    MAT1           ELASTICLT    113    115
+   0.5650   0.0000   2.5021e-05   9.0075e-01
+El     58    T1D2                                concrete                                    MAT1           ELASTICLT    115    117
+   0.5750   0.0000   1.6648e-05   5.9933e-01
+El     59    T1D2                                concrete                                    MAT1           ELASTICLT    117    119
+   0.5850   0.0000   8.3020e-06   2.9887e-01
+El     60    T1D2                                concrete                                    MAT1           ELASTICLT    119    121
+   0.5950   0.0000   0.0000e+00   0.0000e+00
+El     61    T1D2                                concrete                                    MAT1           ELASTICLT    121    123
+   0.6050   0.0000   8.3206e-06   2.9954e-01
+El     62    T1D2                                concrete                                    MAT1           ELASTICLT    123    125
+   0.6150   0.0000   1.6679e-05   6.0045e-01
+El     63    T1D2                                concrete                                    MAT1           ELASTICLT    125    127
+   0.6250   0.0000   2.5058e-05   9.0209e-01
+El     64    T1D2                                concrete                                    MAT1           ELASTICLT    127    129
+   0.6350   0.0000   3.3404e-05   1.2025e+00
+El     65    T1D2                                concrete                                    MAT1           ELASTICLT    129    131
+   0.6450   0.0000   4.0983e-05   1.4754e+00
+El     66    T1D2                                concrete                                    MAT1           ELASTICLT    131    133
+   0.6550   0.0000   4.7006e-05   1.6922e+00
+El     67    T1D2                                concrete                                    MAT1           ELASTICLT    133    135
+   0.6650   0.0000   5.0906e-05   1.8326e+00
+El     68    T1D2                                concrete                                    MAT1           ELASTICLT    135    137
+   0.6750   0.0000   5.2280e-05   1.8821e+00
+El     69    T1D2                                concrete                                    MAT1           ELASTICLT    137    139
+   0.6850   0.0000   5.0906e-05   1.8326e+00
+El     70    T1D2                                concrete                                    MAT1           ELASTICLT    139    141
+   0.6950   0.0000   4.7006e-05   1.6922e+00
+El     71    T1D2                                concrete                                    MAT1           ELASTICLT    141    143
+   0.7050   0.0000   4.0983e-05   1.4754e+00
+El     72    T1D2                                concrete                                    MAT1           ELASTICLT    143    145
+   0.7150   0.0000   3.3404e-05   1.2025e+00
+El     73    T1D2                                concrete                                    MAT1           ELASTICLT    145    147
+   0.7250   0.0000   2.5058e-05   9.0209e-01
+El     74    T1D2                                concrete                                    MAT1           ELASTICLT    147    149
+   0.7350   0.0000   1.6679e-05   6.0045e-01
+El     75    T1D2                                concrete                                    MAT1           ELASTICLT    149    151
+   0.7450   0.0000   8.3206e-06   2.9954e-01
+El     76    T1D2                                concrete                                    MAT1           ELASTICLT    151    153
+   0.7550   0.0000   0.0000e+00   0.0000e+00
+El     77    T1D2                                concrete                                    MAT1           ELASTICLT    153    155
+   0.7650   0.0000   8.1028e-06   2.9170e-01
+El     78    T1D2                                concrete                                    MAT1           ELASTICLT    155    157
+   0.7750   0.0000   1.6290e-05   5.8645e-01
+El     79    T1D2                                concrete                                    MAT1           ELASTICLT    157    159
+   0.7850   0.0000   2.4546e-05   8.8366e-01
+El     80    T1D2                                concrete                                    MAT1           ELASTICLT    159    161
+   0.7950   0.0000   3.2855e-05   1.1828e+00
+El     81    T1D2                                concrete                                    MAT1           ELASTICLT    161    163
+   0.8050   0.0000   4.1203e-05   1.4833e+00
+El     82    T1D2                                concrete                                    MAT1           ELASTICLT    163    165
+   0.8150   0.0000   4.9574e-05   1.7847e+00
+El     83    T1D2                                concrete                                    MAT1           ELASTICLT    165    167
+   0.8250   0.0000   5.7957e-05   2.0864e+00
+El     84    T1D2                                concrete                                    MAT1           ELASTICLT    167    169
+   0.8350   0.0000   6.6180e-05   2.3825e+00
+El     85    T1D2                                concrete                                    MAT1           ELASTICLT    169    171
+   0.8450   0.0000   7.3578e-05   2.6488e+00
+El     86    T1D2                                concrete                                    MAT1           ELASTICLT    171    173
+   0.8550   0.0000   7.9615e-05   2.8661e+00
+El     87    T1D2                                concrete                                    MAT1           ELASTICLT    173    175
+   0.8650   0.0000   8.3900e-05   3.0204e+00
+El     88    T1D2                                concrete                                    MAT1           ELASTICLT    175    177
+   0.8750   0.0000   8.6148e-05   3.1013e+00
+El     89    T1D2                                concrete                                    MAT1           ELASTICLT    177    179
+   0.8850   0.0000   8.6148e-05   3.1013e+00
+El     90    T1D2                                concrete                                    MAT1           ELASTICLT    179    181
+   0.8950   0.0000   8.3900e-05   3.0204e+00
+El     91    T1D2                                concrete                                    MAT1           ELASTICLT    181    183
+   0.9050   0.0000   7.9615e-05   2.8661e+00
+El     92    T1D2                                concrete                                    MAT1           ELASTICLT    183    185
+   0.9150   0.0000   7.3578e-05   2.6488e+00
+El     93    T1D2                                concrete                                    MAT1           ELASTICLT    185    187
+   0.9250   0.0000   6.6180e-05   2.3825e+00
+El     94    T1D2                                concrete                                    MAT1           ELASTICLT    187    189
+   0.9350   0.0000   5.7957e-05   2.0864e+00
+El     95    T1D2                                concrete                                    MAT1           ELASTICLT    189    191
+   0.9450   0.0000   4.9574e-05   1.7847e+00
+El     96    T1D2                                concrete                                    MAT1           ELASTICLT    191    193
+   0.9550   0.0000   4.1203e-05   1.4833e+00
+El     97    T1D2                                concrete                                    MAT1           ELASTICLT    193    195
+   0.9650   0.0000   3.2855e-05   1.1828e+00
+El     98    T1D2                                concrete                                    MAT1           ELASTICLT    195    197
+   0.9750   0.0000   2.4546e-05   8.8366e-01
+El     99    T1D2                                concrete                                    MAT1           ELASTICLT    197    199
+   0.9850   0.0000   1.6290e-05   5.8645e-01
+El    100    T1D2                                concrete                                    MAT1           ELASTICLT    199    201
+   0.9950   0.0000   8.1028e-06   2.9170e-01
+El    101    T1D2                                   reinf                                   MAT31               MISES      2      4
+   0.0050   0.0000   2.4579e-03   4.9158e+02   5.0000e+02
+El    102    T1D2                                   reinf                                   MAT31               MISES      4      6
+   0.0150   0.0000   2.3834e-03   4.7668e+02   5.0000e+02
+El    103    T1D2                                   reinf                                   MAT31               MISES      6      8
+   0.0250   0.0000   2.3086e-03   4.6172e+02   5.0000e+02
+El    104    T1D2                                   reinf                                   MAT31               MISES      8     10
+   0.0350   0.0000   2.2336e-03   4.4672e+02   5.0000e+02
+El    105    T1D2                                   reinf                                   MAT31               MISES     10     12
+   0.0450   0.0000   2.1585e-03   4.3170e+02   5.0000e+02
+El    106    T1D2                                   reinf                                   MAT31               MISES     12     14
+   0.0550   0.0000   2.0879e-03   4.1758e+02   5.0000e+02
+El    107    T1D2                                   reinf                                   MAT31               MISES     14     16
+   0.0650   0.0000   2.0286e-03   4.0573e+02   5.0000e+02
+El    108    T1D2                                   reinf                                   MAT31               MISES     16     18
+   0.0750   0.0000   1.9858e-03   3.9717e+02   5.0000e+02
+El    109    T1D2                                   reinf                                   MAT31               MISES     18     20
+   0.0850   0.0000   1.9631e-03   3.9263e+02   5.0000e+02
+El    110    T1D2                                   reinf                                   MAT31               MISES     20     22
+   0.0950   0.0000   1.9631e-03   3.9263e+02   5.0000e+02
+El    111    T1D2                                   reinf                                   MAT31               MISES     22     24
+   0.1050   0.0000   1.9858e-03   3.9717e+02   5.0000e+02
+El    112    T1D2                                   reinf                                   MAT31               MISES     24     26
+   0.1150   0.0000   2.0286e-03   4.0573e+02   5.0000e+02
+El    113    T1D2                                   reinf                                   MAT31               MISES     26     28
+   0.1250   0.0000   2.0879e-03   4.1758e+02   5.0000e+02
+El    114    T1D2                                   reinf                                   MAT31               MISES     28     30
+   0.1350   0.0000   2.1585e-03   4.3170e+02   5.0000e+02
+El    115    T1D2                                   reinf                                   MAT31               MISES     30     32
+   0.1450   0.0000   2.2336e-03   4.4672e+02   5.0000e+02
+El    116    T1D2                                   reinf                                   MAT31               MISES     32     34
+   0.1550   0.0000   2.3086e-03   4.6172e+02   5.0000e+02
+El    117    T1D2                                   reinf                                   MAT31               MISES     34     36
+   0.1650   0.0000   2.3834e-03   4.7668e+02   5.0000e+02
+El    118    T1D2                                   reinf                                   MAT31               MISES     36     38
+   0.1750   0.0000   2.4579e-03   4.9158e+02   5.0000e+02
+El    119    T1D2                                   reinf                                   MAT31               MISES     38     40
+   0.1850   0.0000   8.5336e-03   5.0637e+02   5.0581e+02
+El    120    T1D2                                   reinf                                   MAT31               MISES     40     42
+   0.1950   0.0000   2.4590e-03   4.9181e+02   5.0000e+02
+El    121    T1D2                                   reinf                                   MAT31               MISES     42     44
+   0.2050   0.0000   2.3855e-03   4.7710e+02   5.0000e+02
+El    122    T1D2                                   reinf                                   MAT31               MISES     44     46
+   0.2150   0.0000   2.3114e-03   4.6228e+02   5.0000e+02
+El    123    T1D2                                   reinf                                   MAT31               MISES     46     48
+   0.2250   0.0000   2.2368e-03   4.4737e+02   5.0000e+02
+El    124    T1D2                                   reinf                                   MAT31               MISES     48     50
+   0.2350   0.0000   2.1620e-03   4.3240e+02   5.0000e+02
+El    125    T1D2                                   reinf                                   MAT31               MISES     50     52
+   0.2450   0.0000   2.0870e-03   4.1739e+02   5.0000e+02
+El    126    T1D2                                   reinf                                   MAT31               MISES     52     54
+   0.2550   0.0000   2.0119e-03   4.0238e+02   5.0000e+02
+El    127    T1D2                                   reinf                                   MAT31               MISES     54     56
+   0.2650   0.0000   1.9406e-03   3.8812e+02   5.0000e+02
+El    128    T1D2                                   reinf                                   MAT31               MISES     56     58
+   0.2750   0.0000   1.8790e-03   3.7581e+02   5.0000e+02
+El    129    T1D2                                   reinf                                   MAT31               MISES     58     60
+   0.2850   0.0000   1.8316e-03   3.6632e+02   5.0000e+02
+El    130    T1D2                                   reinf                                   MAT31               MISES     60     62
+   0.2950   0.0000   1.8015e-03   3.6030e+02   5.0000e+02
+El    131    T1D2                                   reinf                                   MAT31               MISES     62     64
+   0.3050   0.0000   1.7910e-03   3.5820e+02   5.0000e+02
+El    132    T1D2                                   reinf                                   MAT31               MISES     64     66
+   0.3150   0.0000   1.8015e-03   3.6030e+02   5.0000e+02
+El    133    T1D2                                   reinf                                   MAT31               MISES     66     68
+   0.3250   0.0000   1.8316e-03   3.6632e+02   5.0000e+02
+El    134    T1D2                                   reinf                                   MAT31               MISES     68     70
+   0.3350   0.0000   1.8790e-03   3.7581e+02   5.0000e+02
+El    135    T1D2                                   reinf                                   MAT31               MISES     70     72
+   0.3450   0.0000   1.9406e-03   3.8812e+02   5.0000e+02
+El    136    T1D2                                   reinf                                   MAT31               MISES     72     74
+   0.3550   0.0000   2.0119e-03   4.0238e+02   5.0000e+02
+El    137    T1D2                                   reinf                                   MAT31               MISES     74     76
+   0.3650   0.0000   2.0870e-03   4.1739e+02   5.0000e+02
+El    138    T1D2                                   reinf                                   MAT31               MISES     76     78
+   0.3750   0.0000   2.1620e-03   4.3240e+02   5.0000e+02
+El    139    T1D2                                   reinf                                   MAT31               MISES     78     80
+   0.3850   0.0000   2.2368e-03   4.4737e+02   5.0000e+02
+El    140    T1D2                                   reinf                                   MAT31               MISES     80     82
+   0.3950   0.0000   2.3114e-03   4.6228e+02   5.0000e+02
+El    141    T1D2                                   reinf                                   MAT31               MISES     82     84
+   0.4050   0.0000   2.3855e-03   4.7710e+02   5.0000e+02
+El    142    T1D2                                   reinf                                   MAT31               MISES     84     86
+   0.4150   0.0000   2.4590e-03   4.9181e+02   5.0000e+02
+El    143    T1D2                                   reinf                                   MAT31               MISES     86     88
+   0.4250   0.0000   8.5336e-03   5.0637e+02   5.0581e+02
+El    144    T1D2                                   reinf                                   MAT31               MISES     88     90
+   0.4350   0.0000   2.4575e-03   4.9150e+02   5.0000e+02
+El    145    T1D2                                   reinf                                   MAT31               MISES     90     92
+   0.4450   0.0000   2.3828e-03   4.7655e+02   5.0000e+02
+El    146    T1D2                                   reinf                                   MAT31               MISES     92     94
+   0.4550   0.0000   2.3078e-03   4.6156e+02   5.0000e+02
+El    147    T1D2                                   reinf                                   MAT31               MISES     94     96
+   0.4650   0.0000   2.2327e-03   4.4654e+02   5.0000e+02
+El    148    T1D2                                   reinf                                   MAT31               MISES     96     98
+   0.4750   0.0000   2.1609e-03   4.3218e+02   5.0000e+02
+El    149    T1D2                                   reinf                                   MAT31               MISES     98    100
+   0.4850   0.0000   2.1000e-03   4.2001e+02   5.0000e+02
+El    150    T1D2                                   reinf                                   MAT31               MISES    100    102
+   0.4950   0.0000   2.0558e-03   4.1116e+02   5.0000e+02
+El    151    T1D2                                   reinf                                   MAT31               MISES    102    104
+   0.5050   0.0000   2.0322e-03   4.0644e+02   5.0000e+02
+El    152    T1D2                                   reinf                                   MAT31               MISES    104    106
+   0.5150   0.0000   2.0322e-03   4.0644e+02   5.0000e+02
+El    153    T1D2                                   reinf                                   MAT31               MISES    106    108
+   0.5250   0.0000   2.0558e-03   4.1116e+02   5.0000e+02
+El    154    T1D2                                   reinf                                   MAT31               MISES    108    110
+   0.5350   0.0000   2.1000e-03   4.2001e+02   5.0000e+02
+El    155    T1D2                                   reinf                                   MAT31               MISES    110    112
+   0.5450   0.0000   2.1609e-03   4.3218e+02   5.0000e+02
+El    156    T1D2                                   reinf                                   MAT31               MISES    112    114
+   0.5550   0.0000   2.2327e-03   4.4654e+02   5.0000e+02
+El    157    T1D2                                   reinf                                   MAT31               MISES    114    116
+   0.5650   0.0000   2.3078e-03   4.6156e+02   5.0000e+02
+El    158    T1D2                                   reinf                                   MAT31               MISES    116    118
+   0.5750   0.0000   2.3828e-03   4.7655e+02   5.0000e+02
+El    159    T1D2                                   reinf                                   MAT31               MISES    118    120
+   0.5850   0.0000   2.4575e-03   4.9150e+02   5.0000e+02
+El    160    T1D2                                   reinf                                   MAT31               MISES    120    122
+   0.5950   0.0000   8.5336e-03   5.0637e+02   5.0581e+02
+El    161    T1D2                                   reinf                                   MAT31               MISES    122    124
+   0.6050   0.0000   2.4573e-03   4.9147e+02   5.0000e+02
+El    162    T1D2                                   reinf                                   MAT31               MISES    124    126
+   0.6150   0.0000   2.3825e-03   4.7650e+02   5.0000e+02
+El    163    T1D2                                   reinf                                   MAT31               MISES    126    128
+   0.6250   0.0000   2.3074e-03   4.6149e+02   5.0000e+02
+El    164    T1D2                                   reinf                                   MAT31               MISES    128    130
+   0.6350   0.0000   2.2327e-03   4.4654e+02   5.0000e+02
+El    165    T1D2                                   reinf                                   MAT31               MISES    130    132
+   0.6450   0.0000   2.1648e-03   4.3297e+02   5.0000e+02
+El    166    T1D2                                   reinf                                   MAT31               MISES    132    134
+   0.6550   0.0000   2.1109e-03   4.2218e+02   5.0000e+02
+El    167    T1D2                                   reinf                                   MAT31               MISES    134    136
+   0.6650   0.0000   2.0760e-03   4.1519e+02   5.0000e+02
+El    168    T1D2                                   reinf                                   MAT31               MISES    136    138
+   0.6750   0.0000   2.0637e-03   4.1273e+02   5.0000e+02
+El    169    T1D2                                   reinf                                   MAT31               MISES    138    140
+   0.6850   0.0000   2.0760e-03   4.1519e+02   5.0000e+02
+El    170    T1D2                                   reinf                                   MAT31               MISES    140    142
+   0.6950   0.0000   2.1109e-03   4.2218e+02   5.0000e+02
+El    171    T1D2                                   reinf                                   MAT31               MISES    142    144
+   0.7050   0.0000   2.1648e-03   4.3297e+02   5.0000e+02
+El    172    T1D2                                   reinf                                   MAT31               MISES    144    146
+   0.7150   0.0000   2.2327e-03   4.4654e+02   5.0000e+02
+El    173    T1D2                                   reinf                                   MAT31               MISES    146    148
+   0.7250   0.0000   2.3074e-03   4.6149e+02   5.0000e+02
+El    174    T1D2                                   reinf                                   MAT31               MISES    148    150
+   0.7350   0.0000   2.3825e-03   4.7650e+02   5.0000e+02
+El    175    T1D2                                   reinf                                   MAT31               MISES    150    152
+   0.7450   0.0000   2.4573e-03   4.9147e+02   5.0000e+02
+El    176    T1D2                                   reinf                                   MAT31               MISES    152    154
+   0.7550   0.0000   8.5336e-03   5.0637e+02   5.0581e+02
+El    177    T1D2                                   reinf                                   MAT31               MISES    154    156
+   0.7650   0.0000   2.4593e-03   4.9186e+02   5.0000e+02
+El    178    T1D2                                   reinf                                   MAT31               MISES    156    158
+   0.7750   0.0000   2.3860e-03   4.7719e+02   5.0000e+02
+El    179    T1D2                                   reinf                                   MAT31               MISES    158    160
+   0.7850   0.0000   2.3120e-03   4.6241e+02   5.0000e+02
+El    180    T1D2                                   reinf                                   MAT31               MISES    160    162
+   0.7950   0.0000   2.2376e-03   4.4752e+02   5.0000e+02
+El    181    T1D2                                   reinf                                   MAT31               MISES    162    164
+   0.8050   0.0000   2.1629e-03   4.3257e+02   5.0000e+02
+El    182    T1D2                                   reinf                                   MAT31               MISES    164    166
+   0.8150   0.0000   2.0879e-03   4.1758e+02   5.0000e+02
+El    183    T1D2                                   reinf                                   MAT31               MISES    166    168
+   0.8250   0.0000   2.0128e-03   4.0257e+02   5.0000e+02
+El    184    T1D2                                   reinf                                   MAT31               MISES    168    170
+   0.8350   0.0000   1.9392e-03   3.8784e+02   5.0000e+02
+El    185    T1D2                                   reinf                                   MAT31               MISES    170    172
+   0.8450   0.0000   1.8729e-03   3.7459e+02   5.0000e+02
+El    186    T1D2                                   reinf                                   MAT31               MISES    172    174
+   0.8550   0.0000   1.8189e-03   3.6377e+02   5.0000e+02
+El    187    T1D2                                   reinf                                   MAT31               MISES    174    176
+   0.8650   0.0000   1.7805e-03   3.5610e+02   5.0000e+02
+El    188    T1D2                                   reinf                                   MAT31               MISES    176    178
+   0.8750   0.0000   1.7604e-03   3.5207e+02   5.0000e+02
+El    189    T1D2                                   reinf                                   MAT31               MISES    178    180
+   0.8850   0.0000   1.7604e-03   3.5207e+02   5.0000e+02
+El    190    T1D2                                   reinf                                   MAT31               MISES    180    182
+   0.8950   0.0000   1.7805e-03   3.5610e+02   5.0000e+02
+El    191    T1D2                                   reinf                                   MAT31               MISES    182    184
+   0.9050   0.0000   1.8189e-03   3.6377e+02   5.0000e+02
+El    192    T1D2                                   reinf                                   MAT31               MISES    184    186
+   0.9150   0.0000   1.8729e-03   3.7459e+02   5.0000e+02
+El    193    T1D2                                   reinf                                   MAT31               MISES    186    188
+   0.9250   0.0000   1.9392e-03   3.8784e+02   5.0000e+02
+El    194    T1D2                                   reinf                                   MAT31               MISES    188    190
+   0.9350   0.0000   2.0128e-03   4.0257e+02   5.0000e+02
+El    195    T1D2                                   reinf                                   MAT31               MISES    190    192
+   0.9450   0.0000   2.0879e-03   4.1758e+02   5.0000e+02
+El    196    T1D2                                   reinf                                   MAT31               MISES    192    194
+   0.9550   0.0000   2.1629e-03   4.3257e+02   5.0000e+02
+El    197    T1D2                                   reinf                                   MAT31               MISES    194    196
+   0.9650   0.0000   2.2376e-03   4.4752e+02   5.0000e+02
+El    198    T1D2                                   reinf                                   MAT31               MISES    196    198
+   0.9750   0.0000   2.3120e-03   4.6241e+02   5.0000e+02
+El    199    T1D2                                   reinf                                   MAT31               MISES    198    200
+   0.9850   0.0000   2.3860e-03   4.7719e+02   5.0000e+02
+El    200    T1D2                                   reinf                                   MAT31               MISES    200    202
+   0.9950   0.0000   2.4593e-03   4.9186e+02   5.0000e+02
+El    201    S1D2                                    bond                                    MAT5              SPRING      1      2
+   0.0000   0.0000  -1.9253e-04  -5.9114e+00
+El    202    S1D2                                    bond                                    MAT5              SPRING      3      4
+   0.0100   0.0000  -1.6803e-04  -5.9512e+00
+El    203    S1D2                                    bond                                    MAT5              SPRING      5      6
+   0.0200   0.0000  -1.4436e-04  -5.9789e+00
+El    204    S1D2                                    bond                                    MAT5              SPRING      7      8
+   0.0300   0.0000  -1.2152e-04  -5.9949e+00
+El    205    S1D2                                    bond                                    MAT5              SPRING      9     10
+   0.0400   0.0000  -9.9521e-05  -5.9998e+00
+El    206    S1D2                                    bond                                    MAT5              SPRING     11     12
+   0.0500   0.0000  -7.8353e-05  -5.6454e+00
+El    207    S1D2                                    bond                                    MAT5              SPRING     13     14
+   0.0600   0.0000  -5.7970e-05  -4.7352e+00
+El    208    S1D2                                    bond                                    MAT5              SPRING     15     16
+   0.0700   0.0000  -3.8245e-05  -3.4201e+00
+El    209    S1D2                                    bond                                    MAT5              SPRING     17     18
+   0.0800   0.0000  -1.8996e-05  -1.8138e+00
+El    210    S1D2                                    bond                                    MAT5              SPRING     19     20
+   0.0900   0.0000   2.7105e-20   2.7105e-15
+El    211    S1D2                                    bond                                    MAT5              SPRING     21     22
+   0.1000   0.0000   1.8996e-05   1.8138e+00
+El    212    S1D2                                    bond                                    MAT5              SPRING     23     24
+   0.1100   0.0000   3.8245e-05   3.4201e+00
+El    213    S1D2                                    bond                                    MAT5              SPRING     25     26
+   0.1200   0.0000   5.7970e-05   4.7352e+00
+El    214    S1D2                                    bond                                    MAT5              SPRING     27     28
+   0.1300   0.0000   7.8353e-05   5.6454e+00
+El    215    S1D2                                    bond                                    MAT5              SPRING     29     30
+   0.1400   0.0000   9.9521e-05   5.9998e+00
+El    216    S1D2                                    bond                                    MAT5              SPRING     31     32
+   0.1500   0.0000   1.2152e-04   5.9949e+00
+El    217    S1D2                                    bond                                    MAT5              SPRING     33     34
+   0.1600   0.0000   1.4436e-04   5.9789e+00
+El    218    S1D2                                    bond                                    MAT5              SPRING     35     36
+   0.1700   0.0000   1.6803e-04   5.9512e+00
+El    219    S1D2                                    bond                                    MAT5              SPRING     37     38
+   0.1800   0.0000   1.9253e-04   5.9114e+00
+El    220    S1D2                                    bond                                    MAT5              SPRING     39     40
+   0.1900   0.0000  -2.3431e-04  -5.8195e+00
+El    221    S1D2                                    bond                                    MAT5              SPRING     41     42
+   0.2000   0.0000  -2.0980e-04  -5.8769e+00
+El    222    S1D2                                    bond                                    MAT5              SPRING     43     44
+   0.2100   0.0000  -1.8611e-04  -5.9229e+00
+El    223    S1D2                                    bond                                    MAT5              SPRING     45     46
+   0.2200   0.0000  -1.6324e-04  -5.9576e+00
+El    224    S1D2                                    bond                                    MAT5              SPRING     47     48
+   0.2300   0.0000  -1.4120e-04  -5.9817e+00
+El    225    S1D2                                    bond                                    MAT5              SPRING     49     50
+   0.2400   0.0000  -1.1999e-04  -5.9956e+00
+El    226    S1D2                                    bond                                    MAT5              SPRING     51     52
+   0.2500   0.0000  -9.9620e-05  -5.9999e+00
+El    227    S1D2                                    bond                                    MAT5              SPRING     53     54
+   0.2600   0.0000  -8.0082e-05  -5.6984e+00
+El    228    S1D2                                    bond                                    MAT5              SPRING     55     56
+   0.2700   0.0000  -6.1336e-05  -4.9197e+00
+El    229    S1D2                                    bond                                    MAT5              SPRING     57     58
+   0.2800   0.0000  -4.3275e-05  -3.7909e+00
+El    230    S1D2                                    bond                                    MAT5              SPRING     59     60
+   0.2900   0.0000  -2.5741e-05  -2.4074e+00
+El    231    S1D2                                    bond                                    MAT5              SPRING     61     62
+   0.3000   0.0000  -8.5413e-06  -8.3830e-01
+El    232    S1D2                                    bond                                    MAT5              SPRING     63     64
+   0.3100   0.0000   8.5413e-06   8.3830e-01
+El    233    S1D2                                    bond                                    MAT5              SPRING     65     66
+   0.3200   0.0000   2.5741e-05   2.4074e+00
+El    234    S1D2                                    bond                                    MAT5              SPRING     67     68
+   0.3300   0.0000   4.3275e-05   3.7909e+00
+El    235    S1D2                                    bond                                    MAT5              SPRING     69     70
+   0.3400   0.0000   6.1336e-05   4.9197e+00
+El    236    S1D2                                    bond                                    MAT5              SPRING     71     72
+   0.3500   0.0000   8.0082e-05   5.6984e+00
+El    237    S1D2                                    bond                                    MAT5              SPRING     73     74
+   0.3600   0.0000   9.9620e-05   5.9999e+00
+El    238    S1D2                                    bond                                    MAT5              SPRING     75     76
+   0.3700   0.0000   1.1999e-04   5.9956e+00
+El    239    S1D2                                    bond                                    MAT5              SPRING     77     78
+   0.3800   0.0000   1.4120e-04   5.9817e+00
+El    240    S1D2                                    bond                                    MAT5              SPRING     79     80
+   0.3900   0.0000   1.6324e-04   5.9576e+00
+El    241    S1D2                                    bond                                    MAT5              SPRING     81     82
+   0.4000   0.0000   1.8611e-04   5.9229e+00
+El    242    S1D2                                    bond                                    MAT5              SPRING     83     84
+   0.4100   0.0000   2.0980e-04   5.8769e+00
+El    243    S1D2                                    bond                                    MAT5              SPRING     85     86
+   0.4200   0.0000   2.3431e-04   5.8195e+00
+El    244    S1D2                                    bond                                    MAT5              SPRING     87     88
+   0.4300   0.0000  -1.7448e-04  -5.9418e+00
+El    245    S1D2                                    bond                                    MAT5              SPRING     89     90
+   0.4400   0.0000  -1.4998e-04  -5.9733e+00
+El    246    S1D2                                    bond                                    MAT5              SPRING     91     92
+   0.4500   0.0000  -1.2632e-04  -5.9925e+00
+El    247    S1D2                                    bond                                    MAT5              SPRING     93     94
+   0.4600   0.0000  -1.0350e-04  -5.9999e+00
+El    248    S1D2                                    bond                                    MAT5              SPRING     95     96
+   0.4700   0.0000  -8.1503e-05  -5.7390e+00
+El    249    S1D2                                    bond                                    MAT5              SPRING     97     98
+   0.4800   0.0000  -6.0309e-05  -4.8647e+00
+El    250    S1D2                                    bond                                    MAT5              SPRING     99    100
+   0.4900   0.0000  -3.9790e-05  -3.5364e+00
+El    251    S1D2                                    bond                                    MAT5              SPRING    101    102
+   0.5000   0.0000  -1.9764e-05  -1.8829e+00
+El    252    S1D2                                    bond                                    MAT5              SPRING    103    104
+   0.5100   0.0000   2.8189e-18   2.8189e-13
+El    253    S1D2                                    bond                                    MAT5              SPRING    105    106
+   0.5200   0.0000   1.9764e-05   1.8829e+00
+El    254    S1D2                                    bond                                    MAT5              SPRING    107    108
+   0.5300   0.0000   3.9790e-05   3.5364e+00
+El    255    S1D2                                    bond                                    MAT5              SPRING    109    110
+   0.5400   0.0000   6.0309e-05   4.8647e+00
+El    256    S1D2                                    bond                                    MAT5              SPRING    111    112
+   0.5500   0.0000   8.1503e-05   5.7390e+00
+El    257    S1D2                                    bond                                    MAT5              SPRING    113    114
+   0.5600   0.0000   1.0350e-04   5.9999e+00
+El    258    S1D2                                    bond                                    MAT5              SPRING    115    116
+   0.5700   0.0000   1.2632e-04   5.9925e+00
+El    259    S1D2                                    bond                                    MAT5              SPRING    117    118
+   0.5800   0.0000   1.4998e-04   5.9733e+00
+El    260    S1D2                                    bond                                    MAT5              SPRING    119    120
+   0.5900   0.0000   1.7448e-04   5.9418e+00
+El    261    S1D2                                    bond                                    MAT5              SPRING    121    122
+   0.6000   0.0000  -1.6515e-04  -5.9551e+00
+El    262    S1D2                                    bond                                    MAT5              SPRING    123    124
+   0.6100   0.0000  -1.4066e-04  -5.9822e+00
+El    263    S1D2                                    bond                                    MAT5              SPRING    125    126
+   0.6200   0.0000  -1.1700e-04  -5.9968e+00
+El    264    S1D2                                    bond                                    MAT5              SPRING    127    128
+   0.6300   0.0000  -9.4178e-05  -5.9733e+00
+El    265    S1D2                                    bond                                    MAT5              SPRING    129    130
+   0.6400   0.0000  -7.2185e-05  -5.4241e+00
+El    266    S1D2                                    bond                                    MAT5              SPRING    131    132
+   0.6500   0.0000  -5.0946e-05  -4.3111e+00
+El    267    S1D2                                    bond                                    MAT5              SPRING    133    134
+   0.6600   0.0000  -3.0308e-05  -2.7914e+00
+El    268    S1D2                                    bond                                    MAT5              SPRING    135    136
+   0.6700   0.0000  -1.0057e-05  -9.8343e-01
+El    269    S1D2                                    bond                                    MAT5              SPRING    137    138
+   0.6800   0.0000   1.0057e-05   9.8343e-01
+El    270    S1D2                                    bond                                    MAT5              SPRING    139    140
+   0.6900   0.0000   3.0308e-05   2.7914e+00
+El    271    S1D2                                    bond                                    MAT5              SPRING    141    142
+   0.7000   0.0000   5.0946e-05   4.3111e+00
+El    272    S1D2                                    bond                                    MAT5              SPRING    143    144
+   0.7100   0.0000   7.2185e-05   5.4241e+00
+El    273    S1D2                                    bond                                    MAT5              SPRING    145    146
+   0.7200   0.0000   9.4178e-05   5.9733e+00
+El    274    S1D2                                    bond                                    MAT5              SPRING    147    148
+   0.7300   0.0000   1.1700e-04   5.9968e+00
+El    275    S1D2                                    bond                                    MAT5              SPRING    149    150
+   0.7400   0.0000   1.4066e-04   5.9822e+00
+El    276    S1D2                                    bond                                    MAT5              SPRING    151    152
+   0.7500   0.0000   1.6515e-04   5.9551e+00
+El    277    S1D2                                    bond                                    MAT5              SPRING    153    154
+   0.7600   0.0000  -2.4210e-04  -5.7992e+00
+El    278    S1D2                                    bond                                    MAT5              SPRING    155    156
+   0.7700   0.0000  -2.1759e-04  -5.8597e+00
+El    279    S1D2                                    bond                                    MAT5              SPRING    157    158
+   0.7800   0.0000  -1.9390e-04  -5.9089e+00
+El    280    S1D2                                    bond                                    MAT5              SPRING    159    160
+   0.7900   0.0000  -1.7102e-04  -5.9469e+00
+El    281    S1D2                                    bond                                    MAT5              SPRING    161    162
+   0.8000   0.0000  -1.4897e-04  -5.9743e+00
+El    282    S1D2                                    bond                                    MAT5              SPRING    163    164
+   0.8100   0.0000  -1.2776e-04  -5.9916e+00
+El    283    S1D2                                    bond                                    MAT5              SPRING    165    166
+   0.8200   0.0000  -1.0737e-04  -5.9994e+00
+El    284    S1D2                                    bond                                    MAT5              SPRING    167    168
+   0.8300   0.0000  -8.7824e-05  -5.8850e+00
+El    285    S1D2                                    bond                                    MAT5              SPRING    169    170
+   0.8400   0.0000  -6.9094e-05  -5.2949e+00
+El    286    S1D2                                    bond                                    MAT5              SPRING    171    172
+   0.8500   0.0000  -5.1101e-05  -4.3209e+00
+El    287    S1D2                                    bond                                    MAT5              SPRING    173    174
+   0.8600   0.0000  -3.3708e-05  -3.0670e+00
+El    288    S1D2                                    bond                                    MAT5              SPRING    175    176
+   0.8700   0.0000  -1.6742e-05  -1.6088e+00
+El    289    S1D2                                    bond                                    MAT5              SPRING    177    178
+   0.8800   0.0000  -8.6736e-19  -8.6736e-14
+El    290    S1D2                                    bond                                    MAT5              SPRING    179    180
+   0.8900   0.0000   1.6742e-05   1.6088e+00
+El    291    S1D2                                    bond                                    MAT5              SPRING    181    182
+   0.9000   0.0000   3.3708e-05   3.0670e+00
+El    292    S1D2                                    bond                                    MAT5              SPRING    183    184
+   0.9100   0.0000   5.1101e-05   4.3209e+00
+El    293    S1D2                                    bond                                    MAT5              SPRING    185    186
+   0.9200   0.0000   6.9094e-05   5.2949e+00
+El    294    S1D2                                    bond                                    MAT5              SPRING    187    188
+   0.9300   0.0000   8.7824e-05   5.8850e+00
+El    295    S1D2                                    bond                                    MAT5              SPRING    189    190
+   0.9400   0.0000   1.0737e-04   5.9994e+00
+El    296    S1D2                                    bond                                    MAT5              SPRING    191    192
+   0.9500   0.0000   1.2776e-04   5.9916e+00
+El    297    S1D2                                    bond                                    MAT5              SPRING    193    194
+   0.9600   0.0000   1.4897e-04   5.9743e+00
+El    298    S1D2                                    bond                                    MAT5              SPRING    195    196
+   0.9700   0.0000   1.7102e-04   5.9469e+00
+El    299    S1D2                                    bond                                    MAT5              SPRING    197    198
+   0.9800   0.0000   1.9390e-04   5.9089e+00
+El    300    S1D2                                    bond                                    MAT5              SPRING    199    200
+   0.9900   0.0000   2.1759e-04   5.8597e+00
+El    301    S1D2                                    bond                                    MAT5              SPRING    201    202
+   1.0000   0.0000   2.4210e-04   5.7992e+00

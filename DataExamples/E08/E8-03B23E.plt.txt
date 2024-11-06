@@ -1,0 +1,3 @@
+*PlotTimes, 0.5, 1.0
+*ScaleDispl2D, 5.
+*NoPostElem1D

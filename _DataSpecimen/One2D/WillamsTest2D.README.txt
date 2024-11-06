@@ -1,0 +1,12 @@
+See also Note_ConcStudies - Verknüpfung
+
+Large and small element size
+	current references all large
+
+
+Units N, mm
+
+different steps sizes in 2nd step
+
+Isodam
+	Regularization 2 (crack band), 3 (SDA)

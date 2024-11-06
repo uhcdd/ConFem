@@ -1,0 +1,8 @@
+SimFem  ../_DataShellsSlabs/c_1461(0.08)_2.1e5_0.3_segment load
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 7510, elems 1461, active nodes 1502, abs.size 2062.43 MItems, rel.size 0.0374 (abs.size/(ndofs**2)
+used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 1.00000 iter 0 2.678128e-02
+0   1 1.000 1.00000 iter 1 5.111935e-15
+total comp time 7 seconds

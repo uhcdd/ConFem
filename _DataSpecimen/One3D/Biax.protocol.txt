@@ -1,0 +1,8 @@
+ConFem:  ../DataSpecimen/One3D/Biax
+symmetric system True
+0 step starts NR
+1 0 1.0 0.0 0 0.0 0.0 1.0
+1 0 1.0 1.0 1 7.32410687764e-15 0.0081 1.0
+Element Data written 1.0 1.0
+Nodal Data written 1.0 1.0
+0.0120000839233

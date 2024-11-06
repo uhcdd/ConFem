@@ -1,0 +1,12 @@
+**writeNodes,234,2,r-u, 245,2,r-u,246,2,r-u,247,2,r-u,248,2,r-u,249,2,r-u,250,2,r-u,251,2,r-u,252,2,r-u,253,2,r-u,254,2,r-u,255,2,r-u,256,2,r-u,257,2,r-u,258,2,r-u,259,2,r-u,260,2,r-u,261,2,r-u,262,2,r-u,263,2, r-u,233
+writeNodes,290,2,b-u
+writeNodes,232,2,b-u
+writeNodes,235,2,b-u
+writeNodes,280,2,b-u
+writeNodes,282,2,b-u
+writeNodes,284,2,b-u
+writeNodes,286,2,b-u
+writeNodes,274,2,b-u
+writeNodes,276,2,b-u
+writeNodes,278,2,b-u
+writeNodes,288,2,b-u

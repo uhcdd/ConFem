@@ -1,0 +1,40 @@
+*HEADING
+axisym
+axisym ring one CAX4 Isodamage
+2023-06-02_16-13-26
+*NODE
+    1,  1.0000e+00,  0.0000e+00,  0.0
+    2,  1.1000e+00,  0.0000e+00,  0.0
+    3,  1.0000e+00,  1.0000e-01,  0.0
+    4,  1.1000e+00,  1.0000e-01,  0.0
+*ELEMENT, ELSET=EL1, TYPE=CAX4
+    1,       1,       2,       4,       3,   
+******************************************************
+*MATERIAL, NAME=MATEL
+*ELASTIC
+100000.,0.0,0.0
+*MATERIAL, NAME=MATDAM
+*ISODAMAGE
+30000.,0.2,30.,3.0,1,1.2,0.2,2.0,2,100.e-6,0.,0.
+******************************************************
+***SOLID SECTION, ELSET=EL1, MATERIAL=MATEL
+*SOLID SECTION, ELSET=EL1, MATERIAL=MATDAM
+ 1.000
+******************************************************
+*STEP
+*STATIC
+**1.0, 1.0
+0.001, 0.01
+*CONTROLS, ITOL=1.e-6, NITER=20
+*AMPLITUDE, NAME=AMP
+   0.0, 0.0,   1.0, 1.0
+*BOUNDARY, AMPLITUDE=AMP
+       1,   2,   2,   0.0000
+       2,   2,   2,   0.0000
+*CLOAD, AMPLITUDE=AMP
+       2,   1,   6.2832
+       4,   1,   6.2832
+*EL FILE, FREQUENCY=1.0
+*NODE FILE, FREQUENCY=1.0
+*END STEP
+******************************************************

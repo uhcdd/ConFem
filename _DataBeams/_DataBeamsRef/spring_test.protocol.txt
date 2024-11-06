@@ -1,0 +1,7 @@
+ConFem:  ../TestIn/spring_test
+symmetric system True
+0 step starts NR
+1 0 1.0 0.0 0 0.0 0.0 1.0
+1 0 1.0 1.0 1 3.85683505369e-17 1.44609751755e-05 1.0
+Element Data written 1.0 1.0
+0.0160000324249

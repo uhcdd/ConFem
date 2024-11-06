@@ -1,0 +1,2 @@
+*ScaleStress, El1, 2.0
+*PostElem3D

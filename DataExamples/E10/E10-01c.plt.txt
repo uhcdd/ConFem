@@ -1,0 +1,4 @@
+*PostElem3D
+*ScaleDispl, 5.0
+*ScaleStress, EL1, 2.0
+*NoPostNode

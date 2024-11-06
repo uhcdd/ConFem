@@ -1,0 +1,36 @@
+ConFem  ../_DataBuckling/ShellBuckl
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 90, elems 8, active nodes 18, abs.size 1.26 MItems, rel.size 0.1599 (abs.size/(ndofs**2)
+used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 4.928514e-15 1.000000e+00    1.224182e-03
+Element data written 1.000000
+Nodal data written 1.000000
+Restart data written 1.000000
+1 step starts, solution type NR
+Eigenvalue analysis: Matrices have been computed
+Eigenvalue analysis: kinematic boundary conditions considered
+Eigenvalue analysis: prereqs for iterations ready
+iter 0, residual 4.211080
+iter 1, residual 0.419047
+iter 2, residual 0.133479
+iter 3, residual 0.043970
+iter 4, residual 0.014895
+iter 5, residual 0.004999
+iter 6, residual 0.001583
+iter 7, residual 0.000529
+iter 8, residual 0.000179
+iter 9, residual 0.000061
+iter 10, residual 0.000020
+iter 11, residual 0.000006
+iter 12, residual 0.000002
+iter 13, residual 0.000001
+eigenform 0, value 6.652204, rel. acc 4.810711e-12
+eigenform 1, value 61.840366, rel. acc 8.636711e-14
+eigenform 2, value 115.231915, rel. acc 1.108813e-12
+eigenform 3, value 183.488117, rel. acc 1.088214e-10
+eigenform 4, value 398.121538, rel. acc 3.765048e-07
+Eigenvalue analysis: finished
+Restart data written 1.000000
+total comp time 2 seconds

@@ -1,0 +1,89 @@
+*HEADING
+OneElement
+One element with different material laws
+*NODE
+** large unit m
+    1,  0.0,  0.0,  0.00
+    2,  0.1,  0.0,  0.00
+    3,  0.1,  0.1,  0.00
+    4,  0.0,  0.1,  0.00
+** medium
+**    1,  0.00,  0.00,  0.00
+**    2,  0.05,  0.00,  0.00
+**    3,  0.05,  0.05,  0.00
+**    4,  0.0,   0.05,  0.00
+** small
+**    1,  0.00,  0.00,  0.00
+**    2,  0.01,  0.00,  0.00
+**    3,  0.01,  0.01,  0.00
+**    4,  0.00,  0.01,  0.00
+** very small
+**    1,  0.00,   0.00,  0.00
+**    2,  0.004,  0.00,  0.00
+**    3,  0.004,  0.004,  0.00
+**    4,  0.00,   0.004,  0.00
+*****************************************************************
+*ELEMENT, TYPE=CPS4, ELSET=EL1
+    1,   1, 2, 3, 4
+*****************************************************************
+*MATERIAL, NAME=MAT1
+*ELASTIC
+   30000., 0.2, 1.0e-06
+**---------------------------------------------------------------
+*MATERIAL, NAME=ISOD
+*ISODAMAGE,    , "crack energy MN/m"
+   30000.,0.2,   30.,3.0,  1,1.2,0.2,2.0,  0,100.e-6,  0.0,  0.0
+**---------------------------------------------------------------
+***MATERIAL, NAME=MIPL
+***MICROPLANE_DAMAGE1
+**   30000., 0.20, 2, 3.0, 12.5,    0., 0., 0, 100.e-06, 0., 0., 0.282
+****   30000., 0.20, 2, 3.0, 13.0,    0., 0., 2, 100.e-06, 0., 0., 0.282
+**** 35000., 0.15, 1, 0.9, 3000., 0.0001, 12.. 1., "Leukart damage function"
+**---------------------------------------------------------------
+*MATERIAL, NAME=MIPL
+*MICRODAMAGE
+   30000., 0.20, 2, 3.0, 13.0,    0., 0., 0, 100.e-06, 0., 0.
+**---------------------------------------------------------------
+*MATERIAL, NAME=LUBL
+*LUBLINER
+**   35000.,0.20, 24.5,35.0,3.5, 1.16,0.6667,  100.e-6,100.e-4,  15.,0.1, 0.0,0.0
+   35000.,0.20, 24.5,35.0,3.5, 1.16,0.6667,  100.e-6,100.e-4,  15.,0.1, 0.4,0.5
+**---------------------------------------------------------------
+** matrix linear elastic limited tensile strength **************
+***MATERIAL, NAME=ELLT
+***ELASTIC_SDA, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.01, PRINCIPAL_STRESS
+**   35000.,    0.2,   3.50,   100.e-6,  0.0,  0.0, "crack energy N/mm", "bulk viscosity", "crack viscosity"
+**---------------------------------------------------------------
+*MATERIAL, NAME=ELLT_
+*ELASTICLT, SDA
+   35000.,    0.2,   3.50,   100.e-6,  0.0,  -1, 0.0, 0.0, "crack energy MN/m"
+*****************************************************************
+***SOLID SECTION, ELSET=EL1, MATERIAL=MISES
+*SOLID SECTION, ELSET=EL1, MATERIAL=ISOD
+***SOLID SECTION, ELSET=EL1, MATERIAL=MIPL
+***SOLID SECTION, ELSET=EL1, MATERIAL=LUBL
+***SOLID SECTION, ELSET=EL1, MATERIAL=ELLT_
+ 1.00
+*****************************************************************
+*STEP
+*STATIC
+   0.005,   1.0
+*CONTROLS, , ITOL= 1.e-7, NITER= 50
+*AMPLITUDE, NAME=AMPL0, "tension 0.1 sample"    
+ 0.0, 0.0,  1.0, 8.0
+*AMPLITUDE, NAME=AMPL1, "compression 0.1 sample"    
+ 0.0, 0.0,  1.0, -30.0
+*AMPLITUDE, NAME=AMPL2, "compression - unloading - reloading tension 0.1 sample"    
+ 0.0, 0.0,  0.5, -13.0, 1.0, 5.0
+*BOUNDARY, AMPLITUDE=AMPL2
+***BOUNDARY, AMPLITUDE=AMPL0
+  1,    1,  1, 0.
+  1,    2,  2, 0.
+  2,    2,  2, 0.
+  4,    1,  1, 0.
+  2,    1,  1, 1.0e-5
+  3,    1,  1, 1.0e-5
+*EL FILE, FREQUENCY=0.1
+*NODE FILE, FREQUENCY=0.1
+*END STEP
+***************************************************

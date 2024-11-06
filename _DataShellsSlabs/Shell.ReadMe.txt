@@ -1,0 +1,5 @@
+#        Element.__init__(self,"SH4",4,20,3, 4,2,16, [set([1, 2, 3, 4, 5]),set([1, 2, 3, 4, 5]),set([1, 2, 3, 4, 5]),set([1, 2, 3, 4, 5])], (5,5,5,5), 21, True) # four integration points over cross section height
+        Element.__init__(self,"SH4",4,20,3, 4,5,20, [set([1, 2, 3, 4, 5]),set([1, 2, 3, 4, 5]),set([1, 2, 3, 4, 5]),set([1, 2, 3, 4, 5])], (5,5,5,5), 21, True) # five integration points over cross section height
+        self.PlSt = True #False #False #True                                # flag for plane stress
+
+BEACHTEN!

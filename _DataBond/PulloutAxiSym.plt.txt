@@ -1,0 +1,4 @@
+*ScaleDispl,  0.2 
+***NoPostElem2D
+***NoPostNode
+***NoPostElem1D

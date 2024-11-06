@@ -1,0 +1,11 @@
+ConFem  ../_DataAxisym/CylAX
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 22, elems 10, active nodes 11, abs.size 0.07 MItems, rel.size 0.1508 (abs.size/(ndofs**2)
+used material MATEL, spec. inertial mass 0.00e+00, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 4.216379e-14 1.000000e+00    1.157856e-03
+Element data written 1.000000
+Nodal data written 1.000000
+Restart data written 1.000000
+total comp time 0 seconds

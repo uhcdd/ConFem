@@ -1,0 +1,9 @@
+ConFem  ../_DataShellsSlabs/Sattel
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 585, elems 96, nodes 117, rel size 0.0837, abs size 27.9834 MWords
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 4.641917e-13 1.000000e+00    1.100087e-01
+Element Data written 1.000000 1.000000
+Nodal Data written 1.000000 1.000000
+total comp time 0 seconds

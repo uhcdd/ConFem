@@ -1,0 +1,94 @@
+*HEADING
+TwoElementShear
+** node-data must be first
+*NODE
+1,   0.00E+0,   0.00E+0,   0.00E+0
+2,   2.00E+1,   0.00E+1,   0.00E+0
+**2,   2.00E+1,   1.00E+1,   0.00E+0
+3,   0.00E+0,   2.00E+1,   0.00E+0
+4,   2.00E+1,   2.00E+1,   0.00E+0
+**1,   0.00E+0,   0.00E+0,   0.00E+0
+**2,   1.00E+1,   0.00E+0,   0.00E+0
+**3,   0.00E+0,   1.00E+1,   0.00E+0
+**4,   1.00E+1,   1.00E+1,   0.00E+0
+*ELEMENT, TYPE=CPS4, ELSET=E1
+1, 1, 2, 3
+2, 2, 4, 3
+**********************************
+** matrix linear elastic *********
+*MATERIAL, NAME=MAT1
+*ELASTIC
+ 25000., 0.2
+** matrix linear elastic limited tensile strength ************** units are N, mm
+*MATERIAL, NAME=MAT2
+***ELASTIC_SDA, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.01, PRINCIPAL_STRESS
+*ELASTICLT, SDA
+   25000.,    0.2,   3.0,   100.e-3,  0.01, -1, 0.0,  0.0, "crack energy N/mm", "bulk viscosity", "crack viscosity"
+** matrix isodamage ************** units are N, mm
+*MATERIAL, NAME=MAT3
+*DENSITY
+   2.5e-3
+*ISODAMAGE, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.01, PRINCIPAL_STRESS
+** "SDA, crack energy N/mm"  
+   25000.,0.2,   30.,3.0,  1,1.2,0.2,2.0,  3,100.e-3,  .0, .0
+**   25000.,0.2,   30.,3.0,  1,1.2,0.2,2.0,  3,100.e-3,  .1,  "crack energy N/mm"
+**   25000.,0.2,   30.,3.0,  1,1.2,0.2,2.0,  3,100.e-3,  1.,  "crack energy N/mm"
+**   25000.,0.2,   30.,3.0,  1,1.2,0.2,2.0,  0,100.e-3,  30.,  "crack energy N/mm"
+**   25000.,0.2,   30.,3.0,  1,1.2,0.2,2.0,  2,100.e-3,  30.,  "Crack Band, crack energy N/mm"
+**   25000.,0.2,   30.,3.0,  1,1.2,0.2,2.0,  2,100.e-3,  10.,  "crack energy N/mm"
+**********************************
+***SOLID SECTION, ELSET=E1, MATERIAL=Mat1
+***SOLID SECTION, ELSET=E1, MATERIAL=Mat2
+*SOLID SECTION, ELSET=E1, MATERIAL=Mat3
+   1.0
+****STEP 1******************************
+*STEP
+*STATIC
+**, ARCLENGTH=0.0e-4
+   0.01, 5.0
+***CONTROLS, ITOL= 1.e-7, NITER= 50
+*CONTROLS, PARAMETERS=FIELD
+   1.e-6
+*CONTROLS, PARAMETERS=TIME INCREMENTATION
+   50
+*AMPLITUDE, NAME=DISPL1
+** loading, unloading, reloading, but regard steps below
+  0.0, 0.0,  1.0, 4.0,  5.0, 20.0,  8., -2.,  13., 46.
+**
+*BOUNDARY, AMPLITUDE=DISPL1
+1,  1,1,  0.0
+1,  2,2,  0.0
+2,  2,2,  0.0
+** x-dir
+**3,  1,1,  0.0
+**2,  1,1,  0.002
+**4,  1,1,  0.002
+** y-dir
+**3,1,0.0
+**3,2,0.002
+**4,2,0.002
+** shear
+2, 1, 1,  0.0
+3, 1, 1,  0.0015
+4, 1, 1,  0.0015
+3, 2, 2,  0.0
+4, 2, 2,  0.0
+**
+*EL FILE, FREQUENCY=2.0
+S
+E
+*NODE FILE, FREQUENCY=2.0
+U
+*END STEP   
+****STEP 2******************************
+*STEP
+*STATIC
+   0.01, 8.0
+*END STEP   
+****STEP 2******************************
+*STEP
+*STATIC
+   0.01, 13.0
+*END STEP   
+**********************************
+

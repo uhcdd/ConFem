@@ -1,0 +1,88 @@
+*HEADING
+simple brick
+*NODE
+** large unit m
+**    1,  0.00,  0.00,  0.00
+**    2,  0.10,  0.00,  0.00
+**    3,  0.10,  0.10,  0.00
+**    4,  0.00,  0.10,  0.00
+** small
+    1,  0.00,  0.00,  0.00
+    2,  0.01,  0.00,  0.00
+    3,  0.01,  0.01,  0.00
+    4,  0.00,  0.01,  0.00
+*******************************************************************************
+*ELEMENT, TYPE=CPS4, ELSET=EL1
+***ELEMENT, TYPE=CPE4, ELSET=EL1
+**    1,   1, 2, 3, 4
+    1,   1, 2, 3, 4,     3.5, 3.5, 3.5, 3.5
+*******************************************************************************
+*MATERIAL, NAME=MAT1
+*ELASTIC
+   35000., 0.2
+**-----------------------------------------
+*MATERIAL, NAME=MISES
+*MISES
+   35000.,    0.2,   3.5,  4.0,  0.02, 1.0e-5, 0.
+**-----------------------------------------
+*MATERIAL, NAME=ISOD
+*ISODAMAGE
+   35000.,0.2,   35.,3.5,  1,1.2,0.2,2.0,  2,100.e-6,  .0,  0.
+**   "crack energy MN/m"
+**-----------------------------------------
+*MATERIAL, NAME=MIPL
+*MICRODAMAGE
+   35000., 0.20, 2, 3.5, 13.0,    0., 0., 2, 100.e-06, 0., 0.
+** 35000., 0.15, 1, 0.9, 3000., 0.0001, 12.. 1., "Leukart damage function"
+**-----------------------------------------
+*MATERIAL, NAME=LUBL
+*LUBLINER
+**   35000.,0.20, 24.5,35.0,3.5, 1.16,0.6667,  100.e-6,100.e-4,  15.,0.1, 0.0,0.0
+   35000.,0.20, 24.5,35.0,3.5, 1.16,0.6667,  100.e-6,100.e-4,  15.,0.1, 0.4,0.5
+**-----------------------------------------
+** matrix linear elastic limited tensile strength **************
+*MATERIAL, NAME=ELLT
+*ELASTICLT, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.01, PRINCIPAL_STRESS
+***ELASTIC_SDA, 2NDCRACK=30, SHEAR_RETENTION_FACTOR=0.01, PRINCIPAL_STRESS
+   35000.,    0.2,   3.50,   100.e-6,  0.0,  0.0, 0.0
+*******************************************************************************
+***SOLID SECTION, ELSET=EL1, MATERIAL=MISES
+*SOLID SECTION, ELSET=EL1, MATERIAL=ISOD
+***SOLID SECTION, ELSET=EL1, MATERIAL=MIPL
+***SOLID SECTION, ELSET=EL1, MATERIAL=LUBL
+***SOLID SECTION, ELSET=EL1, MATERIAL=ELLT
+ 0.100
+************* another step following for amplitude reversal continuation
+*STEP
+*STATIC
+   0.01,   2.0, "general"
+*CONTROLS, ITOL= 1.e-7, NITER= 50
+** tension followed by compression
+*AMPLITUDE, NAME=AMPL0    
+ 0.0, 0.0,  2.0, 2.0,   4.0, 0.0,  10.0, -6.0
+** compression only
+*AMPLITUDE, NAME=AMPL1, "compression only"    
+   0.0, 0.0, 2., -15.
+*BOUNDARY, AMPLITUDE=AMPL0
+***BOUNDARY, AMPLITUDE=AMPL1
+  1,    1,  1, 0.
+  1,    2,  2, 0.
+  2,    2,  2, 0.
+  4,    1,  1, 0.
+** large element strain / displ
+**  2,    1,  1, 0.2e-4
+**  3,    1,  1, 0.2e-4
+** small element strain
+**  2,    1,  1, 0.2e-5
+**  3,    1,  1, 0.2e-5
+  2,    1,  1, 5.0e-5
+  3,    1,  1, 5.0e-5
+*EL FILE, FREQUENCY=1.0
+*NODE FILE, FREQUENCY=1.0
+*END STEP
+*******************************************************************************
+***STEP
+***STATIC
+**   0.01,   40.0, "general"
+***END STEP
+*******************************************************************************

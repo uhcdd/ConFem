@@ -1,0 +1,14 @@
+ConFem  ../_DataBuckling/fullCyl
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 5200, elems 1000, active nodes 1040, abs.size 1263.99 MItems, rel.size 0.0479 (abs.size/(ndofs**2)
+used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 2.718426e-14 1.000000e+00    5.623081e-02
+Element data written 1.000000
+Nodal data written 1.000000
+Restart data written 1.000000
+1 step starts, solution type NR
+Eigenvalue analysis: Matrices have been computed
+Eigenvalue analysis: kinematic boundary conditions considered
+Eigenvalue analysis: prereqs for iterations ready

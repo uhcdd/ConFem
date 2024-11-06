@@ -1,0 +1,2 @@
+embedded T2D3I and B23EI behave quite different, 
+cross sections chosen differently to get a somehow similar load displacement behavior
