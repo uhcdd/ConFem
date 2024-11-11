@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="SEC_0515.html" title="Beam Section" rel="next" />
+<link href="SEC_0530.html" title="Material Section" rel="prev" />
+<link href="SEC_0500.html" title="Keywords for ConFem Input Data" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0530.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0515.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0500.html">Keywords for ConFem Input Data</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Solid Section</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="SEC_0510">10.5 Solid Section</h2>
+<p><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> <br /><br />A section starting with <tt>*SOLID SECTION</tt> defines a set of truss elements (<tt>T1D2,T2D2,T3D3,TAX2,TAX3</tt>) or corresponding embedded types forming rebars, or spring elements (<tt>S1D2</tt>) or 2D-continuum elements (<tt>CPE3/4,CPS3/4,CAX4</tt>). All elements within a section have the same properties.<br />Multiple section definitions are allowed if required to define a complete model. <br />The section keyword <tt>*SOLID SECTION</tt> has as options <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>ELSET=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> refers to a name of a set of elements (<b class="bfseries">mandatory</b>)</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p>(the same name also has to be defined within an element section) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>MATERIAL=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> refers to a material name defining the material of the elements (<b class="bfseries">mandatory</b>)</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> (the same name also has to be defined within a material section)</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>NREBAR=&lt;float&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> connected to a set of embedded elements of type <tt>T2D2I,T2D3I,TAX2I</tt> (<b class="bfseries">optional</b>)</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> is ignored for other element types </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> specifies the number of rebars per unit width – with length unit as is used in data set – to consider bonding </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> if not specified default is <object data="images/img-0123.svg" style="width:1.600em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0127.png" alt="$1/t&#x27;$" style="vertical-align:-4px; 
+                                     width:24px; 
+                                     height:16px" class="math gen" /></object> with <object data="images/img-0124.svg" style="width:0.600em; 
+                                                                height:0.800em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0128.png" alt="$t&#x27;$" style="vertical-align:0px; 
+                                     width:9px; 
+                                     height:12px" class="math gen" /></object> thickness of underlying <tt>CP*,CAX*</tt>-elements </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> explicit definition of <tt>NREBAR</tt> is recommended for <tt>TAX2I-elements</tt> </p></td>
+
+</tr>
+</table><p> <br /><br />The data line describes the following data <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> width in case of elements <tt>CP*</tt> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> cross section area in case of elements <tt>T1D2,T2D2,T3D2,T3D3</tt> and corresponding embedded types</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> height in case of elements <tt>TAX2, TAX3</tt> whereby width is ruled by circumferential radius – these elements behave like a sheet </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> spring stiffness (force/length) in case of elements <tt>S1D2</tt> (used only with material type <tt>*ELASTIC</tt>) </p></td>
+
+</tr>
+</table><p> <br /><object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> is ignored in case of elements <tt>CAX*</tt>. A unit width is used instead.<br />In case <tt>NREBAR</tt> is specified with elements <tt>T2D2I,T2D3I</tt> the cross section area <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> refers to a <i class="itshape">single</i> rebar. <br />Take care to use the same unit as for all other length quantities. <br /><br />The section keyword <tt>*SOLID SECTION</tt> has no own sub-keywords. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0530.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0515.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

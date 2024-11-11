@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+
+<title></title>
+<link href="SEC_0100.html" title="Python Base" rel="next" />
+
+
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><a href="SEC_0100.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+
+
+<div><div class="titlepage">
+<h1>ConFem Documentation</h1>
+
+<p>November 11, 2024</p>
+
+</div><div class="abstract"> This is the documentation for the ConFem software package accompanying the book <em>Computational Reinforced Concrete</em> (<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a>). The documentation starts from a minimal base. It is planned to extend it according to the demand of users. Thus, it has to be considered as an ongoing project. </div></div>
+
+<div class="contents document-contents"><!--<strong>Subsections</strong>-->
+<ul>
+<li><a href="SEC_0100.html">1 Python Base</a>
+   
+</li><li><a href="SEC_0200.html">2 Modules</a>
+   
+</li><li><a href="SEC_0210.html">3 Bindings</a>
+   
+</li><li><a href="SEC_0250.html">4 Units</a>
+   
+</li><li><a href="SEC_0300.html">5 Example Data</a>
+   
+</li><li><a href="SEC_0400.html">6 Confem File Types</a>
+   
+</li><li><a href="SEC_0450.html">7 Confem Coordinate Systems</a>
+   <ul>
+   <li><a href="sect0001.html">7.1 2D-Beams</a>
+       
+   </li><li><a href="sect0002.html">7.2 Plates, 2D-bars and 2D-springs</a>
+       
+   </li><li><a href="sect0003.html">7.3 Slabs and Shells</a>
+       
+   </li>
+   </ul>
+</li><li><a href="SEC_1108.html">8 Running ConFem</a>
+   <ul>
+   <li><a href="SEC_0650.html">8.1 Using Source Code</a>
+       
+   </li><li><a href="sect0004.html">8.2 Using the .EXE-Version</a>
+       
+   </li>
+   </ul>
+</li><li><a href="SEC_0230.html">9 Open Issues</a>
+   
+</li><li><a href="SEC_0500.html">10 Keywords for ConFem Input Data</a>
+   <ul>
+   <li><a href="sect0005.html">10.1 Overview</a>
+       
+   </li><li><a href="sect0006.html">10.2 Node Section</a>
+       
+   </li><li><a href="SEC_0520.html">10.3 Element Section</a>
+       
+   </li><li><a href="SEC_0530.html">10.4 Material Section</a>
+       
+   </li><li><a href="SEC_0510.html">10.5 Solid Section</a>
+       
+   </li><li><a href="SEC_0515.html">10.6 Beam Section</a>
+       
+   </li><li><a href="SEC_0517.html">10.7 Shell Section</a>
+       
+   </li><li><a href="SEC_0505.html">10.8 Beam reinforcement</a>
+       
+   </li><li><a href="SEC_0570.html">10.9 Step Section</a>
+       
+   </li>
+   </ul>
+</li><li><a href="SEC_0473.html">11 Options File</a>
+   <ul>
+   <li><a href="SEC_0475.html">11.1 WriteNodes</a>
+       
+   </li><li><a href="sect0007.html">11.2 LineSearch</a>
+       
+   </li><li><a href="sect0008.html">11.3 ReinforcementDesign</a>
+       
+   </li><li><a href="sect0009.html">11.4 max_equi_iterations</a>
+       
+   </li>
+   </ul>
+</li><li><a href="SEC_0600.html">12 Organization of ConFem Output Data</a>
+   <ul>
+   <li><a href="sect0010.html">12.1 Overview</a>
+       
+   </li><li><a href="SEC_0615.html">12.2 Execution Report</a>
+       
+   </li><li><a href="SEC_0620.html">12.3 Element Output</a>
+       
+   </li><li><a href="SEC_0640.html">12.4 Nodal Output</a>
+       
+   </li><li><a href="SEC_5640.html">12.5 Reinforcement Design Output</a>
+       
+   </li><li><a href="SEC_5641.html">12.6 Ideal Plastic Design Output</a>
+       
+   </li>
+   </ul>
+</li><li><a href="sect0011.html">13 Plotting</a>
+   <ul>
+   <li><a href="sect0012.html">13.1 Data Structured as Entities</a>
+       
+   </li><li><a href="sect0013.html">13.2 Entity Specific Plotting</a>
+       
+   </li>
+   </ul>
+</li>
+
+
+
+</ul>
+</div>
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><a href="SEC_0100.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

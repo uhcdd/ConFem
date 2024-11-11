@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="sect0004.html" title="Using the .EXE-Version" rel="next" />
+<link href="SEC_1108.html" title="Running ConFem" rel="prev" />
+<link href="SEC_1108.html" title="Running ConFem" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_1108.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_1108.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0004.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_1108.html">Running ConFem</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Using Source Code</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="SEC_0650">8.1 Using Source Code</h2>
+<p><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> <br /><br />Regarding <tt>ConFem.py</tt> edit <tt>ConFemData.py</tt> and regarding <tt>ConSimFem.py</tt> or <tt>ConPlaD.py</tt> or <tt>ConSimplex.py</tt> or <tt>ConPostPlot.py</tt> edit the final section </p><pre>
+if __name__ == "__main__":
+    ...
+    Name="../DataExamples/E2/E2-02C1"               # input data name
+    ...
+</pre><p> to provide a particular input data set following the variable <tt>Name</tt>. The respective module (i.e. <tt>ConFem.py</tt> not <tt>ConFemData.py</tt>) is started by an IDE, see Section <a href="SEC_0100.html">1</a>, or by invoking the <tt>Python</tt>-interpreter (at least version 3.6) directly – supplied with the respective module name, e.g. <tt>python ConFem.py</tt> – from a prompt window, e.g. windows powershell. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_1108.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_1108.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0004.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

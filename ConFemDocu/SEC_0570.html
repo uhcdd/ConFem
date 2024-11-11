@@ -1,0 +1,1605 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="SEC_0473.html" title="Options File" rel="next" />
+<link href="SEC_0505.html" title="Beam reinforcement" rel="prev" />
+<link href="SEC_0500.html" title="Keywords for ConFem Input Data" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0505.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0473.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0500.html">Keywords for ConFem Input Data</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Step Section</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="SEC_0570">10.9 Step Section</h2>
+<p><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> <br /><br />A section starting with <tt>*STEP</tt> defines a type of computation, corresponding loading and boundary conditions to be applied on the model defined in the previous sections. </p><p>The section keyword <tt>*STEP</tt> <i class="itshape">may</i> have as option <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>NLGEOM=YES</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> considers large displacements with small strains </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> (currently implemented for element types <tt> B23E, B23, T2D2, SH4</tt>) </p></td>
+
+</tr>
+</table><p> <br /><br />The section keyword <tt>*STEP</tt> has no own data lines but has sub-keywords which are currently as follows: <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>*STATIC</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> quasi-static computation disregarding mass inertia </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*DYNAMIC</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> dynamic computation with Newmark time integration </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*DAMPING</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Rayleigh damping parameters for Newmark time integration </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*SOLUTION TECHNIQUE</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> solver type for iterative solution of systems of nonlinear equations </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*CONTROLS</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> equilibrium iteration control </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*AMPLITUDE</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> scaling function for boundary conditions / loads – polyline defined in time </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*BOUNDARY</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> displacement boundary conditions for nodes </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*CLOAD</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> concentrated loads on nodes </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*DLOAD</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> distributed loads on elements </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*TEMPERATURE</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> temperature at nodes as cause of temperature stresses </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*PRESTRESS</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> prestressing data </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*EL FILE</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> output related to elements </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*NODE FILE</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> output related to nodes </p></td>
+
+</tr>
+</table><p> <br /><br />A step section has to closed by <tt>*END STEP</tt> as the last line. Further step sections may follow. Computations are applied in a sequence as defined by the sequence of step sections. </p><p>Each step sub-keyword may have options and specific data lines which are described in the following. </p><h3 id="a0000000028"><tt class="ttfamily">*</tt>STATIC</h3>
+<p>The step sub-keyword <tt>*STATIC</tt> has as data line <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0145.svg" style="width:1.600em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0149.png" alt="$\Delta t_1$" style="vertical-align:-2px; 
+                                     width:24px; 
+                                     height:14px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0103.svg" style="width:0.733em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0107.png" alt="$t_1$" style="vertical-align:-2px; 
+                                     width:11px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0146.svg" style="width:1.600em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0150.png" alt="$\Delta t_2$" style="vertical-align:-2px; 
+                                     width:24px; 
+                                     height:14px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0105.svg" style="width:0.733em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0109.png" alt="$t_2$" style="vertical-align:-2px; 
+                                     width:11px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> …, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0147.svg" style="width:1.733em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0151.png" alt="$\Delta t_n$" style="vertical-align:-2px; 
+                                     width:26px; 
+                                     height:14px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0148.svg" style="width:0.867em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0152.png" alt="$t_n$" style="vertical-align:-2px; 
+                                     width:13px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br /><br />with at least a first pair <object data="images/img-0149.svg" style="width:2.867em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0153.png" alt="$\Delta t_1, t_1$" style="vertical-align:-2px; 
+                                     width:43px; 
+                                     height:14px" class="math gen" /></object> and <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0150.svg" style="width:1.467em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0154.png" alt="$\Delta t_i$" style="vertical-align:-2px; 
+                                     width:22px; 
+                                     height:14px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> pseudo-time increment up to time target <object data="images/img-0151.svg" style="width:0.667em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0155.png" alt="$t_i$" style="vertical-align:-2px; 
+                                     width:10px; 
+                                     height:12px" class="math gen" /></object> of actual step </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0151.svg" style="width:0.667em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0155.png" alt="$t_i$" style="vertical-align:-2px; 
+                                     width:10px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> pseudo-time target with <object data="images/img-0152.svg" style="width:3.733em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0156.png" alt="$t_{i}&gt;t_{i-1}$" style="vertical-align:-2px; 
+                                     width:56px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0148.svg" style="width:0.867em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0152.png" alt="$t_n$" style="vertical-align:-2px; 
+                                     width:13px; 
+                                     height:12px" class="math gen" /></object> is the final time target of actual step </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> final time target should be smaller than first target in a following step (if there is one) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0151.svg" style="width:0.667em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0155.png" alt="$t_i$" style="vertical-align:-2px; 
+                                     width:10px; 
+                                     height:12px" class="math gen" /></object> is total time in the case of a sequence of steps </p></td>
+
+</tr>
+</table><p> <br /><br />This step sub-keyword <i class="itshape">may</i> have an option – separated by a comma – to activate arc-length control <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>ARCLENGTH=</tt><object data="images/img-0101.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br /><br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0101.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> prescribed scalar length – euclidean vector norm – of nodal displacement increment vector </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> nodal displacement increment vector is the difference relating to subsequent instants of time</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> an appropriate value for <object data="images/img-0101.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object> may be determined by checking the execution report, see Section <a href="SEC_0615.html">12.2</a>, with a <object data="images/img-0153.svg" style="width:3em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0157.png" alt="$Delta t$" style="vertical-align:0px; 
+                                     width:45px; 
+                                     height:11px" class="math gen" /></object> prescribed in a preceding computation </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> the preceding data line is ignored if the arclength control is activated </p></td>
+
+</tr>
+</table><p> <br /><br />The parameter <object data="images/img-0101.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object> is optional whereby using <tt>ARCLENGTH</tt> only. A value of <object data="images/img-0101.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object> is automatically derived from <object data="images/img-0145.svg" style="width:1.600em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0149.png" alt="$\Delta t_1$" style="vertical-align:-2px; 
+                                     width:24px; 
+                                     height:14px" class="math gen" /></object> in that case. <br /><br />See also the the <i class="sc">Book</i>, Appendix A.4 for the arclength method </p><h3 id="a0000000029"><tt class="ttfamily">*</tt>DYNAMIC</h3>
+<p>The step sub-keyword <tt>*DYNAMIC</tt> has no options. The data line describes the following data <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0154.svg" style="width:1.200em; 
+                                                                height:0.800em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0158.png" alt="$\Delta t$" style="vertical-align:0px; 
+                                     width:18px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br /><br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0154.svg" style="width:1.200em; 
+                                                                height:0.800em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0158.png" alt="$\Delta t$" style="vertical-align:0px; 
+                                     width:18px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> time increment </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> time target of actual step </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> is total time in the case of a sequence of steps </p></td>
+
+</tr>
+</table><p> <br /><br />A variable time increment within a dynamic step is not considered as appropriate. <br />A dynamic step <i class="itshape">may</i> be connected with a Rayleigh damping, see the following. <br />See the <i class="sc">Book</i> 4.10 for dynamics. </p><h3 id="a0000000030"><tt class="ttfamily">*</tt>DAMPING</h3>
+<p>The step sub-keyword <tt>*DAMPING</tt> introduces a Rayleigh damping into a dynamic calculation. This builds a damping matrix from a linear combinations of the mass matrix and the stiffness matrix and might avoid artificial high frequency oscillations.<br /><tt>*DAMPING</tt> has as options <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>ALPHA</tt>=<object data="images/img-0005.svg" style="width:0.667em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0009.png" alt="$\alpha $" style="vertical-align:0px; 
+                                     width:10px; 
+                                     height:7px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> The parameter <object data="images/img-0005.svg" style="width:0.667em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0009.png" alt="$\alpha $" style="vertical-align:0px; 
+                                     width:10px; 
+                                     height:7px" class="math gen" /></object> gives the scaling factor for the mass matrix </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>BETA</tt>=<object data="images/img-0007.svg" style="width:0.667em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0011.png" alt="$\beta $" style="vertical-align:-3px; 
+                                     width:10px; 
+                                     height:14px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> The parameter <object data="images/img-0007.svg" style="width:0.667em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0011.png" alt="$\beta $" style="vertical-align:-3px; 
+                                     width:10px; 
+                                     height:14px" class="math gen" /></object> gives the scaling factor for the stiffness matrix </p></td>
+
+</tr>
+</table><p> <br /><br />The values for <object data="images/img-0155.svg" style="width:1.733em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0159.png" alt="$\alpha ,\beta $" style="vertical-align:-3px; 
+                                     width:26px; 
+                                     height:14px" class="math gen" /></object> are assumed as zero if not specified.<br />If specified in a static step, <tt>*DAMPING</tt> is ignored. </p><h3 id="a0000000031"><tt class="ttfamily">*</tt>SOLUTION TECHNIQUE</h3>
+<p>Default method for solution of systems of equations is the Newton-Raphson method in case that <tt>*SOLUTION TECHNIQUE</tt> is <i class="itshape">not</i> specified. Alternative methods <i class="itshape">may</i> be used with the step sub-keyword <tt>*SOLUTION TECHNIQUE</tt> with the options <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>TYPE=MODIFIED-NR</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> modified Newton-Raphson method </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> or </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>TYPE=QUASI-NEWTON</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> BFGS quasi Newton method </p></td>
+
+</tr>
+</table><p> <br /><br />Linear problems are treated like nonlinear problems but will generally stop after the first equilibrium iteration, see the following <tt>*CONTROLS</tt>. <br /><br />See the <i class="sc">Book</i> Appendix A.1 for solution methods. </p><h3 id="SEC_00456"><tt class="ttfamily">*</tt>CONTROLS</h3>
+<p>The step sub-keyword <tt>*CONTROLS</tt> contrls iterations parameters and has as options – separated by a comma <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>ITOL=</tt><object data="images/img-0156.svg" style="width:1.467em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0160.png" alt="$r_{tol}$" style="vertical-align:-2px; 
+                                     width:22px; 
+                                     height:9px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> scalar tolerance for equilibrium iteration </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> an equilibrium iteration will stop in case the actual scalar equilibrium residual is lower than <object data="images/img-0156.svg" style="width:1.467em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0160.png" alt="$r_{tol}$" style="vertical-align:-2px; 
+                                     width:22px; 
+                                     height:9px" class="math gen" /></object> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> and </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>NITER=</tt></p><table id="a0000000032" class="equation" width="100%" cellspacing="0" cellpadding="7">
+<tr>
+    
+    <td style="width:40%">&nbsp;</td>
+    <td><object data="images/img-0157.svg" style="width:2.400em; 
+                                                                    height:0.733em" type="image/svg+xml"><img src="images/img-0161.png" alt="\[ niter \]" style="width:36px; 
+                            height:11px" class="math gen" /></object></td>
+    
+    <td style="width:40%">&nbsp;</td>
+    <td class="eqnnum" style="width:20%">&nbsp;</td>
+</tr>
+</table></td>
+
+    
+    <td style="text-align:left"><p> maximum number of equilibrium iterations with a time increment or loading step </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> iteration will stop upon this criterion, irrespectively whether the equilibrium iteration tolerance is reached or not </p></td>
+
+</tr>
+</table><p> <br /><br />Default values <object data="images/img-0158.svg" style="width:6.333em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0162.png" alt="$r_{tol}=1 \cdot 10^{-3}$" style="vertical-align:-2px; 
+                                     width:95px; 
+                                     height:16px" class="math gen" /></object> and <object data="images/img-0159.svg" style="width:4.800em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0163.png" alt="$niter=10$" style="vertical-align:0px; 
+                                     width:72px; 
+                                     height:11px" class="math gen" /></object> are used in case <tt>*CONTROLS</tt> is not specified. It is highly recommended to try different values (e.g. <object data="images/img-0160.svg" style="width:8.333em; 
+                                                                height:0.933em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0164.png" alt="$1 \cdot 10^{-3} \ldots 1 \cdot 10^{-6}$" style="vertical-align:0px; 
+                                     width:125px; 
+                                     height:14px" class="math gen" /></object>) if a new problem is started to check convergence of equilibrium iterations.<br />These criteria are also used for linear problems, but the iteration will stop after the first iteration with <object data="images/img-0161.svg" style="width:2.400em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0165.png" alt="$r \approx 0$" style="vertical-align:0px; 
+                                     width:36px; 
+                                     height:11px" class="math gen" /></object>. </p><h3 id="a0000000033"><tt class="ttfamily">*</tt>AMPLITUDE</h3>
+<p>The step sub-keyword <tt>*AMPLITUDE</tt> <i class="itshape">may</i> be used to define (pseudo-)time dependent scaling factors for boundary conditions or loadings. It has as mandatory option <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>*NAME=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> specifies a unique name which may be freely chosen</p></td>
+
+</tr>
+</table><p> <br /><br />The data line describes a polyline with the following data – in one line not interrupted with <tt>CR</tt>! <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0162.svg" style="width:0.800em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0166.png" alt="$t_0$" style="vertical-align:-2px; 
+                                     width:12px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0163.svg" style="width:0.867em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0167.png" alt="$f_0$" style="vertical-align:-3px; 
+                                     width:13px; 
+                                     height:14px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0103.svg" style="width:0.733em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0107.png" alt="$t_1$" style="vertical-align:-2px; 
+                                     width:11px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0164.svg" style="width:0.800em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0168.png" alt="$f_1$" style="vertical-align:-3px; 
+                                     width:12px; 
+                                     height:14px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> …</p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0148.svg" style="width:0.867em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0152.png" alt="$t_n$" style="vertical-align:-2px; 
+                                     width:13px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0165.svg" style="width:1em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0169.png" alt="$f_n$" style="vertical-align:-3px; 
+                                     width:15px; 
+                                     height:14px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0162.svg" style="width:0.800em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0166.png" alt="$t_0$" style="vertical-align:-2px; 
+                                     width:12px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> time of initial supporting point </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0163.svg" style="width:0.867em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0167.png" alt="$f_0$" style="vertical-align:-3px; 
+                                     width:13px; 
+                                     height:14px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> value of initial supporting point </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0151.svg" style="width:0.667em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0155.png" alt="$t_i$" style="vertical-align:-2px; 
+                                     width:10px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> time of further supporting point </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0166.svg" style="width:0.733em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0170.png" alt="$f_i$" style="vertical-align:-3px; 
+                                     width:11px; 
+                                     height:14px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> value of further supporting point </p></td>
+
+</tr>
+</table><p> <br /><br />with <object data="images/img-0167.svg" style="width:3.733em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0171.png" alt="$t_{i} &lt; t_{i+1}$" style="vertical-align:-3px; 
+                                     width:56px; 
+                                     height:14px" class="math gen" /></object>. Supporting points are connected by straight lines. The number <object data="images/img-0004.svg" style="width:0.667em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0008.png" alt="$n$" style="vertical-align:0px; 
+                                     width:10px; 
+                                     height:7px" class="math gen" /></object> or line length, respectively, is not restricted. <br />If <object data="images/img-0168.svg" style="width:2.600em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0172.png" alt="$t&gt;t_n$" style="vertical-align:-2px; 
+                                     width:39px; 
+                                     height:12px" class="math gen" /></object> the corresponding value <object data="images/img-0169.svg" style="width:0.533em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0173.png" alt="$f$" style="vertical-align:-3px; 
+                                     width:8px; 
+                                     height:14px" class="math gen" /></object> is linearly extrapolated from the last two pairs.<br />Prescribed loadings and nonzero boundary conditions are scaled with (pseudo-)time value <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> in case <tt>*AMPLITUDE</tt> is not specified. </p><h3 id="a0000000034"><tt class="ttfamily">*</tt>BOUNDARY</h3>
+<p>The step sub-keyword <tt>*BOUNDARY</tt> defines boundary conditions. There must be sufficient boundary conditions to prevent rigid body motions. It <i class="itshape">may</i> have as options <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>*AMPLITUDE=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> refers to a name of an amplitude defined with the step keyword <tt>*AMPLITUDE</tt> within the current step section (optional) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*OP=ADD</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> data of following date lines are added to final values of previous step </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> in case there is a previous step and boundary conditions are defined for the same degrees of freedom </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> see also concluding remarks of <tt class="ttfamily">*</tt>BOUNDARY </p></td>
+
+</tr>
+</table><p> <br /><br />The data lines describe as data <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0171.svg" style="width:3em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0175.png" alt="$index_1$" style="vertical-align:-2px; 
+                                     width:45px; 
+                                     height:13px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0172.svg" style="width:3.133em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0176.png" alt="$index_n$" style="vertical-align:-2px; 
+                                     width:47px; 
+                                     height:13px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0173.svg" style="width:0.867em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0177.png" alt="$u_i$" style="vertical-align:-2px; 
+                                     width:13px; 
+                                     height:9px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with (dof is degree of freedom)<br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> number of node to be constrained </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0171.svg" style="width:3em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0175.png" alt="$index_1$" style="vertical-align:-2px; 
+                                     width:45px; 
+                                     height:13px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> index of 1st dof to be constrained </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0172.svg" style="width:3.133em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0176.png" alt="$index_n$" style="vertical-align:-2px; 
+                                     width:47px; 
+                                     height:13px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> index of last dof to be constrained </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0173.svg" style="width:0.867em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0177.png" alt="$u_i$" style="vertical-align:-2px; 
+                                     width:13px; 
+                                     height:9px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> value of prescribed displacements of dofs defined by <object data="images/img-0174.svg" style="width:7.800em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0178.png" alt="$index_1 \ldots index_n$" style="vertical-align:-2px; 
+                                     width:117px; 
+                                     height:13px" class="math gen" /></object> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0175.svg" style="width:2.867em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0179.png" alt="$u_i=0$" style="vertical-align:-2px; 
+                                     width:43px; 
+                                     height:13px" class="math gen" /></object> is for a fixed zero displacement </p></td>
+
+</tr>
+</table><p> <br /><br />For the type of a dof indicated by <object data="images/img-0176.svg" style="width:2.867em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0180.png" alt="$index_i$" style="vertical-align:-2px; 
+                                     width:43px; 
+                                     height:13px" class="math gen" /></object> see Section <a href="SEC_0450.html">7</a> and Section <a href="SEC_0520.html">10.3</a>. <br />All dofs with <object data="images/img-0177.svg" style="width:11.933em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0181.png" alt="$index_1&lt;index_i&lt;index_n$" style="vertical-align:-2px; 
+                                     width:179px; 
+                                     height:13px" class="math gen" /></object> are also constrained. <br />Use <object data="images/img-0178.svg" style="width:7.333em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0182.png" alt="$index_1=index_i$" style="vertical-align:-2px; 
+                                     width:110px; 
+                                     height:13px" class="math gen" /></object> in case only dof is constrained, i.e. two integers must always be given (exactly four items per data line).<br />A data line may be repeated as often as required for the same node or for further nodes. <br /><br />The value of <object data="images/img-0173.svg" style="width:0.867em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0177.png" alt="$u_i$" style="vertical-align:-2px; 
+                                     width:13px; 
+                                     height:9px" class="math gen" /></object> is scaled by the current value of the function defined with <tt>*AMPLITUDE=&lt;name&gt;</tt>. In case that <tt>*AMPLITUDE=&lt;name&gt;</tt> is not given a non-zero <object data="images/img-0173.svg" style="width:0.867em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0177.png" alt="$u_i$" style="vertical-align:-2px; 
+                                     width:13px; 
+                                     height:9px" class="math gen" /></object> is scaled with the (pseudo-)time value. <br /><br />In case of consecutive steps all boundary conditions of a second or later step (<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> current step) are automatically taken from the immediately preceding step. A boundary condition – identified by node label and index for degree of freedom, see Section <a href="SEC_0450.html">7</a> – may be overridden with a new definition in the current step. Furthermore, new boundary conditions may be set in the current step. </p><h3 id="a0000000035"><tt class="ttfamily">*</tt>CLOAD</h3>
+<p>The section sub-keyword <tt>*CLOAD</tt> <i class="itshape">may</i> define concentrated loadings and <i class="itshape">may</i> have as options <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>*AMPLITUDE=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> refers to a name of an amplitude defined with the step keyword <tt>*AMPLITUDE</tt> within the current step section </p></td>
+
+</tr>
+</table><p> <br /><br />The data lines describe as data <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0179.svg" style="width:2.600em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0183.png" alt="$index$" style="vertical-align:0px; 
+                                     width:39px; 
+                                     height:11px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0180.svg" style="width:0.933em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0184.png" alt="$P_i$" style="vertical-align:-2px; 
+                                     width:14px; 
+                                     height:13px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> number of loaded node </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0179.svg" style="width:2.600em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0183.png" alt="$index$" style="vertical-align:0px; 
+                                     width:39px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> index of degree of freedom (dof) to be loaded </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0180.svg" style="width:0.933em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0184.png" alt="$P_i$" style="vertical-align:-2px; 
+                                     width:14px; 
+                                     height:13px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> value of prescribed concentrated load of dof defined by <object data="images/img-0179.svg" style="width:2.600em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0183.png" alt="$index$" style="vertical-align:0px; 
+                                     width:39px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br /><br />For the type of a ndof indicated by <object data="images/img-0176.svg" style="width:2.867em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0180.png" alt="$index_i$" style="vertical-align:-2px; 
+                                     width:43px; 
+                                     height:13px" class="math gen" /></object> see Section <a href="SEC_0450.html">7</a> and Section <a href="SEC_0520.html">10.3</a>.<br />A data line may be repeated as often as required for the same node or for further nodes. <br /><br />The value of <object data="images/img-0180.svg" style="width:0.933em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0184.png" alt="$P_i$" style="vertical-align:-2px; 
+                                     width:14px; 
+                                     height:13px" class="math gen" /></object> is scaled by the current value of the function defined with <tt>*AMPLITUDE=&lt;name&gt;</tt>. In case that <tt>*AMPLITUDE=&lt;name&gt;</tt> is not given <object data="images/img-0180.svg" style="width:0.933em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0184.png" alt="$P_i$" style="vertical-align:-2px; 
+                                     width:14px; 
+                                     height:13px" class="math gen" /></object> is scaled with the (pseudo-)time value. </p><h3 id="a0000000036"><tt class="ttfamily">*</tt>DLOAD</h3>
+<p>The section sub-keyword <tt>*DLOAD</tt> <i class="itshape">may</i> define distributed loadings and <i class="itshape">may</i> have as option <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>*AMPLITUDE=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> refers to a name of an amplitude defined with the step keyword <tt>*AMPLITUDE</tt> within the current step section </p></td>
+
+</tr>
+</table><p> <br /><br />The data lines describe as data <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>&lt;name&gt;</tt>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0179.svg" style="width:2.600em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0183.png" alt="$index$" style="vertical-align:0px; 
+                                     width:39px; 
+                                     height:11px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0181.svg" style="width:0.800em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0185.png" alt="$p_i$" style="vertical-align:-3px; 
+                                     width:12px; 
+                                     height:10px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> name of set of loaded elements, see Section <a href="SEC_0520.html">10.3</a> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p>the same name also has to be defined within an element section </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0179.svg" style="width:2.600em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0183.png" alt="$index$" style="vertical-align:0px; 
+                                     width:39px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> index of degree of freedom (dof) to be loaded </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0181.svg" style="width:0.800em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0185.png" alt="$p_i$" style="vertical-align:-3px; 
+                                     width:12px; 
+                                     height:10px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> value of prescribed distributed load of dofs defined by <tt>&lt;index&gt;</tt> and <object data="images/img-0179.svg" style="width:2.600em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0183.png" alt="$index$" style="vertical-align:0px; 
+                                     width:39px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br /><br />A distributed loading is distributed over a length for element types <tt>B..., T...</tt>, over an area for element types <tt>CP..., SB3</tt> and over a volume for the element type <tt>SH3, SH4</tt>. Thus, an area loading for an element of type <tt>SH4</tt> has to be divided by the particular thickness to determine the equivalent value <object data="images/img-0181.svg" style="width:0.800em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0185.png" alt="$p_i$" style="vertical-align:-3px; 
+                                     width:12px; 
+                                     height:10px" class="math gen" /></object>. <br />For the type of a dof indicated by <object data="images/img-0179.svg" style="width:2.600em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0183.png" alt="$index$" style="vertical-align:0px; 
+                                     width:39px; 
+                                     height:11px" class="math gen" /></object> see Section <a href="SEC_0450.html">7</a>. <br />A data line may be repeated as often as required for more element sets. <br />The value of <object data="images/img-0182.svg" style="width:0.600em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0186.png" alt="$p$" style="vertical-align:-3px; 
+                                     width:9px; 
+                                     height:10px" class="math gen" /></object> is multiplied by the current value of the function defined with <tt>*AMPLITUDE=&lt;name&gt;</tt>. In case that <tt>*AMPLITUDE=&lt;name&gt;</tt> is not given <object data="images/img-0183.svg" style="width:0.733em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0187.png" alt="$T$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:11px" class="math gen" /></object> is scaled with the (pseudo-)time value. </p><h3 id="a0000000037"><tt class="ttfamily">*</tt>TEMPERATURE</h3>
+<p>The step sub-keyword <tt>*TEMPERATURE</tt> <i class="itshape">may</i> define temperatures at nodes. Temperatures may induce stresses. </p><ul class="itemize">
+<li><p>This is currently implemented for beam elements of type <tt>B21, B21E, B23, B23E</tt> only (<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <em>open issue</em>). </p></li>
+</ul><p> It <i class="itshape">may</i> have as option <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>*AMPLITUDE=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> refers to a name of an amplitude defined with the step keyword <tt>*AMPLITUDE</tt> within the current step section </p></td>
+
+</tr>
+</table><p> <br /><br />The data lines describe as data <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0184.svg" style="width:1em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0188.png" alt="$T_1$" style="vertical-align:-2px; 
+                                     width:15px; 
+                                     height:13px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0185.svg" style="width:1em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0189.png" alt="$T_2$" style="vertical-align:-2px; 
+                                     width:15px; 
+                                     height:13px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> number of node with temperatureto be constrained </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0184.svg" style="width:1em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0188.png" alt="$T_1$" style="vertical-align:-2px; 
+                                     width:15px; 
+                                     height:13px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> temperature at lower edge <object data="images/img-0136.svg" style="width:0.800em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0140.png" alt="$z_1$" style="vertical-align:-2px; 
+                                     width:12px; 
+                                     height:9px" class="math gen" /></object> of beam, see Fig. <a href="sect0001.html#FIG_21433">1</a> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0185.svg" style="width:1em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0189.png" alt="$T_2$" style="vertical-align:-2px; 
+                                     width:15px; 
+                                     height:13px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> temperature at upper edge <object data="images/img-0186.svg" style="width:3.133em; 
+                                                                height:0.733em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0190.png" alt="$z_2 &gt; z_1$" style="vertical-align:-2px; 
+                                     width:47px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> temperature is linearly interpolated in between along the cross section </p></td>
+
+</tr>
+</table><p> <br /><br />Regarding the beam’s longitudinal direction temperatures are linearly interpolated between nodes on the left hand and right hand side. Regarding enhanced beam elements, see Section <a href="SEC_0520.html#SEC_0545"></a>, a temperature definition for the additional node is ignored. <br />The value of <object data="images/img-0183.svg" style="width:0.733em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0187.png" alt="$T$" style="vertical-align:0px; 
+                                     width:11px; 
+                                     height:11px" class="math gen" /></object> is multiplied by the current value of the function defined with <tt>*AMPLITUDE=&lt;name&gt;</tt>. In case that <tt>*AMPLITUDE=&lt;name&gt;</tt> is not given <object data="images/img-0181.svg" style="width:0.800em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0185.png" alt="$p_i$" style="vertical-align:-3px; 
+                                     width:12px; 
+                                     height:10px" class="math gen" /></object> is scaled with the (pseudo-)time value. <br /><br />See the <i class="sc">Book</i> 4.6 for temperature effects with beams. </p><h3 id="a0000000038"><tt class="ttfamily">*</tt>PRESTRESS</h3>
+<p>The step sub-keyword <tt>*PRESTRESS</tt> <i class="itshape">may</i> define a prestressing of elements. </p><ul class="itemize">
+<li><p>This is currently implemented for element types <tt>B23E, B23</tt> only. </p></li>
+</ul><p> It <i class="itshape">must</i> have the options <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>NAME=&lt;name1&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> specifies a unique name which may be freely chosen </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>TYPE=POST-BONDED</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> indicates prestressing <span class="underbar">with</span> subsequent bond after initial application </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> or </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>TYPE=POST-UNBONDED</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> indicates prestressing <span class="underbar">without</span> subsequent bond after initial application </p></td>
+
+</tr>
+</table><p> <br /><br />It may have an option <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>AMPLITUDE=&lt;name2&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> refers to a name of an amplitude defined with the step keyword <tt>*AMPLITUDE</tt> within the current step section </p></td>
+
+</tr>
+</table><p> <br /><br />The first data line describes the following general properties of tendon and its material with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0187.svg" style="width:1.533em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0191.png" alt="$\alpha _{p0}$" style="vertical-align:-4px; 
+                                     width:23px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0188.svg" style="width:1.133em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0192.png" alt="$A_p$" style="vertical-align:-4px; 
+                                     width:17px; 
+                                     height:16px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0189.svg" style="width:1.200em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0193.png" alt="$E_p$" style="vertical-align:-4px; 
+                                     width:18px; 
+                                     height:16px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0190.svg" style="width:1.333em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0194.png" alt="$f_{py}$" style="vertical-align:-4px; 
+                                     width:20px; 
+                                     height:16px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0191.svg" style="width:1.200em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0195.png" alt="$f_{pt}$" style="vertical-align:-4px; 
+                                     width:18px; 
+                                     height:16px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0192.svg" style="width:1.333em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0196.png" alt="$\epsilon _{pu}$" style="vertical-align:-4px; 
+                                     width:20px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0017.svg" style="width:1.267em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0021.png" alt="$\alpha _T$" style="vertical-align:-2px; 
+                                     width:19px; 
+                                     height:9px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0187.svg" style="width:1.533em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0191.png" alt="$\alpha _{p0}$" style="vertical-align:-4px; 
+                                     width:23px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> factor for the nominal prestressing force <object data="images/img-0193.svg" style="width:8.667em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0197.png" alt="$F_{p0}=\alpha _{p0} \cdot A_p \cdot f_{py}$" style="vertical-align:-4px; 
+                                     width:130px; 
+                                     height:16px" class="math gen" /></object> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0194.svg" style="width:3.400em; 
+                                                                height:1em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0198.png" alt="$\alpha _{p0}&lt;1$" style="vertical-align:-4px; 
+                                     width:51px; 
+                                     height:15px" class="math gen" /></object> with <object data="images/img-0195.svg" style="width:7.133em; 
+                                                                height:1em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0199.png" alt="$\alpha _{p0}\approx 0.6 \ldots 0.8$" style="vertical-align:-4px; 
+                                     width:107px; 
+                                     height:15px" class="math gen" /></object> according to common standards </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0188.svg" style="width:1.133em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0192.png" alt="$A_p$" style="vertical-align:-4px; 
+                                     width:17px; 
+                                     height:16px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> cross section area </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0189.svg" style="width:1.200em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0193.png" alt="$E_p$" style="vertical-align:-4px; 
+                                     width:18px; 
+                                     height:16px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> initial Young’s modulus </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0190.svg" style="width:1.333em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0194.png" alt="$f_{py}$" style="vertical-align:-4px; 
+                                     width:20px; 
+                                     height:16px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> yield stress </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0191.svg" style="width:1.200em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0195.png" alt="$f_{pt}$" style="vertical-align:-4px; 
+                                     width:18px; 
+                                     height:16px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> failure stress </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0192.svg" style="width:1.333em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0196.png" alt="$\epsilon _{pu}$" style="vertical-align:-4px; 
+                                     width:20px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> strain corresponding to <object data="images/img-0036.svg" style="width:0.933em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0040.png" alt="$f_u$" style="vertical-align:-3px; 
+                                     width:14px; 
+                                     height:14px" class="math gen" /></object> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0017.svg" style="width:1.267em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0021.png" alt="$\alpha _T$" style="vertical-align:-2px; 
+                                     width:19px; 
+                                     height:9px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> thermal expansion coefficient </p></td>
+
+</tr>
+</table><p> <br /><br />The value of the prestressing force is scaled by the current value of the function defined with <tt>*AMPLITUDE=&lt;name2&gt;</tt>. In case that <tt>*AMPLITUDE=&lt;name2&gt;</tt> is not given the nominal prestressing force <object data="images/img-0196.svg" style="width:1.467em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0200.png" alt="$F_{p0}$" style="vertical-align:-4px; 
+                                     width:22px; 
+                                     height:16px" class="math gen" /></object> is scaled with the (peseudo-)time value. Anyway, the scaling factor should not exceed a value of 1. <br /><br />The following data lines describe the tendon profile with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0197.svg" style="width:2em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0201.png" alt="$\alpha _{pi,1}$" style="vertical-align:-4px; 
+                                     width:30px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0198.svg" style="width:1.333em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0202.png" alt="$z_{i,1}$" style="vertical-align:-4px; 
+                                     width:20px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0199.svg" style="width:1.533em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0203.png" alt="$\varphi _{i,1}$" style="vertical-align:-4px; 
+                                     width:23px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0061.svg" style="width:0.533em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0065.png" alt="$x$" style="vertical-align:0px; 
+                                     width:8px; 
+                                     height:7px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0200.svg" style="width:2em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0204.png" alt="$\alpha _{pi,2}$" style="vertical-align:-4px; 
+                                     width:30px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0201.svg" style="width:1.333em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0205.png" alt="$z_{i,2}$" style="vertical-align:-4px; 
+                                     width:20px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0202.svg" style="width:1.600em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0206.png" alt="$\varphi _{i,2}$" style="vertical-align:-4px; 
+                                     width:24px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> number of a finite element defined in the element section, see <a href="SEC_0520.html">10.3</a> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0203.svg" style="width:2em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0207.png" alt="$\alpha _{pi,j}$" style="vertical-align:-4px; 
+                                     width:30px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> factor to adapt the initial prestressing to the respective element </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0204.svg" style="width:2.400em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0208.png" alt="$j=1$" style="vertical-align:-3px; 
+                                     width:36px; 
+                                     height:14px" class="math gen" /></object>: at the element’s start node, <object data="images/img-0205.svg" style="width:2.400em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0209.png" alt="$j=2$" style="vertical-align:-3px; 
+                                     width:36px; 
+                                     height:14px" class="math gen" /></object> at the element’s end node </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> (may be used to, e.g., model frictional losses) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0206.svg" style="width:1.333em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0210.png" alt="$z_{i,j}$" style="vertical-align:-4px; 
+                                     width:20px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> height coordinates of tendon in element <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object> with respect to reference axis</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0207.svg" style="width:1.533em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0211.png" alt="$\varphi _{i,j}$" style="vertical-align:-4px; 
+                                     width:23px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> inclinations of tendon in element <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object> with respect to reference axis (counterclockwise positive)</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0061.svg" style="width:0.533em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0065.png" alt="$x$" style="vertical-align:0px; 
+                                     width:8px; 
+                                     height:7px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> not used (for compatibility with the data of the start node) </p></td>
+
+</tr>
+</table><p> <br /><br />The tendon profile is interpolated with a cubic spline within an element on base of values <object data="images/img-0208.svg" style="width:7.667em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0212.png" alt="$z_{i,1},z_{i,2},\varphi _{i,1},\varphi _{i,2}$" style="vertical-align:-4px; 
+                                     width:115px; 
+                                     height:12px" class="math gen" /></object>. The values of <object data="images/img-0209.svg" style="width:4.400em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0213.png" alt="$z_{i-1,2},z_{i,1}$" style="vertical-align:-4px; 
+                                     width:66px; 
+                                     height:12px" class="math gen" /></object> and <object data="images/img-0210.svg" style="width:4.800em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0214.png" alt="$\varphi _{i-1,2},\varphi _{i,1}$" style="vertical-align:-4px; 
+                                     width:72px; 
+                                     height:12px" class="math gen" /></object> must not necessarily be same for an element <object data="images/img-0211.svg" style="width:2.133em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0215.png" alt="$i-1$" style="vertical-align:0px; 
+                                     width:32px; 
+                                     height:11px" class="math gen" /></object> followed by an element <object data="images/img-0170.svg" style="width:0.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0174.png" alt="$i$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:11px" class="math gen" /></object>, although same values generally make more sense. Furthermore, an element within a structure must not have a prestressed preceding element or prestressed following element. <br /><br />There may as much data lines for tendon profiles as required. <br /><br />Prestressing is firstly applied as <em>unbonded</em> in that step where it is defined with that data as is described before. It is applied in following steps again using the step sub-keyword <tt>*PRESTRESS</tt> within the respective <tt>*STEP</tt>-section with the options <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>NAME=&lt;name1&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> refers to a name of a prestressing defined in a preceding step (mandatory) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>AMPLITUDE=&lt;name3&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> refers to a name of an amplitude defined with the step keyword <tt>*AMPLITUDE</tt> within the current step section (optional) </p></td>
+
+</tr>
+</table><p> <br /><br />General and geometric data lines must <i class="itshape">not</i> be repeated. The value of nominal prestressing force <object data="images/img-0196.svg" style="width:1.467em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0200.png" alt="$F_{p0}$" style="vertical-align:-4px; 
+                                     width:22px; 
+                                     height:16px" class="math gen" /></object> is scaled by the current value of the function defined with <tt>*AMPLITUDE=&lt;name3&gt;</tt>. The <tt>*AMPLITUDE</tt> may be omitted and the nominal prestressing force is scaled by the (pseudo-)time, but this is not appropriate regarding the actual application of prestressing. It should be hold constant during service accomplished by a constant <object data="images/img-0169.svg" style="width:0.533em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0173.png" alt="$f$" style="vertical-align:-3px; 
+                                     width:8px; 
+                                     height:14px" class="math gen" /></object>-value, see <tt>*AMPLITUDE</tt>-definition. <br /><br />Prestressing is applied as unbonded in case it has initially defined with <tt>TYPE=POST-UNBONDED</tt> or alternatively as bonded in case it has initially been defined with <tt>TYPE=POST-BONDED</tt>. <br /><br />See the <i class="sc">Book</i> 4.8 for prestressing of beams. </p><h3 id="a0000000039"><tt class="ttfamily">*</tt>EL FILE</h3>
+<p>The step sub-keyword <tt>*EL FILE</tt> initiates ASCII-output related to integrations points of elements and <i class="itshape">must</i> have as option <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>FREQUENCY=&lt;value&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> The parameter <tt>&lt;value&gt;</tt> defines the output time interval </p></td>
+
+</tr>
+</table><p> <br /><br />Details for <span class="underbar">element data</span> are given in Section <a href="SEC_0620.html">12.3</a>. </p><h3 id="a0000000040"><tt class="ttfamily">*</tt>NODE FILE</h3>
+<p>The step sub-keyword <tt>*NODE FILE</tt> initiates ASCII-output related to nodes and <i class="itshape">must</i> have as option <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>FREQUENCY=&lt;value&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> The parameter <tt>&lt;value&gt;</tt> defines the output time interval </p></td>
+
+</tr>
+</table><p> <br /><br />Details for <span class="underbar">nodal data</span> are given in Section <a href="SEC_0640.html">12.4</a> <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0505.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0473.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

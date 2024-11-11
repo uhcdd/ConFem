@@ -39,7 +39,7 @@ class Test(unittest.TestCase):
 
     def testshell_04(self):
         Name, nEig, niterEig ="../_DataBuckling/c_264_210000", 5, 200
-        self.assertEqual(self.ConFem_.Run(Name,    self.NameLog, False, LinAlgFlag, False, "protocol",  [ nEig, niterEig ], None, [], False), '53904b6331412d164413b3ebf37da581')
+        self.assertEqual(self.ConFem_.Run(Name,    self.NameLog, False, LinAlgFlag, False, "protocol",  [ nEig, niterEig ], None, [], False), '6537386be97166d196d0c2d2fa658398')
 
 #    def testE8_02a(self):
 #        Name="../DataExamples/E10/E8-01a"                # ConFem Slab as RC shell            

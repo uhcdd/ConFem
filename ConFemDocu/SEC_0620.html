@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="SEC_0640.html" title="Nodal Output" rel="next" />
+<link href="SEC_0615.html" title="Execution Report" rel="prev" />
+<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0615.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0640.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0600.html">Organization of ConFem Output Data</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Element Output</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="SEC_0620">12.3 Element Output</h2>
+<p>Element output values are written to the file <tt>&lt;name&gt;.elemout.txt</tt>. Following data items are given, each line-wise with white space delimiters: </p><ul class="itemize">
+<li><p>Instant of time with marker <tt>Time</tt> followed by </p><ul class="itemize">
+<li><p>time-value </p></li>
+</ul></li><li><p>Elements with marker <tt>El</tt> followed by </p><ul class="itemize">
+<li><p>element number </p></li><li><p>element type </p></li><li><p>name of element set </p></li><li><p>name of material </p></li><li><p>material type </p></li><li><p>labels of element nodes belonging to element </p></li><li><p>supplementary for shells <tt>SH4</tt> cross sectional integration order and number of reinforcement layers </p></li>
+</ul></li><li><p>Data at integration points – sub-items in one line </p><ul class="itemize">
+<li><p><b class="bfseries">integration point coordinates</b> <object data="images/img-0232.svg" style="width:1.533em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0236.png" alt="$x, y$" style="vertical-align:-3px; 
+                                     width:23px; 
+                                     height:10px" class="math gen" /></object> or <object data="images/img-0233.svg" style="width:1.533em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0237.png" alt="$x, z$" style="vertical-align:-3px; 
+                                     width:23px; 
+                                     height:10px" class="math gen" /></object> in case of 1D elements and 2D elements / beams or <object data="images/img-0234.svg" style="width:2.533em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0238.png" alt="$x, y, z$" style="vertical-align:-3px; 
+                                     width:38px; 
+                                     height:10px" class="math gen" /></object> in case of 3D elements, see Section <a href="SEC_0520.html">10.3</a> </p></li><li><p><b class="bfseries">strains / generalized strains</b> </p><ul class="itemize">
+<li><p>truss elements (<tt>T1D2,T2D2,T2D2E,T2D3,T2D3E,T3D2,T2D2E,T3D3,T2D3E</tt>) with strain <object data="images/img-0235.svg" style="width:0.800em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0239.png" alt="$\epsilon _x$" style="vertical-align:-2px; 
+                                     width:12px; 
+                                     height:9px" class="math gen" /></object> </p></li><li><p>Bernoulli beams (<tt>B23,B23I,B23E,B23EI</tt>) with generalized strains <object data="images/img-0236.svg" style="width:1.467em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0240.png" alt="$\epsilon ,\kappa $" style="vertical-align:-3px; 
+                                     width:22px; 
+                                     height:10px" class="math gen" /></object> </p></li><li><p>Timoshenko beams (<tt>B21,B21E</tt>) with generalized strains <object data="images/img-0237.svg" style="width:2.533em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0241.png" alt="$\epsilon ,\kappa , \gamma $" style="vertical-align:-3px; 
+                                     width:38px; 
+                                     height:10px" class="math gen" /></object> </p></li><li><p>2D continuum elements (<tt>CPE3,CPS3,CPE4,CPS4</tt>) with strains <object data="images/img-0238.svg" style="width:5.133em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0242.png" alt="$\epsilon _x, \epsilon _y, \epsilon ,\gamma _{xy}$" style="vertical-align:-4px; 
+                                     width:77px; 
+                                     height:12px" class="math gen" /></object> </p><ul class="itemize">
+<li><p><object data="images/img-0239.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0243.png" alt="$\epsilon $" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object> is a placeholder for <object data="images/img-0240.svg" style="width:0.800em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0244.png" alt="$\epsilon _z$" style="vertical-align:-2px; 
+                                     width:12px; 
+                                     height:9px" class="math gen" /></object> which is generally set to zero, also for plane stress </p></li><li><p>additional generalized strain output is provided with <span class="underbar">SDA-elements</span>, see Section <a href="SEC_0520.html">10.3</a>. Each discontinuity (‘crack’) has two sampling points, see <i class="sc">Book 7.7</i> <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> - first two items indicate the coordinates of discontinuity center </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>- 3rd item is a marker <tt>C*</tt> indicating a discontinuity data line </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>- 4th and 5th item indicate discontinuity normal with <object data="images/img-0061.svg" style="width:0.533em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0065.png" alt="$x$" style="vertical-align:0px; 
+                                     width:8px; 
+                                     height:7px" class="math gen" /></object>- and <object data="images/img-0002.svg" style="width:0.533em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0003.png" alt="$y$" style="vertical-align:-3px; 
+                                     width:8px; 
+                                     height:10px" class="math gen" /></object>-component </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>- items 6 - 9 indicate discontinuity width: 6 and 7 for tangential and normal component of first sampling point, 8 and 9 for second sampling point </p></td>
+
+</tr>
+</table><p> <br /></p></li>
+</ul></li><li><p>3D-continuum elements (<tt>C3D*</tt>) with strains <object data="images/img-0241.svg" style="width:9.533em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0245.png" alt="$\epsilon _x, \epsilon _y, \epsilon _z, \gamma _{yz},\gamma _{xz},\gamma _{xy}$" style="vertical-align:-4px; 
+                                     width:143px; 
+                                     height:12px" class="math gen" /></object> </p><ul class="itemize">
+<li><p>additional generalized strain output is provided with SDA-elements, but this is still under construction </p></li>
+</ul></li><li><p>slab elements (<tt>SB3</tt>) with generalized strains <object data="images/img-0242.svg" style="width:4.667em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0246.png" alt="$\kappa _x,\kappa _y,\kappa _{xy}$" style="vertical-align:-4px; 
+                                     width:70px; 
+                                     height:12px" class="math gen" /></object> </p></li><li><p>shell elements (<tt>SH4,SH3</tt>) </p><ul class="itemize">
+<li><p>due to the continuum based 5-parameter shell model (see <i class="sc">Book 10.2/3</i>) a derivation of generalized strains is not appropriate </p></li>
+</ul></li><li><p>1D spring element (<tt>S1D2</tt>) with elongation <object data="images/img-0243.svg" style="width:1.400em; 
+                                                                height:0.800em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0247.png" alt="$\Delta u$" style="vertical-align:0px; 
+                                     width:21px; 
+                                     height:12px" class="math gen" /></object> </p></li><li><p>2D bond elements (<tt>B2D2E,B2D3E</tt>) with longitudinal relative displacement / slip <object data="images/img-0101.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object> and lateral relative displacement <object data="images/img-0244.svg" style="width:4em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0248.png" alt="$\Delta u_{lateral}$" style="vertical-align:-2px; 
+                                     width:60px; 
+                                     height:14px" class="math gen" /></object> </p></li><li><p>3D bond elements (<tt>B3D2E,B3D3E</tt>) with longitudinal relative displacement / slip <object data="images/img-0101.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object> and two orthogonal lateral relative displacements <object data="images/img-0245.svg" style="width:9.867em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0249.png" alt="$\Delta u_{lateral,1}, \Delta u_{lateral,2}$" style="vertical-align:-4px; 
+                                     width:148px; 
+                                     height:16px" class="math gen" /></object> </p></li>
+</ul></li><li><p><b class="bfseries">stresses / generalized stresses</b> </p><ul class="itemize">
+<li><p>truss elements with stress <object data="images/img-0041.svg" style="width:1.067em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0045.png" alt="$\sigma _x$" style="vertical-align:-2px; 
+                                     width:16px; 
+                                     height:9px" class="math gen" /></object> </p></li><li><p>beams with internal forces <object data="images/img-0246.svg" style="width:2.400em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0250.png" alt="$N, M$" style="vertical-align:-3px; 
+                                     width:36px; 
+                                     height:14px" class="math gen" /></object> for Bernoulli beams and <object data="images/img-0247.svg" style="width:3.733em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0251.png" alt="$N, M, V$" style="vertical-align:-3px; 
+                                     width:56px; 
+                                     height:14px" class="math gen" /></object> for Timoshenko beams </p></li><li><p>2D continuum elements (plates) with stresses <object data="images/img-0248.svg" style="width:5.667em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0252.png" alt="$\sigma _x, \sigma _y, \sigma , \sigma _{xy}$" style="vertical-align:-4px; 
+                                     width:85px; 
+                                     height:12px" class="math gen" /></object> </p><ul class="itemize">
+<li><p><object data="images/img-0249.svg" style="width:0.600em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0253.png" alt="$\sigma $" style="vertical-align:0px; 
+                                     width:9px; 
+                                     height:7px" class="math gen" /></object> is a placeholder for <object data="images/img-0250.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0254.png" alt="$\sigma _z$" style="vertical-align:-2px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> which is generally set to zero, also for plane strain </p></li><li><p>additional generalized stress output is provided with <span class="underbar">SDA elements</span> following the discontinuity width items: items 10 and 11 for tangential and normal traction component of first sampling point, items 12 and 13 for second sampling point </p></li>
+</ul></li><li><p>3D continuum elements with stresses <object data="images/img-0251.svg" style="width:10.200em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0255.png" alt="$\sigma _x, \sigma _y, \sigma _z, \sigma _{yz}, \sigma _{xz}, \sigma _{xy}$" style="vertical-align:-4px; 
+                                     width:153px; 
+                                     height:12px" class="math gen" /></object> </p><ul class="itemize">
+<li><p>additional output is provided with <span class="underbar">SDA elements</span> in lines indicated by a <tt>C</tt>-marker. This is still under construction. </p></li>
+</ul></li><li><p>slab elements with moments <object data="images/img-0252.svg" style="width:5.667em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0256.png" alt="$m_x, m_y, m_{xy}$" style="vertical-align:-4px; 
+                                     width:85px; 
+                                     height:12px" class="math gen" /></object> and approximate shear forces <object data="images/img-0253.svg" style="width:2.467em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0257.png" alt="$v_x, v_y$" style="vertical-align:-4px; 
+                                     width:37px; 
+                                     height:12px" class="math gen" /></object> </p></li><li><p>shell element stress items are related to the local integration point coordinate system, see Section <a href="SEC_0520.html">10.3</a> and Fig. <a href="SEC_0520.html#FIG_21485">4</a> <br />three different sets are provided </p><ul class="itemize">
+<li><p>with marker <tt>Z</tt> following the global mid-surface integration point coordinates <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> – internal local forces <object data="images/img-0254.svg" style="width:14.533em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0258.png" alt="$n_\alpha ,n_\beta ,n_{\alpha \beta },m_\alpha ,m_\beta ,m_{\alpha \beta },v_\alpha ,v_\beta $" style="vertical-align:-4px; 
+                                     width:218px; 
+                                     height:12px" class="math gen" /></object> related to <object data="images/img-0255.svg" style="width:3.467em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0259.png" alt="$\bf {V}_\alpha ,\, {\bf V}_\beta $" style="vertical-align:-4px; 
+                                     width:52px; 
+                                     height:16px" class="math gen" /></object> (Fig. <a href="SEC_0520.html#FIG_21485">4</a>) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> a moment <object data="images/img-0256.svg" style="width:1.467em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0260.png" alt="$m_\alpha $" style="vertical-align:-2px; 
+                                     width:22px; 
+                                     height:9px" class="math gen" /></object> results from stresses in <object data="images/img-0009.svg" style="width:1.400em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0013.png" alt="$\bf {V}_\alpha $" style="vertical-align:-2px; 
+                                     width:21px; 
+                                     height:13px" class="math gen" /></object>-direction, i.e. its rotation axis is <object data="images/img-0257.svg" style="width:1.333em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0261.png" alt="$\bf {V}_\beta $" style="vertical-align:-4px; 
+                                     width:20px; 
+                                     height:16px" class="math gen" /></object> with analogous rules for <object data="images/img-0258.svg" style="width:3.867em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0262.png" alt="$m_\beta ,m_{\alpha \beta }$" style="vertical-align:-4px; 
+                                     width:58px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>– coordinates of <object data="images/img-0255.svg" style="width:3.467em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0259.png" alt="$\bf {V}_\alpha ,\, {\bf V}_\beta $" style="vertical-align:-4px; 
+                                     width:52px; 
+                                     height:16px" class="math gen" /></object> in global system </p></td>
+
+</tr>
+</table></li><li><p>regarding material type <tt>*RCSHELL</tt>, see Section <a href="SEC_0530.html">10.4</a>, following the global mid-surface integration point coordinates plus the isoparametric lateral <object data="images/img-0259.svg" style="width:4.867em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0263.png" alt="$-1\le t \le 1$" style="vertical-align:-2px; 
+                                     width:73px; 
+                                     height:13px" class="math gen" /></object> coordinate <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> – with marker <tt>C</tt> continuum stresses <object data="images/img-0260.svg" style="width:10.867em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0264.png" alt="$\sigma _\alpha , \sigma _\beta , \sigma _n, \sigma _{\beta n}, \sigma _{\alpha n}, \sigma _{\alpha \beta }$" style="vertical-align:-4px; 
+                                     width:163px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> followed by two reserved values for internal state parameters whereby the first one is currently for damage parameters of material types <tt>*ISODAMAGE,*MICRODAMAGE</tt></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>– with marker <tt>R</tt> reinforcement stresses <object data="images/img-0260.svg" style="width:10.867em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0264.png" alt="$\sigma _\alpha , \sigma _\beta , \sigma _n, \sigma _{\beta n}, \sigma _{\alpha n}, \sigma _{\alpha \beta }$" style="vertical-align:-4px; 
+                                     width:163px; 
+                                     height:12px" class="math gen" /></object> for each reinforcement layer as is defined with a <tt>*SHELL SECTION</tt>, see Section <a href="SEC_0517.html">10.7</a> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> lateral shear stresses <object data="images/img-0261.svg" style="width:6.667em; 
+                                                                height:1em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0265.png" alt="$\sigma _{\beta n} = \sigma _{\alpha n}=0$" style="vertical-align:-4px; 
+                                     width:100px; 
+                                     height:15px" class="math gen" /></object> always for a reinforcement layer by definition</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> it should be considered that the respective uniaxal reinforcement orientation may be different to the axes of the local coordinate system </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p>– for both markers <tt>C,R</tt> this is followed by corresponding principal stress data: three principal in ascending order each followed by its local eigenvector components </p></td>
+
+</tr>
+</table></li>
+</ul></li><li><p>spring elements with spring force <object data="images/img-0262.svg" style="width:0.800em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0266.png" alt="$F$" style="vertical-align:0px; 
+                                     width:12px; 
+                                     height:11px" class="math gen" /></object> </p></li><li><p>2D bond elements with bond stress <object data="images/img-0013.svg" style="width:0.533em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0017.png" alt="$\tau $" style="vertical-align:0px; 
+                                     width:8px; 
+                                     height:7px" class="math gen" /></object> and lateral penalty force <object data="images/img-0263.svg" style="width:3.400em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0267.png" alt="$p_{penalty}$" style="vertical-align:-4px; 
+                                     width:51px; 
+                                     height:12px" class="math gen" /></object> </p></li><li><p>3D bond elements (<tt>B3D2E,B3D3E</tt>) with longitudinal relative displacement / slip <object data="images/img-0101.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object> and two orthogonal lateral penalty forces <object data="images/img-0264.svg" style="width:8.600em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0268.png" alt="$p_{penalty,1}, p_{penalty,2}$" style="vertical-align:-4px; 
+                                     width:129px; 
+                                     height:12px" class="math gen" /></object> </p></li>
+</ul></li><li><p><b class="bfseries">supplementary data</b> specific for material models, see Section <a href="SEC_0530.html">10.4</a> </p><ul class="itemize">
+<li><p><tt>*ELASTIC</tt> with option <tt>PHASE_FIELD</tt> </p></li><li><p><tt>*MISES</tt> </p></li><li><p><tt>*ISODAMAGE</tt> </p></li><li><p><tt>*MICRODAMAGE</tt> </p></li><li><p><tt>*RCBEAM</tt> </p></li>
+</ul></li>
+</ul></li>
+</ul><p> Example RC-beam <tt>B23E</tt> </p><pre>
+Time   1.0000
+El      5    B23E             PROP1          MAT1       RCBEAM      9     10     11
+   2.0564   0.0000   7.2831e-04   1.1072e-02   1.4893e-05   1.8209e-01   2.3891e+00  -1.4861e+00
+   2.2500   0.0000   7.3874e-04   1.1263e-02  -3.6207e-05   1.8501e-01   2.4282e+00  -1.5139e+00
+   2.4436   0.0000   7.4917e-04   1.1455e-02   1.5056e-05   1.8790e-01   2.4673e+00  -1.5417e+00
+...
+</pre><p> Example plate <tt>CPS4</tt> </p><pre>
+Time   1.0000
+El     31    CPS4          EL1           MAT1         ELASTIC     34     43     44     35
+   1.8943   3.3943  -4.3699e-05   4.8675e-06   0.0000e+00  -7.4924e-05  -1.4197e+00  -1.2867e-01   0.0000e+00  -9.9586e-01
+   1.8943   3.1057  -4.1603e-05   4.8675e-06   0.0000e+00  -7.8599e-05  -1.3501e+00  -1.1474e-01   0.0000e+00  -1.0447e+00
+   1.6057   3.3943  -4.3699e-05   1.1919e-06   0.0000e+00  -7.2827e-05  -1.4442e+00  -2.5081e-01   0.0000e+00  -9.6800e-01
+   1.6057   3.1057  -4.1603e-05   1.1919e-06   0.0000e+00  -7.6503e-05  -1.3745e+00  -2.3688e-01   0.0000e+00  -1.0169e+00
+...
+</pre><p>Example slab <tt>SB3</tt> </p><pre>
+Time   1.0000
+El     11     SB3           PROP1                MAT2              NLSLAB     22     20      6
+   2.5000   0.8333   5.0941e-03   1.1908e-03   4.3262e-03   3.2093e-02   7.5023e-03   1.3627e-02  -3.5518e-03   1.0683e-02
+   2.3000   0.9000   4.9372e-03   1.0073e-03   4.3578e-03   3.1105e-02   6.3459e-03   1.3727e-02  -3.5518e-03   1.0683e-02
+   2.5000   0.7000   5.1601e-03   1.3604e-03   4.3236e-03   3.2508e-02   8.5706e-03   1.3619e-02  -3.5518e-03   1.0683e-02
+   2.7000   0.9000   5.2133e-03   1.1200e-03   4.1882e-03   3.2844e-02   7.0562e-03   1.3193e-02  -3.5518e-03   1.0683e-02
+...
+</pre><p>Example shell <tt>SH4</tt>: </p><pre>
+Time   1.0000
+El      7     SH4                     EL1               MAT2          MISES      7      8     19     18           5      0
+    2.8302    0.4226   14.6990        Z  -4.7066e-02  -8.9233e-02   9.7324e-02   1.2878e-01  -2.2318e-02   3.8590e-02   6.6137e-02  -5.3893e-03     0.9820  0.0000 -0.1891  -0.0000  1.0000 -0.0000
+    2.8302    1.5774   14.6990        Z   1.3405e-01  -5.3011e-02   1.1007e-01   1.4652e-01  -1.8771e-02   4.8432e-02   1.2113e-01  -5.3893e-03     0.9820  0.0000 -0.1891  -0.0000  1.0000 -0.0000
+    4.1516    0.4226   14.3820        Z  -5.2629e-02  -5.6235e-02   1.7980e-01   1.3453e-01   6.5280e-03   4.6760e-02   4.5381e-02  -1.0953e-02     0.9608  0.0000 -0.2773  -0.0000  1.0000 -0.0000
+    4.1516    1.5774   14.3820        Z   1.1629e-01  -2.2452e-02   1.9254e-01   1.5224e-01   1.0070e-02   5.6602e-02   9.7776e-02  -1.0953e-02     0.9608  0.0000 -0.2773  -0.0000  1.0000 -0.0000
+...
+</pre><p> Output is repeated for each time interval as defined by step sub-keyword <tt>*EL FILE</tt>, see Section <a href="SEC_0570.html">10.9</a>. <br /><br />Element output values are also written to the file <tt>&lt;name&gt;.elemout_.txt</tt>, same data with different formatting. Specifications remain to be appended. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0615.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0640.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

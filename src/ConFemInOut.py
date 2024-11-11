@@ -802,7 +802,10 @@ def DataInput( f1, ff, Restart):
                     for i in z3:
                         if i.upper().find("ARCLENGTH")>-1: 
                             Step_.ArcLen = True
-                            Step_.ArcLenV = float(i.split("=")[1])
+                            if i.upper().find("=")>-1:
+                                Step_.ArcLenV = float(i.split("=")[1])
+                            else:
+                                Step_.ArcLenV = -1                          # should be computed from time step with first time steo increment
                             Step_.ArcLenNodes = []
                             if len(z3)>2:                                   # nodes for arc length selected
                                 for n in z3[2:]:
@@ -1410,6 +1413,7 @@ def DataOut(fileName, NodeList, uu, ff, rL, Time, WriteType ):
         fp.write('    ')
         for j in range(len(no.DofT)): fp.write('%12.4e,'%(rL[s+j]))         # residual / reaction force
         fp.write('\n')
+    fp.flush()
     fp.close()
   
 def DataOutStress(fileName, ElemList, NodeList, NoIndToCMInd, Time, WriteType, ff):
@@ -1475,6 +1479,7 @@ def DataOutStress(fileName, ElemList, NodeList, NoIndToCMInd, Time, WriteType, f
                     for j, c in enumerate(i.xyzC):                          # loop over vertices of crack face
                         fp.write('%6i, %4s, %10s, %6s, Cra, %10.4f,%10.4f,%10.4f,%12.4e,%12.4e\n'%(Label,ElSet,Mat,Type,c[0],c[1],c[2],vL[j],vT[j]))
         counter+=1
+    fp.flush()
     fp.close()
 
 def SelOutIni( FilName, Type, OutList):                 # initialize files for single element / node output

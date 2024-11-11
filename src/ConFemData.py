@@ -34,7 +34,7 @@ def DefData():
 #    Name, Plot ="../DataExamples/E08/E8-01", True                           # ok deep beam elastic
 #    Name, Plot = "../DataExamples/E08-02/E8-02", False                     # ok deep beam nonlinear
 #    Name, Plot = "../DataExamples/E08/E8-03B23E", True                         # ok single fiber
-    Name, Plot = "../DataExamples/E08/E8-04", True                         # ok plate with reinforcement
+#    Name, Plot = "../DataExamples/E08/E8-04", True                         # ok plate with reinforcement
     # E09                             
 #    Name, Plot ="../DataExamples/E09/E9-01", True                           # ok elastic slab with opening and free edges
 #    Name, Plot = "../DataExamples/E09/E9-04", True                          # ok Elastoplastic slab (NLSLAB) with opening and free edges
@@ -62,7 +62,7 @@ def DefData():
 #    Name, Plot, StressStrainOut = "../_DataBenchmarks/Aachentests/Deep_beam", True, []   # ok
 #    Name, Plot, StressStrainOut = "../_DataBenchmarks/Aachentests/Deep_beam_AacNL", True, []   # ok
     # _DataBond
-    Name, Plot, StressStrainOut = "../_DataBond/bond_T2", True, []  # TestSuite0            # ok
+#    Name, Plot, StressStrainOut = "../_DataBond/bond_T2", True, []  # TestSuite0            # ok
 #    Name, Plot, StressStrainOut = "../_DataBond/Pullout2", True, []   # Pullout, Pullout2           # ok
 #    Name, Plot, StressStrainOut = "../_DataBond/PulloutAxiSym", True, []                                        # ok Isodamage
 #    Name, Plot, StressStrainOut = "../_DataBond/PulloutLatPressure", True, []                    # ok
@@ -87,17 +87,18 @@ def DefData():
 #    Name, Plot ="../_DataSpecimen/One3D/WillamsTest", False                 # ok microdamage, but no plotting avaliable for element type C3D8
     # _DataTrusses
 #    Name, Plot = "../_DataTrusses/staebe_1_1d", True                        # ok looks like elastoplastic mises with un- and reloading
-#    Name, Plot = "../_DataTrusses/staebe_4", True                                       # ok 2D elastic large displacement
+    Name, Plot = "../_DataTrusses/staebe_4", True                                       # ok 2D elastic large displacement
 #    Name, Plot = "../_DataTrusses/staebe3D2", True                             # ok 3D elastic large displacement
     # _DataTmp
 #    Name, Plot, StressStrainOut = "../_DataTmp/shellconfem", True, []
 #    Name, Plot, StressStrainOut = "../_DataTmp/BeamMises", True, []
+    Name, Plot = "../_DataTmp/staebe_4", True                                       # ok 2D elastic large displacement
     #
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2023/Note_ShearPlateRandom/ConFem/ShearPanel/ShearPanelR_med", True, [] #[[1,0]]
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2023/Note_ShearPlateRandom/ConFem/ShearPanel/Explicit/ShearPanelR", False, []
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ConFem/PSlabN_1/Restart/PSlabN_1", True, []
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ConFem/PSlabN_5/PSlabN_5__", True, []
-    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ExpDataSets/126-A-2A/126-A-2A", True, []
+#    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ExpDataSets/75-V-1/75-V-1", True, []
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/Abaqus/AbaqusModels/OneElement/2D/Large/ConFem/Job-1", True, [[1,0]]
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/Abaqus/AbaqusModels/OneElement/3D/Large/ConFem/Set-2", True, [[1,0],[1,1],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7]]
                           #       C:\Users\uhc\Documents\Work\FoilPap\Abaqus\AbaqusModels\OneElement3D\Large\ConFem

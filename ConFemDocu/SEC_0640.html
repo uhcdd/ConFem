@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="SEC_5640.html" title="Reinforcement Design Output" rel="next" />
+<link href="SEC_0620.html" title="Element Output" rel="prev" />
+<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0620.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_5640.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0600.html">Organization of ConFem Output Data</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Nodal Output</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="SEC_0640">12.4 Nodal Output</h2>
+<p>Nodal output values are written to the file <tt>&lt;name&gt;.nodeout.txt</tt>. Following data items are given, each line-wise with white-space delimiters: </p><ul class="itemize">
+<li><p>Instant of time with </p><ul class="itemize">
+<li><p>time-value </p></li>
+</ul></li><li><p>Data at nodes – sub-items in one line </p><ul class="itemize">
+<li><p>node number </p></li><li><p>coordinates <object data="images/img-0265.svg" style="width:3.267em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0269.png" alt="$(x,y,z)$" style="vertical-align:-4px; 
+                                     width:49px; 
+                                     height:16px" class="math gen" /></object> </p></li><li><p>displacements corresponding to nodal degrees of freedom, e.g. <object data="images/img-0266.svg" style="width:2.267em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0270.png" alt="$(u,v)$" style="vertical-align:-4px; 
+                                     width:34px; 
+                                     height:16px" class="math gen" /></object> in case of plates, <object data="images/img-0267.svg" style="width:3em; 
+                                                                height:0.733em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0271.png" alt="$u, w, \varphi $" style="vertical-align:-3px; 
+                                     width:45px; 
+                                     height:11px" class="math gen" /></object> in case of 2D-beams, <object data="images/img-0268.svg" style="width:6em; 
+                                                                height:0.733em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0272.png" alt="$u,w,v,\varphi _r,\varphi _s$" style="vertical-align:-3px; 
+                                     width:90px; 
+                                     height:11px" class="math gen" /></object> in case of shells </p><ul class="itemize">
+<li><p>i.e. the number of values varies according to the type of freedom, see also Section <a href="SEC_0100.html">1</a> </p></li>
+</ul></li><li><p>internal nodal forces corresponding to nodal degrees of freedom, i.e. the same number of values as for displacements </p><ul class="itemize">
+<li><p>internal nodal forces with absolute values smaller than roughly <object data="images/img-0269.svg" style="width:2em; 
+                                                                height:0.933em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0273.png" alt="$10^{-9}$" style="vertical-align:0px; 
+                                     width:30px; 
+                                     height:14px" class="math gen" /></object> (depends on prescribed equilibrium tolerance <object data="images/img-0156.svg" style="width:1.467em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0160.png" alt="$r_{tol}$" style="vertical-align:-2px; 
+                                     width:22px; 
+                                     height:9px" class="math gen" /></object>, see Section <a href="SEC_0570.html#SEC_00456"></a>) may be considered as equilibrated </p></li><li><p>larger values (absolute) occur with prescribed degrees of freedom and correspond to boundary reactions </p></li>
+</ul></li><li><p>output for nodes of slab elements (<tt>SB3</tt>) partially differs <br />integration point moments projected to nodes are inserted between displacements and internal nodal forces <br />Example </p><pre>
+1.0000
+      1   0.0000   0.0000   0.0000  0.0000e+00 -6.5308e-04 -6.5308e-04    6.5184e-02  6.5184e-02 -8.4746e-03    2.5000e-01 -1.2490e-16 -1.7347e-16
+      2   0.5000   0.5000   0.0000 -6.9459e-04  8.7193e-19  0.0000e+00    1.2239e-01  1.2239e-01 -8.5652e-17    1.2768e-15  3.1225e-17  1.8345e-16
+...
+i.e. Node x        y        z       w           phi_x       phi_y         m_x         m_y         m_xy          f_w         f_phi_x     f_phi_y
+</pre></li>
+</ul></li>
+</ul><p> Output is repeated for each interval as defined by step sub-keyword <tt>*NODE FILE</tt>, see Section <a href="SEC_0570.html">10.9</a> <br /><br />Nodal output values are also written to the file <tt>&lt;name&gt;.nodeout_.txt</tt>. Specifications remain to be appended. </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0620.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_5640.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

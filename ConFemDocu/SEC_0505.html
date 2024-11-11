@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="SEC_0570.html" title="Step Section" rel="next" />
+<link href="SEC_0517.html" title="Shell Section" rel="prev" />
+<link href="SEC_0500.html" title="Keywords for ConFem Input Data" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0517.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0570.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0500.html">Keywords for ConFem Input Data</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Beam reinforcement</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="SEC_0505">10.8 Beam reinforcement</h2>
+<p><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> <br /><br />A section starting with <tt>*BEAM REINF</tt> defines the geometry of reinforcement layers. It is used in connection with a beam section. </p><p>The section keyword <tt>*BEAM REINF</tt> has as option <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>NAME=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> specifies a unique name which basically may be freely chosen </p></td>
+
+</tr>
+</table><p> <br /><br />The following data lines describe a reinforcement layer with the following geometric properties <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0128.svg" style="width:1.133em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0132.png" alt="$A_s$" style="vertical-align:-2px; 
+                                     width:17px; 
+                                     height:14px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0129.svg" style="width:0.800em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0133.png" alt="$z_s$" style="vertical-align:-2px; 
+                                     width:12px; 
+                                     height:9px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0130.svg" style="width:1.867em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0134.png" alt="$\varrho _{eff}$" style="vertical-align:-4px; 
+                                     width:28px; 
+                                     height:12px" class="math gen" /></object>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0131.svg" style="width:0.933em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0135.png" alt="$\beta _t$" style="vertical-align:-3px; 
+                                     width:14px; 
+                                     height:14px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0128.svg" style="width:1.133em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0132.png" alt="$A_s$" style="vertical-align:-2px; 
+                                     width:17px; 
+                                     height:14px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> cross section area </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0129.svg" style="width:0.800em; 
+                                                                height:0.600em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0133.png" alt="$z_s$" style="vertical-align:-2px; 
+                                     width:12px; 
+                                     height:9px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> height coordinate with respect to the reference line (<object data="images/img-0132.svg" style="width:2.800em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0136.png" alt="$z_s&lt;0$" style="vertical-align:-2px; 
+                                     width:42px; 
+                                     height:13px" class="math gen" /></object> downward, <object data="images/img-0133.svg" style="width:2.800em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0137.png" alt="$z_s&gt;0$" style="vertical-align:-2px; 
+                                     width:42px; 
+                                     height:13px" class="math gen" /></object> upward)</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> (reference line goes through the cross section center in case of <tt>*SECTION=RECT</tt>) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0130.svg" style="width:1.867em; 
+                                                                height:0.800em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0134.png" alt="$\varrho _{eff}$" style="vertical-align:-4px; 
+                                     width:28px; 
+                                     height:12px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> effective reinforcement ratio (used only for tension stiffening) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0131.svg" style="width:0.933em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0135.png" alt="$\beta _t$" style="vertical-align:-3px; 
+                                     width:14px; 
+                                     height:14px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> bond parameter (<object data="images/img-0134.svg" style="width:2.600em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0138.png" alt="$\beta =0$" style="vertical-align:-3px; 
+                                     width:39px; 
+                                     height:14px" class="math gen" /></object>: no tension stiffening) </p></td>
+
+</tr>
+</table><p> <br /><br />The reinforcement material properties are defined with the material type <tt>*RCBEAM</tt>. Further data lines may follow for further reinforcement layers if required. The number of reinforcement layers is not restricted. <br /><br />The section keyword <tt>*BEAM REINF</tt> has no own sub-keywords. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0517.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0570.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

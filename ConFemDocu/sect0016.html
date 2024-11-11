@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+
+<link href="SEC_0710.html" title="Finite Elements Types" rel="prev" />
+<link href="SEC_0700.html" title="Development" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0710.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0700.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0700.html">Development</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Material Types</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000017">13.2 Material Types</h2>
+<p><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> <a href="https://www.concrete-fem.com">https://www.concrete-fem.com</a> <br /><br />Material Types are coded as <span class="underbar">classes</span> in the module <tt>X-FemMat.py</tt>. This class has the class <tt>Material</tt> as base class. A particular material type class (<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> <tt>MatClass</tt>) generally includes a constructor like </p><ul class="itemize">
+<li><p><tt>__init__(self, PropMat)</tt> </p><p>to initialize an instance of <tt>MatClass</tt> called in the module <tt>X-FemInOut.py::ReadInputFile</tt> with a parameter <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>PropMat</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> (maybe multidimensional) array containing the parameters of the instance of <tt>MatClass</tt> </p></td>
+
+</tr>
+</table><p> <br /><br />There is a variation </p></li><li><p><tt>__init__(self, PropMat, val)</tt> </p><p>in case parameters of the <tt>MatClass</tt>-instance are eventually read in from different places in the input file, from one place into <tt>PropMat</tt>, from the other place into <tt>val</tt>. <br /><br />A specific mass (default value 0) is referenced by <tt>mass</tt> within <tt>X-FemInOut.py::ReadInputFile</tt> and may be inserted in the <tt>PropMat</tt>- or <tt>val</tt>-array of the constructor. A particular value is read in with the key word <tt>*DENSITY</tt> as a first entry in a material section, see Section <a href="SEC_0530.html">10.4</a>. This value has to be assigned to the <tt>self.Density</tt>-property of the instance. </p></li>
+</ul><p> To define <span class="underbar">basic parameters</span> – independent of the data above for a particular material of this type – the <tt>MatClass</tt>-constructor includes a constructor for a material instance connected to the instance of <tt>MatClass</tt> </p><ul class="itemize">
+<li><p><tt>Material.__init__(self,SymmetricVal,RTypeVal,UpdateVal,Updat2Val,StateVarVal,NDataVal)</tt> </p><p>with the parameters <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>self</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> reference to the particular instance (listed only for defining, <span class="underbar">not</span> for calling) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>SymmetricVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> flag for symmetry of material matrices </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>RTypeVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> string for type of regularization (<tt>None</tt> <object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> no regularization) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>UpdateVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> flag whether state variables have specific update method </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Updat2Val</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> flag whether state variables have specific update method connected to special conditions </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>StateVarVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> number of state variables (<tt>None</tt> <object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> if no state variables) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>NDataVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> number of data items for storage or output, respectively </p></td>
+
+</tr>
+</table><p> <br /><br />If an integer number is provided for <tt>StateVarVal</tt> two arrays <tt>StateVar</tt> and <tt>StateVarN</tt> are allocated for each element integration point each with a length of <tt>StateVarVal</tt> for <tt>float</tt>-numbers. <br />At the end of each time increment with finished equilibrium iterations the array <tt>StateVar</tt> by default is overwritten by the array <tt>StateVar</tt> within the procedure <tt>FinishEquilibIteration</tt> of the module <tt>X-FemBasics</tt>. Specific update methods for state variables may be defined for a material which is indicated by setting <tt>UpdateVal</tt> and <tt>Updat2Val</tt> to <tt>True</tt>, see methods <tt>UpdateStateVar</tt> and <tt>UpdateStat2Var</tt> below. <br /><br />This constructor also sets same global (<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> static in OOP-terminology) default values for all material types, which may be updated externally. Furthermore, the <tt>Material</tt>-class should also provide methods which are shared by some or all material types. </p></li>
+</ul><p> <span class="underbar">Data</span> of instances of <tt>MatClass</tt> are read in the module <tt>X-FemInOut.py</tt> in the procedure <tt>ReadInputFile</tt>. Two blocks are concerned: </p><ul class="itemize">
+<li><p>block <tt>subitems MATERIAL</tt> <br /><br />declares / requests a keyword for a material, </p></li><li><p>block <tt>data MATERIAL</tt> <br /><br />stores material parameters of the <tt>ElClass</tt>-instance in an array. </p></li>
+</ul><p> To <span class="underbar">interface</span> <tt>MatClass</tt> has as methods </p><ul class="itemize">
+<li><p><tt>Sig(self,ff,CalcType,Dt,elI,ipI,Elem,Dps,Eps,dTmp,Temp,EpsR)</tt> <br /><br />Compute material response with the parameters <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>self</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> reference to the particular instance (listed only for defining, <span class="underbar">not</span> for calling) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>ff</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> pointer to log-file to print out data for control purposes </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>CalcType</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> calculation type </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 0: check system </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 1: internal forces only </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 2: internal forces and tangential stiffness matrix </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Dt</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> actual time step </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>elI</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> actual internal element index </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>ipI</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> actual integration point index </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Elem</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> pointer to actual element </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> this is also used to transfer state variables assigned to the element’s integration point </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> and maybe other stuff </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Dps</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> actual (generalized) strain increment – should match to this material type </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Eps</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> actual (generalized) strain – should match to this material type </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>dTmp</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> actual (generalized) temperature increment – should match to this material type </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Temp</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> actual (generalized) temperature – should match to this material type </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>EpsR</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> generalized strain for regularization (if regularization is performed) </p></td>
+
+</tr>
+</table><p> <br /><br />provided by the calling procedure <tt>IntForces</tt> of the module <tt>X-FemBasics.py</tt>. <br /><br />The method returns generalized stresses, (tangential) material stiffness matrix and output data-array to <tt>IntForces</tt>. Syntax of parameters and return values do not allow for variations. <br /><br />In case <tt>UpdateVal=True</tt> a method </p></li><li><p><tt>UpdateStateVar(self, Elem, ff)</tt> <br /><br />has to be provided to update state variables with the parameters <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>self</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> reference to the particular instance (listed only for defining, <span class="underbar">not</span> for calling) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Elem</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> pointer to actual element </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> this is also used to transfer state variables assigned to the element’s integration point </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> and maybe also other stuff </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>ff</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> pointer to log-file to print out data for control purposes </p></td>
+
+</tr>
+</table><p> <br /><br />There is a variation in case of <tt>Updat2Val=True</tt> </p></li><li><p><tt>UpdateStat2Var(self, Elem, ff, Flag1, Flag2)</tt> <br /><br />for updating of state variables under special conditions with parameters <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>self</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> reference to the particular instance (listed only for defining, <span class="underbar">not</span> for calling) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Elem</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> pointer to actual element </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> this is also used to transfer state variables assigned to the element’s integration point </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> and maybe also other stuff </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>ff</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> pointer to log-file to print out data for control purposes </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Flag1</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> flag to determine whether special conditions are fulfilled </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Flag2</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> one more flag to determine whether special conditions are fulfilled </p></td>
+
+</tr>
+</table></li>
+</ul><p> <span class="underbar">Result data</span> are prepared in the module <tt>X-FemInOut.py</tt> with the procedure </p><ul class="itemize">
+<li><p><tt>WriteElemData( f2, Time, ElList, NodeList, MatList)</tt> <br /><br />with the parameters <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>f2</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> file object of file for element output, see Section <a href="SEC_0600.html">12</a> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Time</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> actual time value </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>ElList</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> list of all element instances </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>NodeList</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> list of all node instances </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>MatList</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> dictionary of all material intances </p></td>
+
+</tr>
+</table><p> <br /><br />Output is generally performed with a line for each integration point of an element. Output values are given with the <tt>Data</tt>-property of the incidence of the <tt>Element</tt>-object. This property is a 2-dimensional array with the first index referring to the particular integration point. The second index refers to the entry in the output data-array returned by the <tt>Sig</tt>-method. </p></li>
+</ul><p> The <tt>MatClass</tt>-object may have another material type object as <span class="underbar">base class</span> whereby inheriting its properties and methods. Thus, <tt>MatClass</tt> automatically has the <tt>Material</tt>-class without explicitely specifying this. This currently is given for the material types </p><ul class="itemize">
+<li><p><tt>IsoDamage</tt> with base-class <tt>Elastic</tt>, see Section <a href="SEC_0530.html#SEC_0531"></a> </p></li><li><p><tt>WraTCbeam</tt> with base-class <tt>RCBeam</tt>, see Section <a href="SEC_0530.html#SEC_0533"></a> </p></li><li><p>(remains to be completed) <br /><br />Values of properties of the base classes of <tt>MatClass</tt> may be overridden by its own values. Furthermore it generally defines its own properties and methods. But it has to be observed that the constructor like <tt>__init__</tt> of the base-class has to precede the the constructor like <tt>Material.__init__</tt> of the root <tt>Material</tt>-class within the <tt>MatClass.__init__</tt> in order to set the basic parameters of <tt>MatClass</tt> properly. <br /><br />See <tt>IsoDamage.__init__</tt> as an example. </p></li>
+</ul><p> <object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> <a href="https://www.concrete-fem.com">https://www.concrete-fem.com</a> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0710.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0700.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

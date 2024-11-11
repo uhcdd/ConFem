@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="sect0013.html" title="Entity Specific Plotting" rel="next" />
+<link href="sect0011.html" title="Plotting" rel="prev" />
+<link href="sect0011.html" title="Plotting" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0011.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0011.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="sect0011.html">Plotting</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Data Structured as Entities</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000013">13.1 Data Structured as Entities</h2>
+<ul class="itemize">
+<li><p>Plotting refers to data files <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> <tt>&lt;name&gt;.in.txt</tt> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><tt>&lt;name&gt;.elemout.txt</tt> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><tt>&lt;name&gt;.elemout_.txt</tt> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><tt>&lt;name&gt;.nodeout.txt</tt> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><tt>&lt;name&gt;.nodeout_.txt</tt> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><tt>&lt;name&gt;.pkl</tt> </p></td>
+
+</tr>
+</table><p> <br />and option files <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p> <tt>&lt;name&gt;.opt.txt</tt> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p><tt>&lt;name&gt;.plt.txt</tt> </p></td>
+
+</tr>
+</table></li><li><p>Plotting may be performed automatically following a computation or standalone using data of a previously finished computation. </p><ul class="itemize">
+<li><p>In case of .EXE-Version, see Section <a href="SEC_1108.html">8</a>, the corresponding procedures are requested with the prompt window dialogue. </p></li><li><p>In case of using source codes the corresponding procedures are ruled within the module <tt>ConFemData.py</tt> – by definition of <tt>Name, Plot</tt> –, or in the module <tt>ConFemPost.py</tt> by definition of <tt>Name</tt> in the <tt>__main__</tt>-section., see Section <a href="SEC_0200.html">2</a>. </p></li>
+</ul></li><li><p>Plotting works with entities </p><ul class="itemize">
+<li><p>An entity is assigned to an instant in time, according to data output statements given in Section <a href="SEC_0600.html">12</a>. </p></li>
+</ul></li><li><p>Node entities </p><ul class="itemize">
+<li><p>All nodes of a model form an entity with respect to plotting. A number of corresponding node entities may arise due to a number of instants in time. </p></li>
+</ul></li><li><p>Element entities </p><ul class="itemize">
+<li><p>All elements belonging to a particular element set – generally of the same element type, see Section <a href="SEC_0520.html">10.3</a> – form an entity with respect to plotting. A number of corresponding element entities may arise due to a number of instants in time. </p></li><li><p>Three types of element entities are basically distinguished: </p><ul class="itemize">
+<li><p>line element entities are related to <br /><tt>S1D2,T1D2,B21,B21E,B23,B23E</tt> </p><ul class="itemize">
+<li><p>Line element entities have sub-entities considering quantities like normal forces, bending moments, distinguished strains and stresses and more. </p></li>
+</ul></li><li><p>2D element entities are related to<br /><tt>T2D2,T2D3,T2D2E,T2D3E,CPS4,CPE4,CPS3,CPE3,SB3</tt> </p><ul class="itemize">
+<li><p>2D element entities generally do not have sub-entities. </p></li><li><p>Exception is <tt>SB3</tt> with sub-entities bending moments and shear forces </p></li>
+</ul></li><li><p>3D element entities are related to<br /><tt>SH4,SH3</tt> </p><ul class="itemize">
+<li><p>3D element entities have sub-entities considering quantities like components of bendig moments, normal/membrane forces and shear forces. </p></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0011.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0011.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

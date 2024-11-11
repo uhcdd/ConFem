@@ -18,6 +18,7 @@ import os
 import scipy.spatial as spatial
 #import sys 
 import pickle
+from numpy import mean
 
 from ConFemBasics import *
 import ConFemMat
@@ -35,6 +36,18 @@ def CheckInz(ElemList, Label):
     for el in ElemList:
         if el.Label==Label:
             print("CheckInz ",el.Label,el.Type,el.Inzi)
+
+def CheckStability( q0,q1, N,sf):                                           # q0,q1 are lists from queues
+    StableFlag = True
+    if len(q0) >= N:
+        c0 = q0[0]*q0[-1]>=0 and q1[0]*q1[-1]>=0                            # condition no change sign
+        c1 = abs(q1[-1])>sf*abs(q1[-2]) or abs(q0[-1])>sf*abs(q0[-2])       # condition rapid change
+        if c0 or c1:
+            q0_ = q0[0:-1]
+            q1_ = q1[0:-1]
+            if abs(q1[-1])>sf*abs(mean(q1_)) or abs(q0[-1])>sf*abs(mean(q0_)):  # stability criteria
+                StableFlag = False
+    return StableFlag
 
 class ConFem:
     def __init__(self):
@@ -65,7 +78,6 @@ class ConFem:
             f7, MaxType =None, None
             ElemDataAll = {}                                                # skip this in case it is retrieved from pickle !!!
         else:
-#            DirName, FilName = DirFilFromName( Name )
             try: f1=open( Name+".in.txt", 'r')
             except: raise NameError(Name,"not found")
             f6=open( Name+".protocol.txt", 'w')
@@ -142,7 +154,7 @@ class ConFem:
         # Calculations
         stime = process_time()
         while StepCounter<len(StepList):
-            ndeq = 10
+            ndeq = 4                                                        # length of queues
             if f5 != None: timeoutQueues  = [ deque(maxlen=ndeq), deque(maxlen=ndeq), deque(maxlen=ndeq) ]
             equiiterQueues                = [ deque(maxlen=ndeq), deque(maxlen=ndeq), deque(maxlen=ndeq) ]
             #
@@ -407,7 +419,7 @@ class ConFem:
                     tt = 0                                                  # default time corrector
                     # determine time increment dt in case of quasi-statics -- has already been done for dynamics
                     if not StLi.Dyn and TimeTargetActiveFlag:               # TimeTargetActiveFlag set to False before equilibrium iteration loop -- set to True if equilbrium in j=0 iteration
-                        if StLi.ArcLen: 
+                        if StLi.ArcLen and StLi.ArcLenV>0:
                             tt = TS*ArcLength(StLi.ArcLenV, VecDI, VecD, VecU-VecC, VecY, Mask) # time increment with arc length control
                         elif j==0:                                          # time increment determined for the following quilibrium j-iterations
                             if StLi.varTimeSteps:
@@ -419,6 +431,8 @@ class ConFem:
                                 tt=StLi.TimeStep                            # time increment prescribed 
                         dt = dt + tt                                        # update time increment corresponding to loading increment - dt initially 0 for j==0
                         Time = TimeOld + dt                                 # update time
+                        if StLi.ArcLen and StLi.ArcLenV<0 and IncCounter==2 and j==0:  # arclen indirectly determined from initially prescribed time step after 1st iterated load increment
+                            StLi.ArcLenV = sqrt(MaskedP(VecU, VecU, Mask))
 
                     VecD = VecD + tt*DTS*VecDI                              # new displacement increment with two contributions; tt=0 in case of dynamics and for quasi-statics j>0 & fixed time step
                     if j >= (StLi.IterNum - 2): LogResiduals(LogName, IncCounter, j, NodeList, VecRP, VecD)
@@ -435,12 +449,16 @@ class ConFem:
                     EquiFailedCounter += 1
                 else:
                     EquiFailedCounter = 0
+                # checks stability
                 if f5!=None:
-                    q1 = list(timeoutQueues[1])                             # reaction forces or so
-                    if len(q1) > 3:
-                        if abs(q1[-1]) > 1.0e+01 * 0.5*(abs(q1[-2])+abs(q1[-3])):
-                            Echo(f"{Name:s}\n premature termination - unstable reaction {q1[-1]:.4f} - time {Time:.4f} of target {TimeTarg:.4f}",f6)
-                            break                                               # continues after time increment loop
+                    q0 = list(timeoutQueues[0])
+                    q1 = list(timeoutQueues[1])
+                    if not CheckStability( q0,q1, ndeq, 3.0):                   # hard coded stability factor !!!
+                        Echo(f"{Name:s}\n premature termination - unstable reaction\n"
+                             f" displ {q0[-1]:.4f}, load {q1[-1]:.4f} - time {Time:.4f} of target {TimeTarg:.4f}",
+                             f6)
+                        break                                               # continues after time increment loop, i.e. incrementing is terminated
+
                 # book keeping for iterated time step
                 TimeOld = Time
                 VecY = VecU-VecC                                            # store displacement increment in time increment
@@ -451,6 +469,7 @@ class ConFem:
                 FinishEquilibIteration( MatList, ElList, NodeList,NoIndToCMInd, f6, StLi.NLGeom, TimeTargetActiveFlag)# update state variables etc.
                 SelOutWrite( "elem", StressStrainOut, StressStrainOutNames, Time, ElList, None, None, None, StepCounter, IncCounter)   # output for single elements over all time steps
                 
+                # process SDA elements
                 nea = len(ElList)                                           # actual number of all elements (not only active)
                 for el in ElList:
                     if el.Type in ["CPE4S","CPE3S","CPS4S","CPS3S"] and el.Active and el.NoCracks==1: 
@@ -459,11 +478,11 @@ class ConFem:
                     if el.RegType==3 and el.Type in ["CPS4","CPS3", "CPE4","CPE3","C3D8","CPS6","CPE6"] and el.Active:
                         nea = el.CreateSDARankine( nea, MatList, NodeList, ElList, SecDic, NoLabToNoInd, NoIndToCMInd, f6, VecU,VecY, dt )
                 
+                # termination and output control
                 if Time > TimeTarg-1.e-6:                                   # step time target
                     StepFinishedFlag = True                                 # time target reached, finalize computation for step
                 if StLi.ArcLen: 
                     try:
-                        pass
                         if norm(VecB)/norm(VecU) < 0.001: StepFinishedFlag = True                         # basically to stop snap back
                     except:
                         pass
@@ -473,19 +492,18 @@ class ConFem:
                     else:                                                                      return False
                 if WriteXData(TimeEl):
                     DataOutStress(NameElemOut_, ElList, NodeList, NoIndToCMInd, Time, "a", f6)
-                    if LinAlgFlag: NodeList.sort(key=lambda t: t.Label)
-                    DataOut(NameNodeOut_, NodeList, VecU, VecB, VecR, Time, "a" )
-                    if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
                     WriteElemData( f2, f7, Time, ElList, NodeList,NoIndToCMInd, MatList, MaxType, ResultTypes)# write element data
                     f2.flush()
                     Echo(f"Element data written {Time:f}", f6)
                 if WriteXData(TimeNo):
                     if LinAlgFlag: NodeList.sort(key=lambda t: t.Label)
+                    DataOut(NameNodeOut_, NodeList, VecU, VecB, VecR, Time, "a" )
                     WriteNodalData( f3, Time, NodeList, VecU, VecB)         # write nodal data
                     if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
                     f3.flush()
                     Echo(f"Nodal data written {Time:f}", f6)
-                if (Time+1.e-6>=TimeRe and j<StLi.IterNum-1) or StepFinishedFlag:
+                fl = (Time+1.e-6>=TimeRe and j<StLi.IterNum-1)              # flag for writing restart data
+                if fl or StepFinishedFlag:                                  # StepFinishedFlag set if time target in step is reached -- or eigenmode analysis or to stop snap back
                     if j<(StLi.IterNum-1):
                         fd = open(Name+'.pkl', 'wb')                            # Serialize data and store for restart
                         pickle.dump(NodeList,fd);pickle.dump(ElList,fd);pickle.dump(MatList,fd);pickle.dump(StepList,fd);pickle.dump(N,fd);pickle.dump(WrNodes,fd);pickle.dump(LineS,fd);pickle.dump(ElasticLTFlag,fd);\
@@ -518,10 +536,14 @@ class ConFem:
         f2.close()
         f3.close()
         if f5!=None: f5.close()
-        f6.close()
         if f7!=None: f7.close()
 #        fX.close()
-        RC = FinishAllStuff(PloF, DirName, FilName, Name, ResType, VTK)
+        if StepFinishedFlag:
+            RC = FinishAllStuff(PloF, DirName, FilName, Name, ResType, VTK)
+        else:
+            Echo(f" time target not reached -- no finish with plot or hash value", f6)
+            RC = 1
+        f6.close()
         return RC
 
 if __name__ == "__main__":

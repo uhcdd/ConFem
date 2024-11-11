@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="SEC_0250.html" title="Units" rel="next" />
+<link href="SEC_0200.html" title="Modules" rel="prev" />
+<link href="index.html" title="ConFem Documentation" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0200.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0250.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Bindings</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h1 id="SEC_0210">3 Bindings</h1>
+<p><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> <br /><br />Computations may be accelerated using several bindings for C-implementations </p><ul class="itemize">
+<li><p>Standard linear algebra methods requires <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>LinAlg2.py</tt>     </p></td>
+
+    
+    <td style="text-align:left"><p> Interface module</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>_LinAlg2.pyd</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> C-Library for windows</p></td>
+
+</tr>
+</table><p> <br /></p></li><li><p>Standard element computations (current available for shell element <tt>SH4</tt>, see Section <a href="SEC_0520.html">10.3</a>) require <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>ConFemElemC.py</tt>     </p></td>
+
+    
+    <td style="text-align:left"><p> Interface module</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>_ConFemElemC.pyd</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> C-Library for windows</p></td>
+
+</tr>
+</table><p> <br /></p></li><li><p>Material stress computations (currently available <tt>ELASTICLT</tt> without <tt>SDA</tt>-option, <tt>ISODAMAGE</tt>, <tt>MICRODAMAGE</tt>, see Section <a href="SEC_0530.html">10.4</a>) require <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>ConFemMatC.py</tt>     </p></td>
+
+    
+    <td style="text-align:left"><p> Interface module</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>_ConFemMatC.pyd</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> C-Library for windows</p></td>
+
+</tr>
+</table><p> <br /></p></li>
+</ul><p> All parts should be available in the same directory as the modules. On start of <tt>ConFem</tt>-modules it is checked whether each of these (<tt>*.py</tt> and <tt>*.pyd</tt>) is available. If so, the respective C-module is used instead of their Python counterparts. <br />This is all realized with <tt>SWIG</tt> (<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https://www.swig.org">https://www.swig.org</a>) and might lead to considerable accelerations. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0200.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="index.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0250.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

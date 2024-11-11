@@ -59,7 +59,6 @@ Element data written 1.000000
 Nodal data written 1.000000
 Restart data written 1.000000
 last iteration data
-    1, 0.2000,   13
     2, 0.4000,    9
     3, 0.6000,    9
     4, 0.8000,    8

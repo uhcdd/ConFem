@@ -148,4 +148,4 @@ Eigenvalue analysis: finished
 Restart data written 1.000000
 last iteration data
     1, 1.0000,    0
-total comp time 8 seconds
+total comp time 7 seconds

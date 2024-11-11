@@ -1,0 +1,893 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="SEC_0530.html" title="Material Section" rel="next" />
+<link href="sect0006.html" title="Node Section" rel="prev" />
+<link href="SEC_0500.html" title="Keywords for ConFem Input Data" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0006.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0530.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0500.html">Keywords for ConFem Input Data</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Element Section</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="SEC_0520">10.3 Element Section</h2>
+<p><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> <br /><br />The section keyword <tt>*ELEMENT</tt> has as options <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>TYPE=&lt;element type&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> is mandatory and specifies the element type </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>ELSET=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> is mandatory groups a set of elements of same type into a unit with name <tt>&lt;name&gt;</tt> which is reference to by other keywords</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>BONDLAW=&lt;name&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> is optional and indicates the element set as embedded in a continuum and connects it to a bond law specified in the material section (optional)</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> currently implemented for element types <tt>T2D2,T2D3,T3D2,T3D3,B23,B23E,TAX2,BAX21E</tt> only, see the following list </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> automatically transforms the above elements into element types <tt>&lt;type&gt;I</tt> – which cannot be specified explicitly but only implicitly by the <tt>BONDLAW</tt>-option </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> automatically generates corresponding bond elements </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p>of type <tt>Bond2D2</tt> related to <tt>T2D2I,B23I</tt>,</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> of type <tt>Bond2D3</tt> related to <tt>T2D3I,B23EI,B21EI</tt>,</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> of type <tt>Bond3D2</tt> related to <tt>T3D2I</tt> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> of type <tt>Bond3D3</tt> related to <tt>T3D3I</tt></p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> of type <tt>BondAX2</tt> related to <tt>TAX2I</tt> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> of type <tt>BondAX3</tt> related to <tt>TAX3I,BAX21EI</tt> </p></td>
+
+</tr>
+</table><p> <br /><br />The data lines describe the following element data <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>&lt;element number&gt;</tt>, </p></td>
+
+    
+    <td style="text-align:left"><p> <tt>&lt;1st node number&gt;</tt>, </p></td>
+
+    
+    <td style="text-align:left"><p> <tt>&lt;2nd node number&gt;</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> <tt>....</tt></p></td>
+
+</tr>
+</table><p> <br /><br />Values have to be separated by commas. The number of nodes which have to be specified depends on the element type. Nodes have to be specified in a counter clockwise direction sequence regarding plate, slab and shell elements. </p><p>The whole of these lines form an element set which is referred to by the name specified above. The particular element set is closed with a new section keyword. More element sets may be created starting with the section keyword <tt>*ELEMENT</tt>. <br /><br />The following element types can explicitly be specified currently: <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> number </p></td>
+
+    
+    <td style="text-align:left"><p> ndof indices </p></td>
+
+    
+    <td style="text-align:center"><p>embedded</p></td>
+
+    
+    <td style="text-align:left"><p> <i class="sc">Book</i> Section</p></td>
+
+    
+    <td style="text-align:left"><p> internal type index</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> of nodes </p></td>
+
+    
+    <td style="text-align:left"><p> see Section <a href="SEC_0450.html">7</a></p></td>
+
+    
+    <td style="text-align:center"><p>version</p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>T1D2</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 1D truss / bar </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> 2.3 </p></td>
+
+    
+    <td style="text-align:left"><p> 1</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>T2D2</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D truss / bar </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2 </p></td>
+
+    
+    <td style="text-align:center"><p>+</p></td>
+
+    
+    <td style="text-align:left"><p> 2.3 </p></td>
+
+    
+    <td style="text-align:left"><p> 1 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>T2D3</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> enhanced 2D truss / bar </p></td>
+
+    
+    <td style="text-align:left"><p> 2+1 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2 + 1 </p></td>
+
+    
+    <td style="text-align:center"><p>+</p></td>
+
+    
+    <td style="text-align:left"><p> 8.5 </p></td>
+
+    
+    <td style="text-align:left"><p> 1</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>TAX2</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D truss / bar axisymmetric</p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2 </p></td>
+
+    
+    <td style="text-align:center"><p>+</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 5 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>TAX3</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> enhanced 2D truss / bar axisymmetric</p></td>
+
+    
+    <td style="text-align:left"><p> 2+1 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2+1 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 5 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>T3D2</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 3D truss / bar </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,3 </p></td>
+
+    
+    <td style="text-align:center"><p>+</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 1</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>T3D3</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> enhanced 3D truss / bar </p></td>
+
+    
+    <td style="text-align:left"><p> 2+1 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,3 +1 </p></td>
+
+    
+    <td style="text-align:center"><p>+</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 1</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>B21</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D Timoshenko beam </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,6 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> 4.3.1 </p></td>
+
+    
+    <td style="text-align:left"><p> 11 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>B21E</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D enhanced Timoshenko beam </p></td>
+
+    
+    <td style="text-align:left"><p> 3 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,6 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> 4.3.1 </p></td>
+
+    
+    <td style="text-align:left"><p> 11</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>B23</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D Bernoulli beam </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,6 </p></td>
+
+    
+    <td style="text-align:center"><p>+</p></td>
+
+    
+    <td style="text-align:left"><p> 4.3.2 </p></td>
+
+    
+    <td style="text-align:left"><p> 10 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>B23E</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D enhanced Bernoulli beam </p></td>
+
+    
+    <td style="text-align:left"><p> 2+1 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,6 + 1 </p></td>
+
+    
+    <td style="text-align:center"><p>+</p></td>
+
+    
+    <td style="text-align:left"><p> 4.3.2 </p></td>
+
+    
+    <td style="text-align:left"><p> 10 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>BAX21</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> 2D Timoshenko beam axisymmetric </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,6 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 13 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>BAX21E</tt>  </p></td>
+
+    
+    <td style="text-align:left"><p> 2D enhanced Timoshenko beam axisymmetric </p></td>
+
+    
+    <td style="text-align:left"><p> 3 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,6 </p></td>
+
+    
+    <td style="text-align:center"><p>+</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 13 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>BAX23</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D Bernoulli beam axisymmetric </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,6 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 12 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>BAX23E</tt>  </p></td>
+
+    
+    <td style="text-align:left"><p> 2D Bernoulli beam axisymmetric </p></td>
+
+    
+    <td style="text-align:left"><p> 2+1 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,6+1 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> + </p></td>
+
+    
+    <td style="text-align:left"><p> 12 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>CPE3</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D continuum plane strain </p></td>
+
+    
+    <td style="text-align:left"><p> 3 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>CPE4</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D continuum plane strain </p></td>
+
+    
+    <td style="text-align:left"><p> 4 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> 2.3 </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>CPS3</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D continuum plane stress </p></td>
+
+    
+    <td style="text-align:left"><p> 3 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>CPS4</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D continuum plane stress </p></td>
+
+    
+    <td style="text-align:left"><p> 4 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> 2.3 </p></td>
+
+    
+    <td style="text-align:left"><p> 2</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>C3D8</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 3D continuum </p></td>
+
+    
+    <td style="text-align:left"><p> 8 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,3 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 3</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>CAX4</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D continuum axisymmetric </p></td>
+
+    
+    <td style="text-align:left"><p> 4 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 4</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>SB3</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D slab </p></td>
+
+    
+    <td style="text-align:left"><p> 3 </p></td>
+
+    
+    <td style="text-align:left"><p> 3 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> 9.5.2 </p></td>
+
+    
+    <td style="text-align:left"><p> 20 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>SH3</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 3D continuum based shell </p></td>
+
+    
+    <td style="text-align:left"><p> 3 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,3,4,5 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 21 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>SH4</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 3D continuum based shell </p></td>
+
+    
+    <td style="text-align:left"><p> 4 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,3,4,5 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> 10.1-4 </p></td>
+
+    
+    <td style="text-align:left"><p> 21 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>S1D2</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 1D spring </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> 2.3 </p></td>
+
+    
+    <td style="text-align:left"><p> 99 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>S2D6</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> 2D spring </p></td>
+
+    
+    <td style="text-align:left"><p> 2 </p></td>
+
+    
+    <td style="text-align:left"><p> 1,2,6 </p></td>
+
+    
+    <td style="text-align:center"><p>-</p></td>
+
+    
+    <td style="text-align:left"><p> - </p></td>
+
+    
+    <td style="text-align:left"><p> 98 </p></td>
+
+</tr>
+</table><p> <br /><br />The section keyword <tt>*ELEMENT</tt> has no own sub-keywords. </p><h3 id="a0000000015">1D elements</h3>
+<p>1D elements are <tt>T1D2</tt> and <tt>S1D2</tt>. Both allow to provide an additional elective – not mandatory – float value following the element number and the two node numbers spanning these elements. <br /><br /><tt>T1D2</tt> <br />This value specifies a uniaxial tensile strength for the respective element to be used with the material model <tt>*ELASTICLT</tt>, see Section <a href="SEC_0530.html">10.4</a>..In case it is given it overrides the tensile strength specified with the definition of <tt>*ELASTICLT</tt>. Its major purpose is to specify a stochastic field along <tt>T1D2</tt> elements. <br /><br /><tt>S1D2</tt> <br />This value specifies a multiplier for the quantity <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> in a <tt>*SOLID SECTION</tt> definition, see Section <a href="SEC_0510.html">10.5</a>. Its major purpose is to consider the length of <tt>T1D2</tt> elements connected by the respective <tt>S1D2</tt> element to define a bond flow from a circumference definition. The multiplier is chosen with 1 in case it is not explicitly specified. </p><h3 id="a0000000016">Embedded elements</h3>
+<p>Using an option <tt>*BONDLAW=&lt;name&gt;</tt> transforms the respective element into the same element but connected to an underlying continuum of <tt>CP*</tt>-elements by a bond law, see the option definitions and list above. <br /><br />This bond law has to be defined in the <tt>Material</tt> section, see Section <a href="SEC_0530.html">10.4</a>, with the sub-keyword <tt>*BOND</tt> and the same name as defined with the respective options. </p><h3 id="SEC_0542">Enhanced truss elements</h3>
+<p>Enhanced truss / bar elements (<tt>T2D3, T3D3</tt>) include an additional node with a longitudinal displacement degree of freedom only, see <i class="sc">Book 8.5</i>. This improves the behavior when the elements are used as embedded elements with the <tt>BONDLAW</tt>-option. Such an improvement is generally not given with a standalone setup and elements <tt>T2D2, T3D2</tt> are recommended therefore. </p><p>The additional node has to be defined in the input data <tt>*NODE</tt>-section and included as <span class="underbar">3rd</span> node after the 1st node l.h.s and the 2nd node r.h.s. This 3rd node is not shared by other elements and may have coordinates <tt>0.0, 0.0, 0.0</tt>. Anyway, 1st and 2nd node need correct coordinates. </p><h3 id="SEC_0545">Enhanced beam elements</h3>
+<p>Enhanced beam elements (<tt>B21E,B23E</tt>) include an additional node with a longitudinal displacement degree of freedom only, see <i class="sc">Book 4.3.1/2</i>. This improves the interpolation behavior with cracked reinforced concrete cross sections. </p><p>This node has to be defined in the input data <tt>*NODE</tt>-section and included as <span class="underbar">3rd</span> node appended to the 1st node l.h.s and the 2nd node r.h.s. This 3rd node is not shared by other elements and may have coordinates <tt>0.0, 0.0</tt>. Anyway, 1st and 2nd node need correct coordinates. </p><h3 id="a0000000017">Continuum elements with Strong Discontinuity Approach (SDA)</h3>
+<p>Continuum elements (<tt>CP*3,CP*4,C3D8</tt>) are generally – this is also still under construction and may not work seamlessly under all conditions – enabled to regard discontinuous displacement fields according to the Strong Discontinuity Approach, see <i class="sc">Book 7.7</i>. </p><p>This is coupled to a limited tensile strength of materials and currently implemented for material type <tt>*ELASTICLT</tt>, see Section <a href="SEC_0530.html">10.4</a>. Continuum elements are extended to corresponding SDA-elements (<tt>CP*3</tt> to <tt>CP*3S</tt>, <tt>CP*4</tt> to <tt>CP*4S</tt>, <tt>C3D8</tt> to <tt>C3D8S</tt>) when some material specific condition is fulfilled. This introduces – on the element level – additional degrees of freedom for the discontinuity geometry which are connected to a traction-separation law defined by the respective material. The corresponding data are described in Section <a href="SEC_0620.html">12.3</a> </p><h3 id="a0000000018">Shell elements SH4</h3>
+<p>Every shell node has a local 3D right-handed cartesian coordinate system, see Fig. <a href="SEC_0520.html#FIG_21485">4</a> and Section 10.1 of <i class="sc">Book</i>. It is defined through a director more or less normal to the shell surface. A director defines the cross sectional planes which are assumed to remain straight during a deformation. The other two cartesian system directions define the axes of the rotational degrees of freedom. </p><div id="FIG_21485" class="figure"><center>
+<img src="images/img-0007.png" alt="\includegraphics[scale=0.70]{Figures/C8_ShellKinemat1}" style="width:415.79999999999995px; height:290.5px" /> <div class="caption"><b>Figure 4</b>: <span>Nodal shell coordinate system</span></div> </center></div><p> <br /><br />Furthermore, the node directors co-determine the relations between global and local coordinates in shell integration points. In particular – regarding an integration point –, they co-determine the Jacobian matrix and thus the director of the integration point. <br /><br />Another local 3D right-handed cartesian coordinate system is used with each integration point director as local <object data="images/img-0004.svg" style="width:0.667em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0008.png" alt="$n$" style="vertical-align:0px; 
+                                     width:10px; 
+                                     height:7px" class="math gen" /></object>-direction. The local <object data="images/img-0005.svg" style="width:0.667em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0009.png" alt="$\alpha $" style="vertical-align:0px; 
+                                     width:10px; 
+                                     height:7px" class="math gen" /></object>-direction is generally derived by the cross product of the director and the global <object data="images/img-0002.svg" style="width:0.533em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0003.png" alt="$y$" style="vertical-align:-3px; 
+                                     width:8px; 
+                                     height:10px" class="math gen" /></object>-direction, i.e. it aligns to to the global <object data="images/img-0006.svg" style="width:2.333em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0010.png" alt="$x-z$" style="vertical-align:0px; 
+                                     width:35px; 
+                                     height:7px" class="math gen" /></object>-plane. The local <object data="images/img-0007.svg" style="width:0.667em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0011.png" alt="$\beta $" style="vertical-align:-3px; 
+                                     width:10px; 
+                                     height:14px" class="math gen" /></object>-direction is derived from the cross product of the director and and the local <object data="images/img-0005.svg" style="width:0.667em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0009.png" alt="$\alpha $" style="vertical-align:0px; 
+                                     width:10px; 
+                                     height:7px" class="math gen" /></object>-direction. <br /><br />The material behavior is described with respect to this integration point coordinate system, see <i class="sc">Book 10.3</i>. In particular, stress directions and directions of derived normal forces, bending moments and shear forces relate to this coordinate system. The components of <object data="images/img-0008.svg" style="width:3.467em; 
+                                                                height:1.067em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0012.png" alt="$\bf {V}_\alpha ,\, \bf {V}_\beta $" style="vertical-align:-4px; 
+                                     width:52px; 
+                                     height:16px" class="math gen" /></object> – measured in the global system – are appended to the shell element output, see Section <a href="SEC_0620.html">12.3</a>. This indicates how moments, forces and stresses are acting. The orientation angle of a reinforcement layer – acting uniaxially within the shell surface by definition – refers to <object data="images/img-0009.svg" style="width:1.400em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0013.png" alt="$\bf {V}_\alpha $" style="vertical-align:-2px; 
+                                     width:21px; 
+                                     height:13px" class="math gen" /></object>. The orientation angle is measured counterclockwise with the director <object data="images/img-0010.svg" style="width:1.400em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0014.png" alt="$\bf {V}_n$" style="vertical-align:-2px; 
+                                     width:21px; 
+                                     height:13px" class="math gen" /></object> as rotation axis. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="sect0006.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0530.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

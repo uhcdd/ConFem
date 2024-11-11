@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="SEC_0620.html" title="Element output" rel="next" />
+<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="prev" />
+<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0620.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0600.html">Organization of ConFem Output Data</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Overview</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000015">12.1 Overview</h2>
+<p>Files for results are organized as follows. </p><p>Files with a type <tt>nodeout</tt> have superordinate output sections for every point in time defined for output in the <tt>*STEP</tt>-section of <tt>input</tt>-files. Every node has a line within every output section with data for coordinates, values for nodal degrees of freedom and internal nodal forces. Types of nodal degrees of freedom an nodal forces depend on the element type, i.e. are different for, e.g., beam elements and plate elements. </p><p>Files with a type <tt>elemout</tt> also have superordinate output sections for point in time defined for output in the <tt>*STEP</tt>-section of <tt>input</tt>-files. Subsections correspond to every element. Every element integration point has a line within every element subsection with data for coordinates and further values like, e.g. generalized strains and stresses and further values depending on the element and material type. </p><p>Files with a type <tt>timeout</tt> have a line for all computed time increment with values of every nodal degree of freedom as is defined in a file of type <tt>opt</tt>. </p><p>Further details remain to be added. <br /><br /></p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0620.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

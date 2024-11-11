@@ -168,15 +168,9 @@ Element data written 1.000000
 Nodal data written 1.000000
 Restart data written 1.000000
 last iteration data
-   31, 0.7750,    4
-   32, 0.8000,    4
-   33, 0.8250,    3
-   34, 0.8500,    3
-   35, 0.8750,    3
-   36, 0.9000,    3
    37, 0.9250,    3
    38, 0.9500,    3
    39, 0.9750,    3
    40, 1.0000,    3
 last timeout data
-total comp time 6 seconds
+total comp time 7 seconds

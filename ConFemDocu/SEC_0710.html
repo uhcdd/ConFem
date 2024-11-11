@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="sect0013.html" title="Material Types" rel="next" />
+<link href="SEC_0700.html" title="Development" rel="prev" />
+<link href="SEC_0700.html" title="Development" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0700.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0700.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0700.html">Development</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Finite Elements Types</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="SEC_0710">14.1 Finite Elements Types</h2>
+<p><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> <a href="https://www.concrete-fem.com">https://www.concrete-fem.com</a> <br /><br />Finite Elements types are coded as classes in the module <tt>X-FemElem.py</tt>. This class has the class <tt>Element</tt> as base class. A particular finite-element-type class (<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> <tt>ElClass</tt>) includes a constructor </p><ul class="itemize">
+<li><p><tt>__init__(self, Label, SetLabel, InzList, MatName, NoList, SolSecDic, StateV, NData)</tt> </p><p>to initialize an instance of <tt>ElClass</tt> called in the module <tt>X-FemInOut.py::ReadInputFile</tt>. This generally – may deviate for some element types – includes the data <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>self</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> reference to the particular instance (listed only for defining, <span class="underbar">not</span> for calling) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>Label</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> element number – may be subject to renumbering for internal use </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>SetLabel</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> string for element set </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>InzList</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> array of node numbers spanning element</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>MatName</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> string for material type as index for material dictionary </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>SolSecDic</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> string for, e.g., solid section as index for, e.g. solid section dictionary </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> The values of the preceeding parameters are defined in the input data set. </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>NoList</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> list of all node instances </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> The value is automatically derived from an already generated list. </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>StateV</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> number of state variables for this material type </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>NData</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> number of data, e.g. stresses, strains, for output </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> The values are automatically derived from the specifics of the assigned material type. </p></td>
+
+</tr>
+</table><p> <br /><br />To define characteristic element properties – independent of the data above for a particular discretization – this constructor includes a constructor for an element instance </p></li><li><p><tt>Element.__init__(self, TypeVal,nNodVal,DofEVal,nFieVal, IntTVal,nIntVal,nIntLVal, DofTVal,DofNVal, dimVal,NLGeomIVal):</tt> <br /><br />connected to the instance of <tt>ElClass</tt> with the parameters <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>self</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> reference to the particular instance (listed only for defining, <span class="underbar">not</span> for calling) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>TypeVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> string for element type </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>nNodVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> number of nodes </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>DofEVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> number of dofs for whole element </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>nFieVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> degrees of freedom for external loading </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>IntTVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Integration type 0: 1D Gaussian, 1: 2D Gaussian, 2: 3D Gaussian, 3: 2D triangular, 4: shells </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>nIntVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> integration order (<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> index for points, weights = nInt-1) </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>nIntLVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> total number of integration points </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>DofTVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> tuple, type of dof for every node of this element </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 1 <object data="images/img-0277.svg" style="width:2.467em; 
+                                                                height:0.733em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0281.png" alt="$\rightarrow u_x$" style="vertical-align:-2px; 
+                                     width:37px; 
+                                     height:11px" class="math gen" /></object>, 2<object data="images/img-0278.svg" style="width:2.467em; 
+                                                                height:0.867em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0282.png" alt="$\rightarrow u_y$" style="vertical-align:-4px; 
+                                     width:37px; 
+                                     height:13px" class="math gen" /></object>, 3<object data="images/img-0279.svg" style="width:2.400em; 
+                                                                height:0.733em; 
+                                                                vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0283.png" alt="$\rightarrow u_z$" style="vertical-align:-2px; 
+                                     width:36px; 
+                                     height:11px" class="math gen" /></object>, 4<object data="images/img-0280.svg" style="width:2em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0284.png" alt="$\rightarrow \phi $" style="vertical-align:-3px; 
+                                     width:30px; 
+                                     height:14px" class="math gen" /></object> around x, 5<object data="images/img-0280.svg" style="width:2em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0284.png" alt="$\rightarrow \phi $" style="vertical-align:-3px; 
+                                     width:30px; 
+                                     height:14px" class="math gen" /></object> around y, 6<object data="images/img-0280.svg" style="width:2em; 
+                                                                height:0.933em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0284.png" alt="$\rightarrow \phi $" style="vertical-align:-3px; 
+                                     width:30px; 
+                                     height:14px" class="math gen" /></object> around z, 7<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> gradient field</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>DofNVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> tuple, number of dofs (<object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> len(DofT[i]) ) for every node of this element </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>dimVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> element type index </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 1: 1D uniaxial</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 2: 2D plate</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 3: 3D volume</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 10: Bernoulli beam</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 11: Timoshenko beam</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 20: Kirchhoff slab </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 21: continuum based shell </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 98: 2D spring with translation and rotation dofs</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> 99: 1D uniaxial spring</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>NLGeomIVal</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Flag whether large deformations are already implemented for this element </p></td>
+
+</tr>
+</table><p> <br /><br />Furthermore, the <tt>Element</tt>-class should also provide methods which are shared by some or all element types. </p></li>
+</ul><p> Data of instances of <tt>ElClass</tt> are read in the module <tt>X-FemInOut.py</tt> in the procedure <tt>ReadInputFile</tt>. Two blocks are concerned: </p><ul class="itemize">
+<li><p>block <tt>key ELEMENT</tt> </p></li><li><p>block <tt>data ELEMENT</tt> </p></li>
+</ul><p> Some caution has to followed regarding beam elements and spring elements, see block <tt>key STEP</tt>. <br /><br />To interface <tt>ElClass</tt> has as methods </p><ul class="itemize">
+<li><p><tt>Ini2(self, NoList)</tt> <br />Post-initialization of element data </p></li><li><p><tt>FormX(self, r, s, t)</tt> <br />shape function / interpolation of coordinates </p></li><li><p><tt>FormN(self, r, s)</tt> <br />shape functions for displacement degrees of freedom </p></li><li><p><tt>FormB(self, r, s, t, NLg)</tt> <br />shape functions derivatives for displacement degrees of freedom </p></li><li><p><tt>FormT(self, r, s, t)</tt> <br />shape function / interpolation of temperatures (might be different to coordinate interpolation) </p></li><li><p><tt>JacoD(self, r, s, t)</tt> <br />compute Jacobian </p></li>
+</ul><p> Result data are prepared in the module <tt>X-FemInOut.py</tt>. Element specifics data have to be regarded in the procedure <tt>ScaleF</tt>. <br /><br />The material type connected to the <tt>ElClass</tt>-instance has to match to the generalized strains and stresses provided by <tt>ElClass</tt>. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.600em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:9px" class="math gen" /></object> <a href="https://www.concrete-fem.com">https://www.concrete-fem.com</a> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0700.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0700.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0013.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>

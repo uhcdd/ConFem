@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta name="generator" content="plasTeX" />
+<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+<title></title>
+
+<link href="sect0006.html" title="Node Section" rel="next" />
+<link href="SEC_0500.html" title="Keywords for ConFem Input Data" rel="prev" />
+<link href="SEC_0500.html" title="Keywords for ConFem Input Data" rel="up" />
+<link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0500.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0006.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+<div class="breadcrumbs">
+<span>
+<span>
+<a href="index.html">ConFem Documentation</a> <b>:</b>
+</span>
+
+</span><span>
+<span>
+<a href="SEC_0500.html">Keywords for ConFem Input Data</a> <b>:</b>
+</span>
+
+</span><span>
+
+<span>
+<b class="current">Overview</b>
+</span>
+</span>
+<hr />
+</div>
+
+<div><h2 id="a0000000006">10.1 Overview</h2>
+<p><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> <br /><br />Files of type <tt>input</tt> may start with a <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>*HEADING</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> followed by a comments in new lines, e.g. a short problem description </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> comments should not include a *-sign as this is reserved for key words </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> an arbitrary number of lines may follow </p></td>
+
+</tr>
+</table><p> <br /><br />Furthermore, such files are organized through <em>sections</em>. Every section starts with a <em>section keyword</em> which may be followed by <em>options</em> in the same line. Options and keywords are generally separated by commas. </p><p>The following section keywords are currently used: <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> followed by </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*NODE</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Nodal data </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*SOLID SECTION</tt>   </p></td>
+
+    
+    <td style="text-align:left"><p> Definitions for bars, trusses, plates with reference </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> to material types and element types </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*BEAM SECTION</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Definitions for beam structures with reference </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> to material types and element types </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*SHELL SECTION</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Definitions for slab and shell structures with reference </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> to material types and element types </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*MATERIAL</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Material types and their parameters </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*ELEMENT</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Element data </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*BEAM REINF</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Reinforcement data </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*STEP</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> Definitions for type of simulation, the incrementally </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> iterative procedure to be used, boundary conditions, </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> loading and output intervals </p></td>
+
+</tr>
+</table><p> <br /><br />A section keyword starts section data until the next section keyword is set. </p><ul class="itemize">
+<li><p>A section keyword may have options in the <i class="itshape">same (mandatory)</i> line. </p></li><li><p>A section keyword is followed by <em>data lines</em> or further lines with (optional) <em>sub-keywords</em>. Sub-keywords in further lines start with a <tt>*</tt>. Sub-keywords may also be followed by data lines. </p></li>
+</ul><p> A section keyword <tt>*STEP</tt> marks a <em>simulation step</em>. Steps have to be distinguished from time increments. </p><ul class="itemize">
+<li><p>A step corresponds to a period with the application of a particular simulation type on the model. A step comprises a sequence of time increments. </p></li><li><p>A whole simulation must have at least one step but may consist of a sequence of steps, e.g. a step with a dynamic simulation may follow a quasistatic simulation whereby the final state of the former defines the initial state of the latter. </p></li>
+</ul><p> A line with leading <tt>**</tt> may be used as comment line and is ignored. Leading blanks, intermediate blanks and blank lines are generally ignored. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> </p></div>
+
+
+
+
+
+<div class="navigation">
+<table cellspacing="2" cellpadding="0" width="100%">
+<tr>
+<td><a href="SEC_0500.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+
+<td><a href="SEC_0500.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+
+<td><a href="sect0006.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+
+<td class="navtitle" align="center">ConFem Documentation</td>
+<td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
+
+
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
+</tr>
+</table>
+</div>
+
+</body>
+</html>
