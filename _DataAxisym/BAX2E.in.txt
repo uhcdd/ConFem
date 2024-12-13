@@ -314,8 +314,12 @@ TAX3
 *ELASTIC
 100000.,0.0,0.0
 **---------------------------------------------------------------------  
-*BEAM SECTION, SECTION=RECT, ELSET=EL1, MATERIAL=MATEL
- 1.0, 0.100
+***BEAM SECTION, SECTION=RECT, ELSET=EL1, MATERIAL=MATEL
+** 1.0, 0.100
+*BEAM SECTION, SECTION=CIRCLE, ELSET=EL1, MATERIAL=MATEL, nrebar=10
+ .1128379167
+***BEAM SECTION, SECTION=CIRCLE, ELSET=EL1, MATERIAL=MATEL, nrebar=1
+**.3568248232 
 **---------------------------------------------------------------------  
 ***********************************************************************  
 *STEP

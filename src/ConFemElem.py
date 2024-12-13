@@ -155,26 +155,14 @@ class Element(object):
         self.SDim = SpaceDimVal                                     # dimension in space
         self.Label= Label                                           # element number in input
         self.Set  = elSet                                           # label of corresponding element set
-        try:    self.MatN  = MatName.upper()                                # name of default material of element
+        try:    self.MatN  = MatName.upper()                        # name of default material of element
         except: pass
         self.PlSt = None
         self.Active = True
-        self.TensStiff = False                                      # flag for tension stiffening
-        self.nRebarEl = 1.                                            # is adressed for SOLID SECTION (embedded truss elements) and BEAM SECTION, CIRCLE (embedded beam elements)
-#        try:
-#            self.Data = zeros((nIntLVal,NData),dtype=float)             # ! actually used value may be subject to change in case of individual ip materials !
-#            self.DataP= zeros((nIntLVal,NData),dtype=float)             # ! currently only required for "mises" !
-#        except:
-#            pass
-#        self.StateVar = []                                          # default no state variables
-#        self.StateUpdate = False
-#        if StateV!=None:
-#            self.StateVar = zeros((nIntLVal,StateV), dtype=float)
-#            self.StateVarN= zeros((nIntLVal,StateV), dtype=float)
-#            self.StateUpdate = True
-
-#        self.Nodisp = zeros(len(SpaceDimVal*InzList),dtype=float)   # !!! see ElemDimData for substitute
-        if Label>Element.LastLabel: Element.LastLabel = Label  
+        self.TensStiff = False                                       # flag for tension stiffening
+        self.nRebarEl  = 1.                                          # is adressed for SOLID SECTION (embedded truss elements) and BEAM SECTION, CIRCLE (embedded beam elements)
+        self.FlexBonded= False                                       # embedded truss and beam elements may have rigig bond with shared nodes
+        if Label>Element.LastLabel: Element.LastLabel = Label
     
     def InitData(self, nIntLVal, NData, StateV, RanDat, xIp=[], yIp=[]):    # is called in post-phase of InOut::DataInput -- might be problem for elements which are created on the fly
         self.Data = zeros((nIntLVal, NData),dtype=float)                    # ??? ! actually used value may be subject to change in case of individual ip materials !
@@ -307,9 +295,6 @@ class Element(object):
         self.Geom = zeros( (2+nRe,6), dtype=double)                 # all geometry data for concrete and reinforcement, tension stiffening
         self.Geom[0,0] = 1.                                         # Jacobian for integration set in Ini2
         self.Geom[1,0] = 1                                          # for compatibility reasons
-#        if self.Type in ["BAX23"]:
-#            if BeamSec.Type != "RECT":
-#                raise NameError("ConFemElem::IniBeam: option SECTION=RECT allowed for element type BAX23 only")
         if self.Type in ["B23I","B23EI","BAX21EI","BAX23","BAX23EI"]:
             if BeamSec.Type != "CIRCLE":
                 raise NameError("ConFemElem::IniBeam: option SECTION=CIRCULAR allowed for element types B23I, B23EI, BAX21EI, BAX23EI only",self.Type)
@@ -317,7 +302,9 @@ class Element(object):
             bStiff = 1.                                             # used in the following
         else:
             bStiff = BeamSec.bStiff                                 # to modify bending stiffness to consider variations of cross section shape
-        #
+        if not self.FlexBonded:                                     #
+            self.nRebarEl = BeamSec.nRebar                          # nrebar introduced also with TxDxI for flexible bonded elements
+        #                                                             nrebar should include thickness of underlying continuum with this usage -- 1 in case of axisymmetry
         if BeamSec.Type=="POLYLINE":
             self.CrossSecType = "POLYLINE"
             self.CrSecPolyL = BeamSec.Poly                          # Poly holds geometry data
@@ -815,7 +802,8 @@ class T3D3(T3D2):                                  # 3D truss 2 nodes
 # embedded truss elements -- created with BONDLAW-option  for elements TxDx
 class TxDxI(object):
     def __init__(self, NoList):
-        self.BondElInd = zeros((self.nIntL), dtype=int)
+        self.BondElInd  = zeros((self.nIntL), dtype=int)
+        self.FlexBonded = True
     # determine CxD elements where TxDxI integration points lie in and create bond elements
     def CreateBond(self, ElList,NodeList,SecDict, CoorTree_,NoCoLitoNoLi, MatList, NoLabToNoInd,NoIndToCMInd): # called by ["T2D2I","T2D3I","T3D2I","T3D3I","B23I","B23EI"]
         iself = FindIndexByLabel( ElList, self.Label)                       # index in element list

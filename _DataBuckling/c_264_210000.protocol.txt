@@ -10,6 +10,7 @@ Nodal data written 1.000000
 Restart data written 1.000000
 last iteration data
     1, 1.0000,    1
+reached time 1.0000
 1 step starts, solution type NR
 Eigenvalue analysis: Matrices have been computed
 Eigenvalue analysis: kinematic boundary conditions considered
@@ -114,38 +115,12 @@ iter 96, residual 0.000010
 iter 97, residual 0.000009
 iter 98, residual 0.000008
 iter 99, residual 0.000008
-iter 100, residual 0.000007
-iter 101, residual 0.000006
-iter 102, residual 0.000006
-iter 103, residual 0.000006
-iter 104, residual 0.000005
-iter 105, residual 0.000005
-iter 106, residual 0.000004
-iter 107, residual 0.000004
-iter 108, residual 0.000004
-iter 109, residual 0.000003
-iter 110, residual 0.000003
-iter 111, residual 0.000003
-iter 112, residual 0.000003
-iter 113, residual 0.000002
-iter 114, residual 0.000002
-iter 115, residual 0.000002
-iter 116, residual 0.000002
-iter 117, residual 0.000002
-iter 118, residual 0.000002
-iter 119, residual 0.000002
-iter 120, residual 0.000001
-iter 121, residual 0.000001
-iter 122, residual 0.000001
-iter 123, residual 0.000001
-iter 124, residual 0.000001
-eigenform 0, value 107.675545, rel. acc 2.282162e-11
-eigenform 1, value 110.779635, rel. acc 8.481378e-10
-eigenform 2, value 113.467828, rel. acc 1.691782e-08
-eigenform 3, value 114.883681, rel. acc 1.917335e-07
-eigenform 4, value 117.012663, rel. acc 9.088415e-07
+eigenform 0, value 107.675545, rel. acc 1.354636e-09
+eigenform 1, value 110.779635, rel. acc 2.473735e-08
+eigenform 2, value 113.467828, rel. acc 2.722736e-07
+eigenform 3, value 114.883681, rel. acc 2.246881e-06
+eigenform 4, value 117.012663, rel. acc 6.723528e-06
 Eigenvalue analysis: finished
-Restart data written 1.000000
 last iteration data
-    1, 1.0000,    0
-total comp time 7 seconds
+reached time 1.0000
+total comp time 6 seconds

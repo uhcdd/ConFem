@@ -5,9 +5,9 @@
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title></title>
 
-<link href="SEC_0620.html" title="Element output" rel="next" />
-<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="prev" />
-<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="up" />
+
+<link href="sect0013.html" title="Data Structured as Entities" rel="prev" />
+<link href="sect0012.html" title="Plotting" rel="up" />
 <link rel="stylesheet" href="styles/styles.css" />
 </head>
 <body>
@@ -15,12 +15,12 @@
 <div class="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
 <tr>
-<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+<td><a href="sect0013.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+<td><a href="sect0012.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0620.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
 
@@ -39,20 +39,216 @@
 
 </span><span>
 <span>
-<a href="SEC_0600.html">Organization of ConFem Output Data</a> <b>:</b>
+<a href="sect0012.html">Plotting</a> <b>:</b>
 </span>
 
 </span><span>
 
 <span>
-<b class="current">Overview</b>
+<b class="current">Entity Specific Plotting</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000015">12.1 Overview</h2>
-<p>Files for results are organized as follows. </p><p>Files with a type <tt>nodeout</tt> have superordinate output sections for every point in time defined for output in the <tt>*STEP</tt>-section of <tt>input</tt>-files. Every node has a line within every output section with data for coordinates, values for nodal degrees of freedom and internal nodal forces. Types of nodal degrees of freedom an nodal forces depend on the element type, i.e. are different for, e.g., beam elements and plate elements. </p><p>Files with a type <tt>elemout</tt> also have superordinate output sections for point in time defined for output in the <tt>*STEP</tt>-section of <tt>input</tt>-files. Subsections correspond to every element. Every element integration point has a line within every element subsection with data for coordinates and further values like, e.g. generalized strains and stresses and further values depending on the element and material type. </p><p>Files with a type <tt>timeout</tt> have a line for all computed time increment with values of every nodal degree of freedom as is defined in a file of type <tt>opt</tt>. </p><p>Further details remain to be added. <br /><br /></p></div>
+<div><h2 id="a0000000015">13.2 Entity Specific Plotting</h2>
+<ul class="itemize">
+<li><p>General rules </p><ul class="itemize">
+<li><p>Node entities are plotted with nodal displacements. </p></li><li><p>Line element entities are divided into a sequence of plots for each sub-entity. Each plot includes all plotting times. Plotting is in the x-y plane. </p></li><li><p>A 2D element entity (sub-entity for <tt>SB3</tt>) gets its own plot, i.e. each plotting time has its own plot. Plotting is in the x-y plane. </p></li><li><p>A 3D element entity like bending moments and normal/bending forces is plotted as 2D-projections onto the <object data="images/img-0282.svg" style="width:2.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0286.png" alt="$x-y$" style="vertical-align:-3px; 
+                                     width:35px; 
+                                     height:10px" class="math gen" /></object>-plane which is generally assumed as grounding plane. </p></li><li><p>A 3D element sub-entity gets its own plot, i.e. plotting time has its own plot. Plotting is a x-y-z isometric view. This has to be activated by a plot option keyword. </p></li>
+</ul></li><li><p>Scaling </p><ul class="itemize">
+<li><p>A default scaling is computed automatically for all entities but may be superposed with individual scaling factors, see keywords for plot options below </p></li>
+</ul></li><li><p>History </p><ul class="itemize">
+<li><p>In case the option <tt>writeNodes</tt> is defined in <tt>&lt;name&gt;.opt.txt</tt>, see Section <a href="SEC_0473.html">11</a>, the respective data pairs are plotted in x-y for all computed time instants. </p></li>
+</ul></li><li><p>Plot options </p><p>Details of plotting are ruled with an <i class="itshape">optional</i> file <tt>&lt;name&gt;.plt.txt</tt> providing keywords and – separated with comma from keywords – plotting parameters, if required. </p><p>Default values are taken if this file does not exist or if keywords with respect to a plotting item are not specified. </p><ul class="itemize">
+<li><p>Keywords <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>*PlotTimes,</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> sequence of float numbers separated by comma </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> time instances to plot – should be a subset of time instants specified for data output, see Section <a href="SEC_0600.html">12</a> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> default is all specified for output data, see Sections <a href="SEC_0620.html">12.3</a>, <a href="SEC_0640.html">12.4</a> </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*ScaleStress,</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> sequence of of pairs of a string and a float number </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> string is name of element set, see Section <a href="SEC_0500.html">10</a>, number is corresponding superposed scaling factor </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> may be repeated in following lines to indicate more scaling pairs</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> default is 1.0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*ScaleDispl,</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> float number </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> superposed scaling of default scaling for the displacement of node entities</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> default is 1.0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*ScaleDispl2D,</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> float number </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> scaling of deformed structure for 2D element entities</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> default is 0.0 </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*NoPostNode</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> skips plotting of node entities – default is plotting</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*NoPostElem1D</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> skips plotting of 1D element sub-entities – default is plotting </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*NoPostElem2D</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> skips plotting of stresses of 2D element entities – default is plotting </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*PostElem3D</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> activates plotting of node entities of 3D elements and 3D element sub-entities – default is skipping </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left"><p> <tt>*PostElem2DContour,</tt> </p></td>
+
+    
+    <td style="text-align:left"><p> plotting of 2D-contours, sequence of 5 items:</p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> element set label, label for data, index for float data (0 is starter for 1st float) for data position in <tt>*.elemout_.txt</tt>, </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> maximum edge length for triangulation (for concave domains), indicator ’H’ for histogram or -</p></td>
+
+</tr>
+</table><p> <br /></p></li>
+</ul></li><li><p>Plotting with module <tt>ConPlaD</tt> is slightly different. </p><ul class="itemize">
+<li><p>This works for plates (<tt>CPS4,CPE4,CPS3,CPE3</tt>) and slabs (<tt>SB3</tt>) only. </p></li><li><p>Plotting is always automatically performed following a <tt>ConPlaD</tt>-computation. </p></li><li><p>Plotting of entities or sub-entities is superposed with digits indicating amount of required reinforcement. </p><ul class="itemize">
+<li><p>Unit is reinforcement ratio in % for plates and reinforcement cross section in <object data="images/img-0283.svg" style="width:3.600em; 
+                                                                height:1.200em; 
+                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0287.png" alt="$\mathrm{[cm^2/m]}$" style="vertical-align:-4px; 
+                                     width:54px; 
+                                     height:18px" class="math gen" /></object> for slabs. </p></li><li><p>Horizontal digits indicate values for <object data="images/img-0061.svg" style="width:0.533em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0065.png" alt="$x$" style="vertical-align:0px; 
+                                     width:8px; 
+                                     height:7px" class="math gen" /></object>-direction, vertical digits for <object data="images/img-0002.svg" style="width:0.533em; 
+                                                                height:0.667em; 
+                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0003.png" alt="$y$" style="vertical-align:-3px; 
+                                     width:8px; 
+                                     height:10px" class="math gen" /></object>-direction. </p></li>
+</ul></li>
+</ul></li>
+</ul><p> <object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> </p></div>
 
 
 
@@ -61,12 +257,12 @@
 <div class="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
 <tr>
-<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+<td><a href="sect0013.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+<td><a href="sect0012.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0620.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
+<td><img border="0" alt="" src="icons/blank.gif" width="32" height="32" /></td>
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
 

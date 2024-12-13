@@ -5,9 +5,9 @@
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title></title>
 
-<link href="sect0012.html" title="Data Structured as Entities" rel="next" />
-<link href="SEC_5641.html" title="Ideal Plastic Design Output" rel="prev" />
-<link href="index.html" title="ConFem Documentation" rel="up" />
+<link href="SEC_0615.html" title="Execution Report" rel="next" />
+<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="prev" />
+<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="up" />
 <link rel="stylesheet" href="styles/styles.css" />
 </head>
 <body>
@@ -15,11 +15,11 @@
 <div class="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
 <tr>
-<td><a href="SEC_5641.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
 
-<td><a href="index.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="sect0012.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0615.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
@@ -38,44 +38,34 @@
 </span>
 
 </span><span>
+<span>
+<a href="SEC_0600.html">Organization of ConFem Output Data</a> <b>:</b>
+</span>
+
+</span><span>
 
 <span>
-<b class="current">Plotting</b>
+<b class="current">Overview</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h1 id="a0000000012">13 Plotting</h1>
-<p><object data="images/img-0001.svg" style="width:1em; 
-                                                                height:0.533em; 
-                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
-                                     width:15px; 
-                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> <br /></p></div>
-
-<div class="contents section-contents"><!--<strong>Subsections</strong>-->
-<ul>
-<li><a href="sect0012.html">13.1 Data Structured as Entities</a>
-   
-</li><li><a href="sect0013.html">13.2 Entity Specific Plotting</a>
-   
-</li>
+<div><h2 id="a0000000012">12.1 Overview</h2>
+<p>Files for results are organized as follows. </p><p>Files with a type <tt>protocol</tt> report about every iteration of every instant of time of every simulation step. </p><p>Files with a type <tt>nodeout</tt> have output sections for instants of time as defined by the step sub-keyword <tt>*NODE FILE</tt>, see Section <a href="SEC_0570.html">10.9</a>. Every node has a line within every output section with data for coordinates, values for nodal degrees of freedom and internal nodal forces. Types of nodal degrees of freedom an nodal forces depend on the element type, i.e. are different for, e.g., beam elements and plate elements. </p><p>Files with a type <tt>elemout</tt> also have output sections for instants of time as defined by the step sub-keyword <tt>*EL FILE</tt>, see Section <a href="SEC_0570.html">10.9</a>. Output sub-sections correspond to every element. Every element integration point has a line within every element output sub-subsection with data for coordinates and further values like, e.g. generalized strains and stresses and further values depending on the element and material type. </p><p>Files with a type <tt>timeout</tt> have a line for all computed instants of time with values of every nodal degree of freedom as is defined in a file of type <tt>opt</tt>, see Section <a href="SEC_0475.html">11.1</a>. </p></div>
 
 
-
-</ul>
-</div>
 
 
 
 <div class="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
 <tr>
-<td><a href="SEC_5641.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
 
-<td><a href="index.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="sect0012.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0615.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>

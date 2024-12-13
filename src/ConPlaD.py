@@ -357,7 +357,7 @@ class ConPlaD:
         else:                   raise NameError("ConPlaD: unknown elset", KeyElset)
         if pth.isfile(Name+".opt.txt"):                                     # read options, mandatory for reinforcement design
             f4=open( Name+".opt.txt", 'r')
-            WrNodes, LineS, ReDes, MaxType, _ = ReadOptionsFile(f4, NodeList,NoLabToNoInd,NoIndToCMInd)
+            WrNodes, ReDes, MaxType, _,_,_,_,_ = ReadOptionsFile(f4, NodeList,NoLabToNoInd,NoIndToCMInd)
             f4.close()
             if not (len(ReDes)==7): raise NameError("ConPlaD: reinforcement design parameters missing") 
         else: 

@@ -10,4 +10,5 @@ Nodal data written 1.000000
 Restart data written 1.000000
 last iteration data
     1, 1.0000,    1
+reached time 1.0000
 total comp time 3 seconds

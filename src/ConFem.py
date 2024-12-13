@@ -19,6 +19,7 @@ import scipy.spatial as spatial
 #import sys 
 import pickle
 from numpy import mean
+import copy
 
 from ConFemBasics import *
 import ConFemMat
@@ -37,23 +38,39 @@ def CheckInz(ElemList, Label):
         if el.Label==Label:
             print("CheckInz ",el.Label,el.Type,el.Inzi)
 
-def CheckStability( q0,q1, N,sf):                                           # q0,q1 are lists from queues
+#def CheckStability_( q0,q1, N,sfL, sfS):                                           # q0,q1 are lists from queues
+#    StableFlag = True
+#    if len(q0) >= N:
+#        c0 = q0[0]*q0[-1]>=0 and q1[0]*q1[-1]>=0                            # condition no change sign
+#        c1 = abs(q1[-1])>sfL*abs(q1[-2]) or abs(q0[-1])>sfL*abs(q0[-2])     # condition rapid change
+#        if c0 or c1:
+#            q0_ = q0[0:-1]
+#            q1_ = q1[0:-1]
+#            if abs(q1[-1])>sfL*abs(mean(q1_)) or abs(q0[-1])>sfL*abs(mean(q0_)) \
+#                    or abs(q1[-1])<sfS*abs(mean(q1_)) or abs(q0[-1])<sfS*abs(mean(q0_)):  # stability criteria
+#                StableFlag = False
+#    return StableFlag
+
+def CheckStability( q0,q1, N,sf):                             # q0,q1 are lists from queues
     StableFlag = True
     if len(q0) >= N:
-        c0 = q0[0]*q0[-1]>=0 and q1[0]*q1[-1]>=0                            # condition no change sign
-        c1 = abs(q1[-1])>sf*abs(q1[-2]) or abs(q0[-1])>sf*abs(q0[-2])       # condition rapid change
-        if c0 or c1:
-            q0_ = q0[0:-1]
-            q1_ = q1[0:-1]
-            if abs(q1[-1])>sf*abs(mean(q1_)) or abs(q0[-1])>sf*abs(mean(q0_)):  # stability criteria
-                StableFlag = False
+        q0e  = q0[-4] - 3*q0[-3] + 3*q0[-2]                                 # requires N>=4 -- quadratic  extrapolation see QuadraticExtrapolation.mws
+        q1e  = q1[-4] - 3*q1[-3] + 3*q1[-2]
+        del0 = abs(mean(q0[-4:-2]))
+        del1 = abs(mean(q1[-4:-2]))
+        c0 = q0[-1] > q0e + sf*del0
+        c1 = q0[-1] < q0e - sf*del0
+        c2 = q1[-1] > q1e + sf * del1
+        c3 = q1[-1] < q1e - sf * del1
+        if c0 or c1 or c2 or c3:
+            StableFlag = False
     return StableFlag
 
 class ConFem:
     def __init__(self):
         pass
 #    @profile
-    def Run(self, Name, LogName, PloF, LinAlgFlag, Restart, ResType, EigenvalPar, ElPlotTimes, StressStrainOut, VTK):
+    def Run(self, Name, LogName, PloF, LinAlgFlag, Restart, ResType, ElPlotTimes, StressStrainOut, VTK):
         StressStrainOutNames = SelOutIni( Name, ".elemout.", StressStrainOut) # initialize files for single element output
         DirName, FilName = DirFilFromName(Name)
         if Restart:
@@ -63,12 +80,13 @@ class ConFem:
                 VecU=pickle.load(fd);VecC=pickle.load(fd);VecI=pickle.load(fd);VecP=pickle.load(fd);VecP0=pickle.load(fd);VecP0old=pickle.load(fd);VecBold=pickle.load(fd);VecT=pickle.load(fd);VecS=pickle.load(fd);\
                 VeaU=pickle.load(fd);VevU=pickle.load(fd);VeaC=pickle.load(fd);VevC=pickle.load(fd);VecY=pickle.load(fd);BCIn=pickle.load(fd);BCIi=pickle.load(fd);Time=pickle.load(fd);TimeOld=pickle.load(fd);\
                 TimeEl=pickle.load(fd);TimeNo=pickle.load(fd);TimeS=pickle.load(fd);StepCounter=pickle.load(fd);                     Skyline=pickle.load(fd);SDiag=pickle.load(fd);SLen=pickle.load(fd);SymSys=pickle.load(fd);\
-                NoLabToNoInd=pickle.load(fd);NoIndToCMInd=pickle.load(fd);ContinuumNodes=pickle.load(fd);ConNoToNoLi=pickle.load(fd);SecDic=pickle.load(fd);LinAlgFlag=pickle.load(fd);ResultTypes=pickle.load(fd);Header=pickle.load(fd);
+                NoLabToNoInd=pickle.load(fd);NoIndToCMInd=pickle.load(fd);ContinuumNodes=pickle.load(fd);ConNoToNoLi=pickle.load(fd);SecDic=pickle.load(fd);LinAlgFlag=pickle.load(fd);ResultTypes=pickle.load(fd);Header=pickle.load(fd); \
+                StepRestart=pickle.load(fd);MaxType =pickle.load(fd);MaxEquiIter=pickle.load(fd);StabSys=pickle.load(fd);StabTolF=pickle.load(fd);SoftSys=pickle.load(fd);SoftRed=pickle.load(fd);
             fd.close()
             f6=open( Name+".protocol.txt", 'a')                             #
             Echo(f"\nConFem restart {Name:s}", f6)
             f1=open( Name+".in.txt", 'r')
-            MatList, StepList = DataInput(f1, f6, Restart)              # read input file 
+            MatList, StepList = DataInput(f1, f6, Restart)              # read input file ?????
             f1.close()
             f2=open( Name+".elemout.txt", 'a')                              #
             f3=open( Name+".nodeout.txt", 'a')                              #
@@ -106,15 +124,6 @@ class ConFem:
             if pth.exists(NameElemOut_): os.remove(NameElemOut_)
             if pth.exists(NameNodeOut_): os.remove(NameNodeOut_)
             f3=open( Name+".nodeout.txt", 'w')
-            WrNodes, LineS, MaxEquiIter_ = None, None, None
-            MaxType = [] 
-            f5, f7 = None, None
-            if pth.isfile(Name+".opt.txt"):                                 # read options file if there is any
-                f4=open( Name+".opt.txt", 'r')
-                WrNodes, LineS, _, MaxType, MaxEquiIter_ = ReadOptionsFile(f4, NodeList,NoLabToNoInd,NoIndToCMInd)
-                f4.close()
-                f5=open( Name+".timeout.txt", 'w')
-                if len(MaxType)>0: f7=open( Name+".elemmax.txt", 'w')
             for i in list(MatList.values()):                                # check, whether particular material types are in system
                 ElasticLTFlag = ( isinstance(i,ConFemMat.ElasticLT) or isinstance( i.Conc, ConFemMat.ElasticLT)) and i.Used
                 if ElasticLTFlag: break
@@ -140,7 +149,22 @@ class ConFem:
             TimeOld = 0.
             SymSys = IsSymSys( MatList )                                    # if there is at least one un-symmetric material the whole system is un-symmetric
             StepCounter = 0                                                 # step counter
-        VecP0i= zeros((N),dtype=double)                                  # intermediate storage for nominal load vector of step
+            StepRestart = []                                                # for time step, Rayleigh Dampint parameters of latest step
+
+            # data input from options
+            WrNodes,LineS, MaxEquiIter,MaxType, StabSys,StabTolF, SoftSys,SoftRed = None,None, None,[], False,None, False,None
+            f5, f7 = None, None
+            if pth.isfile(Name + ".opt.txt"):  # read options file if there is any
+                f4 = open(Name + ".opt.txt", 'r')
+                WrNodes, _, MaxType,MaxEquiIter, StabSys,StabTolF, SoftSys,SoftRed = ReadOptionsFile(f4, NodeList, NoLabToNoInd, NoIndToCMInd)
+                f4.close()
+                f5 = open(Name + ".timeout.txt", 'w')
+                if len(MaxType) > 0: f7 = open(Name + ".elemmax.txt", 'w')
+            if StabTolF == None:
+                StabTolF = 3.0                                                  # default value, used in CheckStability
+
+        # more initializations
+        VecP0i= zeros((N),dtype=double)                                     # intermediate storage for nominal load vector of step
         VecUP = zeros((N),dtype=double)                                     # displacement vector of latest equilibrium iteration -- for line search
         VecP0_= zeros((N),dtype=double)                                     # 
         VecB = zeros((N), dtype=double)                                     # reaction forces
@@ -151,17 +175,18 @@ class ConFem:
                 no.used = True
         EchoSys( f6, SymSys, LinAlgFlag, ConFemMatCFlag, ConFemElemCFlag, N, ElList, Node.ActiveNodes, SLen, MatList, Element, ElemDataAll) # ElemDataAll will currently not work with restart !!! 
 
-        # Calculations
         stime = process_time()
+        # step loop
         while StepCounter<len(StepList):
-            ndeq = 4                                                        # length of queues
+            ndeq = 12 # 4                                                        # length of queues
             if f5 != None: timeoutQueues  = [ deque(maxlen=ndeq), deque(maxlen=ndeq), deque(maxlen=ndeq) ]
             equiiterQueues                = [ deque(maxlen=ndeq), deque(maxlen=ndeq), deque(maxlen=ndeq) ]
             #
             StLi = StepList[StepCounter]
             Echo(f"{StepCounter:d} step starts, solution type {StLi.SolType:s}", f6)
             StLi.BoundCondCheck( NodeList, f6)                              # whether bc dof has counterpart in dof of node (->node.DofT)
-            if StLi.ArcLen: Mask = StLi.MaskForArclen( NodeList, NoIndToCMInd,NoLabToNoInd, N)
+            if StLi.ArcLen:
+                Mask = StLi.MaskForArclen( NodeList, NoIndToCMInd,NoLabToNoInd, N)
             if StLi.varTimeSteps:
                 TimeVarL = len(StLi.TimeTargVar)
                 TimeTarg = StLi.TimeTargVar[-1]
@@ -172,7 +197,7 @@ class ConFem:
                 if StepCounter>0: TimeS = StepList[StepCounter-1].TimeTarg  # time target of previous step
                 else:   TimeS = 0.
             TS = TimeTarg-TimeS
-            if not StLi.Buckl:
+            if not StLi.Buckl and not StLi.Eigenmodes:
                 if TS<ZeroD: raise NameError("ConFem: TimeTarg <= Times",StepCounter,TimeS,TimeTarg," -- desired?")
                 else: DTS = 1./TS
             if len(StLi.ElFilList)>0: TimeEl = TimeS                        # TimeEl updated below with StLi.ElFilList[-1]
@@ -182,8 +207,19 @@ class ConFem:
             if len(StLi.ReFilList)>0: TimeRe = TimeS + StLi.ReFilList[-1]
             else:                     TimeRe = TimeTarg
             StLi.current = StepCounter                                      # used in ConFemSteps
+            dt = 0.0                                                        # preliminary value to be updated in the following
+            #
             if StLi.Dyn:                                                    # preparation of dynamic calculation
-                dt = StLi.TimeStep                                          # time step for dynamic calculation
+                if StepCounter>0:
+                    if not Restart and StepList[-2].Eigenmodes and not StLi.Eigenmodes and StLi.Eigenmode2TS:
+                        dt = StLi.Eigenmode2TSrel * 2.0*pi/StepList[-2].Eigenvalues[0]     # --> largest natural period
+                else:
+                    dt = StLi.TimeStep                                     # time step for dynamic calculation
+                if StLi.Eigenmodes:
+                    SymSys_     = copy.copy(SymSys)                         # to recover Flags after eigenmode step
+                    LinAlgFlag_ = copy.copy(LinAlgFlag)
+                    SymSys      = True
+                    LinAlgFlag  = False
                 if LinAlgFlag:
                     if StLi.Damp:
                         DVecU = zeros(SLen, dtype=float)                    # Initialize upper right part of damping vector
@@ -195,42 +231,56 @@ class ConFem:
                     sysMass = IntForces( MatList, ElList, Time-TimeOld, VecC,VecU,VecU,VecS,VecT, VecI, None,None,MVecU,MVecL,SDiag, 10, f6, StLi.NLGeom, SymSys,False,0) # mass matrix
                 else:
                     MatM = sparse.lil_matrix((N, N))                        # sparse mass matrix initialization
-                    sysMass = IntForces( N, MatList, ElList, Time-TimeOld, VecC,VecU,VecU,VecS,VecT, VecI, MatM,None,None,None,None,       10, f6, StLi.NLGeom, SymSys,False,0) # mass matrix
-                a_ = StLi.NMgamma/StLi.NMbeta                               # Newmark auxiliary value
-                a0 = 1./(StLi.NMbeta*dt**2)                                 # Newmark auxiliary value
-                a1 = a_/dt                                                  # Newmark auxiliary value for Rayleigh damping
+                    sysMass = IntForces( MatList, ElList, Time-TimeOld, VecC,VecU,VecU,VecS,VecT, VecI, MatM,None,None,None,None,       10, f6, StLi.NLGeom, SymSys,False,0) # mass matrix
                 Echo(f"System mass {sysMass:f}", f6)
-            elif StLi.Buckl: 
+            elif StLi.Buckl:
                 MatM = sparse.lil_matrix((N, N))                            # used for geometric stiffness matrix
                 LinAlgFlag = False
             else: 
                 MatM = None
-            if Time>TimeTarg-1.e-6 and not StLi.Buckl: StepFinishedFlag = True    # step time target
-            else:                                      StepFinishedFlag = False
-            if LineS!=None and LineS[0]>1:                                  # parameters for line search iteration
-                LinS = LineS[0]
-                LinT = LineS[1]
-            else: 
-                LinS=1
-            StLi.BoundOffset( NodeList,NoLabToNoInd,NoIndToCMInd, VecU)     # add offset for prescribed displacement from current displacement for OPT=ADD
-            
-            IncCounter = 0                                                  # counter for increments within step
-            if MaxEquiIter_ != None:
-                EquiFailedMax = MaxEquiIter_
+            if StLi.Damp:                                                   # maybe redefinition of Rayleigh damping parameters
+                if StepCounter > 0:
+                    if not Restart and StepList[-2].Eigenmodes and StLi.EigenVal2Beta:
+                        om_1 = StepList[-2].Eigenvalues[0]
+                        om_2 = StepList[-2].Eigenvalues[1]
+                        if om_1<ZeroD or om_2<ZeroD:
+                            raise NameError("ConFem: no valid eigenvalues for Rayleigh damping ",om_1,om_2)
+                        StLi.RaAlph = 2.*StLi.Zeta*om_2*om_1/(om_1+om_2)    # for mass -- see RayleighDampingCoefficients.mws
+                        StLi.RaBeta = 2.*StLi.Zeta/(om_1+om_2)              # for stiffness
+            if Restart:                                                     # must be here after damping parameter definition
+                dt = StepRestart[0]
+                StLi.RaAlph = StepRestart[1]
+                StLi.RaBeta = StepRestart[2]
             else:
-                EquiFailedMax = 3
+                StepRestart = [dt, StLi.RaAlph, StLi.RaBeta]
+
+            if StLi.Dyn and not StLi.Eigenmodes:                                         # must be here after dt definition
+                a_ = StLi.NMgamma / StLi.NMbeta  # Newmark auxiliary value
+                a0 = 1. / (StLi.NMbeta * dt ** 2)  # Newmark auxiliary value
+                a1 = a_ / dt  # Newmark auxiliary value for Rayleigh damping
+            #
+            if Time>TimeTarg-1.e-6 and not StLi.Buckl and not StLi.Eigenmodes: StepFinishedFlag = True  # step time target
+            else:                                                              StepFinishedFlag = False
+            StLi.BoundOffset( NodeList,NoLabToNoInd,NoIndToCMInd, VecU)     # add offset for prescribed displacement from current displacement for OPT=ADD
+            IncCounter = 0                                                  # counter for loading / time increments within step
+            if MaxEquiIter != None: EquiFailedMax = MaxEquiIter
+            else:                   EquiFailedMax = 3                       # default value
             EquiFailedCounter = 0                                           # to count failing equilibrium iterations - initialization
+            maxWriteNodes = zeros((3), dtype=float)                         # see ConFemInOut::WriteNodes
+            #
             while not StepFinishedFlag:                                     # loop over time steps
                 CalcType = 2                                                # 0: check system, 1: internal forces only, 2: internal forces and tangential stiffness matrix
                 IncCounter += 1
-                if Time+1.e-6>=TimeEl: TimeEl=Time + StLi.ElFilList[-1]     # set time for element output
-                if Time+1.e-6>=TimeNo: TimeNo=Time + StLi.NoFilList[-1]     # set time for nodeal output
+                if Time+1.e-6>=TimeEl and len(StLi.ElFilList)>0:
+                    TimeEl=Time + StLi.ElFilList[-1]                        # set time for element output
+                if Time+1.e-6>=TimeNo and len(StLi.NoFilList)>0:
+                    TimeNo=Time + StLi.NoFilList[-1]                        # set time for nodeal output
                 A_BFGS, B_BFGS, rho_BFGS = [], [], []                       # A_BFGS, B_BFGS: BFGS auxiliary list of vectors, rho_BFGS: BFGS auxiliary list of scalars
                 VecD = zeros((N),dtype=double)                              # displacement increment vector
                 VecDI= zeros((N),dtype=double)                              # 
                 VecR = zeros((N),dtype=double)                              # residual nodal forces vector
                 VecRP= zeros((N),dtype=double)                              # residual nodal forces vector
-                if StLi.Dyn:                                                # implicit dynamic calculation
+                if StLi.Dyn and not StLi.Eigenmodes:                        # implicit dynamic calculation
                     Time = Time + dt                                        # new time for dynamic calculation
                     VecX = VecC + dt*VevC + 0.5*dt**2*(1-2*StLi.NMbeta)*VeaC # Newmark auxiliary vector
                     VecX_= -a1*VecC +(1-a_)*VevC + dt*(1-0.5*a_)*VeaC       # Newmark auxiliary vector
@@ -242,111 +292,99 @@ class ConFem:
 
                 # equilibrium iteration loop
                 for j in range(StLi.IterNum):
-                    S = [0.]                                                # line search auxiliary value
-                    G = [dot(VecRP,VecD)]                                   # line search auxiliary value
-                    sds = 1.0                                               # line search scalar
                     VecUP[:] = VecU[:]                                      # remember displacement of last load increment
-                    k_ = -1                                                 # auxiliary counter for line search
-                    # line search iteration -- generally broken for j > 1 ???
-                    for k in range(LinS):                                   
-                        VecU = VecUP + sds*VecD                             # update displacements
-                        if StLi.ArcLen: dU = norm( (VecU-VecC) * Mask )     # dU is for output only
-                        else:           dU = norm(VecU-VecC)                # displacement increment compared to last step
-                        if StLi.Dyn:                                        # auxiliary values in case of dynamic calculation
-                            VevU = a1*VecU + VecX_                          # actual velocities
-                            VeaU = a0*(VecU-VecX)                           # actual accelerations
-                        nTmp = StLi.NodalTemp( N, Time, NodeList,NoLabToNoInd,NoIndToCMInd, VecT)            # introduce nodal temperatures into system with computation of nodal temperatures -> in SimFemSteps.py
+                    VecU = VecUP + VecD                                     # update displacements
+                    if StLi.ArcLen:
+                        dU = norm( (VecU-VecC) * Mask )                     # dU is for output only
+                    else:
+                        dU = norm(VecU-VecC)                                # displacement increment compared to last step
+                    if StLi.Dyn and not StLi.Eigenmodes:                    # auxiliary values in case of dynamic calculation
+                        VevU = a1*VecU + VecX_                              # actual velocities
+                        VeaU = a0*(VecU-VecX)                               # actual accelerations
+                    nTmp = StLi.NodalTemp( N, Time, NodeList,NoLabToNoInd,NoIndToCMInd, VecT)            # introduce nodal temperatures into system with computation of nodal temperatures -> in SimFemSteps.py
 
-                        # internal nodal forces and system stiffness (CalcType==2)
-                        if ElasticLTFlag and j==0:                          # check system state for certain materials -- might lead to 'system change'
-                            IntForces( MatList,ElList,Time-TimeOld, VecC,VecU,VecD,VecS,VecT,VecI, None,None,None,None,None, 0,f6,StLi.NLGeom,SymSys,False, j)
+                    # internal nodal forces and system stiffness (CalcType==2)
+                    if ElasticLTFlag and j==0:                              # check system state for certain materials -- might lead to 'system change'
+                        IntForces( MatList,ElList,Time-TimeOld, VecC,VecU,VecD,VecS,VecT,VecI, None,None,None,None,None, 0,f6,StLi.NLGeom,SymSys,False, j)
+                    if LinAlgFlag:
+                        if CalcType==2:                                     # 0: check system, 1: internal forces only, 2: internal forces and tangential stiffness matrix
+                            KVecU = zeros(SLen, dtype=float)                # Initialize upper right part of stiffness vector
+                            if not SymSys: KVecL = zeros(SLen, dtype=float) # Initialize lower left part of stiffness vector
+                            else:               KVecL = None
+                        # ! Time-TimeOld initially different for dynamics and quasi statics
+                        IntForces( MatList, ElList, Time-TimeOld, VecC,VecU,VecD,VecS,VecT, VecI, None,None,KVecU,KVecL,SDiag, CalcType,f6,StLi.NLGeom,SymSys,False, j,nTmp=nTmp)# internal nodal forces / stiffness matrix
+                    else:
+                        if CalcType==2:
+                            MatK = sparse.lil_matrix((N, N))                # sparse stiffness matrix initialization
+                        IntForces( MatList, ElList, Time-TimeOld, VecC,VecU,VecD,VecS,VecT, VecI, MatK,MatM,None,None,None,    CalcType,f6,StLi.NLGeom,SymSys,StLi.Buckl, j,nTmp=nTmp)# internal nodal forces / stiffness matrix
+
+                    # eigenmode analysis
+                    if StLi.Buckl or StLi.Eigenmodes:
+                        if not SymSys: raise NameError("ConFem::Run: Symmetric system required for eigenforms")
+                        evals = Eigen( StLi.EigenmodesN, StLi.EigenmodeIter, N, NodeList, ElList, StLi, MatK, MatM, NoLabToNoInd,NoIndToCMInd, PloF, f6)
+                        StepFinishedFlag = True
+                        if StLi.Eigenmodes:
+                            for eig in range(min(StLi.EigenmodesN,10)):     # hard coded length
+                                StLi.Eigenvalues[eig] = 2.0*pi/sqrt(evals[eig])
+                                StLi.Eigenvalues[eig] = sqrt(evals[eig])
+                            Echo(f"eigenmodes from Eigenmode analysis {*StLi.Eigenvalues,}", f6)
+                            natP = []
+                            for x in StLi.Eigenvalues:
+                                if x>ZeroD: natP += [ 2.0*pi/x]
+                            Echo(f"natural periods from Eigenmode analysis {*natP,}", f6)
+                            LinAlgFlag = LinAlgFlag_
+                            SymSys     = SymSys_
+                        break                                               # 1st break to come out for buckling analysis
+
+                    # external loading -- before application of displacement boundary conditions
+                    StLi.NodalLoads( N, Time, TimeTarg, NodeList,NoLabToNoInd,NoIndToCMInd, VecP, VecP0)# introduce concentrated loads into system
+                    StLi.ElementLoads( Time, TimeTarg, ElList, VecP, VecP0)# introduce distributed loads into system
+                    StLi.NodalPrestress( N, Time, ElList, VecP, VecU, StLi.NLGeom)# introduce prestressing
+                    StLi.NodalPrestress( N, TimeTarg, ElList, VecP0, VecU, StLi.NLGeom)# nominal prestressing (maybe this works not optimal with P0-approach)
+                    VecP0i[:] = VecP0[:]                                    # remember current total load vector for use after step completion
+                    VecP0[:]  = VecP0[:]-VecP0old[:]                        # only nominal load change compared to last step is relevant
+                    VecB[:]   = VecI[:]-VecP[:]                             # boundary forces from internal / external forces difference -- before displacement boundary conditions
+
+                    # Newmark dynamics
+                    if StLi.Dyn:
                         if LinAlgFlag:
-                            if CalcType==2:                                 # 0: check system, 1: internal forces only, 2: internal forces and tangential stiffness matrix
-                                KVecU = zeros(SLen, dtype=float)            # Initialize upper right part of stiffness vector
-                                if not SymSys: KVecL = zeros(SLen, dtype=float) # Initialize lower left part of stiffness vector
-                                else:               KVecL = None
-                            # ! Time-TimeOld initially different for dynamics and quasi statics
-                            IntForces( MatList, ElList, Time-TimeOld, VecC,VecU,VecD,VecS,VecT, VecI, None,None,KVecU,KVecL,SDiag, CalcType,f6,StLi.NLGeom,SymSys,False, j,nTmp=nTmp)# internal nodal forces / stiffness matrix
-                        else:
-                            if CalcType==2:
-                                MatK = sparse.lil_matrix((N, N))            # sparse stiffness matrix initialization
-                            IntForces( MatList, ElList, Time-TimeOld, VecC,VecU,VecD,VecS,VecT, VecI, MatK,MatM,None,None,None,    CalcType,f6,StLi.NLGeom,SymSys,StLi.Buckl, j,nTmp=nTmp)# internal nodal forces / stiffness matrix
-
-                        # eigenmode analysis
-                        if StLi.Buckl:
-                            if not SymSys: raise NameError("ConFem::Run: Symmetric system required for eigenforms")
-                            Eigen( EigenvalPar[0], EigenvalPar[1], N, NodeList, ElList, StLi, MatK, MatM, NoLabToNoInd,NoIndToCMInd, PloF, f6)
-                            StepFinishedFlag = True
-                            break                                           # 1st break to come out for buckling analysis
-                        
-                        # external loading -- before application of displacement boundary conditions
-                        StLi.NodalLoads( N, Time, TimeTarg, NodeList,NoLabToNoInd,NoIndToCMInd, VecP, VecP0)# introduce concentrated loads into system
-                        StLi.ElementLoads( Time, TimeTarg, ElList, VecP, VecP0)# introduce distributed loads into system
-                        StLi.NodalPrestress( N, Time, ElList, VecP, VecU, StLi.NLGeom)# introduce prestressing
-                        StLi.NodalPrestress( N, TimeTarg, ElList, VecP0, VecU, StLi.NLGeom)# nominal prestressing (maybe this works not optimal with P0-approach)
-                        VecP0i[:] = VecP0[:]                                # remember current total load vector for use after step completion
-                        VecP0[:]  = VecP0[:]-VecP0old[:]                    # only nominal load change compared to last step is relevant
-                        VecB[:]   = VecI[:]-VecP[:]                         # boundary forces from internal / external forces difference -- before displacement boundary conditions
-                        
-                        # Newmark dynamics
-                        if StLi.Dyn:
-                            if LinAlgFlag: 
-                                if CalcType==2:                             # internal forces and tangential stiffness matrix
-                                    if StLi.Damp:
-                                        DVecU                = StLi.RaBeta*KVecU + StLi.RaAlph*MVecU
-                                        if not SymSys: DVecL = StLi.RaBeta*KVecL + StLi.RaAlph*MVecL
-                                        KVecU                = KVecU + a1*DVecU
-                                        if not SymSys: KVecL = KVecL + a1*DVecL
-                                    KVecU                    = KVecU + a0 * MVecU
-                                    if not SymSys:     KVecL = KVecL + a0 * MVecL
-                                if SymSys:     LinAlg2.sim1_mmul(VecY, MVecU,        VeaU, SDiag, Skyline, N)
-                                else:          LinAlg2.sim0_mmul(VecY, MVecU, MVecL, VeaU, SDiag, Skyline, N)
+                            if CalcType==2:                                 # internal forces and tangential stiffness matrix
+                                if StLi.Damp:
+                                    DVecU                = StLi.RaBeta*KVecU + StLi.RaAlph*MVecU
+                                    if not SymSys: DVecL = StLi.RaBeta*KVecL + StLi.RaAlph*MVecL
+                                    KVecU                = KVecU + a1*DVecU
+                                    if not SymSys: KVecL = KVecL + a1*DVecL
+                                KVecU                    = KVecU + a0 * MVecU
+                                if not SymSys:     KVecL = KVecL + a0 * MVecL
+                            if SymSys:     LinAlg2.sim1_mmul(VecY, MVecU,        VeaU, SDiag, Skyline, N)
+                            else:          LinAlg2.sim0_mmul(VecY, MVecU, MVecL, VeaU, SDiag, Skyline, N)
+                            VecP = VecP - VecY
+                            if StLi.Damp:
+                                if SymSys: LinAlg2.sim1_mmul(VecY, DVecU,        VevU, SDiag, Skyline, N)
+                                else:      LinAlg2.sim0_mmul(VecY, DVecU, DVecL, VevU, SDiag, Skyline, N)
                                 VecP = VecP - VecY
-                                if StLi.Damp:
-                                    if SymSys: LinAlg2.sim1_mmul(VecY, DVecU,        VevU, SDiag, Skyline, N)
-                                    else:      LinAlg2.sim0_mmul(VecY, DVecU, DVecL, VevU, SDiag, Skyline, N)
-                                    VecP = VecP - VecY
-                            else:
-                                if StLi.Damp:
-                                    MatD = StLi.RaBeta*MatK + StLi.RaAlph*MatM  
-                                    MatK = MatK + a1*MatD
-                                    VecP = VecP - aslinearoperator(MatD).matvec(VevU)
-                                MatK = MatK + a0*MatM                       # modify system matrix
-                                MatK = MatK.tolil()                         # became CSR
-                                VecP = VecP - aslinearoperator(MatM).matvec(VeaU) # modify load vector
-                                
-                        # displacement boundary conditions and residual vector
-                        if LinAlgFlag:
-                            StLi.BoundCond( N, Time, TimeS, TimeTarg, NodeList, VecU, VecI, VecP, VecP0, BCIn, BCIi, None,KVecU,KVecL,Skyline,SDiag, CalcType, SymSys, f6)# introduce boundary conditions
                         else:
-                            StLi.BoundCond( N, Time, TimeS, TimeTarg, NodeList, VecU, VecI, VecP, VecP0, BCIn, BCIi, MatK,[],None,None,None, CalcType, SymSys, f6)# introduce boundary conditions
-                        if CalcType==2: VecP0_[:]= VecP0[:]                 # remember nominal load in case stiffness matrix is not updated upcoming -- stiffness updating relevant for prescribed displacements
-                        else:           VecP0[:] = VecP0_[:]                # use previous value of nominal load in case stiffness matrix was not updated
-                        VecR[:] = VecP[:] - VecI[:]                         # residual vector - entries should be zero for prescribed displacement for j>0
+                            if StLi.Damp:
+                                MatD = StLi.RaBeta*MatK + StLi.RaAlph*MatM
+                                MatK = MatK + a1*MatD
+                                VecP = VecP - aslinearoperator(MatD).matvec(VevU)
+                            MatK = MatK + a0*MatM                           # modify system matrix
+                            MatK = MatK.tolil()                             # became CSR
+                            VecP = VecP-aslinearoperator(MatM).matvec(VeaU) # modify load vector
 
-                        # line search scaling, if prescribed
-                        if j>1 and LinS>1:
-                            G_ = dot(VecR,VecD)
-                            G0 = dot(VecRP,VecD)
-                            if G_*G[k_]<0.:
-                                k_ = k_+1
-                                S += [sds]
-                                G += [G_]
-                            if abs(G_)>LinT*abs(G0):
-                                sds = S[k_] - G[k_]*(sds-S[k_])/(G_-G[k_])
-                                if sds<0.0:   sds = 1.0
-                                elif sds<0.2: sds = 0.2
-                                elif sds>5.0: sds = 5.0
-                                print('line search',k_,'G/G0',G_/G0,'step',sds)
-                                print('line search',k_,'G/G0',G_/G0,'step',sds, file=f6)
-                            else: break                                     # end of line search iteration
-                        else: break                                         # no line search iteration
-                    # end of line search loop
-                    if StLi.Buckl: break                                    # 2nd break to come out for buckling analysis
+                    # displacement boundary conditions and residual vector
+                    if LinAlgFlag:
+                        StLi.BoundCond( N, Time, TimeS, TimeTarg, NodeList, VecU, VecI, VecP, VecP0, BCIn, BCIi, None,KVecU,KVecL,Skyline,SDiag, CalcType, SymSys, f6)# introduce boundary conditions
+                    else:
+                        StLi.BoundCond( N, Time, TimeS, TimeTarg, NodeList, VecU, VecI, VecP, VecP0, BCIn, BCIi, MatK,[],None,None,None, CalcType, SymSys, f6)# introduce boundary conditions
+                    if CalcType==2: VecP0_[:]= VecP0[:]                     # remember nominal load in case stiffness matrix is not updated upcoming -- stiffness updating relevant for prescribed displacements
+                    else:           VecP0[:] = VecP0_[:]                    # use previous value of nominal load in case stiffness matrix was not updated
+                    VecR[:] = VecP[:] - VecI[:]                             # residual vector - entries should be zero for prescribed displacement for j>0
 
                     # equilibrium control
                     Resi = norm(VecR)                                       # residual norm
-                    if StLi.SolType=='BFGS': VecRD = VecRP - VecR + tt*DTS*VecP0 # BFGS auxiliary vector
+                    if StLi.SolType=='BFGS':
+                        VecRD = VecRP - VecR + tt*DTS*VecP0                 # BFGS auxiliary vector
                     VecRP[:] = VecR[:]                                      # residual nodal forces vector of previous iteration
                     if j>0:
                         En1 = dot(VecD, (VecR + BCIi * (VecB-VecBold)))     # residual energy, BCIi masks dofs NOT prescribed
@@ -357,7 +395,7 @@ class ConFem:
                     Echo(f"{StepCounter:d} {IncCounter:3d} {TimeTarg:.3f} {Time:.5f} iter {j:d} {Resi:e} {Resi_:e}    {dU:e}", f6)
                     f6.flush()
                     
-                    # termination control
+                    # iteration termination control
                     if Resi<StLi.IterTol:                                   # convergence criterion reached
                         if StLi.Dyn:
                             break                                           # continue after equilibrium iteration loop - independent from j
@@ -378,16 +416,16 @@ class ConFem:
                             if SymSys: LinAlg2.sim1_so(VecDI,KVecU,        SDiag, Skyline, N)
                             else:      LinAlg2.sim0_so(VecDI,KVecU, KVecL, SDiag, Skyline, N)
                         else:
-                            K_LU = splu(MatK.tocsc(),permc_spec=3) #triangulization of stiffness matrix
+                            K_LU = splu(MatK.tocsc(),permc_spec=3)          #triangulization of stiffness matrix
                             VecD = K_LU.solve( VecR )                       # solution of K*u=R -> displacement increment
                             VecDI= K_LU.solve( VecP0 )                      # solution contribution for arc length control
                         if StLi.SolType != 'NR': CalcType = 1               # stiffness matrix not built anymore 
                     elif StLi.SolType=='BFGS':                              # BFGS according to Matthies & Strang 1979 (S. 1617) for indefinite matrices
                         VecRD = VecRD * BCIn                                # mask prescribed dofs
-                        VecD = VecD * BCIn                                  # mask prescribed dofs
-                        A_BFGS += [VecRD]  
-                        B_BFGS += [sds*VecD]
-                        rho_BFGS += [1./dot(transpose(VecRD),sds*VecD)]
+                        VecD  = VecD  * BCIn                                # mask prescribed dofs
+                        A_BFGS += [ VecRD ]                                 # presumably linked but has been recomputed just before presumably is equivalent to to 1.0*vecRD
+                        B_BFGS += [ np.copy( VecD ) ]                       # a link otherwise  -- formerly B_BFGS += [ 1.0*VecD ]
+                        rho_BFGS += [1./dot(transpose(VecRD),VecD)]
                         alpha_BFGS = []
                         for k in range(j-1,-1,-1):
                             alpha = rho_BFGS[k]*dot(B_BFGS[k],VecR)
@@ -421,6 +459,7 @@ class ConFem:
                     if not StLi.Dyn and TimeTargetActiveFlag:               # TimeTargetActiveFlag set to False before equilibrium iteration loop -- set to True if equilbrium in j=0 iteration
                         if StLi.ArcLen and StLi.ArcLenV>0:
                             tt = TS*ArcLength(StLi.ArcLenV, VecDI, VecD, VecU-VecC, VecY, Mask) # time increment with arc length control
+
                         elif j==0:                                          # time increment determined for the following quilibrium j-iterations
                             if StLi.varTimeSteps:
                                 for targ_i in range(TimeVarL): # 
@@ -436,27 +475,47 @@ class ConFem:
 
                     VecD = VecD + tt*DTS*VecDI                              # new displacement increment with two contributions; tt=0 in case of dynamics and for quasi-statics j>0 & fixed time step
                     if j >= (StLi.IterNum - 2): LogResiduals(LogName, IncCounter, j, NodeList, VecRP, VecD)
+
                 # end of equilibrium iteration loop -- either by reaching convergence criteria or by interation counter limit
+                if StLi.Buckl or StLi.Eigenmodes:
+                    Time = TimeOld
+                    break                                                   # to come out of time increment loop
                 equiiterQueues[0].append( IncCounter )                      # load increment counter
                 equiiterQueues[1].append( Time )                            # actual time
                 equiiterQueues[2].append( j )                               # last iteration
 
                 # premature termination cases -- if so
-                if not StLi.Dyn and j==StLi.IterNum-1:
+#                if not StLi.Dyn and j==StLi.IterNum-1:
+                if j == StLi.IterNum - 1:
                     if EquiFailedCounter==EquiFailedMax-1:
-                        Echo(f"{Name:s}\n premature termination - {EquiFailedCounter+1:d} iteration attempts - time {Time:.4f} of target {TimeTarg:.4f}", f6)
+                        Echo(f"{Name:s}\n premature termination 1 - {EquiFailedCounter+1:d} iteration attempts - time {Time:.4f} of target {TimeTarg:.4f}", f6)
                         break                                               # continues after time increment loop
                     EquiFailedCounter += 1
                 else:
                     EquiFailedCounter = 0
+                # softening system
+#                if SoftSys and j<StLi.IterNum-1:
+                if SoftSys and j<StLi.IterNum-1 and Time> 100 *dt:          # quick and dirty hardcoded -- to avoid premature term in case of initially oscillationg dynamic systems
+                    q1 = list(timeoutQueues[1])
+                    if len(q1)>=ndeq:
+                        q1_ = abs(np.mean(q1))
+                        if q1_ < SoftRed*maxWriteNodes[1]:                  #
+                            Echo(f"{Name:s}\n premature termination 2 - softening system\n"
+                                 f" reactions {q1[0]:.4f}, load {q1[-1]:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
+                            break                                           # continues after time increment loop, i.e. incrementing is terminated
                 # checks stability
                 if f5!=None:
                     q0 = list(timeoutQueues[0])
                     q1 = list(timeoutQueues[1])
-                    if not CheckStability( q0,q1, ndeq, 3.0):                   # hard coded stability factor !!!
-                        Echo(f"{Name:s}\n premature termination - unstable reaction\n"
-                             f" displ {q0[-1]:.4f}, load {q1[-1]:.4f} - time {Time:.4f} of target {TimeTarg:.4f}",
-                             f6)
+                    if not CheckStability( q0,q1, ndeq, StabTolF):          #
+                        Echo(f"{Name:s}\n premature termination 3 - unstable reaction\n"
+                             f" displ {q0[-1]:.4f}, load {q1[-1]:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
+                        break                                               # continues after time increment loop, i.e. incrementing is terminated
+                # unstable time steps in case of arclength
+                if StLi.ArcLen:
+                    if abs(dt) > 0.5*TimeTarg:                              # !!! hard coded stability factor !!!
+                        Echo(f"{Name:s}\n premature termination 4 - arclen unstable time steps\n"
+                             f" time step {dt:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
                         break                                               # continues after time increment loop, i.e. incrementing is terminated
 
                 # book keeping for iterated time step
@@ -509,14 +568,15 @@ class ConFem:
                         pickle.dump(NodeList,fd);pickle.dump(ElList,fd);pickle.dump(MatList,fd);pickle.dump(StepList,fd);pickle.dump(N,fd);pickle.dump(WrNodes,fd);pickle.dump(LineS,fd);pickle.dump(ElasticLTFlag,fd);\
                             pickle.dump(VecU,fd);pickle.dump(VecC,fd);pickle.dump(VecI,fd);pickle.dump(VecP,fd);pickle.dump(VecP0,fd);pickle.dump(VecP0old,fd);pickle.dump(VecBold,fd);pickle.dump(VecT,fd);pickle.dump(VecS,fd);pickle.dump(VeaU,fd);pickle.dump(VevU,fd);pickle.dump(VeaC,fd);pickle.dump(VevC,fd);pickle.dump(VecY,fd);\
                             pickle.dump(BCIn,fd);pickle.dump(BCIi,fd);pickle.dump(Time,fd);pickle.dump(TimeOld,fd);pickle.dump(TimeEl,fd);pickle.dump(TimeNo,fd);pickle.dump(TimeS,fd);pickle.dump(StepCounter,fd);                     pickle.dump(Skyline,fd);pickle.dump(SDiag,fd);\
-                        pickle.dump(SLen,fd);pickle.dump(SymSys,fd);pickle.dump(NoLabToNoInd,fd);pickle.dump(NoIndToCMInd,fd);pickle.dump(ContinuumNodes,fd);pickle.dump(ConNoToNoLi,fd);pickle.dump(SecDic,fd);pickle.dump(LinAlgFlag,fd);pickle.dump(ResultTypes,fd);pickle.dump(Header,fd);
+                        pickle.dump(SLen,fd);pickle.dump(SymSys,fd);pickle.dump(NoLabToNoInd,fd);pickle.dump(NoIndToCMInd,fd);pickle.dump(ContinuumNodes,fd);pickle.dump(ConNoToNoLi,fd);pickle.dump(SecDic,fd);pickle.dump(LinAlgFlag,fd);pickle.dump(ResultTypes,fd);pickle.dump(Header,fd);\
+                        pickle.dump(StepRestart,fd);pickle.dump(MaxType,fd);pickle.dump(MaxEquiIter,fd);pickle.dump(StabSys,fd);pickle.dump(StabTolF,fd);pickle.dump(SoftSys,fd);pickle.dump(SoftRed,fd);
                         fd.close()
                         Echo(f"Restart data written {Time:f}", f6)
                         if len(StLi.ReFilList)>0: TimeRe += StLi.ReFilList[-1]  # update time for restart output
                     else :
                         Echo(f"No restart data writing {Time:f}, residual {Time:e}", f6)
                 if f5!=None:
-                    WriteNodes( f5, WrNodes, Time, VecU, VecB, VecP, StepCounter, IncCounter, timeoutQueues)
+                    WriteNodes( f5, WrNodes, Time, VecU, VecB, VecP, StepCounter, IncCounter, timeoutQueues, ndeq,maxWriteNodes)
                     f5.flush()
             # end of time increment loop for current step
                     
@@ -530,6 +590,7 @@ class ConFem:
                 Echo("last timeout data", f6)
                 for u, p, s in zip(list( timeoutQueues[0]), list(timeoutQueues[1]), list(timeoutQueues[2])):
                     Echo(f" {s:4d}, {u:.6f}, {p:.2f}", f6)
+            Echo(f"reached time {Time:.4f}", f6)
         # end of step loop
 
         Echo(f"total comp time {process_time()-stime:.0f} seconds", f6)
@@ -549,8 +610,8 @@ class ConFem:
 if __name__ == "__main__":
     LogName="../LogFiles"                                                   # to log temporary data
 #    numpy.seterr(all='raise')
-    Name, Plot, Restart, HashSource, Eig, ElPlotTimes, StressStrainOut, VTK = DefData() # VTK currently not used
+    Name, Plot, Restart, HashSource, ElPlotTimes, StressStrainOut, VTK = DefData() # VTK currently not used
 #    Name=str(raw_input('Filename without extension: '))                    # input data name
     ConFem_ = ConFem()
-    RC=ConFem_.Run(Name, LogName, Plot, LinAlgFlag, Restart, HashSource, Eig, ElPlotTimes, StressStrainOut, VTK)
+    RC=ConFem_.Run(Name, LogName, Plot, LinAlgFlag, Restart, HashSource, ElPlotTimes, StressStrainOut, VTK)
     print(RC)

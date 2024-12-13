@@ -11,7 +11,7 @@ from matplotlib.pyplot import figure, plot, grid, title, text, contour, clabel, 
 #import mpl_toolkits.mplot3d as a3
 #import pylab                as pl
 #from pylab import arange, griddata
-#import numpy                as np
+import numpy                as np
 #from numpy        import meshgrid, pi, arcsin, fabs, sqrt
 #from scipy.linalg import norm
 from os           import path, makedirs
@@ -75,62 +75,77 @@ def ReadPlotOptionsFile(f1, SecDic):                            # read plot opti
     return SN, SN2, PE2DFlag, PE3DFlag, PlotTimes, Post1DFlag, ScaleStress, PostNode, ShellL, ScaleShellL, Contour2D
 
 def ReadOptionsFile(f1, NodeList, NoLabToNoInd, NoIndToCMInd):              # read options
-    z1 = f1.readline()                                                      # 1st input line
-    z2 = z1.split(",")
-    zLen = len(z2)
     LS = [1,1.]                                                             # default values for line search
-    R, L, MaxType, MaxEquiIter = [], [], [], None
-    for i in range(zLen): z2[i] = z2[i].strip()
-    while z1!="":
-        for i in range(zLen): z2[i] = z2[i].strip()
-        if z2[0].upper()=="WRITENODES":                                     # write single nodal displacement, force during whole course of computation
-            n = int((len(z2)-1)/3)                                          # three data - node, dof, outtype - expected per item  
-            for j in range(n):
-                iP = int(z2[3*j+1])                                         # node
-                iD = int(z2[3*j+2])                                         # dof   
-                ty = z2[3*j+3]                                              # outtypes p-u, p-t, u-t, b-u, b-t
-                try: node = NodeList[ NoIndToCMInd[NoLabToNoInd[iP]] ] # !!! might not correctly work for unused nodes where  NoIndToCMInd[NoLabToNoInd[iP]] presumably points to zero - don't refer to them in opt-file 
-                except: raise NameError ("ConFemInOut::ReadOptionsFile: no such node available in current dataset "+str(iP))
-                DofTL = list(node.DofT)                                     # DofT is set of markers for dof types for current node
-                iD_ = -1
-                for i in range(len(DofTL)):
-                    if DofTL[i]==iD: 
-                        iD_ = i                                             # iD_ and iD differ!
-                if iD_==-1: raise NameError ("ConFemInOut::ReadOptionsFile: invalid dof type indicator ")
-                ii = node.GlobDofStart+iD_                                  # global index history plot
-                L += [[iP,iD_,ii,ty]]
-        elif z2[0].upper()=="LINESEARCH":                                   # parameter for line search iteration method
-            if int(z2[1])>1:
-                LS[0] = int(z2[1])
-                LS[1] = float(z2[2])
-        elif z2[0].upper()=="REINFORCEMENTDESIGN":                          # parameter reinforcement design - ConPlad
-            if int(z2[1])>1:
-                R += [float(z2[1])]                                         # design value reinforcement strength
-                R += [float(z2[2])]                                         # design value concrete compressive strength
-                R += [float(z2[3])]                                         # minimum reinforcement ratio x (%), minimum reinforcement ratio labs   ( formerly geometric height )
-                R += [float(z2[4])]                                         # minimum reinforcement ratio y (%)   ( formerly structural height)
-                R += [float(z2[5])]                                         # geometric height
-                R += [float(z2[6])]                                         # geometric structural height
-                R += [float(z2[7])]                                         # specific weight reinforcing steel
-        elif z2[0].upper()=="MAXVALUES":
-            MaxType = z2[1:]
-        elif z2[0].upper()=="MAX_EQUI_ITERATIONS":                          # overrides EquiFailedMax in ConFem
-            MaxEquiIter = int(z2[1])
-        z1 = f1.readline()                                                  # read next line
-        z2 = z1.split(",")
-        zLen = len(z2)
-    return L, LS, R, MaxType, MaxEquiIter
+    R, L, MaxType, MaxEquiIter, StabSys,StabTolF, SoftSys,SoftRed = [],[],[],None, False,None, False,None
+    with ( f1 ) as ff:
+        for z1 in ff:
+            z2 = z1.split(",")
+            zLen = len(z2)
+            for i in range(zLen): z2[i] = z2[i].strip()
+            if z2[0].upper()=="WRITENODES":                                 # write single nodal displacement, force during whole course of computation
+                n = int((len(z2)-1)/3)                                      # three data - node, dof, outtype - expected per item
+                for j in range(n):
+                    iP = int(z2[3*j+1])                                     # node
+                    iD = int(z2[3*j+2])                                     # dof
+                    ty = z2[3*j+3]                                          # outtypes p-u, p-t, u-t, b-u, b-t
+                    try: node = NodeList[ NoIndToCMInd[NoLabToNoInd[iP]] ] # !!! might not correctly work for unused nodes where  NoIndToCMInd[NoLabToNoInd[iP]] presumably points to zero - don't refer to them in opt-file
+                    except: raise NameError ("ConFemInOut::ReadOptionsFile: no such node available in current dataset "+str(iP))
+                    DofTL = list(node.DofT)                                 # DofT is set of markers for dof types for current node
+                    iD_ = -1
+                    for i in range(len(DofTL)):
+                        if DofTL[i]==iD:
+                            iD_ = i                                         # iD_ and iD differ!
+                    if iD_==-1: raise NameError ("ConFemInOut::ReadOptionsFile: invalid dof type indicator ")
+                    ii = node.GlobDofStart+iD_                              # global index
+                    L += [[iP,iD_,ii,ty]]
+            elif z2[0].upper()=="LINESEARCH":                               # parameter for line search iteration method
+                if int(z2[1])>1:
+                    LS[0] = int(z2[1])
+                    LS[1] = float(z2[2])
+            elif z2[0].upper()=="REINFORCEMENTDESIGN":                      # parameter reinforcement design - ConPlad
+                if int(z2[1])>1:
+                    R += [float(z2[1])]                                     # design value reinforcement strength
+                    R += [float(z2[2])]                                     # design value concrete compressive strength
+                    R += [float(z2[3])]                                     # minimum reinforcement ratio x (%), minimum reinforcement ratio labs   ( formerly geometric height )
+                    R += [float(z2[4])]                                     # minimum reinforcement ratio y (%)   ( formerly structural height)
+                    R += [float(z2[5])]                                     # geometric height
+                    R += [float(z2[6])]                                     # geometric structural height
+                    R += [float(z2[7])]                                     # specific weight reinforcing steel
+            elif z2[0].upper()=="MAXVALUES":
+                MaxType = z2[1:]
+            elif z2[0].upper()=="MAX_EQUI_ITERATIONS":                      # overrides EquiFailedMax in ConFem
+                MaxEquiIter = int(z2[1])
+            elif z2[0].upper()=="STABILITY_TOLERANCE_FACTOR":               #
+                StabSys  = True
+                try:    StabTolF = float(z2[1])
+                except: raise NameError("ConFemInOut::ReadOptionsFile: a value must be defined for "+z2[0])
+            elif z2[0].upper()=="TERMINATE_SOFTENING_SYSTEM":               # "
+                SoftSys = True
+                try:    SoftRed = float(z2[1])
+                except: raise NameError("ConFemInOut::ReadOptionsFile: a value must be defined for "+z2[0])
+            elif z2[0].find("**") > -1:
+                pass
+            else:
+                raise NameError("ConFemInOut::ReadOptionsFile: unknown keyword "+z2[0])
 
-def WriteNodes( f5, WrNodes, Time, VecU, VecB, VecP, step, counter, queues):   # write single nodal displacement, force during whole course of computation into file
+    return L,R, MaxType,MaxEquiIter, StabSys,StabTolF, SoftSys,SoftRed
+
+def WriteNodes( f5, WrNodes, Time, VecU,VecB,VecP, step,counter, queues,ndeq,maxWriteNodes):   # write single nodal displacement, force during whole course of computation into file
     for j in range(len(WrNodes)):
         ii = WrNodes[j][2]
         if WrNodes[j][3]  =='u-t': f5.write('%8.4f%12.6f' %(Time,VecU[ii]))
         elif WrNodes[j][3]=='t-u': f5.write('%12.6f%8.4f' %(fabs(VecU[ii]),Time,))
         elif WrNodes[j][3]=='b-u':
             f5.write('%14.8f%14.6e'%(VecU[ii],VecB[ii]))
-            queues[0].append(VecU[ii])
-            queues[1].append(VecB[ii])
-            queues[2].append(counter)
+            if j==0:
+                queues[0].append(VecU[ii])
+                queues[1].append(VecB[ii])
+                queues[2].append(counter)
+                qVecB = np.mean(list(queues[1]))
+                if len(queues[0])==ndeq and abs(qVecB) > maxWriteNodes[1]:
+                    maxWriteNodes[0] = abs(np.mean(list(queues[0])))
+                    maxWriteNodes[1] = abs(qVecB)
+                    maxWriteNodes[2] = counter
         elif WrNodes[j][3]=='b-t': f5.write('%8.4f%12.6f'%(Time,VecB[ii]))
         elif WrNodes[j][3]=='p-u': f5.write('%14.8f%14.8f'%(VecU[ii],VecP[ii]))
         elif WrNodes[j][3]=='p-t': f5.write('%8.4f%12.6f'%(Time,VecP[ii]))
@@ -345,7 +360,8 @@ def DataInput( f1, ff, Restart):
                                    "*DENSITY","*RCBEAM","*TCTBAR","*ELASTIC","*ELASTICORTHO","*ELASTICLT","*RCSHELL","*ISODAMAGE","*SPRING","*MISES","*LUBLINER","*RESHEET","*NLSLAB","*MICRODAMAGE","*BOND","*ELASTIC_SDA","*ELASTICR1D","*ELASTICC1D",
                                    "*CONTROLS","*STATIC","*DYNAMIC", "*DAMPING","*BUCKLING","*BOUNDARY","*DLOAD","*CLOAD","*TEMPERATURE","*EL FILE","*NODE FILE","*SOLUTION TECHNIQUE","*AMPLITUDE","*PRESTRESS","*ELSET","*NSET",
                                    "*CONCRETE DAMAGED PLASTICITY","*CONCRETE COMPRESSION HARDENING","*CONCRETE TENSION STIFFENING","*CONCRETE COMPRESSION DAMAGE","*CONCRETE TENSION DAMAGE","*DEPVAR","*USER MATERIAL","*MISESBEAM",
-                                   "*PREPRINT","*PART","*END PART","*ASSEMBLY","*INSTANCE","*END INSTANCE","*END ASSEMBLY","*RESTART","*OUTPUT","*PREPRINT","*SYSTEM","*NODE OUTPUT","*ELEMENT OUTPUT","*MONITOR","*POLYBEAM","*RESTART FILE"]:
+                                   "*PREPRINT","*PART","*END PART","*ASSEMBLY","*INSTANCE","*END INSTANCE","*END ASSEMBLY","*RESTART","*OUTPUT","*PREPRINT","*SYSTEM","*NODE OUTPUT","*ELEMENT OUTPUT","*MONITOR","*POLYBEAM","*RESTART FILE",
+                                                          "*EIGENMODES"]:
             raise NameError ("ConFemInOut::DataInput: unknown keyword", z3[0])
         z1 = f1.readline()
         z2 = z1.strip()
@@ -434,7 +450,7 @@ def DataInput( f1, ff, Restart):
         elif z3[0].upper()=="*BEAM SECTION":                                # key BEAM SECTION
             IType = "beamsection"
             reinf = "DEFAULT"
-            nRebar = None
+            nRebar = 1.0   #None
             bStiff_ = None
             for i in range(1,len(z3)):                                      # loop starts with 1
                 if   z3[i].upper().find("SECTION")>-1:  beamSecType=z3[i].split("=")[1]
@@ -587,6 +603,8 @@ def DataInput( f1, ff, Restart):
                 for i in range(1,zLen):                                     # loop starts with 1
                     if z3[i].find("NLGEOM")>-1:                             
                         if z3[i].split("=")[1]=="YES": StepList[len(StepList)-1].NLGeom = True # acts on last
+
+            Step_ = StepList[len(StepList)-1]                               # Step_ is a pointer to last entry of StepList -- in case of 1st step an initialized instance of object Step
             # end initialize step
         elif z3[0].upper() in ['*PREPRINT','*PART','*END PART','*ASSEMBLY','*INSTANCE','*END INSTANCE','*END ASSEMBLY','*RESTART','*OUTPUT','*SYSTEM']:
             Echo(f"ignored {z3[0]:s}", ff)                                  # Abaqus stuff
@@ -796,9 +814,13 @@ def DataInput( f1, ff, Restart):
                     if PreName not in Step.PreSDict:                        # underlined defined below 
                         Step.PreSDict[PreName] = PreStress(PreType, L1, PList, AmpLbl) # PreSDict is common for all steps -- underlined defined below
                                                                             # construct should work for multiple *prestress sections, current *PTRESTRESS is closed by new  
-                Step_ = StepList[len(StepList)-1]
+#                Step_ = StepList[len(StepList)-1]                           # Step_ is a pointer to last entry of StepList -- in case of 1st step an initialized instance of object Step
                 if   z3[0].upper()=="*STATIC":
                     IType2 = "static"
+                    Step_.Dyn        = False
+                    Step_.Damp       = False
+                    Step_.Eigenmodes = False
+                    Step_.Buckl      = False
                     for i in z3:
                         if i.upper().find("ARCLENGTH")>-1: 
                             Step_.ArcLen = True
@@ -810,8 +832,23 @@ def DataInput( f1, ff, Restart):
                             if len(z3)>2:                                   # nodes for arc length selected
                                 for n in z3[2:]:
                                     Step_.ArcLenNodes += [ int(n) ]
+                elif z3[0].upper()=="*EIGENMODES":
+                    Step_.Eigenmodes = True
+                    Step_.Dyn = True
+                    IType2 = "eigenmodes"
                 elif z3[0].upper()=="*DYNAMIC":    
+                    Step_.Dyn = True
+                    Step_.varTimeSteps = False
+                    Step_.Eigenmodes = False
                     IType2 = "dynamic"
+                    for i in z3:
+                        if i.upper().find("EIGENMODE2TIMESTEP") > -1:
+                            Step_.Eigenmode2TS = True
+                            try:
+                                i.find("=") > -1
+                                Step_.Eigenmode2TSrel = float(i.split("=")[1])
+                            except:
+                                raise NameError("ConFemInOut::DataInput: value required for ",i)
                 elif z3[0].upper()=="*SOLUTION TECHNIQUE":                  # key STEP SOLUTION TECHNIQUE
                     for i in range(1,zLen):
                         if z3[i].upper().find("TYPE")>-1: SolType=z3[i].split("=")[1].upper()
@@ -870,16 +907,16 @@ def DataInput( f1, ff, Restart):
                     IType2 = "stepElFile"
                     for i in z3:  
                         if i.find("FREQUENCY")>-1:
-                            Step_.ElFilList += [float(i.split("=")[1])] #elfreq = i.split("=")[1]                     # element output interval
+                            Step_.ElFilList += [float(i.split("=")[1])]                         # element output interval
                 elif z3[0].upper()=="*NODE FILE":
                     IType2 = "stepNoFile"
                     for i in z3:  
                         if i.find("FREQUENCY")>-1:
-                            Step_.NoFilList += [float(i.split("=")[1])] #nofreq = i.split("=")[1]                     # node output interval
+                            Step_.NoFilList += [float(i.split("=")[1])]                         # node output interval
                 elif z3[0].upper() == "*RESTART FILE":
                     for i in z3:
                         if i.find("FREQUENCY") > -1:
-                            Step_.ReFilList += [float(i.split("=")[1])]  # nofreq = i.split("=")[1]                     # restart output interval
+                            Step_.ReFilList += [float(i.split("=")[1])]                         # restart output interval
                 elif z3[0].upper()=="*NODE OUTPUT":
                     IType2 = "stepNoOut"
                 elif z3[0].upper()=="*ELEMENT OUTPUT":
@@ -887,9 +924,13 @@ def DataInput( f1, ff, Restart):
                 elif z3[0].upper()=="*DAMPING":                                                 # key STEP DAMPING
                     Step_.Damp = True
                     for i in z3:
-                        if i.find("ALPHA")>-1: Step_.RaAlph=float(i.split("=")[1]) # Damp[1]=float(i.split("=")[1])
+                        if i.upper().find("ALPHA")>-1: Step_.RaAlph=float(i.split("=")[1])
                     for i in z3:
-                        if i.find("BETA")>-1:  Step_.RaBeta=float(i.split("=")[1]) # Damp[2]
+                        if i.upper().find("BETA")>-1:  Step_.RaBeta=float(i.split("=")[1])
+                    for i in z3:
+                        if i.upper().find("EIGENVAL2BETA") > -1:
+                            Step_.EigenVal2Beta = True
+                            Step_.Zeta   = float(i.split("=")[1])                               # damping related to critical damping
                 #
                 # IType -- finalizing current step
                 elif z3[0].upper().strip().replace(" ","")=="*ENDSTEP":
@@ -930,11 +971,11 @@ def DataInput( f1, ff, Restart):
                         Step_.TimeTarg = Step_.TimeTargVar[0]
                     else:
                         Step_.varTimeSteps = True
+                elif IType2 == "eigenmodes":
+                    Step_.EigenmodesN = int(z3[0])
                 elif IType2=="dynamic":                                     # variable time step not allowed within step as mass matrix is pre-determined
                     Step_.TimeStep = float(z3[0])
                     Step_.TimeTarg = float(z3[1])
-                    Step_.Dyn = True
-                    Step_.varTimeSteps = False
                 elif IType2=="stepControls0":                              # data STEP CONTROLS
                     Step_.IterTol = float(z3[0])
                 elif IType2=="stepControls1":                               # data STEP CONTROLS
@@ -1096,15 +1137,6 @@ def DataInput( f1, ff, Restart):
                 if   Material.Type in ['ELASTIC']:                                  NData = 8
                 elif Material.Type in ['MISES','ISODAMAGE','MICRODAMAGE']:          NData = 10 # 9 # gradient damage ???
                 if Material.Type in ['ISODAMAGE'] and elLabel in RandomData:# prepare data for element initialization of random data
-                    #   in case integration point coordinats are needed somewhere --> InitData
-#                    xN = array([NodeList[j].XCo for j in el.Inzi])
-#                    yN = array([NodeList[j].YCo for j in el.Inzi])
-#                    xIp, yIp = [], []
-#                    for ip in range(4):
-#                        rs = SamplePoints[1, 1, ip]
-#                        xIp += [dot(el.FormX(rs[0], rs[1], 0.), xN)]
-#                        yIp += [dot(el.FormX(rs[0], rs[1], 0.), yN)]
-                    #
                     RandData = RandomData[elLabel]                          # RandomData is local dictionary and holds random values for each integration point
                     if len(RandData) != el.nIntL: raise NameError("ConFemInOut::DataInput: number of ip mismatch with random data",elset)
                     for r in RandData:

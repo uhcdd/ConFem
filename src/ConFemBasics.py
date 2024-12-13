@@ -437,28 +437,28 @@ def IPMassMatrix( Elem, mm, j, r,s,t,f, mmat, B23Flag):
     return 0
 
 def RSTf( CalcType,Elem, InT,nint, j):
-    if Elem.ShellRCFlag and j >= Elem.nIntLi:  # for reinforcement layers
+    if Elem.ShellRCFlag and j >= Elem.nIntLi:                               # for reinforcement layers
         eSet = Elem.Set
         r = SamplePointsRCShell[eSet, InT, nint - 1, j][0]
         s = SamplePointsRCShell[eSet, InT, nint - 1, j][1]
         t = SamplePointsRCShell[eSet, InT, nint - 1, j][2]
-        f = Elem.Geom[0, 0] * SampleWeightRCShell[eSet, InT, nint - 1, j]  # weighting factor
+        f = Elem.Geom[0, 0] * SampleWeightRCShell[eSet, InT, nint - 1, j]   # weighting factor
     else:
         r = SamplePoints[InT, nint - 1, j][0]
         s = SamplePoints[InT, nint - 1, j][1]
         t = SamplePoints[InT, nint - 1, j][2]
-        f = Elem.Geom[0, 0] * SampleWeight[InT, nint - 1, j]  # weighting factor; Geom[0,0] might hold Jacobian
+        f = Elem.Geom[0, 0] * SampleWeight[InT, nint - 1, j]                # weighting factor; Geom[0,0] might hold Jacobian
     if Elem.dim == 4:  # axisymmetric CAX4
         x = Elem.X[j]
-        f = 2. * x * pi * SampleWeight[InT, nint - 1, j]  # Jacobian for integration comes into play with det
-    if Elem.dim in [5, 12, 13, 96]:  # axisymmetric TAX, BAX23, BAX21, Bond
+        f = 2. * x * pi * SampleWeight[InT, nint - 1, j]                    # Jacobian for integration comes into play with det
+    if Elem.dim in [5, 12, 13, 96]:                                         # axisymmetric TAX, BAX23, BAX21, Bond
         x = Elem.X[j]
         if CalcType in [10, 11] and Elem.Type in ['BAX21E', 'BAX21EI', 'BAX23E', 'BAX23EI']:  # for BAX21E
-            x = np.mean(Elem.X)  # mass vector will have zero elements otherwise ???
+            x = np.mean(Elem.X)                                             # mass vector will have zero elements otherwise ???
         w = SampleWeight[InT, nint - 1, j]
-        f = Elem.Geom[0, 0] * 2. * x * pi * w  # Geom[0,0] -> Jacobian for integration
+        f = Elem.Geom[0, 0] * 2. * x * pi * w                               # Geom[0,0] -> Jacobian for integration
     #
-    f = f * Elem.nRebarEl  # nRebar (default 1) scaling for embedded beams, trusses for number of bars embedded
+    f = f * Elem.nRebarEl                                                   # nRebar (default 1) scaling for embedded beams, trusses for number of bars embedded
     return r, s, t, f
 
 #@profile
@@ -524,35 +524,12 @@ def IntForces( MatList, ElList, Dt, VecC,VecU,VecD,VecS,VecT, VecI, MatK,MatG,KV
                 # integration point loop
                 # integration jacobian is either from Geom[0,0] which goes into f or from det from FormB
                 for j in range(nIntL):                                      # build element stiffness with integration loop
-                    if False:
-                       if Elem.ShellRCFlag and j>=Elem.nIntLi:                     # for reinforcement layers
-                            eSet = Elem.Set
-                            r = SamplePointsRCShell[eSet,InT,nint-1,j][0]
-                            s = SamplePointsRCShell[eSet,InT,nint-1,j][1]
-                            t = SamplePointsRCShell[eSet,InT,nint-1,j][2]
-                            f = Elem.Geom[0,0]*SampleWeightRCShell[eSet,InT,nint-1,j] # weighting factor
-                       else:
-                            r = SamplePoints[InT,nint-1,j][0]
-                            s = SamplePoints[InT,nint-1,j][1]
-                            t = SamplePoints[InT,nint-1,j][2]
-                            f = Elem.Geom[0,0]*SampleWeight[InT,nint-1,j]           # weighting factor; Geom[0,0] might hold Jacobian
-                       if Elem.dim==4:                                             # axisymmetric CAX4
-                            x = Elem.X[j]
-                            f = 2. * x * pi *  SampleWeight[InT,nint-1,j]           # Jacobian for integration comes into play with det
-                       if Elem.dim in [5,12,13,96]:                                # axisymmetric TAX, BAX23, BAX21, Bond
-                            x = Elem.X[j]
-                            if CalcType in [10,11] and Elem.Type in ['BAX21E','BAX21EI','BAX23E', 'BAX23EI']:  # for BAX21E
-                                x = np.mean(Elem.X)                                 # mass vector will have zero elements otherwise ???
-                            w = SampleWeight[InT,nint-1,j]
-                            f = Elem.Geom[0,0] * 2.*x*pi * w                        # Geom[0,0] -> Jacobian for integration
-
-                       f = f*Elem.nRebarEl                                         # nRebar (default 1) scaling for embedded beams, trusses for number of bars embedded
-                    else:
-                        r,s,t,f = RSTf( CalcType,Elem, InT,nint, j)
+                    #
+                    r,s,t,f = RSTf( CalcType,Elem, InT,nint, j)
                     #
                     if CalcType in [10,11]:                                      # mass matrix -- extra contributions to continuum in case of ShellRCFlag - index 11 for explicit
                         mm  = MatList[matN].Mass(Elem)                           # element mass in integration point
-                        IPMassMatrix(Elem, mm, j,r,s,t,f, kmat, (CalcType==11) )
+                        IPMassMatrix(Elem, mm, j,r,s,t,f, kmat, (CalcType==11) ) # mass matrix might include 1, 2 or 3 directions leading to differences with physical mass !!!
                         continue
 
                     # preliminaries
@@ -1229,7 +1206,6 @@ def Eigen( ne, lim, N, NodeList, ElList, Step, Kmat, Mmat, NoLabToNoInd,NoIndToC
     BCIndex, QList = zeros((N),dtype=int), []                           # QList to sort ratios K/M
     for bl in Step.BoundList:                                           # loop over all boundary conditions of step
         Found = False
-#        nI = NoLabToNoInd[bl.NodeLabel]
         nI = FindIndexByLabel(NodeList, bl.NodeLabel)  # node index of bc
 
         for j, jj in enumerate(NodeList[nI].DofT):                      # loop over all dofs of node
@@ -1245,11 +1221,7 @@ def Eigen( ne, lim, N, NodeList, ElList, Step, Kmat, Mmat, NoLabToNoInd,NoIndToC
             Kmat[k,j] = 0.
             Mmat[j,k] = 0.                                              # modification geometric stiffness matrix
             Mmat[k,j] = 0.
-#        Kmat[:,k] = 0.
-#        Kmat[k,:] = 0.
         Kmat[k,k] = 1.
-#        Mmat[:,k] = 0.
-#        Mmat[k,:] = 0.                                                  # modification stiffness matrix
         Mmat[k,k] = 1.
     Echo(f"Eigenvalue analysis: kinematic boundary conditions considered", ff)
 
@@ -1303,6 +1275,8 @@ def Eigen( ne, lim, N, NodeList, ElList, Step, Kmat, Mmat, NoLabToNoInd,NoIndToC
             from ConFemPost import PostNode3D 
             PostNode3D( ElList,NodeList,NoIndToCMInd, None,xx, evals[i], 1.0) # xx is eigenvector
     Echo(f"Eigenvalue analysis: finished", ff)
+
+    return evals
 
 
 

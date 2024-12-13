@@ -104,9 +104,18 @@ Element data written 1.000085
 Nodal data written 1.000085
 Restart data written 1.000085
 last iteration data
+   34, 0.9991,    1
+   35, 0.9992,    1
+   36, 0.9993,    1
+   37, 0.9994,    1
+   38, 0.9995,    1
+   39, 0.9995,    1
+   40, 0.9996,    1
+   41, 0.9997,    1
    42, 0.9998,    1
    43, 0.9999,    1
    44, 1.0000,    1
    45, 1.0001,    1
 last timeout data
+reached time 1.0001
 total comp time 0 seconds

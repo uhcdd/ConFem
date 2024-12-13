@@ -174,9 +174,18 @@ Element data written 500.000000
 Nodal data written 500.000000
 Restart data written 500.000000
 last iteration data
+   39, 390.0000,    1
+   40, 400.0000,    1
+   41, 410.0000,    1
+   42, 420.0000,    1
+   43, 430.0000,    1
+   44, 440.0000,    1
+   45, 450.0000,    1
+   46, 460.0000,    1
    47, 470.0000,    1
    48, 480.0000,    1
    49, 490.0000,    1
    50, 500.0000,    1
 last timeout data
+reached time 500.0000
 total comp time 0 seconds

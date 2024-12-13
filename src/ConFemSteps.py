@@ -68,13 +68,11 @@ class Step(object):
     current = 0                                                     # initialization of current step
     PreSDict = {}                                                   # dictionary for all prestressings
     def __init__(self):
-        self.IterTol = 1.e-3
-        self.IterNum = 10
-#        self.IterTol = 1.e-6
-#        self.IterNum = 100
-        self.TimeStep = 1.
-        self.TimeTarg = 1.
-        self.SolType ="NR"                                          # NR: Newton Raphson, BFGS: BFGS
+        self.IterTol  = 1.e-3                                       # default values
+        self.IterNum  = 10
+        self.TimeStep = 0.                                          # should be initialized within confem
+        self.TimeTarg = 0.
+        self.SolType  ="NR"                                         # NR: Newton Raphson, BFGS: BFGS
         self.BoundList = []                                         # boundary conditions
         self.CLoadList = []                                         # nodal loads
         self.DLoadList = []                                         # distributed loads
@@ -83,20 +81,28 @@ class Step(object):
         self.ElFilList = []
         self.NoFilList = []
         self.ReFilList = [1.]                                       # in case no "restart file" defined in input
-        self.AmpDict = {}                                           # dictionary for Amplitudes
+        self.AmpDict   = {}                                         # dictionary for Amplitudes
         self.AmpDict['Default'] = [[0.,0.],[1.,1.]]
-        self.ZeroD = 1.e-9                                          # Smallest float for division by Zero
-        self.Dyn = False                                            # Flag for implicit dynamics 
-        self.Buckl = False                                          # Flag for buckling / modal analysis 
-        self.NMbeta = 0.25                                          # Newmark parameter beta
-        self.NMgamma = 0.5                                          # Newmark parameter gamma
-        self.Damp = False                                           # Flag for artificial / Rayleigh damping
-        self.RaAlph = 0.0                                           # Rayleigh damping parameter with stiffness                 
-        self.RaBeta = 0.0                                           # Rayleigh damping parameter with mass                 
-        self.ArcLen = False                                         # flag for arc length control
-        self.ArcLenV = 0                                            # arc length parameter
-        self.NLGeom= False                                          # Flag for large deformations
-        self.varTimeSteps= False                                    # Flag for variable TimestepSizes
+        self.ZeroD     = 1.e-9                                      # smallest float for division by Zero
+        self.Dyn       = False                                      # flag for implicit dynamics
+        self.Eigenmode2TS = False                             # largest natural period to timstep
+        self.Eigenmode2TSrel = 0.1                                  # default ratio time step to largest natural period if
+        self.Buckl     = False                                      # flag for buckling analysis
+        self.Eigenmodes = False                                     # flag for computation of dynamic eigenmodes
+        self.EigenmodesN = 5                                        # !!!!! default for number of comuted eigemodes in case of Eigenmodes=True - also used for buckling
+        self.EigenmodeIter = 100                                    # max number of iterations for eigenmode iteration - also used for buckling
+        self.Eigenvalues = zeros((10), dtype=double)                # array for eigenvalues -- hard coded length
+        self.NMbeta    = 0.25                                       # Newmark parameter beta
+        self.NMgamma   = 0.5                                        # Newmark parameter gamma
+        self.Damp      = False                                      # flag for artificial / Rayleigh damping
+        self.RaAlph    = 0.0                                        # default Rayleigh damping parameter with stiffness
+        self.RaBeta    = 0.0                                        # default Rayleigh damping parameter with mass
+        self.EigenVal2Beta = False                                  # derive beta from eigenmode
+        self.Zeta      = 0.0                                        # damping related to critical damping
+        self.ArcLen    = False                                      # flag for arc length control
+        self.ArcLenV   = 0                                          # arc length parameter
+        self.NLGeom    = False                                      # flag for large deformations
+        self.varTimeSteps= False                                    # flag for variable TimestepSizes
         self.ScaleMass = 1.0                                        # for explicit to manipulate critical time step
     def AmpVal(self, Time, Label):                                  # determine value for amplitude
         Data = self.AmpDict[Label]

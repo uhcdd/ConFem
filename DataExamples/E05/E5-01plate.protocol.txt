@@ -13,6 +13,5 @@ Restart data written 1.000000
 last iteration data
     1, 1.0000,    1
 last timeout data
-    1, 0.000000, 0.93
-    1, 0.000000, 1.93
+reached time 1.0000
 total comp time 0 seconds

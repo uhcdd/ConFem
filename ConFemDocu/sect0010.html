@@ -5,9 +5,9 @@
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title></title>
 
-<link href="SEC_0615.html" title="Execution Report" rel="next" />
-<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="prev" />
-<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="up" />
+<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="next" />
+<link href="sect0009.html" title="Stability_Tolerance_Factor" rel="prev" />
+<link href="SEC_0473.html" title="Options File" rel="up" />
 <link rel="stylesheet" href="styles/styles.css" />
 </head>
 <body>
@@ -15,11 +15,11 @@
 <div class="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
 <tr>
-<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+<td><a href="sect0009.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0473.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0615.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0600.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
@@ -39,20 +39,60 @@
 
 </span><span>
 <span>
-<a href="SEC_0600.html">Organization of ConFem Output Data</a> <b>:</b>
+<a href="SEC_0473.html">Options File</a> <b>:</b>
 </span>
 
 </span><span>
 
 <span>
-<b class="current">Overview</b>
+<b class="current">Terminate_Softening_System</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000011">12.1 Overview</h2>
-<p>Files for results are organized as follows. </p><p>Files with a type <tt>protocol</tt> report about every iteration of every instant of time of every simulation step. </p><p>Files with a type <tt>nodeout</tt> have output sections for instants of time as defined by the step sub-keyword <tt>*NODE FILE</tt>, see Section <a href="SEC_0570.html">10.9</a>. Every node has a line within every output section with data for coordinates, values for nodal degrees of freedom and internal nodal forces. Types of nodal degrees of freedom an nodal forces depend on the element type, i.e. are different for, e.g., beam elements and plate elements. </p><p>Files with a type <tt>elemout</tt> also have output sections for instants of time as defined by the step sub-keyword <tt>*EL FILE</tt>, see Section <a href="SEC_0570.html">10.9</a>. Output sub-sections correspond to every element. Every element integration point has a line within every element output sub-subsection with data for coordinates and further values like, e.g. generalized strains and stresses and further values depending on the element and material type. </p><p>Files with a type <tt>timeout</tt> have a line for all computed instants of time with values of every nodal degree of freedom as is defined in a file of type <tt>opt</tt>, see Section <a href="SEC_0475.html">11.1</a>. </p></div>
+<div><h2 id="a0000000011">11.5 Terminate_Softening_System</h2>
+<p>The option has a data line. <br /><br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <tt>terminate_softening_system</tt>, </p></td>
+
+    
+    <td style="text-align:left"><p> <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> </p></td>
+
+</tr>
+</table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
+<tr>
+
+    
+    <td style="text-align:left"><p>  <object data="images/img-0227.svg" style="width:2.200em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0231.png" alt="$t&lt;1$" style="vertical-align:0px; 
+                                     width:33px; 
+                                     height:11px" class="math gen" /></object> </p></td>
+
+    
+    <td style="text-align:left"><p> terminates a computation in case the latest reaction (absolute value) is <object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object>-times smaller than the reaction (absolute value) a short period before.</p></td>
+
+</tr>
+</table><p> <br /><br /><object data="images/img-0003.svg" style="width:0.333em; 
+                                                                height:0.667em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
+                                     width:5px; 
+                                     height:10px" class="math gen" /></object> has no default value and should be explicitly stated. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                                                height:0.533em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
+                                     width:15px; 
+                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> </p></div>
 
 
 
@@ -61,11 +101,11 @@
 <div class="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
 <tr>
-<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+<td><a href="sect0009.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0473.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0615.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0600.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>

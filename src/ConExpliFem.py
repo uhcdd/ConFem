@@ -217,7 +217,7 @@ class ConExpliFem:
             f5, f7 = None, None
             if pth.isfile(Name+".opt.txt"):                                 # read options file if there is any
                 f4=open( Name+".opt.txt", 'r')
-                WrNodes, LineS, _, MaxType, _ = ReadOptionsFile(f4, NodeList,NoLabToNoInd,NoIndToCMInd)
+                WrNodes, _, MaxType, _,_,_,_,_ = ReadOptionsFile(f4, NodeList,NoLabToNoInd,NoIndToCMInd)
                 f4.close()
                 f5=open( Name+".timeout.txt", 'w')
                 if len(MaxType)>0: f7=open( Name+".elemmax.txt", 'w')
@@ -407,8 +407,8 @@ class ConExpliFem:
 if __name__ == "__main__":
     LogName="../LogFiles"                                                   # to log temporary data
 #    numpy.seterr(all='raise')
-    Name, Plot, Restart, HashSource, Eig, ElPlotTimes, StressStrainOut, VTK = DefData()
+    Name, Plot, Restart, HashSource, ElPlotTimes, StressStrainOut, VTK = DefData()
 #    Name=str(raw_input('Filename without extension: '))                    # input data name
     ConFem_ = ConExpliFem()
-    RC=ConFem_.Run(Name, LogName, Plot, LinAlgFlag, Restart, HashSource, Eig, ElPlotTimes, StressStrainOut, VTK)
+    RC=ConFem_.Run(Name, LogName, Plot, LinAlgFlag, Restart, HashSource, [], ElPlotTimes, StressStrainOut, VTK)
     print(RC)

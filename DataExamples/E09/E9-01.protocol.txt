@@ -5,4 +5,4 @@ used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
 0 step starts, solution type NR
 0   1 1.000 1.00000 iter 0 3.728689e-02
 0   1 1.000 1.00000 iter 1 8.306091e-14
-total comp time 0 seconds
+total comp time 1 seconds

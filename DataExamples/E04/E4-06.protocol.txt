@@ -22,11 +22,13 @@ Element data written 1.000000
 Nodal data written 1.000000
 Restart data written 1.000000
 last iteration data
+    1, 0.2000,    2
     2, 0.4000,    2
     3, 0.6000,    2
     4, 0.8000,    2
     5, 1.0000,    2
 last timeout data
+reached time 1.0000
 1 step starts, solution type NR
 1   1 2.000 1.00000 iter 0 4.801642e-08 1.000000e+00    0.000000e+00
 1   1 2.000 1.10000 iter 1 6.766534e-03 1.000000e+00    2.824817e-02
@@ -91,9 +93,16 @@ Element data written 2.000000
 Nodal data written 2.000000
 Restart data written 2.000000
 last iteration data
+    1, 1.1000,    3
+    2, 1.2000,    3
+    3, 1.3000,    3
+    4, 1.4000,    4
+    5, 1.5000,    5
+    6, 1.6000,    5
     7, 1.7000,    6
     8, 1.8000,    6
     9, 1.9000,    7
    10, 2.0000,    7
 last timeout data
+reached time 2.0000
 total comp time 2 seconds

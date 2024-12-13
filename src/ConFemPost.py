@@ -1654,6 +1654,8 @@ def PostNode3D( ElList,NodeList,NoIndToCMInd, NodeResults,VecU, Time, ScaleDis):
     xMean, yMean, zMean = 0.5*(xMin+xMax), 0.5*(yMin+yMax), 0.5*(zMin+zMax) 
     # for measure of absolute displacement
     for elem in ElList:                                                     # loop over elements
+        if elem.Type in ["TAX2","BAX21E","CAX4"]:
+            continue
         DisList = []
         for o in elem.Inzi:
             ni = NoIndToCMInd[o]
@@ -1670,68 +1672,74 @@ def PostNode3D( ElList,NodeList,NoIndToCMInd, NodeResults,VecU, Time, ScaleDis):
                 elif elem.Type in _Length2D_:                               # uhc quick and dirty
                     if elem.Type in ['B23E']:
                         if len(node.DofT)==3:   DisList += [sqrt(VecU[DofInd]**2+VecU[DofInd+1]**2)] # to exclude enhance node
-                    else:                       raise NameError("ConFemPost::PostNode3D: element ype not yet implemented",elem.Type)
+                    else:
+                        raise NameError("ConFemPost::PostNode3D: element ype not yet implemented",elem.Type)
         DisElemList += [np.mean(DisList)]                                   # this is always positive
-    dMax = max(DisElemList)
-    #
-    scale_ = 10.                                                            # 20.  # displayed deformation should be roughly 1/scale_ of parts dimensions
-    scale = ScaleDis*max(XM,YM,ZM)/(dMax*scale_)
-    ColM = plt.get_cmap('summer')
-    fig = pl.figure()
-    fig.text( 0.05, 0.95, f"deformed mesh time {Time:7.3f} - scale {scale:7.3f}", size='x-large') # , ha='right')
-    norm_ = colors.Normalize(vmin=0., vmax=dMax)
-    ax1, orie = fig.add_axes([0.90, 0.05, 0.02, 0.8]), 'vertical'           # left, bottom, width, height] where all quantities are in fractions of figure width and height
-#    ax1, orie = fig.add_axes([0.05, 0.05, 0.9, 0.02]), 'horizontal' # left, bottom, width, height] where all quantities are in fractions of figure width and height
-    cb1 = mpl.colorbar.ColorbarBase(ax1, cmap=ColM, norm=norm_, orientation=orie)
-    ax = plt.subplot(projection='3d')
-    #
-    for i, elem in enumerate( ElList ):
-        CoordList  = []
-        for j in elem.Inzi:
-            node = NodeList[ NoIndToCMInd[j] ]
-            if len(VecU) == 0:
-                nL = node.Label
-                if nL in NodeResults: noRe = NodeResults[nL][2]
-                else:                 raise NameError("ConFemPost::PostNode3D: node results not available",nL)
-                if   elem.Type in ['SH4','SH3']:
-                    CoordList += [[node.XCo+scale*noRe[0],  node.YCo+scale*noRe[1],  node.ZCo+scale*noRe[2]]]
-                elif elem.Type=='SB3':
-                    CoordList += [[node.XCo-xMin, node.YCo-yMin, node.ZCo-zMin+scale*noRe[0]]]
-                else:
-                    raise NameError ("ConFemPost::PostNode3D: element type not yet implemented",elem.Label,elem.Type)
-            else:
-                DofInd = node.GlobDofStart
-                if   elem.Type in ['SH4','SH3']:
-                    CoordList += [[node.XCo+scale*VecU[DofInd], node.YCo+scale*VecU[DofInd+1], node.ZCo+scale*VecU[DofInd+2]]]
-                elif elem.Type=='SB3':
-                    CoordList += [[node.XCo-xMin, node.YCo-yMin, node.ZCo-zMin+scale*VecU[DofInd]]]
-                elif elem.Type in _Length2D_:                               # uhc quick and dirty
-                    if elem.Type in ['B23E']:
-                        if len(node.DofT)==3:   CoordList += [[node.XCo+scale*VecU[DofInd], node.YCo+scale*VecU[DofInd+1], node.ZCo]] # to exclude enhance node
-                    else:                       raise NameError("ConFemPost::PostNode3D: element ype not yet implemented",elem.Type)
 
-        tri = a3.art3d.Poly3DCollection([CoordList])
-        tri.set_color(ColM( DisElemList[i]/dMax ))
-        tri.set_edgecolor('k')
-        ax.add_collection3d(tri)
-    #
-    ax.set_xlim3d( xMean-delR2, xMean+delR2 )
-    ax.set_ylim3d( yMean-delR2, yMean+delR2 )
-    ax.set_zlim3d( zMean-delR2, zMean+delR2 )
-    ax.set_xlabel('x',fontsize='x-large')
-    ax.set_ylabel('y',fontsize='x-large')
-    ax.set_zlabel('z',fontsize='x-large')
-    ax.tick_params(axis='x', labelsize='x-large')
-    ax.tick_params(axis='y', labelsize='x-large')
-    ax.tick_params(axis='z', labelsize='x-large')
-    ax.set_xticks([xMin,xMean,xMax])
-    ax.set_xticklabels( ["%.2f"%(xMin),"%.2f"%(xMean),"%.2f"%(xMax)] )
-    ax.set_yticks([yMin,yMean,yMax])
-    ax.set_yticklabels( ["%.2f"%(yMin),"%.2f"%(yMean),"%.2f"%(yMax)] )
-    ax.set_zticks([zMin,zMean,zMax])
-    ax.set_zticklabels( ["%.2f"%(zMin),"%.2f"%(zMean),"%.2f"%(zMax)] )
-    ax.set_aspect('auto')
-    ax.grid()
+    if len(DisElemList)>0:
+        dMax = max(DisElemList)
+        #
+        scale_ = 10.                                                            # 20.  # displayed deformation should be roughly 1/scale_ of parts dimensions
+        scale = ScaleDis*max(XM,YM,ZM)/(dMax*scale_)
+        ColM = plt.get_cmap('summer')
+        fig = pl.figure()
+        fig.text( 0.05, 0.95, f"deformed mesh time {Time:7.3f} - scale {scale:7.3f}", size='x-large') # , ha='right')
+        norm_ = colors.Normalize(vmin=0., vmax=dMax)
+        ax1, orie = fig.add_axes([0.90, 0.05, 0.02, 0.8]), 'vertical'           # left, bottom, width, height] where all quantities are in fractions of figure width and height
+    #    ax1, orie = fig.add_axes([0.05, 0.05, 0.9, 0.02]), 'horizontal' # left, bottom, width, height] where all quantities are in fractions of figure width and height
+        cb1 = mpl.colorbar.ColorbarBase(ax1, cmap=ColM, norm=norm_, orientation=orie)
+        ax = plt.subplot(projection='3d')
+        #
+        for i, elem in enumerate( ElList ):
+            if elem.Type in ["TAX2","BAX21E","CAX4"]:
+                continue
+            CoordList  = []
+            for j in elem.Inzi:
+                node = NodeList[ NoIndToCMInd[j] ]
+                if len(VecU) == 0:
+                    nL = node.Label
+                    if nL in NodeResults: noRe = NodeResults[nL][2]
+                    else:                 raise NameError("ConFemPost::PostNode3D: node results not available",nL)
+                    if   elem.Type in ['SH4','SH3']:
+                        CoordList += [[node.XCo+scale*noRe[0],  node.YCo+scale*noRe[1],  node.ZCo+scale*noRe[2]]]
+                    elif elem.Type=='SB3':
+                        CoordList += [[node.XCo-xMin, node.YCo-yMin, node.ZCo-zMin+scale*noRe[0]]]
+                    else:
+                        raise NameError ("ConFemPost::PostNode3D: element type not yet implemented",elem.Label,elem.Type)
+                else:
+                    DofInd = node.GlobDofStart
+                    if   elem.Type in ['SH4','SH3']:
+                        CoordList += [[node.XCo+scale*VecU[DofInd], node.YCo+scale*VecU[DofInd+1], node.ZCo+scale*VecU[DofInd+2]]]
+                    elif elem.Type=='SB3':
+                        CoordList += [[node.XCo-xMin, node.YCo-yMin, node.ZCo-zMin+scale*VecU[DofInd]]]
+                    elif elem.Type in _Length2D_:                               # uhc quick and dirty
+                        if elem.Type in ['B23E']:
+                            if len(node.DofT)==3:   CoordList += [[node.XCo+scale*VecU[DofInd], node.YCo+scale*VecU[DofInd+1], node.ZCo]] # to exclude enhance node
+                        else:                       raise NameError("ConFemPost::PostNode3D: element ype not yet implemented",elem.Type)
+
+            tri = a3.art3d.Poly3DCollection([CoordList])
+            tri.set_color(ColM( DisElemList[i]/dMax ))
+            tri.set_edgecolor('k')
+            ax.add_collection3d(tri)
+        #
+        ax.set_xlim3d( xMean-delR2, xMean+delR2 )
+        ax.set_ylim3d( yMean-delR2, yMean+delR2 )
+        ax.set_zlim3d( zMean-delR2, zMean+delR2 )
+        ax.set_xlabel('x',fontsize='x-large')
+        ax.set_ylabel('y',fontsize='x-large')
+        ax.set_zlabel('z',fontsize='x-large')
+        ax.tick_params(axis='x', labelsize='x-large')
+        ax.tick_params(axis='y', labelsize='x-large')
+        ax.tick_params(axis='z', labelsize='x-large')
+        ax.set_xticks([xMin,xMean,xMax])
+        ax.set_xticklabels( ["%.2f"%(xMin),"%.2f"%(xMean),"%.2f"%(xMax)] )
+        ax.set_yticks([yMin,yMean,yMax])
+        ax.set_yticklabels( ["%.2f"%(yMin),"%.2f"%(yMean),"%.2f"%(yMax)] )
+        ax.set_zticks([zMin,zMean,zMax])
+        ax.set_zticklabels( ["%.2f"%(zMin),"%.2f"%(zMean),"%.2f"%(zMax)] )
+        ax.set_aspect('auto')
+        ax.grid()
+
     return 0
 
 def PlotHist( f5, WrNodes ):
@@ -2007,7 +2015,8 @@ def PickleLoad( FilDir, FilName, StepCounter):
             VecU=pickle.load(fd);VecC=pickle.load(fd);VecI=pickle.load(fd);VecP=pickle.load(fd);VecP0=pickle.load(fd);VecP0old=pickle.load(fd);VecBold=pickle.load(fd);VecT=pickle.load(fd);VecS=pickle.load(fd);\
             VeaU=pickle.load(fd);VevU=pickle.load(fd);VeaC=pickle.load(fd);VevC=pickle.load(fd);VecY=pickle.load(fd);BCIn=pickle.load(fd);BCIi=pickle.load(fd);Time=pickle.load(fd);TimeOld=pickle.load(fd);\
             TimeEl=pickle.load(fd);TimeNo=pickle.load(fd);TimeS=pickle.load(fd);Step=pickle.load(fd);                Skyline=pickle.load(fd);SDiag=pickle.load(fd);SLen=pickle.load(fd);SymSys=pickle.load(fd);\
-            NoLabToNoInd=pickle.load(fd);NoIndToCMInd=pickle.load(fd);ContinuumNodes=pickle.load(fd);CoNoToNoLi=pickle.load(fd);SecDic=pickle.load(fd);LinAlgFlag=pickle.load(fd);ResultTypes=pickle.load(fd);Header=pickle.load(fd);
+            NoLabToNoInd=pickle.load(fd);NoIndToCMInd=pickle.load(fd);ContinuumNodes=pickle.load(fd);CoNoToNoLi=pickle.load(fd);SecDic=pickle.load(fd);LinAlgFlag=pickle.load(fd);ResultTypes=pickle.load(fd);Header=pickle.load(fd); \
+            StepRestart = pickle.load(fd);MaxType = pickle.load(fd);MaxEquiIter=pickle.load(fd);StabSys=pickle.load(fd);StabTolF=pickle.load(fd);SoftSys=pickle.load(fd);SoftRed=pickle.load(fd);
         fd.close()
 #        s = StepList[StepCounter]
         if len(ContinuumNodes)>0: CoorTree = spatial.cKDTree( ContinuumNodes ) # for search purposes, e.g. for EFG or aggregates or embedded truss elements
@@ -2118,26 +2127,29 @@ class ConFemPost:
                 PostNode( ElemList, NodeList,NoIndToCMInd, VecU, ScaleDis, None)
                 print('PostNode   process plot for last time', "%6.4f"%LastTime)
             #
-            ff  = open(Name+".elemout_"+".txt",'r')
-            ffN = open(Name+".nodeout_"+".txt",'r')
-            EndFlag, EndFlagN = False, False
-            # loop over times in result data sets
-            while not EndFlag and not EndFlagN:
-                EndFlag, EndFlagN, Time, TimeN, ElemResults, NodeResults, ElResults, SetSlices = ReadResultsFromFile( MatList, ff, ffN)
-                if Time != TimeN: raise NameError("ConFemPostProcStandAlone: async time for elements and nodes",Time, TimeN)
-                print("ElemData found time",Time)
-                if Time in PlotTimes or len(PlotTimes)==0:
-                    if PE2DFlag:
-                        SCa_= PostScales( SecDic, ElemList, ElResults, ScaleStress )
-                        _ = PostElem2D( Header,ElemList,NodeList, ScaleDis2D,Contour2D, SecDic, MaPlLib, NoIndToCMInd, NodeResults,ElResults,SetSlices, Time, FilDir+"/", SCa_)
-                    if PE3DFlag:
-                        PostNode3D( ElemList,NodeList,NoIndToCMInd, NodeResults,[], Time, ScaleDis)
-                        l = PostElem3D( ElemList, NodeList,NoIndToCMInd, ElResults, Time)
-                        if l>0: print('PostElem3D process plot for time ', Time)
-                    if VTK:
-                        PostElemVTK( Name, str(int(1000*round(Time,5))), ElemList, NodeList,NoIndToCMInd, ElResults,NodeResults)
-            ff.close()
-            ffN.close() 
+            try:
+                ff  = open(Name+".elemout_"+".txt",'r')
+                ffN = open(Name+".nodeout_"+".txt",'r')
+                EndFlag, EndFlagN = False, False
+                # loop over times in result data sets
+                while not EndFlag and not EndFlagN:
+                    EndFlag, EndFlagN, Time, TimeN, ElemResults, NodeResults, ElResults, SetSlices = ReadResultsFromFile( MatList, ff, ffN)
+                    if Time != TimeN: raise NameError("ConFemPostProcStandAlone: async time for elements and nodes",Time, TimeN)
+                    print("ElemData found time",Time)
+                    if Time in PlotTimes or len(PlotTimes)==0:
+                        if PE2DFlag:
+                            SCa_= PostScales( SecDic, ElemList, ElResults, ScaleStress )
+                            _ = PostElem2D( Header,ElemList,NodeList, ScaleDis2D,Contour2D, SecDic, MaPlLib, NoIndToCMInd, NodeResults,ElResults,SetSlices, Time, FilDir+"/", SCa_)
+                        if PE3DFlag:
+                            PostNode3D( ElemList,NodeList,NoIndToCMInd, NodeResults,[], Time, ScaleDis)
+                            l = PostElem3D( ElemList, NodeList,NoIndToCMInd, ElResults, Time)
+                            if l>0: print('PostElem3D process plot for time ', Time)
+                        if VTK:
+                            PostElemVTK( Name, str(int(1000*round(Time,5))), ElemList, NodeList,NoIndToCMInd, ElResults,NodeResults)
+                ff.close()
+                ffN.close()
+            except:
+                print(" no elemout_.txt available -- skipped PostElem2D & PostElem3D")
             #
             if ShellL:
                 f2=open( Name+".elemout.txt", 'r')
@@ -2146,7 +2158,7 @@ class ConFemPost:
             #   
             if pth.isfile(Name+".opt.txt"):
                 f4=open( Name+".opt.txt", 'r')
-                WrNodes, _, _, _, _ = ReadOptionsFile(f4, NodeList, NoLabToNoInd, NoIndToCMInd)
+                WrNodes,_,_,_,_,_,_,_ = ReadOptionsFile(f4, NodeList, NoLabToNoInd, NoIndToCMInd)
                 f4.close()
             else: WrNodes = []
             if len(WrNodes)>0:
@@ -2204,7 +2216,7 @@ if __name__ == "__main__":
 #    Name = "../_DataShellsSlabs/c_1461(0.08)_2.1e5_0.3_segment load" # Shell, bridge_el05m, c_1461(0.08)_2.1e5_0.3_segment load
     #
 #    Name = "C:/Users/uhc/Documents/Work/FoilPap/2023/Note_ShearPlateRandom/ConFem/ShearPanel/Restart/ShearPanelR.89"
-    Name = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ExpDataSets/281-9/281-9"
+    Name = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ExpDataSets//_61-I-6/Restart/61-I-6"
 #    Name = "../_DataBond/PulloutAxiSym"
 #    Name = "../_DataAxisym/BAX23"
 #    Name = "../_DataTmp/xxxT"
@@ -2212,8 +2224,8 @@ if __name__ == "__main__":
     DirName, FilName = DirFilFromName( Name )
     #
     print('ConFemPost for ',Name)
-    Version = 1                                                         # 1: plot results, 2: plot residuals
-    ResiData = [ 250, 18, 2.0e+1]                                       # incr, iter scale
+    Version = 2                                                             # 1: plot results, 2: plot residuals
+    ResiData = [ 30, 18, 5.0e+01]                                            # incr, iter, scale
     ComFemPost_ = ConFemPost()
     MaPlLib = True                                                          # flag for using matplotlib
     Flag = ComFemPost_.Run( DirName,FilName, Name,StepCounter, MaPlLib, VTK, Version, ResiData)

@@ -5,8 +5,8 @@
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title></title>
 
-<link href="sect0009.html" title="max_equi_iterations" rel="next" />
-<link href="sect0007.html" title="LineSearch" rel="prev" />
+<link href="sect0009.html" title="Stability_Tolerance_Factor" rel="next" />
+<link href="sect0007.html" title="ReinforcementDesign" rel="prev" />
 <link href="SEC_0473.html" title="Options File" rel="up" />
 <link rel="stylesheet" href="styles/styles.css" />
 </head>
@@ -45,176 +45,42 @@
 </span><span>
 
 <span>
-<b class="current">ReinforcementDesign</b>
+<b class="current">Max_Equi_Iterations</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000009">11.3 ReinforcementDesign</h2>
-<p>This option must be used when running a Reinforced concrete design using <tt>ConPlaD</tt>. It creates a file <tt>&lt;name&gt;.reinforcement.txt</tt>. The option has a data line <br /><br /></p><table class="tabular" cellspacing="0">
+<div><h2 id="a0000000009">11.3 Max_Equi_Iterations</h2>
+<p>The option is active in quasistatic simulations with step keyword <tt>*STATIC*, </tt>see, Section <a href="SEC_0570.html">10.9</a>. The option has a data line <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
-    <td style="text-align:left"><p>  <tt>reinforcementDesign</tt>, </p></td>
+    <td style="text-align:left"><p>  <tt>max_equi_iterations</tt>, </p></td>
 
     
-    <td style="text-align:left"><p> <object data="images/img-0220.svg" style="width:1.333em; 
-                                                                height:1.067em; 
-                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0224.png" alt="$f_{yd}$" style="vertical-align:-4px; 
-                                     width:20px; 
-                                     height:16px" class="math gen" /></object>, </p></td>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0221.svg" style="width:1.333em; 
-                                                                height:0.933em; 
-                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0225.png" alt="$f_{cd}$" style="vertical-align:-3px; 
-                                     width:20px; 
-                                     height:14px" class="math gen" /></object>, </p></td>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0222.svg" style="width:2.733em; 
-                                                                height:0.800em; 
-                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0226.png" alt="$\rho _{x,min}$" style="vertical-align:-4px; 
-                                     width:41px; 
-                                     height:12px" class="math gen" /></object>, </p></td>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0223.svg" style="width:2.733em; 
-                                                                height:0.800em; 
-                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0227.png" alt="$\rho _{y,min}$" style="vertical-align:-4px; 
-                                     width:41px; 
-                                     height:12px" class="math gen" /></object>, </p></td>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0127.svg" style="width:0.533em; 
-                                                                height:0.733em; 
-                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0131.png" alt="$h$" style="vertical-align:0px; 
-                                     width:8px; 
-                                     height:11px" class="math gen" /></object>, </p></td>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0023.svg" style="width:0.533em; 
-                                                                height:0.733em; 
-                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0027.png" alt="$d$" style="vertical-align:0px; 
-                                     width:8px; 
-                                     height:11px" class="math gen" /></object>, </p></td>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0224.svg" style="width:0.467em; 
-                                                                height:0.667em; 
-                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0228.png" alt="$\varrho $" style="vertical-align:-3px; 
-                                     width:7px; 
-                                     height:10px" class="math gen" /></object> </p></td>
+    <td style="text-align:left"><p> <object data="images/img-0004.svg" style="width:0.667em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0008.png" alt="$n$" style="vertical-align:0px; 
+                                     width:10px; 
+                                     height:7px" class="math gen" /></object> </p></td>
 
 </tr>
 </table><p> <br />with <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
-    <td style="text-align:left"><p>  <object data="images/img-0220.svg" style="width:1.333em; 
-                                                                height:1.067em; 
-                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0224.png" alt="$f_{yd}$" style="vertical-align:-4px; 
-                                     width:20px; 
-                                     height:16px" class="math gen" /></object> </p></td>
-
-    
-    <td style="text-align:left"><p> design value of the reinforcement strength</p></td>
-
-</tr><tr>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0221.svg" style="width:1.333em; 
-                                                                height:0.933em; 
-                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0225.png" alt="$f_{cd}$" style="vertical-align:-3px; 
-                                     width:20px; 
-                                     height:14px" class="math gen" /></object> </p></td>
-
-    
-    <td style="text-align:left"><p> design value of the concrete compressive strength </p></td>
-
-</tr><tr>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0222.svg" style="width:2.733em; 
-                                                                height:0.800em; 
-                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0226.png" alt="$\rho _{x,min}$" style="vertical-align:-4px; 
-                                     width:41px; 
-                                     height:12px" class="math gen" /></object> </p></td>
-
-    
-    <td style="text-align:left"><p> minimum reinforcement ratio <object data="images/img-0061.svg" style="width:0.533em; 
+    <td style="text-align:left"><p>  <object data="images/img-0004.svg" style="width:0.667em; 
                                                                 height:0.467em; 
-                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0065.png" alt="$x$" style="vertical-align:0px; 
-                                     width:8px; 
-                                     height:7px" class="math gen" /></object>-direction – as is, e.g., stipulated by common standards </p></td>
-
-</tr><tr>
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0008.png" alt="$n$" style="vertical-align:0px; 
+                                     width:10px; 
+                                     height:7px" class="math gen" /></object> </p></td>
 
     
-    <td style="text-align:left"><p> <object data="images/img-0223.svg" style="width:2.733em; 
-                                                                height:0.800em; 
-                                                                vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0227.png" alt="$\rho _{y,min}$" style="vertical-align:-4px; 
-                                     width:41px; 
-                                     height:12px" class="math gen" /></object> </p></td>
-
-    
-    <td style="text-align:left"><p> minimum reinforcement ratio <object data="images/img-0002.svg" style="width:0.533em; 
-                                                                height:0.667em; 
-                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0003.png" alt="$y$" style="vertical-align:-3px; 
-                                     width:8px; 
-                                     height:10px" class="math gen" /></object>-direction – as is, e.g., stipulated by common standards</p></td>
-
-</tr><tr>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0127.svg" style="width:0.533em; 
-                                                                height:0.733em; 
-                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0131.png" alt="$h$" style="vertical-align:0px; 
-                                     width:8px; 
-                                     height:11px" class="math gen" /></object> </p></td>
-
-    
-    <td style="text-align:left"><p> geometric height – only relevant for slabs, set to 1 for plates</p></td>
-
-</tr><tr>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0023.svg" style="width:0.533em; 
-                                                                height:0.733em; 
-                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0027.png" alt="$d$" style="vertical-align:0px; 
-                                     width:8px; 
-                                     height:11px" class="math gen" /></object> </p></td>
-
-    
-    <td style="text-align:left"><p> structural height – only relevant for slabs, set to 1 for plates</p></td>
-
-</tr><tr>
-
-    
-    <td style="text-align:left">&nbsp;</td>
-
-    
-    <td style="text-align:left"><p> geometric height or thickness, respetively, of plates is taken from the respective <tt>*SOLID SECTION</tt>-thickness <object data="images/img-0003.svg" style="width:0.333em; 
-                                                                height:0.667em; 
-                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
-                                     width:5px; 
-                                     height:10px" class="math gen" /></object>, see Section <a href="SEC_0510.html">10.5</a></p></td>
-
-</tr><tr>
-
-    
-    <td style="text-align:left"><p> <object data="images/img-0224.svg" style="width:0.467em; 
-                                                                height:0.667em; 
-                                                                vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0228.png" alt="$\varrho $" style="vertical-align:-3px; 
-                                     width:7px; 
-                                     height:10px" class="math gen" /></object> </p></td>
-
-    
-    <td style="text-align:left"><p> specific weight (not to be confused with specific mass) of reinforcement material – to compute total reinforcement weight </p></td>
+    <td style="text-align:left"><p> number of iteration attempts allowed without reaching convergence before terminating the calculation </p></td>
 
 </tr>
-</table><p> <br /><br />The organization of output data is indicated in header lines of <tt>&lt;name&gt;.reinforcement.txt</tt>. Every line basically addresses an element integration point. But it is different for plates and slabs, e.g., slabs generally have distinct lower and upper reinforcements and consider shear while this is not distinguished / relevant for plates.<br />The exact meaning is also illustrated in the <i class="sc">Book</i> Example 8.1 for plates and Example 9.2, 9.3 for slabs . <br />Regarding plate output lines they may be interrupted by lines indicating an iteration to find a solution. <br /><br />See also the <i class="sc">Book</i> 8.1.3 for reinforcement design procedures of plates and 9.7.1/2 for reinforcement design procedures of slabs. </p></div>
+</table><p> <br /><br />Default value is 3 in case the option is not explicitly defined. </p></div>
 
 
 

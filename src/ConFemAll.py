@@ -20,7 +20,7 @@ Name    = str(input('Filename without extension: '))
 
 if Im:
     ConFem_ = ConFem.ConFem()
-    ConFem_.Run(Name, LogName, False, True, False, "elemout", [None, None], [], [], False) # expects data set name in command line
+    ConFem_.Run(Name, LogName, False, True, False, "elemout", [], [], False) # expects data set name in command line
 else:
     X = str(input('ConFem 0, ConSimFem 1, ConPlaD 2, ConSimplex 3, ConFemPost 4, ConStressStrain 5: '))
     if X in ['0','1']:

@@ -59,7 +59,7 @@ class ConSimFem:
         MaxType = [] 
         if pth.isfile(Name+".opt.txt"):                                             # read options file if there is any
             f4=open( Name+".opt.txt", 'r')
-            WrNodes, LineS, ReDes, MaxType, _ = ReadOptionsFile(f4, NodeList, NoLabToNoInd,NoIndToCMInd)
+            WrNodes, ReDes, MaxType, _,_,_,_,_ = ReadOptionsFile(f4, NodeList, NoLabToNoInd,NoIndToCMInd)
             f4.close()
             f5=open( Name+".timeout.txt", 'w')
 
@@ -108,6 +108,7 @@ class ConSimFem:
             if len(StLi.NoFilList)>0: TimeNo = TimeS
             else:                     TimeNo = TimeTarg
 
+            maxWriteNodes = zeros((3), dtype=float)                                 # see ConFemInOut::WriteNodes
             while not Stop:                                                         # loop over time steps
                 counter = counter+1
                 if Time+1.e-6>=TimeEl: TimeEl=Time + StLi.ElFilList[-1]             # set time for element output
@@ -170,7 +171,7 @@ class ConSimFem:
                     WriteNodalData( f3, Time, NodeList, VecU, VecB)                 # write nodal data
                 if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
                 if f5!=None:
-                    WriteNodes( f5, WrNodes, Time, VecU, VecB, VecP, i, counter, queues)
+                    WriteNodes( f5, WrNodes, Time, VecU,VecB,VecP, i, counter, queues,ndeq,maxWriteNodes)
                     f5.flush()
             Step += 1                                                       # next step
         # end of step loop 

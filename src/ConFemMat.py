@@ -2643,11 +2643,16 @@ class MicroPlaneDam(Material):                                                 #
                 else:                                                                           # plane strain
                     MatM_ =array([[MatM[0,0],MatM[0,1],MatM[0,5]],[MatM[1,0],MatM[1,1],MatM[1,5]],[MatM[5,0],MatM[5,1],MatM[5,5]]])
                 return array([sig[0],sig[1],sig[5]]), MatM_, [Eps[0], Eps[1], ep2, Eps[5], sig[0], sig[1], sig[2], sig[5],dd_iso]
-            elif Elem.dim == 4:
+            elif Elem.dim == 4:                                                                 # axisymmetric
                 MatM_ = array([[MatM[0, 0], MatM[0, 1], MatM[0, 2], MatM[0, 5]],
                                [MatM[1, 0], MatM[1, 1], MatM[1, 2], MatM[1, 5]],
                                [MatM[2, 0], MatM[2, 1], MatM[2, 2], MatM[2, 5]],
                                [MatM[5, 0], MatM[5, 1], MatM[5, 2], MatM[5, 5]]])
+#
+#
+#                if Elem.Label==459:
+#                    print("XXX",Eps,sig,dd_iso)
+#
                 return [sig[0], sig[1], sig[2], sig[5]], MatM_, [Eps[0], Eps[1], Eps[2], Eps[5], sig[0], sig[1], sig[2], sig[5], dd_iso]
             elif Elem.dim==3:                                                                   # 3D
                 return array([sig[0],sig[1],sig[2],sig[3],sig[4],sig[5]]), MatM, [Eps[0],Eps[1],Eps[2],Eps[3],Eps[4],Eps[5],sig[0],sig[1],sig[2],sig[3],sig[4],sig[5],dd_iso]
