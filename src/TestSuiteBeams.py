@@ -24,14 +24,15 @@ class Test(unittest.TestCase):
         self.ConFem_ = ConFem.ConFem()
         self.ConSimFem_ = ConSimFem.ConSimFem()
         self.NameLog = "../LogFiles"
-       
+        self.LogData = True
+
     def testE3_02_B21(self):
         Name="../_DataBeams/E3-02_B21"
         self.assertEqual(self.ConSimFem_.Run(Name, False, LinAlgFlag,"elemout"), 'd28ea08ad56a44300e2feea6a936d3a4')
 
     def testE3_02_B21E(self):
         Name="../_DataBeams/E3-02_B21E"                 #
-        self.assertEqual(self.ConFem_.Run(Name, self.NameLog, False, LinAlgFlag, False, "elemout", None, [], False), '72b9694c4e8e981af105beb5033a6a10')
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '72b9694c4e8e981af105beb5033a6a10')
 
     def testE3_02_B23(self):
         Name="../_DataBeams/E3-02_B23"                 #
@@ -39,11 +40,11 @@ class Test(unittest.TestCase):
 
     def testE3_02_B23E_PolyL(self):
         Name="../_DataBeams/E3-02_B23E_PolyL"                 #
-        self.assertEqual(self.ConFem_.Run(Name, self.NameLog, False, LinAlgFlag, False, "elemout", None, [], False), 'dc08427e96d81e453d65e7087c618a8d')
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), 'dc08427e96d81e453d65e7087c618a8d')
 
     def testE3_02_Tens(self):
         Name="../DataExamples/E04/E4-02"                 # introducing example for RC beams whereby regarding concrete tensile strength
-        self.assertEqual(self.ConFem_.Run(Name, self.NameLog, False, LinAlgFlag, False, "elemout", None, [], False), '995928fe76bbe4b20043d0b9b33d8586')
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '995928fe76bbe4b20043d0b9b33d8586')
 
 if __name__ == "__main__":
 #    numpy.seterr(all='raise')

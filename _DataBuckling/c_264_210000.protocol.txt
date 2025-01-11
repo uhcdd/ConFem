@@ -115,7 +115,7 @@ iter 96, residual 0.000010
 iter 97, residual 0.000009
 iter 98, residual 0.000008
 iter 99, residual 0.000008
-eigenform 0, value 107.675545, rel. acc 1.354636e-09
+eigenform 0, value 107.675545, rel. acc 1.354634e-09
 eigenform 1, value 110.779635, rel. acc 2.473735e-08
 eigenform 2, value 113.467828, rel. acc 2.722736e-07
 eigenform 3, value 114.883681, rel. acc 2.246881e-06
@@ -123,4 +123,4 @@ eigenform 4, value 117.012663, rel. acc 6.723528e-06
 Eigenvalue analysis: finished
 last iteration data
 reached time 1.0000
-total comp time 6 seconds
+total comp time 7 seconds

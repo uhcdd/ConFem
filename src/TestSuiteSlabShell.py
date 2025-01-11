@@ -24,14 +24,15 @@ class Test(unittest.TestCase):
         self.ConFem_ = ConFem.ConFem()
         self.ConSimFem_ = ConSimFem.ConSimFem()
         self.NameLog = "../LogFiles"
-       
+        self.LogData = True
+
     def testshell_01(self):
         Name="../_DataShellsSlabs/Shell"
-        self.assertEqual(self.ConFem_.Run(Name,    self.NameLog, False, LinAlgFlag, False, "elemout", None, [], False), '291afe2ecd94f1e13b2c16dcd7704350')
+        self.assertEqual(self.ConFem_.Run(Name,    self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '291afe2ecd94f1e13b2c16dcd7704350')
 
     def testshell_02(self):
         Name="../_DataShellsSlabs/bridge_el05m"                 #                                # folded plate
-        self.assertEqual(self.ConFem_.Run(Name,    self.NameLog, False, LinAlgFlag, False, "elemout", None, [], False), '1a5da2db1089b8fb6d8829dadb41528b')
+        self.assertEqual(self.ConFem_.Run(Name,    self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '1a5da2db1089b8fb6d8829dadb41528b')
 
     def testshell_03(self):
         Name="../_DataShellsSlabs/c_1461(0.08)_2.1e5_0.3_segment load"                 # with SH3
@@ -39,7 +40,7 @@ class Test(unittest.TestCase):
 
     def testshell_04(self):
         Name ="../_DataBuckling/c_264_210000"
-        self.assertEqual(self.ConFem_.Run(Name,    self.NameLog, False, LinAlgFlag, False, "protocol",  None, [], False), '6537386be97166d196d0c2d2fa658398')
+        self.assertEqual(self.ConFem_.Run(Name,    self.LogData,self.NameLog, False, LinAlgFlag, False, "protocol",  [], False), '6537386be97166d196d0c2d2fa658398')
 
 #    def testE8_02a(self):
 #        Name="../DataExamples/E10/E8-01a"                # ConFem Slab as RC shell            

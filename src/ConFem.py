@@ -5,26 +5,19 @@
 # You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses
 #
 from time import process_time
-from numpy import ones
-#from scipy.linalg import norm
 from scipy import sparse
-#from scipy.sparse.linalg.dsolve import linsolve
 from scipy.sparse.linalg import splu
 from scipy.sparse.linalg import aslinearoperator
 from os import path as pth
 from collections import deque
-import os
-#from scipy.spatial import KDTree
 import scipy.spatial as spatial
-#import sys 
 import pickle
-from numpy import mean
-import copy
+#from numpy import mean
 
 from ConFemBasics import *
 import ConFemMat
-from ConFemElem import *
-from ConFemSteps import *
+#from ConFemElem import *
+#from ConFemSteps import *
 from ConFemInOut import *
 from ConFemData import *
 try:
@@ -38,39 +31,11 @@ def CheckInz(ElemList, Label):
         if el.Label==Label:
             print("CheckInz ",el.Label,el.Type,el.Inzi)
 
-#def CheckStability_( q0,q1, N,sfL, sfS):                                           # q0,q1 are lists from queues
-#    StableFlag = True
-#    if len(q0) >= N:
-#        c0 = q0[0]*q0[-1]>=0 and q1[0]*q1[-1]>=0                            # condition no change sign
-#        c1 = abs(q1[-1])>sfL*abs(q1[-2]) or abs(q0[-1])>sfL*abs(q0[-2])     # condition rapid change
-#        if c0 or c1:
-#            q0_ = q0[0:-1]
-#            q1_ = q1[0:-1]
-#            if abs(q1[-1])>sfL*abs(mean(q1_)) or abs(q0[-1])>sfL*abs(mean(q0_)) \
-#                    or abs(q1[-1])<sfS*abs(mean(q1_)) or abs(q0[-1])<sfS*abs(mean(q0_)):  # stability criteria
-#                StableFlag = False
-#    return StableFlag
-
-def CheckStability( q0,q1, N,sf):                             # q0,q1 are lists from queues
-    StableFlag = True
-    if len(q0) >= N:
-        q0e  = q0[-4] - 3*q0[-3] + 3*q0[-2]                                 # requires N>=4 -- quadratic  extrapolation see QuadraticExtrapolation.mws
-        q1e  = q1[-4] - 3*q1[-3] + 3*q1[-2]
-        del0 = abs(mean(q0[-4:-2]))
-        del1 = abs(mean(q1[-4:-2]))
-        c0 = q0[-1] > q0e + sf*del0
-        c1 = q0[-1] < q0e - sf*del0
-        c2 = q1[-1] > q1e + sf * del1
-        c3 = q1[-1] < q1e - sf * del1
-        if c0 or c1 or c2 or c3:
-            StableFlag = False
-    return StableFlag
-
 class ConFem:
     def __init__(self):
         pass
 #    @profile
-    def Run(self, Name, LogName, PloF, LinAlgFlag, Restart, ResType, ElPlotTimes, StressStrainOut, VTK):
+    def Run(self, Name, LogData,LogName, PloF, LinAlgFlag, Restart, ResType, StressStrainOut, VTK):
         StressStrainOutNames = SelOutIni( Name, ".elemout.", StressStrainOut) # initialize files for single element output
         DirName, FilName = DirFilFromName(Name)
         if Restart:
@@ -108,7 +73,7 @@ class ConFem:
             if len(ContinuumNodes)>0: CoorTree = spatial.cKDTree( ContinuumNodes )   # for search purposes, e.g. for EFG or aggregates or embedded truss elements
             else:                     CoorTree = None
             for el in ElList:
-                if el.Type in ["T2D2I","T2D3I","T3D2I","T3D3I","TAX2I","TAX3I","B23I","B23EI","BAX23I","BAX23EI","BAX21I","BAX21EI"]:
+                if el.Type in ["T2D2I","T2D3I","T3D2I","T3D3I","TAX2I","TAX3I","B23I","B23EI","BAX23I","BAX23EI","BAX21I","BAX21EI"] and el.BondLaw!=None:
                     el.CreateBond( ElList,NodeList,SecDic, CoorTree,ConNoToNoLi, MatList, NoLabToNoInd,NoIndToCMInd)    # determine continuum elements connected via bond
             EvNodeEl( NodeList, ElList, NoLabToNoInd)                       # determine element indices belonging to each node after element creation - required for Cuthill McKee - assign type to continuum nodes
 
@@ -180,6 +145,7 @@ class ConFem:
         while StepCounter<len(StepList):
             ndeq = 12 # 4                                                        # length of queues
             if f5 != None: timeoutQueues  = [ deque(maxlen=ndeq), deque(maxlen=ndeq), deque(maxlen=ndeq) ]
+            else:          timeoutQueues  = None
             equiiterQueues                = [ deque(maxlen=ndeq), deque(maxlen=ndeq), deque(maxlen=ndeq) ]
             #
             StLi = StepList[StepCounter]
@@ -474,7 +440,8 @@ class ConFem:
                             StLi.ArcLenV = sqrt(MaskedP(VecU, VecU, Mask))
 
                     VecD = VecD + tt*DTS*VecDI                              # new displacement increment with two contributions; tt=0 in case of dynamics and for quasi-statics j>0 & fixed time step
-                    if j >= (StLi.IterNum - 2): LogResiduals(LogName, IncCounter, j, NodeList, VecRP, VecD)
+                    if LogData:
+                        if j >= (StLi.IterNum - 2): LogResiduals(LogName, IncCounter, j, NodeList, VecRP, VecD)
 
                 # end of equilibrium iteration loop -- either by reaching convergence criteria or by interation counter limit
                 if StLi.Buckl or StLi.Eigenmodes:
@@ -485,38 +452,8 @@ class ConFem:
                 equiiterQueues[2].append( j )                               # last iteration
 
                 # premature termination cases -- if so
-#                if not StLi.Dyn and j==StLi.IterNum-1:
-                if j == StLi.IterNum - 1:
-                    if EquiFailedCounter==EquiFailedMax-1:
-                        Echo(f"{Name:s}\n premature termination 1 - {EquiFailedCounter+1:d} iteration attempts - time {Time:.4f} of target {TimeTarg:.4f}", f6)
-                        break                                               # continues after time increment loop
-                    EquiFailedCounter += 1
-                else:
-                    EquiFailedCounter = 0
-                # softening system
-#                if SoftSys and j<StLi.IterNum-1:
-                if SoftSys and j<StLi.IterNum-1 and Time> 100 *dt:          # quick and dirty hardcoded -- to avoid premature term in case of initially oscillationg dynamic systems
-                    q1 = list(timeoutQueues[1])
-                    if len(q1)>=ndeq:
-                        q1_ = abs(np.mean(q1))
-                        if q1_ < SoftRed*maxWriteNodes[1]:                  #
-                            Echo(f"{Name:s}\n premature termination 2 - softening system\n"
-                                 f" reactions {q1[0]:.4f}, load {q1[-1]:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
-                            break                                           # continues after time increment loop, i.e. incrementing is terminated
-                # checks stability
-                if f5!=None:
-                    q0 = list(timeoutQueues[0])
-                    q1 = list(timeoutQueues[1])
-                    if not CheckStability( q0,q1, ndeq, StabTolF):          #
-                        Echo(f"{Name:s}\n premature termination 3 - unstable reaction\n"
-                             f" displ {q0[-1]:.4f}, load {q1[-1]:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
-                        break                                               # continues after time increment loop, i.e. incrementing is terminated
-                # unstable time steps in case of arclength
-                if StLi.ArcLen:
-                    if abs(dt) > 0.5*TimeTarg:                              # !!! hard coded stability factor !!!
-                        Echo(f"{Name:s}\n premature termination 4 - arclen unstable time steps\n"
-                             f" time step {dt:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
-                        break                                               # continues after time increment loop, i.e. incrementing is terminated
+                if PremTermination( Name,f5,f6,StLi, dt,Time,TimeTarg, j, EquiFailedCounter,EquiFailedMax, ndeq,timeoutQueues, SoftSys,SoftRed,StabTolF, maxWriteNodes):
+                    break
 
                 # book keeping for iterated time step
                 TimeOld = Time
@@ -608,10 +545,10 @@ class ConFem:
         return RC
 
 if __name__ == "__main__":
-    LogName="../LogFiles"                                                   # to log temporary data
+    LogName = "../LogFiles"                                                   # to log temporary data
+    LogData = True
 #    numpy.seterr(all='raise')
     Name, Plot, Restart, HashSource, ElPlotTimes, StressStrainOut, VTK = DefData() # VTK currently not used
-#    Name=str(raw_input('Filename without extension: '))                    # input data name
     ConFem_ = ConFem()
-    RC=ConFem_.Run(Name, LogName, Plot, LinAlgFlag, Restart, HashSource, ElPlotTimes, StressStrainOut, VTK)
+    RC=ConFem_.Run(Name, LogData,LogName, Plot, LinAlgFlag, Restart, HashSource, StressStrainOut, VTK)
     print(RC)

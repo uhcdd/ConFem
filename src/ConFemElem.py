@@ -803,7 +803,7 @@ class T3D3(T3D2):                                  # 3D truss 2 nodes
 class TxDxI(object):
     def __init__(self, NoList):
         self.BondElInd  = zeros((self.nIntL), dtype=int)
-        self.FlexBonded = True
+        self.FlexBonded = True                                              # maybe reset in following of __init__ -- circumvention considering BAX23E elements which are provisionally defined as BAX23EI
     # determine CxD elements where TxDxI integration points lie in and create bond elements
     def CreateBond(self, ElList,NodeList,SecDict, CoorTree_,NoCoLitoNoLi, MatList, NoLabToNoInd,NoIndToCMInd): # called by ["T2D2I","T2D3I","T3D2I","T3D3I","B23I","B23EI"]
         iself = FindIndexByLabel( ElList, self.Label)                       # index in element list
@@ -825,7 +825,7 @@ class TxDxI(object):
             #
             if i==0:
                 if SecDict[self.Set].nRebar != None and self.Type != "TAX2I": # presumably because TAX2I is defined as sheet
-                    self.nRebarEl = SecDict[self.Set].nRebar * ContThick
+                    self.nRebarEl = SecDict[self.Set].nRebar * ContThick    # nRebarEl also set in IniBeam for elements without flexible bond
                 else:
                     self.nRebarEl = 1.
             #
@@ -1432,6 +1432,8 @@ class BAX23EI(B23E, TxDxI):                                                   # 
             r = SamplePoints[self.IntT, self.nInt - 1, j][0]
             self.X[j] = 0.5 * ((1 - r) * self.X0 + (1 + r) * self.X1)
         self.BondLaw = BondLaw
+        if self.BondLaw == None:
+            self.FlexBonded = False                                         # reseeting from TxDxI -- circumvention considering BAX23E elements which are provisionally defined as BAX23EI
 
 # bond elements
 class BondXDX(object):

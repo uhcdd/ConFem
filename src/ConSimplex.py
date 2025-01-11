@@ -8,7 +8,8 @@ from time import *
 from numpy import *
 from scipy.linalg import *
 from scipy import sparse
-from scipy.sparse.linalg.dsolve import linsolve
+#from scipy.sparse.linalg.dsolve import linsolve
+from scipy.sparse.linalg import splu
 from scipy.sparse.linalg import aslinearoperator
 import matplotlib.pyplot as plt
 from os import path as pth
@@ -262,7 +263,8 @@ class ConSimplex:
             VecU[:] = VecR[:] #copy(VecR)
             IntForces( MatList,ElList, Time, VecZ,VecU,VecZ,VecZ,VecZ, VecI, None,None,KVecU,KVecL,SDiag, 1, None,False,False,False, 0)# internal nodal forces
         else:
-            K_LU = linsolve.splu(MatK.tocsc(),permc_spec=3)     #triangulization of stiffness matrix
+#            K_LU = linsolve.splu(MatK.tocsc(),permc_spec=3)     #triangulization of stiffness matrix
+            K_LU = splu(MatK.tocsc(),permc_spec=3)     #triangulization of stiffness matrix
             VecU = K_LU.solve( VecR )                           # solution of K*u=R -> displacement increment
             IntForces( MatList,ElList, Time, VecZ,VecU,VecZ,VecZ,VecZ, VecI, MatK,None,None,None,None,    1, None, False,False,False, 0)# internal nodal forces
         DataOutStress(Name+".elemout_.txt", ElList, NodeList, NoIndToCMInd, 1.0, "w", None)

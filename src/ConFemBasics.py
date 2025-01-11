@@ -394,7 +394,8 @@ def AssignGlobalDof( NodeList, ElList, MatList, SecDict, NoIndToCMInd):     # as
                         break
 #    Skyline = np.zeros((Index), dtype=np.int)                               # switch back for win10, otherwise this will not work for large fields / large number of dofs (est. > 10**5)
 #    SDiag = np.zeros((Index), dtype=np.int64)
-    Skyline = np.zeros((Index), dtype=int)                               # switch back for win10, otherwise this will not work for large fields / large number of dofs (est. > 10**5)
+#    Skyline = np.zeros((Index), dtype=int)                               # switch back for win10, otherwise this will not work for large fields / large number of dofs (est. > 10**5)
+    Skyline = np.zeros((Index), dtype=np.int32)                               #
     SDiag = np.zeros((Index), dtype=int)
     for El in ElList:                                                       # upper right skyline of system matrix
         minL = []
@@ -1196,7 +1197,8 @@ def PickleSysMat(NodeList, ElList, Step, N, MatK, MatM):                # where 
 
 #@profile
 def Eigen( ne, lim, N, NodeList, ElList, Step, Kmat, Mmat, NoLabToNoInd,NoIndToCMInd, PloF, ff ): # NoLabToInd, mapNoInd, PloF, ff ):
-    from scipy.sparse.linalg.dsolve import linsolve
+#    from scipy.sparse.linalg.dsolve import linsolve
+    from scipy.sparse.linalg import splu
     from scipy.sparse.linalg import aslinearoperator
     from numpy import zeros, dot, transpose
     from numpy.linalg import norm
@@ -1225,7 +1227,8 @@ def Eigen( ne, lim, N, NodeList, ElList, Step, Kmat, Mmat, NoLabToNoInd,NoIndToC
         Mmat[k,k] = 1.
     Echo(f"Eigenvalue analysis: kinematic boundary conditions considered", ff)
 
-    K_LU = linsolve.splu(Kmat.tocsc(),permc_spec=3)                     # triangularization of stiffness matrix
+#    K_LU = linsolve.splu(Kmat.tocsc(),permc_spec=3)                     # triangularization of stiffness matrix
+    K_LU = splu(Kmat.tocsc(), permc_spec=3)
     np_ = min(2*ne, ne+8, N)                                            # dimension of subspace with ne number of required eigenpairs, Bathe p. 963
     KK_, MM_, YY, XX = zeros((np_,np_),dtype=float), zeros((np_,np_),dtype=float), zeros((N,np_),dtype=float),zeros((N,np_),dtype = float)
     # starting vectors YY for iteration
@@ -1278,5 +1281,55 @@ def Eigen( ne, lim, N, NodeList, ElList, Step, Kmat, Mmat, NoLabToNoInd,NoIndToC
 
     return evals
 
-
+def CheckStability( q0,q1, N,sf):                                               # q0,q1 are lists from queues
+    StableFlag = True
+    if len(q0) >= N:
+        q0e  = q0[-4] - 3*q0[-3] + 3*q0[-2]                                     # requires N>=4 -- quadratic  extrapolation see QuadraticExtrapolation.mws
+        q1e  = q1[-4] - 3*q1[-3] + 3*q1[-2]
+        del0 = abs(np.mean(q0[-4:-2]))
+        del1 = abs(np.mean(q1[-4:-2]))
+        c0 = q0[-1] > q0e + sf*del0
+        c1 = q0[-1] < q0e - sf*del0
+        c2 = q1[-1] > q1e + sf * del1
+        c3 = q1[-1] < q1e - sf * del1
+        if c0 or c1 or c2 or c3:
+            StableFlag = False
+    return StableFlag
+def PremTermination( Name,f5,f6, StLi, dt,Time,TimeTarg, j, EquiFailedCounter,EquiFailedMax, ndeq,timeoutQueues,SoftSys,SoftRed,StabTolF, maxWriteNodes):
+    BreakFlag = False
+                # premature termination cases -- if so
+#                if not StLi.Dyn and j==StLi.IterNum-1:
+    if j == StLi.IterNum-1:
+        if EquiFailedCounter==EquiFailedMax-1:
+            Echo(f"{Name:s}\n premature termination 1 - {EquiFailedCounter+1:d} iteration attempts - time {Time:.4f} of target {TimeTarg:.4f}", f6)
+            BreakFlag = True                                               # continues after time increment loop
+        EquiFailedCounter += 1
+    else:
+        EquiFailedCounter = 0
+    # softening system
+#                if SoftSys and j<StLi.IterNum-1:
+    if SoftSys and j<StLi.IterNum-1 and Time> 100 *dt:          # quick and dirty hardcoded -- to avoid premature term in case of initially oscillationg dynamic systems
+        q1 = list(timeoutQueues[1])
+        if len(q1)>=ndeq:
+            q1_ = abs(np.mean(q1))
+            if q1_ < SoftRed*maxWriteNodes[1]:                  #
+                Echo(f"{Name:s}\n premature termination 2 - softening system\n"
+                     f" reactions {q1[0]:.4f}, load {q1[-1]:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
+                BreakFlag = True                                           # continues after time increment loop, i.e. incrementing is terminated
+    # checks stability
+    if f5!=None:
+        q0 = list(timeoutQueues[0])
+        q1 = list(timeoutQueues[1])
+        if not CheckStability( q0,q1, ndeq, StabTolF):          #
+            Echo(f"{Name:s}\n premature termination 3 - unstable reaction\n"
+                 f" displ {q0[-1]:.4f}, load {q1[-1]:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
+            BreakFlag = True                                               # continues after time increment loop, i.e. incrementing is terminated
+    # unstable time steps in case of arclength
+    if StLi.ArcLen:
+        if abs(dt) > 0.5*TimeTarg:                              # !!! hard coded stability factor !!!
+            Echo(f"{Name:s}\n premature termination 4 - arclen unstable time steps\n"
+                 f" time step {dt:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
+            BreakFlag = True                                               # continues after time increment loop, i.e. incrementing is terminated
+    #
+    return BreakFlag
 

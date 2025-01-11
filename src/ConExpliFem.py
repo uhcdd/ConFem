@@ -11,6 +11,7 @@ from os import path as pth
 import os
 import scipy.spatial as spatial
 import pickle
+from collections import deque
 
 from ConFemBasics import *
 import ConFemMat
@@ -196,7 +197,8 @@ class ConExpliFem:
             if len(ContinuumNodes)>0: CoorTree = spatial.cKDTree( ContinuumNodes )   # for search purposes, e.g. for EFG or aggregates or embedded truss elements
             else:                     CoorTree = None
             for el in ElList:
-                if el.Type in ["T2D2I","T2D3I","T3D2I","T3D3I","TAX2I","TAX3I","B23I","B23EI","BAX23I","BAX23EI","BAX21I","BAX21EI"]:
+                if el.Type in ["T2D2I","T2D3I","T3D2I","T3D3I","TAX2I","TAX3I","B23I","B23EI","BAX23I","BAX23EI","BAX21I","BAX21EI"] and el.BondLaw!=None:
+#                if el.Type in ["T2D2I","T2D3I","T3D2I","T3D3I","TAX2I","TAX3I","B23I","B23EI","BAX23I","BAX23EI","BAX21I","BAX21EI"]:
                     el.CreateBond( ElList, NodeList, SecDic, CoorTree,ConNoToNoLi, MatList, NoLabToNoInd, NoIndToCMInd)    # determine continuum elements connected via bond
             EvNodeEl( NodeList, ElList, NoLabToNoInd)                       # determine element indices belonging to each node after element creation - required for Cuthill McKee - assign type to continuum nodes
 
@@ -272,6 +274,10 @@ class ConExpliFem:
         # Calculations
         stime = process_time()
         while StepCounter<len(StepList):
+            ndeq = 12 # 4                                                        # length of queues
+            if f5 != None: timeoutQueues  = [ deque(maxlen=ndeq), deque(maxlen=ndeq), deque(maxlen=ndeq) ]
+            equiiterQueues                = [ deque(maxlen=ndeq), deque(maxlen=ndeq), deque(maxlen=ndeq) ]
+            #
             StLi = StepList[StepCounter]
             Echo(f"{StepCounter:d} step starts, solution type {StLi.SolType:s}", f6)
             dt = self.TimeStep(SecDic, MatList, ElList, StLi.ScaleMass,StLi.RaAlph,StLi.RaBeta, StLi.NLGeom,f6)
@@ -301,8 +307,9 @@ class ConExpliFem:
             if Time>TimeTarg-1.e-6: StepFinishedFlag = True    # step time target
             else:                   StepFinishedFlag = False
             StLi.BoundOffset( NodeList,NoLabToNoInd,NoIndToCMInd, VecU0)                               # add offset for prescribed displacement from current displacement for OPT=ADD
-            
             IncCounter = 0
+            maxWriteNodes = zeros((3), dtype=float)                         # see ConFemInOut::WriteNodes
+            #
             while not StepFinishedFlag:                                     # loop over time increments
                 IncCounter += 1
                 TimeOld = Time
@@ -388,7 +395,8 @@ class ConExpliFem:
                     fd.close()
                     Echo(f"Restart data written {Time:f}", f6)
                 if f5!=None:
-                    WriteNodes( f5, WrNodes, Time, VecU0, VecB, VecP1, StepCounter, IncCounter)
+                    WriteNodes( f5, WrNodes, Time, VecU0, VecB, VecP1, StepCounter, IncCounter, timeoutQueues, ndeq,maxWriteNodes)
+#                    WriteNodes( f5, WrNodes, Time, VecU, VecB, VecP, StepCounter, IncCounter, timeoutQueues, ndeq,maxWriteNodes)
                     f5.flush()
             # end of time increment loop for current step
             StepCounter += 1                                                       # next step

@@ -5,6 +5,7 @@
 # You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses
 #
 import ConFem
+import ConExpliFem
 import ConSimFem
 import ConPlaD
 import ConSimplex
@@ -15,13 +16,28 @@ import ConStressStrain
 # tested for win 10, 11 and a limited selection of x64-processors only
 
 Im      = True                                                              # hard coded ConFem only for batch computations - False for prompted selection out of package and plot
-LogName = "./LogFiles"                                                      # to log temporary data
-Name    = str(input('Filename without extension: '))
+LogName = "./LogFiles"  # to log temporary data
+LogData = False
 
 if Im:
-    ConFem_ = ConFem.ConFem()
-    ConFem_.Run(Name, LogName, False, True, False, "elemout", [], [], False) # expects data set name in command line
+    in_ = str(input('infile restart prog: ')).split()           # rawinput ?
+    Name = in_[0].strip()
+    arg1, arg2 = None, None
+    Restart, Explicit = False, False
+    if len(in_)>=2:
+        arg1 = in_[1].strip()
+        if arg1.upper() =='RESTART': Restart=True
+    if len(in_)==3:
+        arg2 = in_[2].strip()
+        if arg2.upper() == 'CONEXPLIFEM': Explicit = True
+    if Explicit:
+        ConFem_ = ConExpliFem.ConExpliFem()
+        ConFem_.Run(Name, LogName, False, True, Restart, "elemout", [], [], [], False)
+    else:
+        ConFem_ = ConFem.ConFem()
+        ConFem_.Run(Name, LogData,LogName, False, True, Restart, "elemout", [], False)
 else:
+    Name = str(input('Filename without extension: '))
     X = str(input('ConFem 0, ConSimFem 1, ConPlaD 2, ConSimplex 3, ConFemPost 4, ConStressStrain 5: '))
     if X in ['0','1']:
         PlotS=str(input('ConFem / ConSimFem Post-Plots (y/n), default no: '))
@@ -29,7 +45,7 @@ else:
         else:                                      PlotF = False
     if X=='0':
         ConFem_ = ConFem.ConFem()
-        ConFem_.Run(Name, LogName, PlotF, True, False, "elemout", [None, None], [], [], False) # does not use DefData
+        ConFem_.Run(Name, LogData,LogName, PlotF, True, False, "elemout", [None, None], [], False)
     elif X=='1':
         SimFem_ = ConSimFem.ConSimFem()
         SimFem_.Run(Name, True, True, "elemout")
@@ -59,3 +75,4 @@ else:
         ConMat.Run(Name, MatName, ElSet, NormalForceList)
     else:
         print('Invalid index!')
+

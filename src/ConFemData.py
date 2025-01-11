@@ -17,7 +17,7 @@ def DefData():
     Name="../DataExamples/E03/E3-04"                                        # ok
     # E04 beams
 #    Name="../DataExamples/E04/E3-02"                                        # ok
-#    Name="../DataExamples/E04/E3-04"                                        # -03, -04, -06, -08, -09 ok
+#    Name="../DataExamples/E04/E4-09"                                        # -03, -04, -06, -08, -09 ok
 #    Name="../DataExamples/E04/E3-02_CircMises"                              # ok 2_CircMises"
     # E05 strut-and-tie
 #    Name="../DataExamples/E05/E5-01plate"                                   # ok
@@ -71,6 +71,7 @@ def DefData():
 #    Name, nEig, niterEig, Plot = "../_DataBuckling/E3-02V", 4, 200, True          # 2D Euler bat
 #    Name, nEig, niterEig, Plot = "../_DataBuckling/fullCyl", 1, 200, True       # full cylinder under compression - lower end horizontally free
 #    Name, nEig, niterEig, Plot = "../_DataBuckling/ShellBuckl", 5, 200, True    # simple flat shell with longitudinal compression
+#
 #    Name, nEig, niterEig, Plot = "../_DataBuckling/a_640_210000", 5, 200, True # full cylinder under compression -- lower end clamped
     # _DataC3D
 #    Name, Plot, StressStrainOut, VTK ="../_DataC3D/Cube8", True, [], True                      # ok
@@ -91,14 +92,14 @@ def DefData():
 #    Name, Plot = "../_DataTrusses/staebe3D2", True                             # ok 3D elastic large displacement
     # _DataTmp
 #    Name, Plot, StressStrainOut = "../_DataTmp/shellconfem", True, []
-#    Name, Plot, StressStrainOut = "../_DataTmp/BeamMises", True, []
+#    Name, Plot, StressStrainOut = "../_DataTmp/La_11", True, []
 #    Name, Plot = "../_DataTmp/staebe_4", True                                       # ok 2D elastic large displacement
     #
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2023/Note_ShearPlateRandom/ConFem/ShearPanel/ShearPanelR_med", True, [] #[[1,0]]
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2023/Note_ShearPlateRandom/ConFem/ShearPanel/Explicit/ShearPanelR", False, []
-#    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ConFem/PSlabN_1/Restart/PSlabN_1", True, []
-#    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ConFem/PSlabN_5/PSlabN_5__", True, []
-    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ExpDataSets/_154-3F22/154-3F22", True, []
+#    Name, Plot, StressStrainOut = "C:/Users/uhc/Desktop/Note_FlatSlab_Comp/_ConFem/Landler_11/Restart/La_11", False, []
+#    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ExpDataSets/_8-ND65-1-1/Restart/8-ND65-1-1", False, []
+    Name, Plot, StressStrainOut = "C:/Users/uhc/Desktop/Note_FlatSlab_Comp/ExpDataSets/8-ND65-1-1/Restart/8-ND65-1-1", False, []
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/Abaqus/AbaqusModels/OneElement/2D/Large/ConFem/Job-1", True, [[1,0]]
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/Abaqus/AbaqusModels/OneElement/3D/Large/ConFem/Set-2", True, [[1,0],[1,1],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7]]
 #       C:\Users\uhc\Documents\Work\FoilPap\Abaqus\AbaqusModels\OneElement3D\Large\ConFem

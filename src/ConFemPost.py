@@ -1654,7 +1654,7 @@ def PostNode3D( ElList,NodeList,NoIndToCMInd, NodeResults,VecU, Time, ScaleDis):
     xMean, yMean, zMean = 0.5*(xMin+xMax), 0.5*(yMin+yMax), 0.5*(zMin+zMax) 
     # for measure of absolute displacement
     for elem in ElList:                                                     # loop over elements
-        if elem.Type in ["TAX2","BAX21E","CAX4"]:
+        if elem.Type in ["TAX2","BAX21E","CAX4","BAX23EI"]:
             continue
         DisList = []
         for o in elem.Inzi:

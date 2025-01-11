@@ -24,18 +24,19 @@ class Test(unittest.TestCase):
         self.ConFem_ = ConFem.ConFem()
         self.ConSimFem_ = ConSimFem.ConSimFem()
         self.NameLog = "../LogFiles"
+        self.LogData = True
        
     def test_01(self):
         Name="../_DataTrusses/staebe_1_1d"                 #                                        7s
-        self.assertEqual(self.ConFem_.Run(Name, self.NameLog, False, LinAlgFlag, False, "elemout", None, [], False), '9729d2bea31d9a557bd4ddea8c110432')
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '9729d2bea31d9a557bd4ddea8c110432')
 
     def test_02(self):
         Name="../_DataTrusses/staebe_4"                 #                                        7s
-        self.assertEqual(self.ConFem_.Run(Name, self.NameLog, False, LinAlgFlag, False, "elemout", None, [], False), 'aac36ff814fa654f6291529b8b3513e0')
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), 'aac36ff814fa654f6291529b8b3513e0')
 
     def test_03(self):
         Name="../_DataTrusses/staebe3D2"                 #                                        7s
-        self.assertEqual(self.ConFem_.Run(Name, self.NameLog, False, LinAlgFlag, False, "elemout", None, [], False), '6a9f09bd47063a4e4217c95a82cca461')
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '6a9f09bd47063a4e4217c95a82cca461')
 
 if __name__ == "__main__":
 #    numpy.seterr(all='raise')

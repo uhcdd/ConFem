@@ -9,7 +9,8 @@ from time import *
 from numpy import ones, copy
 from scipy.linalg import norm
 from scipy import sparse
-from scipy.sparse.linalg.dsolve import linsolve
+#from scipy.sparse.linalg.dsolve import linsolve
+from scipy.sparse.linalg import splu
 from scipy.sparse.linalg import aslinearoperator
 #import matplotlib.pyplot as plt
 from os import path as pth
@@ -145,7 +146,8 @@ class ConSimFem:
                             LinAlg2.sim0_so(VecR, KVecU, KVecL, SDiag, Skyline, N)
                         VecD[:] = VecR[:]
                     else:
-                        K_LU = linsolve.splu(MatK.tocsc(),permc_spec=3)             #triangulization of stiffness matrix
+#                        K_LU = linsolve.splu(MatK.tocsc(),permc_spec=3)             #triangulization of stiffness matrix
+                        K_LU = splu(MatK.tocsc(),permc_spec=3)             #triangulization of stiffness matrix
                         VecD = K_LU.solve( VecR )                                   # solution of K*u=R -> displacement increment
 
                 if Time > StLi.TimeTarg-1.e-6: Stop = True                          # time target reached, finalize computation, eventually with one equilibrium iteration

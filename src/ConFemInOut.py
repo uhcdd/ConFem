@@ -501,6 +501,8 @@ def DataInput( f1, ff, Restart):
                     elif eltype=='BAX23': ElemList += [BAX23(ElemList_[i][1],ElemList_[i][3],ElemList_[i][2], NodeList,NoLabToNoInd)]
                     elif eltype=='BAX23I':        #          label,           elset            InzList          BondLaw
                         ElemList += [                 BAX23I(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], ElemList_[i][4], NodeList, NoLabToNoInd)]
+                    elif eltype=='BAX23E':                 # label,           elset            InzList          BondLaw
+                        ElemList += [                 BAX23EI(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], None,            NodeList, NoLabToNoInd)]
                     elif eltype=='BAX23EI':                 # label,           elset            InzList          BondLaw
                         ElemList += [                 BAX23EI(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], ElemList_[i][4], NodeList, NoLabToNoInd)]
                     elif eltype=='B21':   ElemList +=[B21(   ElemList_[i][1],ElemList_[i][2],ElemList_[i][3], NodeList,NoLabToNoInd)]
@@ -1067,7 +1069,8 @@ def DataInput( f1, ff, Restart):
         if SecDic[elset].bStiff != None:
             Material.matbStiff = SecDic[elset].bStiff
         if len(SecDic[elset].ElemTypes)>0: eltype = SecDic[elset].ElemTypes[0] 
-        else:                              raise NameError("ConFemInOut::DataInput: seems to be no element for element set",elset)
+        else:
+            raise NameError("ConFemInOut::DataInput: seems to be no element for element set",elset)
         # assigns result types to element sets
         if eltype in _BeamsBernAll_:
             if bondl!=None:                          ResultTypes[elset] = ('longitudinal strain','curvature','normal force','moment','sig_bottom','sig_top') # 4 more bond items in DataOutStress
@@ -1493,7 +1496,7 @@ def DataOutStress(fileName, ElemList, NodeList, NoIndToCMInd, Time, WriteType, f
                     else:
                         for x in Sig.tolist():  fp.write('%14.6e,'%(x))
                     # append bond data for embedded elements - 4 items for 2D, 6 items for 3D: 2 bond, 4 lateral
-                    if i.Type in ['T2D2I','T2D3I',"TAX2I","TAX3I",'T3D2I','T3D3I',"B23I","BAX23I","BAX23EI","B23EI","BAX21EI"]:
+                    if i.Type in ['T2D2I','T2D3I',"TAX2I","TAX3I",'T3D2I','T3D3I',"B23I","BAX23I","BAX23EI","B23EI","BAX21EI"] and i.BondLaw!=None:
                         bel  = ElemList[i.BondElInd[k]]                 # corresponding bond element
                         if counter!=bel.iT or k!=bel.ElInt: raise NameError("CaeFemInOut::DataOutStress: wrong assignment of embedded truss to bond element ")
                         for kk in range(len(bel.Data[0])): fp.write('%14.6e,'%(bel.Data[0,kk])) # bond element should have only one integration point

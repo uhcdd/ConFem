@@ -131,4 +131,4 @@ last timeout data
     9, -0.018000, -9.06
    10, -0.020000, -9.61
 reached time 1.0000
-total comp time 14 seconds
+total comp time 12 seconds

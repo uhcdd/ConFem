@@ -252,7 +252,8 @@ class Material(object):
             for i in range(nI+1):                                           # generate samples
                 sia[i] = UniaxTension( lam, ee)
                 ee += de
-            return integrate.trapz( sia, x=None, dx=de)                     # integrate samples
+#            return integrate.trapz( sia, x=None, dx=de)                     # integrate samples
+            return integrate.trapezoid(sia, x=None, dx=de)  # integrate samples
         # end def
         epsEnd,xP,yP = IntEnd( UniaxTension )
         CrE = IntCrE( UniaxTension )                                        # uses epsEnd
@@ -3076,11 +3077,11 @@ class MisesBeam2D_(MisesUniaxial):                                       # elast
             if abs(z-r) < ZeroD : z = r
             if i ==    0: sig_lo = sig[0]
             if i == nI-1: sig_up = sig[0]
-        NN  = integrate.trapz( nn, x=None, dx=dz)                           # numerical integration normal force
-        MM  = integrate.trapz( mm, x=None, dx=dz)                           # numerical integration moment (Script -> last term in Eq. (3.18))
-        NDE = integrate.trapz( nde,x=None, dx=dz)                           # numerical normal force grad eps (Script -> last term in Eq. (3.20)1)
-        NDK = integrate.trapz( ndk,x=None, dx=dz)                           # numerical normal force grad kappa (Script -> last term in Eq. (3.20)2)
-        MDK = integrate.trapz( mdk,x=None, dx=dz)                           # numerical moment grad kappa (Script -> last term in Eq. (3.21))
+        NN  = integrate.trapezoid( nn, x=None, dx=dz)                           # numerical integration normal force
+        MM  = integrate.trapezoid( mm, x=None, dx=dz)                           # numerical integration moment (Script -> last term in Eq. (3.18))
+        NDE = integrate.trapezoid( nde,x=None, dx=dz)                           # numerical normal force grad eps (Script -> last term in Eq. (3.20)1)
+        NDK = integrate.trapezoid( ndk,x=None, dx=dz)                           # numerical normal force grad kappa (Script -> last term in Eq. (3.20)2)
+        MDK = integrate.trapezoid( mdk,x=None, dx=dz)                           # numerical moment grad kappa (Script -> last term in Eq. (3.21))
         MDE = NDK
         MatM= array( [[NDE,NDK],[MDE,MDK]] )                                # material tangential stiffness (Script Eq. (3.21))
         Sig = array( [NN,MM] )                                              # stress vector
@@ -3864,11 +3865,22 @@ class RCBeam(Material):                                             # Reinforced
             ndk[i] = -z   *dsig_                                # normal force grad kappa
             mdk[i] =  z**2*dsig_                                # moment grad kappa
             z = z + dz
-        NN  = integrate.trapz( nn, x=None, dx=dz)           # numerical integration normal force
-        MM  = integrate.trapz( mm, x=None, dx=dz)           # numerical integration moment
-        NDE = integrate.trapz( nde, x=None, dx=dz)        # numerical normal force grad eps
-        NDK1= integrate.trapz( ndk, x=None, dx=dz)        # numerical normal force grad kappa
-        MDK = integrate.trapz( mdk, x=None, dx=dz)        # numerical moment grad kappa
+#        NN  = integrate.trapz( nn, x=None, dx=dz)           # numerical integration normal force
+#        MM  = integrate.trapz( mm, x=None, dx=dz)           # numerical integration moment
+#        NDE = integrate.trapz( nde, x=None, dx=dz)        # numerical normal force grad eps
+#        NDK1= integrate.trapz( ndk, x=None, dx=dz)        # numerical normal force grad kappa
+#        MDK = integrate.trapz( mdk, x=None, dx=dz)        # numerical moment grad kappa
+
+
+        NN  = integrate.trapezoid( nn, x=None, dx=dz)           # numerical integration normal force
+        MM  = integrate.trapezoid( mm, x=None, dx=dz)           # numerical integration moment
+        NDE = integrate.trapezoid( nde, x=None, dx=dz)        # numerical normal force grad eps
+        NDK1= integrate.trapezoid( ndk, x=None, dx=dz)        # numerical normal force grad kappa
+        MDK = integrate.trapezoid( mdk, x=None, dx=dz)        # numerical moment grad kappa
+
+
+
+
         return NN, MM, NDE, NDK1, MDK
 #    @profile
     def Sig(self, ff, CalcType, Dt, elI, ipI, Elem, Dps, Eps, dTmp, Temp, EpsR):
