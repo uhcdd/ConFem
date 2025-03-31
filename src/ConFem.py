@@ -24,7 +24,7 @@ try:
     import LinAlg2
     LinAlgFlag = True
 except ImportError:
-    LinAlgFlag = False 
+    LinAlgFlag = False
 
 def CheckInz(ElemList, Label):
     for el in ElemList:
@@ -51,13 +51,11 @@ class ConFem:
             f6=open( Name+".protocol.txt", 'a')                             #
             Echo(f"\nConFem restart {Name:s}", f6)
             f1=open( Name+".in.txt", 'r')
-            MatList, StepList = DataInput(f1, f6, Restart)              # read input file ?????
+            MatList, StepList = DataInput(f1, f6, Restart)                  # read input file
             f1.close()
-            f2=open( Name+".elemout.txt", 'a')                              #
-            f3=open( Name+".nodeout.txt", 'a')                              #
             f5=open( Name+".timeout.txt", 'a')                              #
-            NameElemOut_ = Name+".elemout_.txt"
-            NameNodeOut_ = Name+".nodeout_.txt"
+            NameElemOut_ = Name+".elemout.txt"
+            NameNodeOut_ = Name+".nodeout.txt"
             f7, MaxType =None, None
             ElemDataAll = {}                                                # skip this in case it is retrieved from pickle !!!
         else:
@@ -83,31 +81,31 @@ class ConFem:
                 NoIndToCMInd = Sloan(NodeList, ElList)                      # to reduce the skyline - initial node index (not label) to index according to bandwidth optimization
                 NodeList.sort(key=lambda t: t.CMIndex)                      # CMIndex holds new index
             N, Skyline, SDiag, SLen, ElemDataAll = AssignGlobalDof( NodeList, ElList, MatList, SecDic, NoIndToCMInd) # assign degrees of freedom (dof) to nodes and elements -> see above
-            f2=open( Name+".elemout.txt", 'w')
-            NameElemOut_ = Name+".elemout_.txt"
-            NameNodeOut_ = Name+".nodeout_.txt"
+#            f2=open( Name+".elemout.txt", 'w')
+            NameElemOut_ = Name+".elemout.txt"
+            NameNodeOut_ = Name+".nodeout.txt"
             if pth.exists(NameElemOut_): os.remove(NameElemOut_)
             if pth.exists(NameNodeOut_): os.remove(NameNodeOut_)
-            f3=open( Name+".nodeout.txt", 'w')
+#            f3=open( Name+".nodeout.txt", 'w')
             for i in list(MatList.values()):                                # check, whether particular material types are in system
                 ElasticLTFlag = ( isinstance(i,ConFemMat.ElasticLT) or isinstance( i.Conc, ConFemMat.ElasticLT)) and i.Used
                 if ElasticLTFlag: break
 #            fX = open( Name+".stuff.txt", 'w')
             # Initializations
-            VecU = zeros((N),dtype=double)                                  # current displacement vector
-            VecC = zeros((N),dtype=double)                                  # displacement vector of previous time increment after equilibrium iteration
-            VecY = zeros((N),dtype=double)                                  # displacement increment of previous time increment after equilibrium iteration
-            VevU = zeros((N),dtype=double)                                  # current velocities
-            VeaU = zeros((N),dtype=double)                                  # current accelerations
-            VevC = zeros((N),dtype=double)                                  # previous time step velocities
-            VeaC = zeros((N),dtype=double)                                  # previous time step accelerations
-            VecI = zeros((N),dtype=double)                                  # internal nodal forces vector
-            VecP = zeros((N),dtype=double)                                  # load vector
-            VecP0= zeros((N),dtype=double)                                  # nominal load vector
-            VecP0old= zeros((N),dtype=double)                               # nominal load vector of previous calculation step
-            VecBold= zeros((N),dtype=double)                                # reaction forces of previous step
-            VecT = zeros((N),dtype=double)                                  # current temperatures vector
-            VecS = zeros((N),dtype=double)                                  # temperatures vector of previous time step
+            VecU = zeros((N),dtype=float)                                  # current displacement vector
+            VecC = zeros((N),dtype=float)                                  # displacement vector of previous time increment after equilibrium iteration
+            VecY = zeros((N),dtype=float)                                  # displacement increment of previous time increment after equilibrium iteration
+            VevU = zeros((N),dtype=float)                                  # current velocities
+            VeaU = zeros((N),dtype=float)                                  # current accelerations
+            VevC = zeros((N),dtype=float)                                  # previous time step velocities
+            VeaC = zeros((N),dtype=float)                                  # previous time step accelerations
+            VecI = zeros((N),dtype=float)                                  # internal nodal forces vector
+            VecP = zeros((N),dtype=float)                                  # load vector
+            VecP0= zeros((N),dtype=float)                                  # nominal load vector
+            VecP0old= zeros((N),dtype=float)                               # nominal load vector of previous calculation step
+            VecBold= zeros((N),dtype=float)                                # reaction forces of previous step
+            VecT = zeros((N),dtype=float)                                  # current temperatures vector
+            VecS = zeros((N),dtype=float)                                  # temperatures vector of previous time step
             BCIn = ones((N),dtype=int)                                      # indices for dofs with prescribed displacements --> 0, --> 1 otherwise
             BCIi = zeros((N),dtype=int)                                     # indices for dofs with prescribed displacements --> 1, --> 0 otherwise
             Time = 0.
@@ -129,10 +127,10 @@ class ConFem:
                 StabTolF = 3.0                                                  # default value, used in CheckStability
 
         # more initializations
-        VecP0i= zeros((N),dtype=double)                                     # intermediate storage for nominal load vector of step
-        VecUP = zeros((N),dtype=double)                                     # displacement vector of latest equilibrium iteration -- for line search
-        VecP0_= zeros((N),dtype=double)                                     # 
-        VecB = zeros((N), dtype=double)                                     # reaction forces
+        VecP0i= zeros((N),dtype=float)                                     # intermediate storage for nominal load vector of step
+        VecUP = zeros((N),dtype=float)                                     # displacement vector of latest equilibrium iteration -- for line search
+        VecP0_= zeros((N),dtype=float)                                     #
+        VecB = zeros((N), dtype=float)                                     # reaction forces
         Node.ActiveNodes = 0
         for no in NodeList: 
             if len(no.NodeEl)>0: 
@@ -205,14 +203,15 @@ class ConFem:
             else: 
                 MatM = None
             if StLi.Damp:                                                   # maybe redefinition of Rayleigh damping parameters
-                if StepCounter > 0:
-                    if not Restart and StepList[-2].Eigenmodes and StLi.EigenVal2Beta:
+                if StepCounter > 0:                                         # StLi.RaAlph, StLi.RaBeta primarily adressed in ConFemInOut::DataInput
+                    if not Restart and StepList[-2].Eigenmodes:
                         om_1 = StepList[-2].Eigenvalues[0]
                         om_2 = StepList[-2].Eigenvalues[1]
                         if om_1<ZeroD or om_2<ZeroD:
                             raise NameError("ConFem: no valid eigenvalues for Rayleigh damping ",om_1,om_2)
-                        StLi.RaAlph = 2.*StLi.Zeta*om_2*om_1/(om_1+om_2)    # for mass -- see RayleighDampingCoefficients.mws
-                        StLi.RaBeta = 2.*StLi.Zeta/(om_1+om_2)              # for stiffness
+                        if StLi.EigenVal2Alph: StLi.RaAlph = 2.*StLi.ZetaAlph*om_2*om_1/(om_1+om_2)    # for mass -- see RayleighDampingCoefficients.mws
+                        if StLi.EigenVal2Beta: StLi.RaBeta = 2.*StLi.ZetaBeta/(om_1+om_2)              # for stiffness
+                        Echo(f"Rayleigh damping parameters: alpha for mass {StLi.RaAlph:.4e}, beta for stiffness {StLi.RaBeta:.4e}", f6)
             if Restart:                                                     # must be here after damping parameter definition
                 dt = StepRestart[0]
                 StLi.RaAlph = StepRestart[1]
@@ -242,10 +241,10 @@ class ConFem:
                 if Time+1.e-6>=TimeNo and len(StLi.NoFilList)>0:
                     TimeNo=Time + StLi.NoFilList[-1]                        # set time for nodeal output
                 A_BFGS, B_BFGS, rho_BFGS = [], [], []                       # A_BFGS, B_BFGS: BFGS auxiliary list of vectors, rho_BFGS: BFGS auxiliary list of scalars
-                VecD = zeros((N),dtype=double)                              # displacement increment vector
-                VecDI= zeros((N),dtype=double)                              # 
-                VecR = zeros((N),dtype=double)                              # residual nodal forces vector
-                VecRP= zeros((N),dtype=double)                              # residual nodal forces vector
+                VecD = zeros((N),dtype=float)                              # displacement increment vector
+                VecDI= zeros((N),dtype=float)                              #
+                VecR = zeros((N),dtype=float)                              # residual nodal forces vector
+                VecRP= zeros((N),dtype=float)                              # residual nodal forces vector
                 if StLi.Dyn and not StLi.Eigenmodes:                        # implicit dynamic calculation
                     Time = Time + dt                                        # new time for dynamic calculation
                     VecX = VecC + dt*VevC + 0.5*dt**2*(1-2*StLi.NMbeta)*VeaC # Newmark auxiliary vector
@@ -287,10 +286,11 @@ class ConFem:
                     # eigenmode analysis
                     if StLi.Buckl or StLi.Eigenmodes:
                         if not SymSys: raise NameError("ConFem::Run: Symmetric system required for eigenforms")
+                        # EigenmodesN, EigenmodeIter currently hard coded in ConFemSteps
                         evals = Eigen( StLi.EigenmodesN, StLi.EigenmodeIter, N, NodeList, ElList, StLi, MatK, MatM, NoLabToNoInd,NoIndToCMInd, PloF, f6)
                         StepFinishedFlag = True
                         if StLi.Eigenmodes:
-                            for eig in range(min(StLi.EigenmodesN,10)):     # hard coded length
+                            for eig in range(min(StLi.EigenmodesN,10)):     # hard coded limit, see ConFemSteps
                                 StLi.Eigenvalues[eig] = 2.0*pi/sqrt(evals[eig])
                                 StLi.Eigenvalues[eig] = sqrt(evals[eig])
                             Echo(f"eigenmodes from Eigenmode analysis {*StLi.Eigenvalues,}", f6)
@@ -452,8 +452,8 @@ class ConFem:
                 equiiterQueues[2].append( j )                               # last iteration
 
                 # premature termination cases -- if so
-                if PremTermination( Name,f5,f6,StLi, dt,Time,TimeTarg, j, EquiFailedCounter,EquiFailedMax, ndeq,timeoutQueues, SoftSys,SoftRed,StabTolF, maxWriteNodes):
-                    break
+                EquiFailedCounter, Flag = PremTermination( Name,f5,f6,StLi, dt,Time,TimeTarg, j, EquiFailedCounter,EquiFailedMax, ndeq,timeoutQueues, SoftSys,SoftRed,StabTolF, maxWriteNodes)
+                if Flag: break
 
                 # book keeping for iterated time step
                 TimeOld = Time
@@ -487,16 +487,12 @@ class ConFem:
                     if not EqF and not StLi.Buckl and (Time+1.e-6>=TimeX or StepFinishedFlag): return True
                     else:                                                                      return False
                 if WriteXData(TimeEl):
-                    DataOutStress(NameElemOut_, ElList, NodeList, NoIndToCMInd, Time, "a", f6)
-                    WriteElemData( f2, f7, Time, ElList, NodeList,NoIndToCMInd, MatList, MaxType, ResultTypes)# write element data
-                    f2.flush()
+                    WriteElemData(NameElemOut_, ElList, NodeList, NoIndToCMInd, Time, "a", f6)
                     Echo(f"Element data written {Time:f}", f6)
                 if WriteXData(TimeNo):
                     if LinAlgFlag: NodeList.sort(key=lambda t: t.Label)
-                    DataOut(NameNodeOut_, NodeList, VecU, VecB, VecR, Time, "a" )
-                    WriteNodalData( f3, Time, NodeList, VecU, VecB)         # write nodal data
+                    WriteNodeData(NameNodeOut_, NodeList, VecU, VecB, VecR, Time, "a")
                     if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
-                    f3.flush()
                     Echo(f"Nodal data written {Time:f}", f6)
                 fl = (Time+1.e-6>=TimeRe and j<StLi.IterNum-1)              # flag for writing restart data
                 if fl or StepFinishedFlag:                                  # StepFinishedFlag set if time target in step is reached -- or eigenmode analysis or to stop snap back
@@ -531,8 +527,6 @@ class ConFem:
         # end of step loop
 
         Echo(f"total comp time {process_time()-stime:.0f} seconds", f6)
-        f2.close()
-        f3.close()
         if f5!=None: f5.close()
         if f7!=None: f7.close()
 #        fX.close()

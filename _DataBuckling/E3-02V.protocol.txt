@@ -8,6 +8,9 @@ used material MAT2, spec. inertial mass 0.00e+00, type ELASTIC
 Element data written 1.000000
 Nodal data written 1.000000
 Restart data written 1.000000
+last iteration data
+    1, 1.0000,    1
+reached time 1.0000
 1 step starts, solution type NR
 Eigenvalue analysis: Matrices have been computed
 Eigenvalue analysis: kinematic boundary conditions considered
@@ -22,10 +25,11 @@ iter 6, residual 0.000052
 iter 7, residual 0.000013
 iter 8, residual 0.000003
 iter 9, residual 0.000001
-eigenform 0, value 27.384935, rel. acc 3.309052e-14
-eigenform 1, value 57.929866, rel. acc 2.725330e-11
+eigenform 0, value 27.384935, rel. acc 2.921204e-14
+eigenform 1, value 57.929866, rel. acc 2.724266e-11
 eigenform 2, value 120.534562, rel. acc 2.308324e-08
 eigenform 3, value 193.382545, rel. acc 1.150206e-06
 Eigenvalue analysis: finished
-Restart data written 1.000000
+last iteration data
+reached time 1.0000
 total comp time 1 seconds

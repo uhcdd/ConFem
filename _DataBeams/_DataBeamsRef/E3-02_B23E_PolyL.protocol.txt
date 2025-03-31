@@ -1,5 +1,4 @@
 ConFem  ../_DataBeams/E3-02_B23E_PolyL
-PROP1, Area 0.110000, 1st moment area 3.750000e-03, 2nd moment area 1.591667e-03 
 symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
 ndofs 43, elems 10, active nodes 21, abs.size 0.22 MItems, rel.size 0.1222 (abs.size/(ndofs**2)
 used material MAT1, spec. inertial mass 0.00e+00, type RCBEAM
@@ -196,4 +195,19 @@ used material MAT1, spec. inertial mass 0.00e+00, type RCBEAM
 Element data written 1.001182
 Nodal data written 1.001182
 Restart data written 1.001182
-total comp time 33 seconds
+last iteration data
+   38, 0.9506,    2
+   39, 0.9719,    2
+   40, 0.9797,    3
+   41, 0.9832,    2
+   42, 0.9863,    2
+   43, 0.9891,    2
+   44, 0.9916,    2
+   45, 0.9939,    2
+   46, 0.9960,    2
+   47, 0.9979,    2
+   48, 0.9996,    2
+   49, 1.0012,    2
+last timeout data
+reached time 1.0012
+total comp time 27 seconds

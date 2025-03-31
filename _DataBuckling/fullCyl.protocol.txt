@@ -8,6 +8,9 @@ used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
 Element data written 1.000000
 Nodal data written 1.000000
 Restart data written 1.000000
+last iteration data
+    1, 1.0000,    1
+reached time 1.0000
 1 step starts, solution type NR
 Eigenvalue analysis: Matrices have been computed
 Eigenvalue analysis: kinematic boundary conditions considered

@@ -1297,7 +1297,7 @@ def CheckStability( q0,q1, N,sf):                                               
     return StableFlag
 def PremTermination( Name,f5,f6, StLi, dt,Time,TimeTarg, j, EquiFailedCounter,EquiFailedMax, ndeq,timeoutQueues,SoftSys,SoftRed,StabTolF, maxWriteNodes):
     BreakFlag = False
-                # premature termination cases -- if so
+    # premature termination cases -- if so
 #                if not StLi.Dyn and j==StLi.IterNum-1:
     if j == StLi.IterNum-1:
         if EquiFailedCounter==EquiFailedMax-1:
@@ -1331,5 +1331,5 @@ def PremTermination( Name,f5,f6, StLi, dt,Time,TimeTarg, j, EquiFailedCounter,Eq
                  f" time step {dt:.4f} - time {Time:.4f} of target {TimeTarg:.4f}", f6)
             BreakFlag = True                                               # continues after time increment loop, i.e. incrementing is terminated
     #
-    return BreakFlag
+    return EquiFailedCounter, BreakFlag
 

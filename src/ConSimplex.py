@@ -222,8 +222,6 @@ class ConSimplex:
         pass
     def Run(self, Name, LinAlgFlag, PloF, ElPlotTimes=['1.0000']):
         f1 =open( Name+".in.txt", 'r')
-        f2 =open( Name+".elemout.txt", 'w')
-        f3 =open( Name+".nodeout.txt", 'w')
         f6 =open( Name+".protocol.txt", 'w')
         f7=None
         print("ConSim: ", Name)
@@ -267,14 +265,10 @@ class ConSimplex:
             K_LU = splu(MatK.tocsc(),permc_spec=3)     #triangulization of stiffness matrix
             VecU = K_LU.solve( VecR )                           # solution of K*u=R -> displacement increment
             IntForces( MatList,ElList, Time, VecZ,VecU,VecZ,VecZ,VecZ, VecI, MatK,None,None,None,None,    1, None, False,False,False, 0)# internal nodal forces
-        DataOutStress(Name+".elemout_.txt", ElList, NodeList, NoIndToCMInd, 1.0, "w", None)
-        WriteElemData( f2, f7, Time, ElList, NodeList,NoIndToCMInd, MatList, [], ResultTypes)          # write element data
+        WriteElemData(Name + ".elemout.txt", ElList, NodeList, NoIndToCMInd, 1.0, "w", None)
         if LinAlgFlag: NodeList.sort(key=lambda t: t.Label)
-        WriteNodalData( f3, Time, NodeList, VecU, VecU)     # write nodal data
-        DataOut(Name+".nodeout_.txt", NodeList, VecU, VecI, VecR, 1.0, "w")
+        WriteNodeData(Name + ".nodeout_.txt", NodeList, VecU, VecI, VecR, 1.0, "w")
         if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
-        f2.close()
-        f3.close()
         f6.close()
         print(f"finished prior FEM calculation -- one step with nominal load")
         # post processing

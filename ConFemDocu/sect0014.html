@@ -51,7 +51,7 @@
 <hr />
 </div>
 
-<div><h2 id="a0000000015">13.2 Entity Specific Plotting</h2>
+<div><h2 id="a0000000015">12.2 Entity Specific Plotting</h2>
 <ul class="itemize">
 <li><p>General rules </p><ul class="itemize">
 <li><p>Node entities are plotted with nodal displacements. </p></li><li><p>Line element entities are divided into a sequence of plots for each sub-entity. Each plot includes all plotting times. Plotting is in the x-y plane. </p></li><li><p>A 2D element entity (sub-entity for <tt>SB3</tt>) gets its own plot, i.e. each plotting time has its own plot. Plotting is in the x-y plane. </p></li><li><p>A 3D element entity like bending moments and normal/bending forces is plotted as 2D-projections onto the <object data="images/img-0282.svg" style="width:2.333em; 
@@ -62,7 +62,7 @@
 </ul></li><li><p>Scaling </p><ul class="itemize">
 <li><p>A default scaling is computed automatically for all entities but may be superposed with individual scaling factors, see keywords for plot options below </p></li>
 </ul></li><li><p>History </p><ul class="itemize">
-<li><p>In case the option <tt>writeNodes</tt> is defined in <tt>&lt;name&gt;.opt.txt</tt>, see Section <a href="SEC_0473.html">11</a>, the respective data pairs are plotted in x-y for all computed time instants. </p></li>
+<li><p>In case the option <tt>writeNodes</tt> is defined in <tt>&lt;name&gt;.opt.txt</tt>, see Section <a href="SEC_0473.html">10</a>, the respective data pairs are plotted in x-y for all computed time instants. </p></li>
 </ul></li><li><p>Plot options </p><p>Details of plotting are ruled with an <i class="itshape">optional</i> file <tt>&lt;name&gt;.plt.txt</tt> providing keywords and – separated with comma from keywords – plotting parameters, if required. </p><p>Default values are taken if this file does not exist or if keywords with respect to a plotting item are not specified. </p><ul class="itemize">
 <li><p>Keywords <br /></p><table class="tabular" cellspacing="0">
 <tr>
@@ -71,7 +71,7 @@
     <td style="text-align:left"><p>  <tt>*PlotTimes,</tt> </p></td>
 
     
-    <td style="text-align:left"><p> sequence of float numbers separated by comma </p></td>
+    <td style="text-align:left"><p> <tt>&lt;sequence of float numbers separated by comma&gt;</tt> </p></td>
 
 </tr><tr>
 
@@ -79,7 +79,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> time instances to plot – should be a subset of time instants specified for data output, see Section <a href="SEC_0600.html">12</a> </p></td>
+    <td style="text-align:left"><p> time instances to plot – should be a subset of time instants specified for data output, see Section <a href="SEC_0600.html">11</a> </p></td>
 
 </tr><tr>
 
@@ -87,7 +87,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> default is all specified for output data, see Sections <a href="SEC_0620.html">12.3</a>, <a href="SEC_0640.html">12.4</a> </p></td>
+    <td style="text-align:left"><p> default is all specified for output data, see Sections <a href="SEC_0620.html">11.2</a>, <a href="SEC_0640.html">11.3</a> </p></td>
 
 </tr><tr>
 
@@ -95,7 +95,7 @@
     <td style="text-align:left"><p> <tt>*ScaleStress,</tt> </p></td>
 
     
-    <td style="text-align:left"><p> sequence of of pairs of a string and a float number </p></td>
+    <td style="text-align:left"><p> <tt>&lt;sequence of of pairs of a string and a float number&gt;</tt> </p></td>
 
 </tr><tr>
 
@@ -103,7 +103,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> string is name of element set, see Section <a href="SEC_0500.html">10</a>, number is corresponding superposed scaling factor </p></td>
+    <td style="text-align:left"><p> string is name of element set, see Section <a href="SEC_0500.html">9</a>, number is corresponding superposed scaling factor </p></td>
 
 </tr><tr>
 
@@ -127,7 +127,7 @@
     <td style="text-align:left"><p> <tt>*ScaleDispl,</tt> </p></td>
 
     
-    <td style="text-align:left"><p> float number </p></td>
+    <td style="text-align:left"><p> <tt>&lt;float number&gt;</tt> </p></td>
 
 </tr><tr>
 
@@ -151,7 +151,7 @@
     <td style="text-align:left"><p> <tt>*ScaleDispl2D,</tt> </p></td>
 
     
-    <td style="text-align:left"><p> float number </p></td>
+    <td style="text-align:left"><p> <tt>&lt;float number&gt;</tt> </p></td>
 
 </tr><tr>
 
@@ -207,7 +207,7 @@
     <td style="text-align:left"><p> <tt>*PostElem2DContour,</tt> </p></td>
 
     
-    <td style="text-align:left"><p> plotting of 2D-contours, sequence of 5 items:</p></td>
+    <td style="text-align:left"><p> plotting of 2D-contours <tt>&lt;sequence of 5 items&gt;</tt>:</p></td>
 
 </tr><tr>
 
@@ -215,7 +215,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> element set label, label for data, index for float data (0 is starter for 1st float) for data position in <tt>*.elemout_.txt</tt>, </p></td>
+    <td style="text-align:left"><p> element set label, label for data, index for float data (0 is starter for 1st float) for data position in <tt>*.elemout.txt</tt>, </p></td>
 
 </tr><tr>
 

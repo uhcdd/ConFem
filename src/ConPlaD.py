@@ -371,11 +371,11 @@ class ConPlaD:
                 f1.close()
             # this is quick and dirty to get data to derive scaling factors
             from ConFemPost import PostScales, ReadResultsFromFile
-            ff  = open(Name+".elemout_"+".txt",'r')
-            ffN = open(Name+".nodeout_"+".txt",'r')
+            ff  = open(Name+".elemout"+".txt",'r')
+            ffN = open(Name+".nodeout"+".txt",'r')
             EndFlag = False
             while not EndFlag:
-                EndFlag, _, Time_, _, ElemResults,_,ElResults = ReadResultsFromFile( MatList, ff, ffN) # reads until next time marker, will presumably work only for elemenout_, nodeout_
+                EndFlag, _, Time_, _, _,ElResults, _ = ReadResultsFromFile( MatList, ff, ffN) # reads until next time marker, will presumably work only for elemenout_, nodeout
                 if Time_ == Time: break
             if Time_ != Time: raise NameError("ConPlaD: inconsistency in time -- last computed time unequal to last output time")
             ff.close()
@@ -410,6 +410,6 @@ if __name__ == "__main__":
     PlotFlag = True
 #    numpy.seterr(all='raise')
     Name, KeyElset, Type ="../DataExamples/E08/E8-01",' EL1', "plate"                 # ConPlad Plate E4_01 linear elastic, reinforcement design        11s
-#    Name, KeyElset, Type ="../DataExamples/E09/E9-01",'PROP1', "slab"                         # input data name
+    Name, KeyElset, Type ="../DataExamples/E09/E9-01",'PROP1', "slab"                         # input data name
     ConPlaD_ = ConPlaD()
     RC = ConPlaD_.Run(Name, KeyElset, PlotFlag, Type)

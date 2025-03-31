@@ -88,4 +88,31 @@ used material ISOD, spec. inertial mass 0.00e+00, type ISODAMAGE, fct 3.50, DStr
 Element data written 1.000000
 Nodal data written 1.000000
 Restart data written 1.000000
-total comp time 4 seconds
+last iteration data
+    9, 0.4500,    3
+   10, 0.5000,    3
+   11, 0.5500,    3
+   12, 0.6000,    3
+   13, 0.6500,    3
+   14, 0.7000,    3
+   15, 0.7500,    3
+   16, 0.8000,    3
+   17, 0.8500,    3
+   18, 0.9000,    3
+   19, 0.9500,    3
+   20, 1.0000,    3
+last timeout data
+    9, 0.002250, 0.76
+   10, 0.002500, 0.78
+   11, 0.002750, 0.80
+   12, 0.003000, 0.82
+   13, 0.003250, 0.83
+   14, 0.003500, 0.85
+   15, 0.003750, 0.87
+   16, 0.004000, 0.88
+   17, 0.004250, 0.90
+   18, 0.004500, 0.91
+   19, 0.004750, 0.93
+   20, 0.005000, 0.95
+reached time 1.0000
+total comp time 2 seconds

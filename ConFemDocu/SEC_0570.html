@@ -51,7 +51,7 @@
 <hr />
 </div>
 
-<div><h2 id="SEC_0570">10.9 Step Section</h2>
+<div><h2 id="SEC_0570">9.9 Step Section</h2>
 <p><object data="images/img-0001.svg" style="width:1em; 
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
@@ -188,7 +188,7 @@
     <td style="text-align:left"><p> output related to nodes </p></td>
 
 </tr>
-</table><p> <br /><br />A step section has to closed by <tt>*END STEP</tt> as the last line. Further step sections may follow. Computations are applied in a sequence as defined by the sequence of step sections. </p><p>Each step sub-keyword may have options and specific data lines which are described in the following. </p><h3 id="a0000000029"><tt class="ttfamily">*</tt>STATIC</h3>
+</table><p> <br /><br />A step section has to closed by <tt>*END STEP</tt> as the last line. Further step sections may follow. Computations are applied in a sequence as defined by the sequence of step sections. </p><p>Each step sub-keyword may have options and specific data lines which are described in the following. </p><h3 id="a0000000030"><tt class="ttfamily">*</tt>STATIC</h3>
 <p>The step sub-keyword <tt>*STATIC</tt> has as data line <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -258,6 +258,14 @@
                                                                 vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0155.png" alt="$t_i$" style="vertical-align:-2px; 
                                      width:10px; 
                                      height:12px" class="math gen" /></object> of actual step </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> pseudo-time is used for a loading history and must not be clock-time </p></td>
 
 </tr><tr>
 
@@ -337,7 +345,7 @@
                                                                 height:0.467em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
                                      width:6px; 
-                                     height:7px" class="math gen" /></object> may be determined in a preceding computation by checking the execution report, see Section <a href="SEC_0615.html">12.2</a>, with <object data="images/img-0145.svg" style="width:1.600em; 
+                                     height:7px" class="math gen" /></object> may be determined in a preceding computation by checking the execution report, see Section <a href="SEC_0615.html">11.1</a>, with <object data="images/img-0145.svg" style="width:1.600em; 
                                                                 height:0.933em; 
                                                                 vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0149.png" alt="$\Delta t_1$" style="vertical-align:-2px; 
                                      width:24px; 
@@ -345,7 +353,11 @@
                                                                 height:0.467em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
                                      width:6px; 
-                                     height:7px" class="math gen" /></object> is optional whereby using <tt>ARCLENGTH</tt> only. A value of <object data="images/img-0101.svg" style="width:0.400em; 
+                                     height:7px" class="math gen" /></object> is optional whereby using <tt>ARCLENGTH</tt> only without specifying <object data="images/img-0101.svg" style="width:0.400em; 
+                                                                height:0.467em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
+                                     width:6px; 
+                                     height:7px" class="math gen" /></object>. A value of <object data="images/img-0101.svg" style="width:0.400em; 
                                                                 height:0.467em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0105.png" alt="$s$" style="vertical-align:0px; 
                                      width:6px; 
@@ -353,7 +365,7 @@
                                                                 height:0.933em; 
                                                                 vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0149.png" alt="$\Delta t_1$" style="vertical-align:-2px; 
                                      width:24px; 
-                                     height:14px" class="math gen" /></object> in that case. <br />The time step data line is ignored if the arclength control is activated. <br /><br />See also the the <i class="sc">Book</i>, Appendix A.4 for the arclength method </p><h3 id="a0000000030"><tt class="ttfamily">*</tt>EIGENMODES</h3>
+                                     height:14px" class="math gen" /></object> in that case. <br />The time step data line is ignored if the arclength control is activated. <br /><br />See also the the <i class="sc">Book</i>, Appendix A.4 for the arclength method </p><h3 id="a0000000031"><tt class="ttfamily">*</tt>EIGENMODES</h3>
 <p>The step sub-keyword <tt>*EIGENMODES</tt> has as data line <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -376,10 +388,10 @@
                                      height:7px" class="math gen" /></object> </p></td>
 
     
-    <td style="text-align:left"><p> number of eigenmodes to be computed – this is currently restricted to natural periods times </p></td>
+    <td style="text-align:left"><p> number of eigenmodes to be computed – this is currently limited to times of natural periods </p></td>
 
 </tr>
-</table><p> <br /><br />If Rayleigh damping is defined – see the following sub-keyword –it is disregarded for this computation type. <br /><br />See the <i class="sc">Book</i> 4.10 for dynamics. </p><h3 id="a0000000031"><tt class="ttfamily">*</tt>DYNAMIC</h3>
+</table><p> <br /><br />If Rayleigh damping is defined – see the following sub-keyword –it is disregarded for this computation type. <br /><br />See the <i class="sc">Book</i> 4.10 for dynamics. </p><h3 id="a0000000032"><tt class="ttfamily">*</tt>DYNAMIC</h3>
 <p>The step sub-keyword <tt>*DYNAMIC</tt> has as data line <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -410,6 +422,14 @@
 
     
     <td style="text-align:left"><p> time increment </p></td>
+
+</tr><tr>
+
+    
+    <td style="text-align:left">&nbsp;</td>
+
+    
+    <td style="text-align:left"><p> time has to be clock time </p></td>
 
 </tr><tr>
 
@@ -465,11 +485,11 @@
                                      height:12px" class="math gen" /></object> to largest natural period </p></td>
 
 </tr>
-</table><p> <br /><br />This requires that a <tt>*EIGENMODES</tt>-step has been performed immediately before. The <object data="images/img-0153.svg" style="width:1.200em; 
+</table><p> <br /><br />This requires that an <tt>*EIGENMODES</tt>-step has been performed immediately before. The <object data="images/img-0153.svg" style="width:1.200em; 
                                                                 height:0.800em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0157.png" alt="$\Delta t$" style="vertical-align:0px; 
                                      width:18px; 
-                                     height:12px" class="math gen" /></object>-value of the data line is ignored for this option. <br /><br />See the <i class="sc">Book</i> 4.10 for dynamics. </p><h3 id="a0000000032"><tt class="ttfamily">*</tt>DAMPING</h3>
+                                     height:12px" class="math gen" /></object>-value of the data line is ignored for this option. <br /><br />See the <i class="sc">Book</i> 4.10 for dynamics. </p><h3 id="a0000000033"><tt class="ttfamily">*</tt>DAMPING</h3>
 <p>The step sub-keyword <tt>*DAMPING</tt> introduces a Rayleigh damping into a dynamic calculation. This builds a damping matrix from a linear combinations of the mass matrix and the stiffness matrix.<br /><tt>*DAMPING</tt> has as options <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -526,11 +546,11 @@
                                      height:7px" class="math gen" /></object> determines the ratio of damping for the 1st and 2nd dynamic eigenmode compared to critical damping </p></td>
 
 </tr>
-</table><p> <br /><br />This requires that a <tt>*EIGENMODES</tt>-step has been performed immediately before whereby at least two natural periods are required. Explicitly defined values for <object data="images/img-0155.svg" style="width:1.733em; 
+</table><p> <br /><br />This requires that an <tt>*EIGENMODES</tt>-step has been performed immediately before whereby at least two natural periods are required. Explicitly defined values for <object data="images/img-0155.svg" style="width:1.733em; 
                                                                 height:0.933em; 
                                                                 vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0159.png" alt="$\alpha ,\beta $" style="vertical-align:-3px; 
                                      width:26px; 
-                                     height:14px" class="math gen" /></object> are ignored in this case. </p><h3 id="a0000000033"><tt class="ttfamily">*</tt>SOLUTION TECHNIQUE</h3>
+                                     height:14px" class="math gen" /></object> are ignored in this case. </p><h3 id="a0000000034"><tt class="ttfamily">*</tt>SOLUTION TECHNIQUE</h3>
 <p>Default method for solution of systems of equations is the Newton-Raphson method in case that <tt>*SOLUTION TECHNIQUE</tt> is <i class="itshape">not</i> specified. Alternative methods <i class="itshape">may</i> be used with the step sub-keyword <tt>*SOLUTION TECHNIQUE</tt> with the options <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -588,18 +608,11 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p> <tt>NITER=</tt></p><table id="a0000000034" class="equation" width="100%" cellspacing="0" cellpadding="7">
-<tr>
-    
-    <td style="width:40%">&nbsp;</td>
-    <td><object data="images/img-0157.svg" style="width:2.400em; 
-                                                                    height:0.733em" type="image/svg+xml"><img src="images/img-0161.png" alt="\[ niter \]" style="width:36px; 
-                            height:11px" class="math gen" /></object></td>
-    
-    <td style="width:40%">&nbsp;</td>
-    <td class="eqnnum" style="width:20%">&nbsp;</td>
-</tr>
-</table></td>
+    <td style="text-align:left"><p> <tt>NITER=</tt><object data="images/img-0157.svg" style="width:2.333em; 
+                                                                height:0.733em; 
+                                                                vertical-align:0em" type="image/svg+xml"><img src="images/img-0161.png" alt="$niter$" style="vertical-align:0px; 
+                                     width:35px; 
+                                     height:11px" class="math gen" /></object> </p></td>
 
     
     <td style="text-align:left"><p> maximum number of equilibrium iterations with a time increment or loading step </p></td>
@@ -610,7 +623,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> iteration will stop upon this criterion, irrespectively whether the equilibrium iteration tolerance is reached or not </p></td>
+    <td style="text-align:left"><p> iteration will stop upon this criterion, respectively whether the equilibrium iteration tolerance is reached or not </p></td>
 
 </tr>
 </table><p> <br /><br />Default values <object data="images/img-0158.svg" style="width:6.333em; 
@@ -630,7 +643,7 @@
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0165.png" alt="$r \approx 0$" style="vertical-align:0px; 
                                      width:36px; 
                                      height:11px" class="math gen" /></object>. </p><h3 id="a0000000035"><tt class="ttfamily">*</tt>AMPLITUDE</h3>
-<p>The step sub-keyword <tt>*AMPLITUDE</tt> <i class="itshape">may</i> be used to define (pseudo-)time dependent scaling factors for boundary conditions or loadings. It has as mandatory option <br /><br /></p><table class="tabular" cellspacing="0">
+<p>The step sub-keyword <tt>*AMPLITUDE</tt> <i class="itshape">may</i> be used to define (pseudo- or clock-)time dependent scaling factors for boundary conditions or loadings. It has as mandatory option <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -640,7 +653,7 @@
     <td style="text-align:left"><p> specifies a unique name which may be freely chosen</p></td>
 
 </tr>
-</table><p> <br /><br />The data line describes a polyline with the following data – in one line not interrupted with <tt>CR</tt>! <br /></p><table class="tabular" cellspacing="0">
+</table><p> <br /><br />The data line describes a polyline with the following data – in one line <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -755,7 +768,7 @@
                                                                 height:0.933em; 
                                                                 vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0173.png" alt="$f$" style="vertical-align:-3px; 
                                      width:8px; 
-                                     height:14px" class="math gen" /></object> is linearly extrapolated from the last two pairs.<br />Prescribed loadings and nonzero boundary conditions are scaled with (pseudo-)time value <object data="images/img-0003.svg" style="width:0.333em; 
+                                     height:14px" class="math gen" /></object> is linearly extrapolated from the last two pairs.<br />Prescribed loading and nonzero boundary conditions are scaled with (pseudo- or clock)time value <object data="images/img-0003.svg" style="width:0.333em; 
                                                                 height:0.667em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
                                      width:5px; 
@@ -896,7 +909,7 @@
                                                                 height:0.867em; 
                                                                 vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0180.png" alt="$index_i$" style="vertical-align:-2px; 
                                      width:43px; 
-                                     height:13px" class="math gen" /></object> see Section <a href="SEC_0450.html">7</a> and Section <a href="SEC_0520.html">10.3</a>. <br />All dofs with <object data="images/img-0177.svg" style="width:11.933em; 
+                                     height:13px" class="math gen" /></object> see Section <a href="SEC_0450.html">7</a> and Section <a href="SEC_0520.html">9.3</a>. <br />All dofs with <object data="images/img-0177.svg" style="width:11.933em; 
                                                                 height:0.867em; 
                                                                 vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0181.png" alt="$index_1&lt;index_i&lt;index_n$" style="vertical-align:-2px; 
                                      width:179px; 
@@ -912,7 +925,7 @@
                                                                 height:0.600em; 
                                                                 vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0177.png" alt="$u_i$" style="vertical-align:-2px; 
                                      width:13px; 
-                                     height:9px" class="math gen" /></object> is scaled with the (pseudo-)time value. <br /><br />In case of consecutive steps all boundary conditions of a second or later step (<object data="images/img-0001.svg" style="width:1em; 
+                                     height:9px" class="math gen" /></object> is scaled with the (pseudo- or clock-)time value. <br /><br />In case of consecutive steps all boundary conditions of a second or later step (<object data="images/img-0001.svg" style="width:1em; 
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
                                      width:15px; 
@@ -998,7 +1011,7 @@
                                                                 height:0.867em; 
                                                                 vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0180.png" alt="$index_i$" style="vertical-align:-2px; 
                                      width:43px; 
-                                     height:13px" class="math gen" /></object> see Section <a href="SEC_0450.html">7</a> and Section <a href="SEC_0520.html">10.3</a>.<br />A data line may be repeated as often as required for the same node or for further nodes. <br /><br />The value of <object data="images/img-0180.svg" style="width:0.933em; 
+                                     height:13px" class="math gen" /></object> see Section <a href="SEC_0450.html">7</a> and Section <a href="SEC_0520.html">9.3</a>.<br />A data line may be repeated as often as required for the same node or for further nodes. <br /><br />The value of <object data="images/img-0180.svg" style="width:0.933em; 
                                                                 height:0.867em; 
                                                                 vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0184.png" alt="$P_i$" style="vertical-align:-2px; 
                                      width:14px; 
@@ -1006,7 +1019,7 @@
                                                                 height:0.867em; 
                                                                 vertical-align:-0.133em" type="image/svg+xml"><img src="images/img-0184.png" alt="$P_i$" style="vertical-align:-2px; 
                                      width:14px; 
-                                     height:13px" class="math gen" /></object> is scaled with the (pseudo-)time value. </p><h3 id="a0000000038"><tt class="ttfamily">*</tt>DLOAD</h3>
+                                     height:13px" class="math gen" /></object> is scaled with the (pseudo- or clock-)time value. </p><h3 id="a0000000038"><tt class="ttfamily">*</tt>DLOAD</h3>
 <p>The section sub-keyword <tt>*DLOAD</tt> <i class="itshape">may</i> define distributed loadings and <i class="itshape">may</i> have as option <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -1045,7 +1058,7 @@
     <td style="text-align:left"><p>  <tt>&lt;name&gt;</tt> </p></td>
 
     
-    <td style="text-align:left"><p> name of set of loaded elements, see Section <a href="SEC_0520.html">10.3</a> </p></td>
+    <td style="text-align:left"><p> name of set of loaded elements, see Section <a href="SEC_0520.html">9.3</a> </p></td>
 
 </tr><tr>
 
@@ -1100,7 +1113,7 @@
                                                                 height:0.733em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0187.png" alt="$T$" style="vertical-align:0px; 
                                      width:11px; 
-                                     height:11px" class="math gen" /></object> is scaled with the (pseudo-)time value. </p><h3 id="a0000000039"><tt class="ttfamily">*</tt>TEMPERATURE</h3>
+                                     height:11px" class="math gen" /></object> is scaled with the (pseudo- or clock-)time value. </p><h3 id="a0000000039"><tt class="ttfamily">*</tt>TEMPERATURE</h3>
 <p>The step sub-keyword <tt>*TEMPERATURE</tt> <i class="itshape">may</i> define temperatures at nodes. Temperatures may induce stresses. </p><ul class="itemize">
 <li><p>This is currently implemented for beam elements of type <tt>B21, B21E, B23, B23E</tt> only (<object data="images/img-0001.svg" style="width:1em; 
                                                                 height:0.533em; 
@@ -1204,7 +1217,7 @@
                                                                 height:0.667em; 
                                                                 vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0185.png" alt="$p_i$" style="vertical-align:-3px; 
                                      width:12px; 
-                                     height:10px" class="math gen" /></object> is scaled with the (pseudo-)time value. <br /><br />See the <i class="sc">Book</i> 4.6 for temperature effects with beams. </p><h3 id="a0000000040"><tt class="ttfamily">*</tt>PRESTRESS</h3>
+                                     height:10px" class="math gen" /></object> is scaled with the (pseudo- or clock-)time value. <br /><br />See the <i class="sc">Book</i> 4.6 for temperature effects with beams. </p><h3 id="a0000000040"><tt class="ttfamily">*</tt>PRESTRESS</h3>
 <p>The step sub-keyword <tt>*PRESTRESS</tt> <i class="itshape">may</i> define a prestressing of elements. </p><ul class="itemize">
 <li><p>This is currently implemented for element types <tt>B23E, B23</tt> only. </p></li>
 </ul><p> It <i class="itshape">must</i> have the options <br /><br /></p><table class="tabular" cellspacing="0">
@@ -1486,7 +1499,7 @@
                                      height:11px" class="math gen" /></object> </p></td>
 
     
-    <td style="text-align:left"><p> number of a finite element defined in the element section, see <a href="SEC_0520.html">10.3</a> </p></td>
+    <td style="text-align:left"><p> number of a finite element defined in the element section, see <a href="SEC_0520.html">9.3</a> </p></td>
 
 </tr><tr>
 
@@ -1611,7 +1624,7 @@
                                                                 height:1.067em; 
                                                                 vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0200.png" alt="$F_{p0}$" style="vertical-align:-4px; 
                                      width:22px; 
-                                     height:16px" class="math gen" /></object> is scaled by the current value of the function defined with <tt>*AMPLITUDE=&lt;name3&gt;</tt>. The <tt>*AMPLITUDE</tt> may be omitted and the nominal prestressing force is scaled by the (pseudo-)time, but this is not appropriate regarding the actual application of prestressing. It should be hold constant during service accomplished by a constant <object data="images/img-0169.svg" style="width:0.533em; 
+                                     height:16px" class="math gen" /></object> is scaled by the current value of the function defined with <tt>*AMPLITUDE=&lt;name3&gt;</tt>. The <tt>*AMPLITUDE</tt> may be omitted and the nominal prestressing force is scaled by the (pseudo- or clock-)time, but this is not appropriate regarding the actual application of prestressing. It should be hold constant during service accomplished by a constant <object data="images/img-0169.svg" style="width:0.533em; 
                                                                 height:0.933em; 
                                                                 vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0173.png" alt="$f$" style="vertical-align:-3px; 
                                      width:8px; 
@@ -1626,7 +1639,7 @@
     <td style="text-align:left"><p> The parameter <tt>&lt;value&gt;</tt> defines the output time interval </p></td>
 
 </tr>
-</table><p> <br /><br />Details for <span class="underbar">element data</span> are given in Section <a href="SEC_0620.html">12.3</a>. </p><h3 id="a0000000042"><tt class="ttfamily">*</tt>NODE FILE</h3>
+</table><p> <br /><br />Details for <span class="underbar">element data</span> are given in Section <a href="SEC_0620.html">11.2</a>. </p><h3 id="a0000000042"><tt class="ttfamily">*</tt>NODE FILE</h3>
 <p>The step sub-keyword <tt>*NODE FILE</tt> initiates ASCII-output related to nodes and <i class="itshape">must</i> have as option <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -1637,7 +1650,7 @@
     <td style="text-align:left"><p> The parameter <tt>&lt;value&gt;</tt> defines the output time interval </p></td>
 
 </tr>
-</table><p> <br /><br />Details for <span class="underbar">nodal data</span> are given in Section <a href="SEC_0640.html">12.4</a> <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+</table><p> <br /><br />Details for <span class="underbar">nodal data</span> are given in Section <a href="SEC_0640.html">11.3</a> <br /><br /><object data="images/img-0001.svg" style="width:1em; 
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
                                      width:15px; 

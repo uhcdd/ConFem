@@ -4,3 +4,4 @@ writeNodes,4,1,b-u
 **writeNodes,4,2,b-u
 **writeNodes,3,1,b-u
 **writeNodes,4,1,b-u
+Stability_Tolerance_Factor, 100.0

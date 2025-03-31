@@ -5,8 +5,8 @@
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title></title>
 
-<link href="SEC_0230.html" title="Open Issues" rel="next" />
-<link href="SEC_0650.html" title="Using Source Code" rel="prev" />
+<link href="SEC_0500.html" title="Keywords for ConFem Input Data" rel="next" />
+<link href="SEC_0650.html" title="Using Python Scripts" rel="prev" />
 <link href="SEC_1108.html" title="Running ConFem" rel="up" />
 <link rel="stylesheet" href="styles/styles.css" />
 </head>
@@ -19,7 +19,7 @@
 
 <td><a href="SEC_1108.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0230.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0500.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
@@ -56,7 +56,11 @@
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
                                      width:15px; 
-                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> <br /><br />A zipped <tt>ConFemAll.exe</tt> is provided for download <a href="https://concrete-fem.com/download/">https://concrete-fem.com/download/</a>. This expands a directory <tt>ConFem*</tt> with a windows batch script <tt>Run.bat</tt> . A double click should start <tt>ComFemAll.exe</tt> which is a wrapper for all modules. Echo lines contain examples for the prompt requests. Echo lines may be edited for customized requirements. Cut and paste of echo lines avoids annoying typing errors. <br /><br />Working manually through prompts can be avoided with the windows powershell (PS). It allows that prompts of programs are fed by files. PS may again be invoked by a windows batch script, see <tt>PSRun.bat</tt>. This feeds the content of – name is arbitrary – <tt>in.txt</tt> to ConFem. Each line of <tt>in.txt</tt> but the last corresponds to a prompt response. The last line may be an arbitrary character or empty line. The echo is redirected into a log-file by <tt>PSRun.bat</tt>. </p><p>ConFem calls may be stacked within <tt>PSRun.bat</tt> to initiate a number of runs, e.g. for a parameter study, requiring a corresponding number of prompt input files. This stacking is executed one after the other. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> <br /><br />Python scripts may be compiled into a <tt>&lt;name&gt;.exe</tt> to be run under Windows. This requires the <i class="sc">PyInstaller</i>-package (<a href="https://pyinstaller.org/en/stable/">https://pyinstaller.org/en/stable/</a>). For compilation of ConFem python scripts go to the source file directory, open a powershell or command prompt window and launch </p><pre>
+PyInstaller .\ConFemAll.py
+</pre><p> <tt>ConFemAll.py</tt> offers two hard coded versions: </p><ul class="itemize">
+<li><p>A <i class="itshape">batch processing version</i> for continuous feeding of input files listed in an arbitrary text file, see <a href="https://github.com/uhcdd/ConFem/tree/master/WinBatch">https://github.com/uhcdd/ConFem/tree/master/WinBatch</a> for more instructions. </p></li><li><p>A <i class="itshape">prompt version</i> as a wrapper for all modules, see <a href="https://github.com/uhcdd/ConFem/tree/master/WinPrompt">https://github.com/uhcdd/ConFem/tree/master/WinPrompt</a> for more instructions. </p></li>
+</ul><p> After successful compilation the executable is available under the <tt>dist</tt>-directory and my be started immediately without further installation requirements. It is basically a portable and may be copied – including the <tt>_internal</tt>-directory – to other windows sites and used there<a href="#a0000000016" class="footnote"><sup class="footnotemark">1</sup></a> without a python installation. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
                                      width:15px; 
@@ -64,7 +68,12 @@
 
 
 
-
+<div id="footnotes">
+<p><b>Footnotes</b></p>
+<ol>
+<li id="a0000000016">Cannot be guaranteed for all processor types.</li>
+</ol>
+</div>
 
 <div class="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
@@ -73,7 +82,7 @@
 
 <td><a href="SEC_1108.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0230.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0500.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>

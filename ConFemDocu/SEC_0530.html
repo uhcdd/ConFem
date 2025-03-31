@@ -51,7 +51,7 @@
 <hr />
 </div>
 
-<div><h2 id="SEC_0530">10.4 Material Section</h2>
+<div><h2 id="SEC_0530">9.4 Material Section</h2>
 <p><object data="images/img-0001.svg" style="width:1em; 
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
@@ -60,7 +60,7 @@
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
                                      width:15px; 
-                                     height:8px" class="math gen" /></object><a href="SEC_0510.html">10.5</a>, <a href="SEC_0515.html">10.6</a>, <a href="SEC_0517.html">10.7</a>). In that case the respective material will be ignored. This is for an easy switching between different materials within an input data set. <br /><br />The section keyword <tt>*MATERIAL</tt> <i class="itshape">must</i> have an option <br /><br /></p><table class="tabular" cellspacing="0">
+                                     height:8px" class="math gen" /></object><a href="SEC_0510.html">9.5</a>, <a href="SEC_0515.html">9.6</a>, <a href="SEC_0517.html">9.7</a>). In that case the respective material will be ignored. This is for an easy switching between different materials within an input data set. <br /><br />The section keyword <tt>*MATERIAL</tt> <i class="itshape">must</i> have an option <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -2307,7 +2307,7 @@
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
                                      width:15px; 
                                      height:8px" class="math gen" /></object> <tt>"some comment"</tt>) are ignored. The same remarks hold for all data lines of the following material type keywords. </p></li>
-</ul><p>  Element output provides standard data, see Section <a href="SEC_0620.html">12.3</a>. <br /><br /><tt>*ELASTIC</tt> may have an option <tt>VISCO</tt> which allows for visco-elasticity of the Kelvin-Voigt-type, see <i class="sc">Book</i> 3.2. This is currently implemented for elements of type <tt>T*</tt> only. This option requires two more items in the data line which now takes the form <br /></p><table class="tabular" cellspacing="0">
+</ul><p>  Element output provides standard data, see Section <a href="SEC_0620.html">11.2</a>. <br /><br /><tt>*ELASTIC</tt> may have an option <tt>VISCO</tt> which allows for visco-elasticity of the Kelvin-Voigt-type, see <i class="sc">Book</i> 3.2. This is currently implemented for elements of type <tt>T*</tt> only. This option requires two more items in the data line which now takes the form <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -2408,7 +2408,7 @@
     <td style="text-align:left"><p> creep time </p></td>
 
 </tr>
-</table><p> <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">12.3</a>. <br /><br /><tt>*ELASTIC</tt> may have a further option <tt>PHASE_FIELD</tt> which activates the phase-field approach for resolution of strain localizations, see <i class="sc">Book</i> 7.5.2. This is currently implemented for elements of type <tt>T*</tt> only. This option requires three more data in the data line which now takes the form <br /></p><table class="tabular" cellspacing="0">
+</table><p> <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">11.2</a>. <br /><br /><tt>*ELASTIC</tt> may have a further option <tt>PHASE_FIELD</tt> which activates the phase-field approach for resolution of strain localizations, see <i class="sc">Book</i> 7.5.2. This is currently implemented for elements of type <tt>T*</tt> only. This option requires three more data in the data line which now takes the form <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -2528,11 +2528,11 @@
     <td style="text-align:left"><p> stress viscosity – might be necessary for convergence, see <i class="sc">Book</i> A.1 (currently trial and error, default should be 0!) </p></td>
 
 </tr>
-</table><p> <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">12.3</a>, and additionally the value of damage variable <object data="images/img-0023.svg" style="width:0.533em; 
+</table><p> <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">11.2</a>, and additionally the value of damage variable <object data="images/img-0023.svg" style="width:0.533em; 
                                                                 height:0.733em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0027.png" alt="$d$" style="vertical-align:0px; 
                                      width:8px; 
-                                     height:11px" class="math gen" /></object> as last item of integration point data lines. <br /><br />The options <tt>VISCO</tt> and <tt>PHASEFIELD</tt> cannot be combined. </p><h3 id="a0000000020"><tt class="ttfamily">*</tt>ELASTICLT</h3>
+                                     height:11px" class="math gen" /></object> as last item of integration point data lines. <br /><br />The options <tt>VISCO</tt> and <tt>PHASEFIELD</tt> cannot be combined. </p><h3 id="a0000000021"><tt class="ttfamily">*</tt>ELASTICLT</h3>
 <p>The data line describes the following properties <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -2684,7 +2684,7 @@
     <td style="text-align:left"><p> crack traction viscosity – might be necessary for convergence, see <i class="sc">Book</i> A.1 (currently trial and error, default should be 0!) </p></td>
 
 </tr>
-</table><p> <br /><br /><tt>*ELASTICLT</tt> has distinct states which are reported to the execution report, see Section <a href="SEC_0615.html">12.2</a>, when a state change occurs <br /></p><table class="tabular" cellspacing="0">
+</table><p> <br /><br /><tt>*ELASTICLT</tt> has distinct states which are reported to the execution report, see Section <a href="SEC_0615.html">11.1</a>, when a state change occurs <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -2726,7 +2726,7 @@
     <td style="text-align:left"><p> fully cracked with zero crack traction</p></td>
 
 </tr>
-</table><p> <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">12.3</a>. <br /><br /><tt>*ELASTICLT</tt> may have an option <tt>SDA</tt> which activates the strong discontinuity approach (SDA) to describe crack formation by allowing for displacement discontinuities instead of smeared cracks, see <i class="sc">Book</i> 7.7. This is appropriate for continuum elements of type <tt>C*</tt> only. This is currently implemented as fixed crack for element types <tt>CP*</tt> and under construction for <tt>C3D*</tt>. This option requires a modified data line <br /></p><table class="tabular" cellspacing="0">
+</table><p> <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">11.2</a>. <br /><br /><tt>*ELASTICLT</tt> may have an option <tt>SDA</tt> which activates the strong discontinuity approach (SDA) to describe crack formation by allowing for displacement discontinuities instead of smeared cracks, see <i class="sc">Book</i> 7.7. This is appropriate for continuum elements of type <tt>C*</tt> only. This is currently implemented as fixed crack for element types <tt>CP*</tt> and under construction for <tt>C3D*</tt>. This option requires a modified data line <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -2912,7 +2912,7 @@
     <td style="text-align:left"><p> crack traction viscosity for discrete cracks – might be necessary for convergence, see <i class="sc">Book</i> A.1 (currently trial and error, default should be 0!) </p></td>
 
 </tr>
-</table><p> <br /><br />Regarding ordinary integration points the element output provides standard data, see Section <a href="SEC_0620.html">12.3</a>. Regarding integration points along discontinuity lines, additional data lines are provided, see also Section <a href="SEC_0620.html">12.3</a>. </p><h3 id="SEC_0532"><tt class="ttfamily">*</tt>MISES</h3>
+</table><p> <br /><br />Regarding ordinary integration points the element output provides standard data, see Section <a href="SEC_0620.html">11.2</a>. Regarding integration points along discontinuity lines, additional data lines are provided, see also Section <a href="SEC_0620.html">11.2</a>. </p><h3 id="SEC_0532"><tt class="ttfamily">*</tt>MISES</h3>
 <p>The data line describes the following properties <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -3076,7 +3076,7 @@
                                      height:13px" class="math gen" /></object> in case of convergence problems </p></td>
 
 </tr>
-</table><p> <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">12.3</a>, and additionally <br /></p><table class="tabular" cellspacing="0">
+</table><p> <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">11.2</a>, and additionally <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -3102,7 +3102,7 @@
                                      height:16px" class="math gen" /></object> as last item of integration point data lines </p></td>
 
 </tr>
-</table><h3 id="a0000000021"><tt class="ttfamily">*</tt>ISODAMAGE</h3>
+</table><h3 id="a0000000022"><tt class="ttfamily">*</tt>ISODAMAGE</h3>
 <p>The data line describes the following properties <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -3443,11 +3443,11 @@
                                      width:33px; 
                                      height:9px" class="math gen" /></object>. There might be unfeasible choices. <br /><br />As an example with units [MN,m] </p><pre>
   36300.,0.2,   40.,3.5,  1,1.2,0.2,2.0,  2,150.e-6,  0., 0.
-</pre><p> should make sense, e.g., for C40 according to MC2010. <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">12.3</a>, and additionally the value of isotropic damage <object data="images/img-0059.svg" style="width:0.867em; 
+</pre><p> should make sense, e.g., for C40 according to MC2010. <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">11.2</a>, and additionally the value of isotropic damage <object data="images/img-0059.svg" style="width:0.867em; 
                                                                 height:0.733em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0063.png" alt="$D$" style="vertical-align:0px; 
                                      width:13px; 
-                                     height:11px" class="math gen" /></object> as last item of integration point data lines. </p><h3 id="a0000000022"><tt class="ttfamily">*</tt>MICRODAMAGE</h3>
+                                     height:11px" class="math gen" /></object> as last item of integration point data lines. </p><h3 id="a0000000023"><tt class="ttfamily">*</tt>MICRODAMAGE</h3>
 <p>The data line describes the following properties <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -3572,10 +3572,10 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> choose <object data="images/img-0062.svg" style="width:5.200em; 
+    <td style="text-align:left"><p> choose <object data="images/img-0062.svg" style="width:5.133em; 
                                                                 height:0.933em; 
                                                                 vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0066.png" alt="$LimTy=2$" style="vertical-align:-3px; 
-                                     width:78px; 
+                                     width:77px; 
                                      height:14px" class="math gen" /></object> – other values reserved for further extensions </p></td>
 
 </tr><tr>
@@ -3700,7 +3700,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> value is ignored for </p><table id="a0000000023" class="equation" width="100%" cellspacing="0" cellpadding="7">
+    <td style="text-align:left"><p> value is ignored for </p><table id="a0000000024" class="equation" width="100%" cellspacing="0" cellpadding="7">
 <tr>
     
     <td style="width:40%">&nbsp;</td>
@@ -3740,8 +3740,8 @@
 </tr>
 </table><p> <br /><br />As an example with units [MN,m] </p><pre>
    363000., 0.20,   2, 3.0, 13.0,   0., 0.,   0, 150.e-06,   0., 0.
-</pre><p> should make sense, e.g., for C40 according to MC2010. <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">12.3</a>, and additionally an averaged damage value over all microplanes of an integration point. </p><h3 id="SEC_0533"><tt class="ttfamily">*</tt>RCBEAM</h3>
-<p>This must be combined with geometric reinforcement data defined in a <tt>*BEAM SECTION</tt>, see Section <a href="SEC_0515.html">10.6</a>. The first data line describes the following <b class="bfseries">concrete</b> properties <br /></p><table class="tabular" cellspacing="0">
+</pre><p> should make sense, e.g., for C40 according to MC2010. <br /><br />Element output provides standard data, see Section <a href="SEC_0620.html">11.2</a>, and additionally an averaged damage value over all microplanes of an integration point. </p><h3 id="SEC_0533"><tt class="ttfamily">*</tt>RCBEAM</h3>
+<p>This must be combined with geometric reinforcement data defined in a <tt>*BEAM SECTION</tt>, see Section <a href="SEC_0515.html">9.6</a>. The first data line describes the following <b class="bfseries">concrete</b> properties <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -3882,7 +3882,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> value comes only into play if tension stiffening is activated in <tt>*BEAM SECTION</tt>, see Section <a href="SEC_0515.html">10.6</a></p></td>
+    <td style="text-align:left"><p> value comes only into play if tension stiffening is activated in <tt>*BEAM SECTION</tt>, see Section <a href="SEC_0515.html">9.6</a></p></td>
 
 </tr><tr>
 
@@ -4001,7 +4001,7 @@
                                                                 height:0.933em; 
                                                                 vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0028.png" alt="$f_{ct}$" style="vertical-align:-3px; 
                                      width:17px; 
-                                     height:14px" class="math gen" /></object> are used in different contexts and may be chosen independent from each other. <br /><br />The second data line describes the <b class="bfseries">reinforcing</b> steel properties and is the same as for the <tt>*MISES</tt> data line. <br /><br />Element output provides standard data for beam elements, see Section <a href="SEC_0620.html">12.3</a>, and additionally edge strains [‰]: concrete edge strain at the compressed edge and strain of reinforcement with the largest lever arm at the tension edge. </p><h3 id="a0000000024"><tt class="ttfamily">*</tt>RESHEET</h3>
+                                     height:14px" class="math gen" /></object> are used in different contexts and may be chosen independent from each other. <br /><br />The second data line describes the <b class="bfseries">reinforcing</b> steel properties and is the same as for the <tt>*MISES</tt> data line. <br /><br />Element output provides standard data for beam elements, see Section <a href="SEC_0620.html">11.2</a>, and additionally edge strains [‰]: concrete edge strain at the compressed edge and strain of reinforcement with the largest lever arm at the tension edge. </p><h3 id="a0000000025"><tt class="ttfamily">*</tt>RESHEET</h3>
 <p>This material type provides a reinforcement like plane sheet with uniaxial Mises elasto-plasticity. The data line describes the following properties <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -4134,7 +4134,7 @@
                                                                 height:0.733em; 
                                                                 vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0022.png" alt="$\varphi $" style="vertical-align:-3px; 
                                      width:9px; 
-                                     height:11px" class="math gen" /></object>. <br /><br />Only one data line is allowed corresponding to one reinforcement sheet. Further reinforcement sheets have to be defined with further <tt>*RESHEET</tt> material sections. <br /><br />Element output provides standard data for 2D continuum elements, see Section <a href="SEC_0620.html">12.3</a>. </p><h3 id="a0000000025"><tt class="ttfamily">*</tt>NLSLAB</h3>
+                                     height:11px" class="math gen" /></object>. <br /><br />Only one data line is allowed corresponding to one reinforcement sheet. Further reinforcement sheets have to be defined with further <tt>*RESHEET</tt> material sections. <br /><br />Element output provides standard data for 2D continuum elements, see Section <a href="SEC_0620.html">11.2</a>. </p><h3 id="a0000000026"><tt class="ttfamily">*</tt>NLSLAB</h3>
 <p>This material type provides a bilinear moment-curvature relation for usage with Kirchhoff-slabs. This includes elasto-plastic behavior with unloading, i.e. elastic behavior of plastic cross sections prior to unloading. As slabs are statically indeterminate internally an elasto-plastic behavior should not be expected in a straightforward way. The data line describes the following properties <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
@@ -4475,8 +4475,8 @@
                                                                 height:0.667em; 
                                                                 vertical-align:-0.200em" type="image/svg+xml"><img src="images/img-0103.png" alt="$neg$" style="vertical-align:-3px; 
                                      width:24px; 
-                                     height:10px" class="math gen" /></object> negative parameters. See also the <i class="sc">Book</i> Sections 9.8.2, 9.8.3 for a further specification of these values. <br /><br />Element output provides standard data for slabs, see Section <a href="SEC_0620.html">12.3</a>. </p><h3 id="a0000000026"><tt class="ttfamily">*</tt>RCSHELL</h3>
-<p>This material type is appropriate for the continuum based shell with element type <tt>SH4</tt> and must be combined with geometric reinforcement data defined in a <tt>*SHELL SECTION</tt>, see Section <a href="SEC_0517.html">10.7</a>. The first seven items of the following data line correspond to the <tt>*MISES</tt> data line to be applied to uniaxial reinforcement behavior. The last item refers to a biaxial material law. <br /></p><table class="tabular" cellspacing="0">
+                                     height:10px" class="math gen" /></object> negative parameters. See also the <i class="sc">Book</i> Sections 9.8.2, 9.8.3 for a further specification of these values. <br /><br />Element output provides standard data for slabs, see Section <a href="SEC_0620.html">11.2</a>. </p><h3 id="a0000000027"><tt class="ttfamily">*</tt>RCSHELL</h3>
+<p>This material type is appropriate for the continuum based shell with element type <tt>SH4</tt> and must be combined with geometric reinforcement data defined in a <tt>*SHELL SECTION</tt>, see Section <a href="SEC_0517.html">9.7</a>. The first seven items of the following data line correspond to the <tt>*MISES</tt> data line to be applied to uniaxial reinforcement behavior. The last item refers to a biaxial material law. <br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -4666,7 +4666,7 @@
     <td style="text-align:left"><p> the respective material has to be explicitly defined with a material type specification </p></td>
 
 </tr>
-</table><p> <br /><br />Element output provides standard data for shells, see Section <a href="SEC_0620.html">12.3</a>. </p><h3 id="a0000000027"><tt class="ttfamily">*</tt>SPRING</h3>
+</table><p> <br /><br />Element output provides standard data for shells, see Section <a href="SEC_0620.html">11.2</a>. </p><h3 id="a0000000028"><tt class="ttfamily">*</tt>SPRING</h3>
 <p>This material type provides a force <object data="images/img-0003.svg" style="width:0.333em; 
                                                                 height:0.667em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0006.png" alt="$t$" style="vertical-align:0px; 
@@ -4898,7 +4898,7 @@
                                                                 height:1.067em; 
                                                                 vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0119.png" alt="$|s|$" style="vertical-align:-4px; 
                                      width:13px; 
-                                     height:16px" class="math gen" /></object>. <br /><br />Element output provides standard data for springs, see Section <a href="SEC_0620.html">12.3</a>. </p><h3 id="a0000000028"><tt class="ttfamily">*</tt>BOND</h3>
+                                     height:16px" class="math gen" /></object>. <br /><br />Element output provides standard data for springs, see Section <a href="SEC_0620.html">11.2</a>. </p><h3 id="a0000000029"><tt class="ttfamily">*</tt>BOND</h3>
 <p><tt>*BOND</tt> is an extension of <tt>*SPRING</tt>. It has the same behavior in case of loading, i.e. increasing <object data="images/img-0115.svg" style="width:0.867em; 
                                                                 height:1.067em; 
                                                                 vertical-align:-0.267em" type="image/svg+xml"><img src="images/img-0119.png" alt="$|s|$" style="vertical-align:-4px; 
@@ -5011,7 +5011,7 @@
     <td style="text-align:left"><p> to check the relative lateral displacements see following output description </p></td>
 
 </tr>
-</table><p> <br /><br />The second data line is same as for <tt>*SPRING</tt>. <br /><br />Element output provides standard data for bond elements, see Section <a href="SEC_0620.html">12.3</a>. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
+</table><p> <br /><br />The second data line is same as for <tt>*SPRING</tt>. <br /><br />Element output provides standard data for bond elements, see Section <a href="SEC_0620.html">11.2</a>. <br /><br /><object data="images/img-0001.svg" style="width:1em; 
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
                                      width:15px; 

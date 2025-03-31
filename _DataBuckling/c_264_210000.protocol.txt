@@ -123,4 +123,4 @@ eigenform 4, value 117.012663, rel. acc 6.723528e-06
 Eigenvalue analysis: finished
 last iteration data
 reached time 1.0000
-total comp time 7 seconds
+total comp time 6 seconds

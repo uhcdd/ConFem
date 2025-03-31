@@ -51,12 +51,12 @@
 <hr />
 </div>
 
-<div><h2 id="SEC_0515">10.6 Beam Section</h2>
+<div><h2 id="SEC_0515">9.6 Beam Section</h2>
 <p><object data="images/img-0001.svg" style="width:1em; 
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
                                      width:15px; 
-                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> <br /><br />A section starting with <tt>*BEAM SECTION</tt> defines a set of beam elements (<tt>B23E,B23,BAX23,B21,B21E,BAX21E</tt> + embedded counterparts), whereby all elements within a set have the same properties. <br />Notice: beam elements may include a reinforcement. Their embedded counterparts ARE a reinforcement within an underlying 2D or axisymmetric continuum. </p><p>The section keyword <tt>*BEAM SECTION</tt> has as options <br /><br /></p><table class="tabular" cellspacing="0">
+                                     height:8px" class="math gen" /></object> <a href="https:://concrete-fem.com">https:://concrete-fem.com</a> <br /><br />A section starting with <tt>*BEAM SECTION</tt> defines a set of beam elements <br />(<tt>B23,B23E,BAX23,BAX23E,B21,B21E,BAX21E</tt> + embedded counterparts, see element list in Section <a href="SEC_0520.html">9.3</a>)<br />whereby all elements within a set have the same properties <br />Notice: beam elements may include a reinforcement. Their embedded counterparts ARE a reinforcement within an underlying 2D or axisymmetric continuum. </p><p>The section keyword <tt>*BEAM SECTION</tt> has as options <br /><br /></p><table class="tabular" cellspacing="0">
 <tr>
 
     
@@ -143,7 +143,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> <tt>SECTION=CIRCLE</tt> is mandatory for embedded beam versions of beam elements <tt>B23,B23E,BAX21E</tt></p></td>
+    <td style="text-align:left"><p> <tt>SECTION=CIRCLE</tt> is mandatory for embedded beam elements, see element list in Section <a href="SEC_0520.html">9.3</a> </p></td>
 
 </tr><tr>
 
@@ -159,7 +159,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> (the same name also has to be defined within a reinforcement section) </p></td>
+    <td style="text-align:left"><p> the same name also has to be defined within a reinforcement section </p></td>
 
 </tr><tr>
 
@@ -167,7 +167,7 @@
     <td style="text-align:left"><p> <tt>NREBAR=&lt;float&gt;</tt> </p></td>
 
     
-    <td style="text-align:left"><p> connected to a set of embedded elements of type <tt>B23I,B23EI,BAX21EI</tt> (<b class="bfseries">optional</b>), is ignored for other element types </p></td>
+    <td style="text-align:left"><p> connected to embedded elements (<b class="bfseries">optional</b>), is ignored for other element types </p></td>
 
 </tr><tr>
 
@@ -207,7 +207,7 @@
     <td style="text-align:left">&nbsp;</td>
 
     
-    <td style="text-align:left"><p> explicit definition of <tt>NREBAR</tt> is recommended for <tt>BAX21EI</tt>-elements </p></td>
+    <td style="text-align:left"><p> explicit definition of <tt>NREBAR</tt> is recommended for embedded <tt>BAX*</tt>-elements </p></td>
 
 </tr>
 </table><p> <br /><br />Some extension for <tt>NREBAR</tt>: may also be used for all non-embedded beam elements with <tt>SECTION=CIRCLE</tt>. Its value indicates the total number of rebars – in contrast to the definition above – in that case. <br /><br />In case of <tt>SECTION=RECT</tt> the first data line describes the following data (<b class="bfseries">mandatory</b>) <br /></p><table class="tabular" cellspacing="0">

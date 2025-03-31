@@ -5,8 +5,8 @@
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
 <title></title>
 
-<link href="SEC_0615.html" title="Execution Report" rel="next" />
-<link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="prev" />
+<link href="SEC_5640.html" title="Reinforcement Design Output" rel="next" />
+<link href="SEC_0640.html" title="Nodal Output" rel="prev" />
 <link href="SEC_0600.html" title="Organization of ConFem Output Data" rel="up" />
 <link rel="stylesheet" href="styles/styles.css" />
 </head>
@@ -15,11 +15,11 @@
 <div class="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
 <tr>
-<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0640.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
 
 <td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0615.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_5640.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>
@@ -45,14 +45,14 @@
 </span><span>
 
 <span>
-<b class="current">Overview</b>
+<b class="current">Time Output</b>
 </span>
 </span>
 <hr />
 </div>
 
-<div><h2 id="a0000000012">12.1 Overview</h2>
-<p>Files for results are organized as follows. </p><p>Files with a type <tt>protocol</tt> report about every iteration of every instant of time of every simulation step. </p><p>Files with a type <tt>nodeout</tt> have output sections for instants of time as defined by the step sub-keyword <tt>*NODE FILE</tt>, see Section <a href="SEC_0570.html">10.9</a>. Every node has a line within every output section with data for coordinates, values for nodal degrees of freedom and internal nodal forces. Types of nodal degrees of freedom an nodal forces depend on the element type, i.e. are different for, e.g., beam elements and plate elements. </p><p>Files with a type <tt>elemout</tt> also have output sections for instants of time as defined by the step sub-keyword <tt>*EL FILE</tt>, see Section <a href="SEC_0570.html">10.9</a>. Output sub-sections correspond to every element. Every element integration point has a line within every element output sub-subsection with data for coordinates and further values like, e.g. generalized strains and stresses and further values depending on the element and material type. </p><p>Files with a type <tt>timeout</tt> have a line for all computed instants of time with values of every nodal degree of freedom as is defined in a file of type <tt>opt</tt>, see Section <a href="SEC_0475.html">11.1</a>. </p></div>
+<div><h2 id="a0000000012">11.4 Time Output</h2>
+<p>Files with a type <tt>timeout</tt> have a line for all computed instants of time with values of every nodal degree of freedom as is defined in a file of type <tt>opt</tt>, see Section <a href="SEC_0475.html">10.1</a>. </p></div>
 
 
 
@@ -61,11 +61,11 @@
 <div class="navigation">
 <table cellspacing="2" cellpadding="0" width="100%">
 <tr>
-<td><a href="SEC_0600.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_0640.html"><img border="0" src="icons/previous.gif" width="32" height="32" /></a></td>
 
 <td><a href="SEC_0600.html"><img border="0" src="icons/up.gif" width="32" height="32" /></a></td>
 
-<td><a href="SEC_0615.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
+<td><a href="SEC_5640.html"><img border="0" src="icons/next.gif" width="32" height="32" /></a></td>
 
 <td class="navtitle" align="center">ConFem Documentation</td>
 <td><a href="index.html" title="Table of Contents"><img border="0" alt="" src="icons/contents.gif" width="32" height="32" /></a></td>

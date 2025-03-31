@@ -664,7 +664,8 @@ class Elastic(Material):                                                    # li
                 MatM = array([[Emod, 0.], [0., Emod]])
                 sig = dot(MatM, Eps)
                 return sig, MatM, [Eps[0], Eps[1], sig[0], sig[1]]
-            elif Elem.dim in [10,12]:                                       # bernoulli beam
+            elif Elem.dim in [10,12]:                                       # bernoulli beam, axisymmetric bernoulli beam
+                nR = Elem.nRebarEl
                 hh =  Elem.Geom[1,2]                                        # height
                 z1, z2 = Elem.zLow, Elem.zUpp                               # lower, upper coordinate
                 AA, SS, JJ = Elem.Geom[1,3], Elem.Geom[1,4], Elem.Geom[1,5] 
@@ -672,11 +673,12 @@ class Elastic(Material):                                                    # li
                 Tg = (Temp[0]-Temp[1])/hh                                   # temperature gradient
                 Tps = self.alphaT*array([Tr,Tg])                            # temperature strain
                 MatM = array([[Emod*AA,-Emod*SS],[-Emod*SS,Emod*JJ]])       # beam tangential stiffness
-                sig = dot(MatM,Eps-Tps)
+                sig = dot(MatM,Eps-Tps)                                     #  nR NOT here !
                 eps1= Eps[0] - z1*Eps[1]                                    # lower strain
                 eps2= Eps[0] - z2*Eps[1]                                    # upper strain
-                return sig, MatM, [Eps[0],Eps[1],sig[0],sig[1],Emod*eps1,Emod*eps2]
+                return sig, MatM, [Eps[0],Eps[1],nR*sig[0],nR*sig[1],Emod*eps1,Emod*eps2]
             elif Elem.dim in [11,13]:                                       # timoshenko beam, axisymmetric timoshenko beam
+                nR = Elem.nRebarEl
                 AA = Elem.Geom[1,3]                                         # cross sectional area
                 JJ = Elem.Geom[1,5]                                         # moment of inertia
                 alpha = 0.8                                                 # factor for shear stiffness
@@ -685,8 +687,8 @@ class Elastic(Material):                                                    # li
     #            Tps = self.alphaT*array([Tr,Tg])        # temperature strain
 #                MatM = array([[Emod*bb*hh,0,0],[0,Emod*bb*hh**3/12.,0],[0,0,bb*hh*alpha*0.5*Emod/(1+nu)]])# beam tangential stiffness
                 MatM = array([[Emod*AA,0,0],[0,Emod*JJ,0],[0,0,AA*alpha*0.5*Emod/(1+nu)]])# beam tangential stiffness
-                sig = dot(MatM,Eps)                     #
-                return sig, MatM, [Eps[0],Eps[1],Eps[2],sig[0],sig[1],sig[2]]
+                sig = dot(MatM,Eps)                                         #  nR NOT here !
+                return sig, MatM, [Eps[0],Eps[1],Eps[2],nR*sig[0],nR*sig[1],nR*sig[2]]
             elif Elem.dim==20:                                              # Kirchhoff slab
                 hh =  Elem.Geom[1,1]                                        # height
 #                KK = Emod*hh**3/(12*(1-nu))             # slab stiffness
@@ -2462,8 +2464,8 @@ class MicroPlaneDam(Material):                                                 #
         self.Density =    PropMat[12]
         self.lamLow  = 0.003 # 0.01
         self.lamHigh = 100.
-        self.lam2Low = 0.01
-        self.lam2High= 0.5
+        self.lam2Low = 0.01                                                 # reduction should reduce lower limit
+        self.lam2High= 0.5 # 0.6 # 0.5                                                  # increase should increase upper limit ???
         self.CrX, self.CrY = self.SpeCrEnergyData( "LargeEl", self.lamLow,self.lamHigh,  self.CrBwN, self.eps_ct, self.UniaxTensionScaled) # arrays to determine scaling factor for given characteristic element length
         self.CrX2,self.CrY2= self.SpeCrEnergyData( "SmallEl", self.lam2Low,self.lam2High,self.CrBwN, self.eps_ct, self.UniaxTensionScaled2) # arrays to determine scaling factor for given characteristic element length
         if self.CrX[-1]<self.CrX2[-1]:
@@ -3262,8 +3264,9 @@ class MisesBeam2D(Material):                                       # elastoplast
         Elem.StateVarN[ipI,13] = Sig[1]                                     # bending moment
         if Elem.dim in [11, 13]: Elem.StateVarN[ipI,14] = Sig[2]
         #
-        if Elem.dim in [10, 12]: return Sig, MatM, [ Eps[0],Eps[1], Sig[0],Sig[1], sigLy,sigUy, zY1,zY2]
-        else:                    return Sig, MatM, [ Eps[0],Eps[1],Eps[2], Sig[0],Sig[1],Sig[2], sigLy,sigUy, zY1,zY2 ]
+        nR = Elem.nRebarEl
+        if Elem.dim in [10, 12]: return Sig, MatM, [ Eps[0],Eps[1], nR*Sig[0],nR*Sig[1], sigLy,sigUy, zY1,zY2] # bernoulli beam, axisymmetric bernoulli beam
+        else:                    return Sig, MatM, [ Eps[0],Eps[1],Eps[2], nR*Sig[0],nR*Sig[1],nR*Sig[2], sigLy,sigUy, zY1,zY2 ]
 
     def UpdateStateVar(self, Elem, ff):
         for ipI in range(Elem.StateVar.shape[0]):                           # loop over integration points
@@ -4128,9 +4131,11 @@ class WraRCShell(Material):                                                 # Wr
             self.ReinfType = 'MISES'
         self.Type = 'RCSHELL'
     def Sig(self, ff, CalcType, Dt, elI, ipI, Elem, Dps, Eps, dTmp, Temp, EpsR):
+        # bulk / concrete contribution
         if ipI<Elem.nIntLi:                                                 # initial value of number of bulk integration points before extension for reinforcement 
             SigL, MatL, dataL = self.Conc.Sig( ff, CalcType, Dt, elI, ipI, Elem, Dps, Eps, dTmp, Temp, []) # 4/5 integration points over cross section height
-        else:                                                               # reinforcement contributions -- every reinforcement sheet should have its own IpI
+        # reinforcement contributions -- every reinforcement sheet should have its own IpI
+        else:
             if CalcType == 0: return [], [], []
             As = SampleWeightRCShell[Elem.Set,Elem.IntT,Elem.nInt-1,ipI]
             if As>ZeroD:
@@ -4146,9 +4151,11 @@ class WraRCShell(Material):                                                 # Wr
                 MStiff=array([[cos(phi)**4,cos(phi)**2*sin(phi)**2,cos(phi)**3*sin(phi)],
                               [cos(phi)**2*sin(phi)**2,sin(phi)**4,cos(phi)*sin(phi)**3],
                               [cos(phi)**3*sin(phi),cos(phi)*sin(phi)**3,cos(phi)**2*sin(phi)**2]])
+                # local system
                 dpsL = dot(Trans,Dps_)                                      # directed strain increment
                 epsL = dot(Trans,Eps_)                                      # directed strain
                 SigL, MatL, dataL = self.Reinf.Sig( ff, CalcType, Dt, elI, ipI, Elem, dpsL, epsL, dTmp, Temp, None)
+                # back
                 MatM = MatL[0,0]*MStiff                                     # anisotropic tangential material stiffness in DIRECTOR system
                 sig = dot(Trans.transpose(),[SigL[0],0.,0.])                # rotate back to DIRECTOR system ???
                 Elem.dim=21                                                 # undo

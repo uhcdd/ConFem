@@ -28,23 +28,23 @@ class Test(unittest.TestCase):
 
     def testE3_02_B21(self):
         Name="../_DataBeams/E3-02_B21"
-        self.assertEqual(self.ConSimFem_.Run(Name, False, LinAlgFlag,"elemout"), 'd28ea08ad56a44300e2feea6a936d3a4')
+        self.assertEqual(self.ConSimFem_.Run(Name, False, LinAlgFlag,"elemout"), '5bf5e17936110e02dbd2594ee03a8c87')
 
     def testE3_02_B21E(self):
         Name="../_DataBeams/E3-02_B21E"                 #
-        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '72b9694c4e8e981af105beb5033a6a10')
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '5c143cebb3834d0784c9dea533a5689c')
 
     def testE3_02_B23(self):
         Name="../_DataBeams/E3-02_B23"                 #
-        self.assertEqual(self.ConSimFem_.Run(Name, False, LinAlgFlag,"elemout"), '1ee342ee800fb7331f28bbde4e7b7379')
+        self.assertEqual(self.ConSimFem_.Run(Name, False, LinAlgFlag,"elemout"), '23ba45c110feadfd0e931339c74fda42')
 
     def testE3_02_B23E_PolyL(self):
         Name="../_DataBeams/E3-02_B23E_PolyL"                 #
-        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), 'dc08427e96d81e453d65e7087c618a8d')
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '4540d85d584c1cef118f11aef688115c')
 
     def testE3_02_Tens(self):
         Name="../DataExamples/E04/E4-02"                 # introducing example for RC beams whereby regarding concrete tensile strength
-        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '995928fe76bbe4b20043d0b9b33d8586')
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '3bc2c7588cb6dd28bd7cbc6b0e613685')
 
 if __name__ == "__main__":
 #    numpy.seterr(all='raise')

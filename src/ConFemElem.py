@@ -11,6 +11,7 @@ from numpy.linalg import norm, inv, det
 from bisect import bisect_left #, bisect_right
 from math import acos, cos, sin, pi
 #import sys 
+from scipy.linalg import eigh
 
 from ConFemBasics import FindIndexByLabel, SamplePoints, SampleWeight, SamplePointsRCShell, SampleWeightRCShell, ZeroD, Echo, EchoM
 from ConFemMat import Mises
@@ -2114,7 +2115,8 @@ class ElementC2D(Element):
 #                if xyC[i]==xyC[j]: xyC[j] = []
         xyC_ = []
         for i in xyC:
-            if i != []: xyC_ += [i]
+#            if i != []: xyC_ += [i]
+            if len(i)>0: xyC_ += [i]
         # more than two non duplicates should not make sense
         if len(xyC_)!=2:
             print(self.Label,Inzi_,'_',xy,nn,[dirDx,dirDy],'_',xyC_) 
@@ -4342,7 +4344,9 @@ class SB3(Element):
     def ShearForces(self, NodeList,NoIndToCMInd, WrNoVal ):
         AI = array([[53./12.,-11./6.,-11./6.],[-11./6.,53./12.,-11./6.],[-11./6.,-11./6.,53./12.]])
         XX = array([[1./3.,1./3.,1./3.],[0.2,0.6,0.2],[0.2,0.2,0.6],[0.6,0.2,0.2]])
-        for j in range(len(self.Inzi)): NodeList[NoIndToCMInd[self.Inzi[j]]].c += 1 #count assigned elements
+        if WrNoVal:
+            for j in range(len(self.Inzi)):
+                NodeList[NoIndToCMInd[self.Inzi[j]]].c += 1 #count assigned elements
         mx = [self.Data[0,3],self.Data[1,3],self.Data[2,3],self.Data[3,3]]
         aa = dot(AI, dot(transpose(XX),mx))                             # coefficients of linear approximation
         if WrNoVal: 
@@ -4366,7 +4370,7 @@ class SB3(Element):
         #
         for j in range(self.nIntL): self.Data[j,6] = -mx_x -mxy_y       # x shear force
         for j in range(self.nIntL): self.Data[j,7] = -my_y -mxy_x       # y shear force
-    
+
 class SH4(Element):
     """ Shell element 4 nodes
     """
@@ -4932,57 +4936,61 @@ class SH4(Element):
         for k in range(3): JJ[k,2]=N[0]*(1/2.*self.a[0]*self.Vn[k,0])+N[1]*(1/2.*self.a[1]*self.Vn[k,1])+N[2]*(1/2.*self.a[2]*self.Vn[k,2])+N[3]*(1/2.*self.a[3]*self.Vn[k,3])
         det = JJ[0,0]*JJ[1,1]*JJ[2,2]-JJ[0,0]*JJ[1,2]*JJ[2,1]-JJ[1,0]*JJ[0,1]*JJ[2,2]+JJ[1,0]*JJ[0,2]*JJ[2,1]+JJ[2,0]*JJ[0,1]*JJ[1,2]-JJ[2,0]*JJ[0,2]*JJ[1,1]
         return det
-    def StressIntegration(self, j, offset, nRe, ElemResults, FF):           # j is index of base integration point
+    def StressIntegration(self, j, nRe):                                    # j is index of base integration point
+        if   self.Type=='SH4': Corr, CorM =0.5, 0.5                         # to compensate for local iso-parametric coordinate t in range [-1..1] --> 2
+        elif self.Type=='SH3': Corr, CorM =3.0, 0.5                         # " + Corr -->  0.5 * 8 *3/4 = 3, see ConFemBasic::SampleWeights SH3
+        #  
         r = SamplePoints[self.IntT,self.nInt-1,j][0]                        # local integration point coordinates in reference surface
         s = SamplePoints[self.IntT,self.nInt-1,j][1]                        # "
         aa = dot( self.FormX(r,s,0), self.a)                                # interpolated shell thickness from node thicknesses
-        # see WriteElemData
-        if   self.Type=='SH4': Corr, CorM =0.5, 0.5             # to compensate for local iso-parametric coordinate t in range [-1..1] --> 2
-        elif self.Type=='SH3': Corr, CorM =3.0, 0.5             # " + Corr -->  0.5 * 8 *3/4 = 3, see ConFemBasic::SampleWeights SH3
-        #  
-        if ElemResults == None:
-            r = SamplePoints[self.IntT,self.nInt-1,j][0]                    # local integration point coordinates in reference surface
-            s = SamplePoints[self.IntT,self.nInt-1,j][1]                    # "
-            aa = dot( self.FormX(r,s,0), self.a)                            # interpolated shell thickness from node thicknesses
-            nx, ny, nxy, qx, qy, mx, my, mxy = 0., 0., 0., 0., 0., 0., 0., 0.
+        nx,ny,nxy,qx,qy,mx,my,mxy = 0.,0.,0.,0.,0.,0.,0.,0.
+        concData, reinfData, concPrin,reinfPrin = [], [], [], []
 #            nxR,nyR,nxyR,qxR,qyR,mxR,myR,mxyR= 0., 0., 0., 0., 0., 0., 0., 0.
 #            nxC,nyC,nxyC,qxC,qyC,mxC,myC,mxyC= 0., 0., 0., 0., 0., 0., 0., 0.
-            Lis2, Lis3 = self.Lists2( nRe, j)                               # integration point indices specific for base point
-            for k in Lis2:                                                  # loop over height integration points - Lis2 should also hold reinforcement layers
-                jj = j+k
-                ppp = self.Data[jj]
-                #
-                if (k in Lis3):                                             # reinforcement layers only 
-                    t  =         SamplePointsRCShell[self.Set,self.IntT,self.nInt-1,jj][2]
-                    ff = Corr*aa*SampleWeightRCShell[self.Set,self.IntT,self.nInt-1,jj]  # 0.5 seems to compensate for SampleWeight local coordinates
-#                    nxR = nxR + ff*ppp[0+offset]
-#                    nyR = nyR + ff*ppp[1+offset]
-#                    qyR = qyR + ff*ppp[3+offset]
-#                    qxR = qxR + ff*ppp[4+offset]
-#                    nxyR= nxyR+ ff*ppp[5+offset]
-#                    mxR = mxR + 0.5*aa*t*ff*ppp[0+offset]
-#                    myR = myR + 0.5*aa*t*ff*ppp[1+offset]
-#                    mxyR= mxyR+ 0.5*aa*t*ff*ppp[5+offset]
-                else:                                                       # bulk only        
-                    t  =         SamplePoints[self.IntT,self.nInt-1,jj][2]
-                    ff = Corr*aa*SampleWeight[self.IntT,self.nInt-1,jj]
-#                    nxC = nxC + ff*ppp[0+offset]
-#                    nyC = nyC + ff*ppp[1+offset]
-#                    qyC = qyC + ff*ppp[3+offset]
-#                    qxC = qxC + ff*ppp[4+offset]
-#                    nxyC= nxyC+ ff*ppp[5+offset]
-#                    mxC = mxC + 0.5*aa*t*ff*ppp[0+offset]
-#                    myC = myC + 0.5*aa*t*ff*ppp[1+offset]
-#                    mxyC= mxyC+ 0.5*aa*t*ff*ppp[5+offset]
-                #
-                nx = nx + ff*ppp[0+offset]                                  # do currently not know for what offset is uhc 200630
-                ny = ny + ff*ppp[1+offset]
-                qy = qy + ff*ppp[3+offset]
-                qx = qx + ff*ppp[4+offset]
-                nxy= nxy+ ff*ppp[5+offset]
-                mx = mx + CorM*aa*t*ff*ppp[0+offset]
-                my = my + CorM*aa*t*ff*ppp[1+offset]
-                mxy= mxy+ CorM*aa*t*ff*ppp[5+offset]
+        Lis2, Lis3 = self.Lists2( nRe, j)                                   # integration point indices specific for base point -- Lis2 all, Lis3 reinforcement layers only in case of RC
+        for k in Lis2:                                                      # loop over height integration points - Lis2 should also hold reinforcement layers
+            jj = j+k
+            ppp = self.Data[jj]
+            #
+            if (k in Lis3):                                                 # reinforcement layers only
+                t  =         SamplePointsRCShell[self.Set,self.IntT,self.nInt-1,jj][2]
+                ff = Corr*aa*SampleWeightRCShell[self.Set,self.IntT,self.nInt-1,jj]  # 0.5 seems to compensate for SampleWeight local coordinates
+#                    nxR = nxR + ff*ppp[0]
+#                    nyR = nyR + ff*ppp[1]
+#                    qyR = qyR + ff*ppp[3]
+#                    qxR = qxR + ff*ppp[4]
+#                    nxyR= nxyR+ ff*ppp[5]
+#                    mxR = mxR + 0.5*aa*t*ff*ppp[0]
+#                    myR = myR + 0.5*aa*t*ff*ppp[1]
+#                    mxyR= mxyR+ 0.5*aa*t*ff*ppp[5]
+                if self.ShellRCFlag:
+                    reinfData += [[k,t, ppp[6],ppp[7],ppp[8]]]              # local uniaxial strain, stress, current yield stress
+                    la_,v_ = eigh( [[ppp[0],ppp[5],ppp[4]] , [ppp[5],ppp[1],ppp[3]] , [ppp[4],ppp[3],ppp[2]]])  # principal values/eigenvalues -- in ascending order -- and eigenvectors of stress tensor
+                    reinfPrin += [[la_[0],v_[0,0],v_[1,0],v_[2,0],la_[1],v_[0,1],v_[1,1],v_[2,1],la_[2],v_[0,2],v_[1,2],v_[2,2]]]
+            else:                                                           # bulk only
+                t  =         SamplePoints[self.IntT,self.nInt-1,jj][2]
+                ff = Corr*aa*SampleWeight[self.IntT,self.nInt-1,jj]
+#                    nxC = nxC + ff*ppp[0]
+#                    nyC = nyC + ff*ppp[1]
+#                    qyC = qyC + ff*ppp[3]
+#                    qxC = qxC + ff*ppp[4]
+#                    nxyC= nxyC+ ff*ppp[5]
+#                    mxC = mxC + 0.5*aa*t*ff*ppp[0]
+#                    myC = myC + 0.5*aa*t*ff*ppp[1]
+#                    mxyC= mxyC+ 0.5*aa*t*ff*ppp[5]
+                if self.ShellRCFlag:
+                    concData += [[k,t, ppp[6],ppp[7],ppp[8],ppp[9],ppp[10],ppp[11]]] # in-plane strains and stresses
+                    la_, v_ = eigh([[ppp[0], ppp[5], ppp[4]], [ppp[5], ppp[1], ppp[3]], [ppp[4], ppp[3], ppp[2]]])  # principal values/eigenvalues -- in ascending order -- and eigenvectors of stress tensor
+                    concPrin += [[la_[0],v_[0,0],v_[1,0],v_[2,0],la_[1],v_[0,1],v_[1,1],v_[2,1],la_[2],v_[0,2],v_[1,2],v_[2,2]]]
+            #
+            nx = nx + ff*ppp[0]
+            ny = ny + ff*ppp[1]
+            qy = qy + ff*ppp[3]
+            qx = qx + ff*ppp[4]
+            nxy= nxy+ ff*ppp[5]
+            mx = mx + CorM*aa*t*ff*ppp[0]
+            my = my + CorM*aa*t*ff*ppp[1]
+            mxy= mxy+ CorM*aa*t*ff*ppp[5]
                 
 #            nx_,ny_,nxy_ = nx-nxR-nxC, ny-nyR-nyC, nxy-nxyR-nxyC 
 #            mx_,my_,mxy_ = mx-mxR-mxC, my-myR-myC, mxy-mxyR-mxyC
@@ -4995,15 +5003,8 @@ class SH4(Element):
 #            val = 1.0e-15
 #            if abs(nx_)>val or abs(ny_)>val or abs(nxy_)>val or abs(mx_)>val or abs(my_)>val or abs(mxy_)>val or abs(qx_)>val or abs(qy_)>val:
 #                raise NameError("XXX")   
-        else:
-            key = str( self.Label)+self.Set+str(j)
-            if key in ElemResults:
-                nx, ny, nxy, mx, my, mxy, qx, qy = ElemResults[key][5][3],ElemResults[key][5][4],ElemResults[key][5][5],\
-                                                   ElemResults[key][5][6],ElemResults[key][5][7],ElemResults[key][5][8],\
-                                                   ElemResults[key][5][9],ElemResults[key][5][10] # Data
-            else: 
-                raise NameError("ConFemElem:StressIntegration: unknown key for data 2",self.Label)
-        return nx, ny, nxy, qx, qy, mx, my, mxy, aa 
+
+        return nx,ny,nxy,qx,qy,mx,my,mxy,aa, concData,reinfData,concPrin,reinfPrin
     
 class SH3( SH4 ):
     """ Shell element 3 nodes

@@ -25,15 +25,6 @@ from ConFemSteps import *
 from ConFemRandom import RandomField_Routines
 from numpy.linalg import lstsq
 
-#Colors = ['tab:green','tab:brown','magenta','darkviolet','blue','green','yellow']
-#Colors = ['royalblue','magenta','darkviolet','darkcyan','blue','green','yellow']
-#FonSizTi='x-large'   # fontsize title x-large
-#FonSizAx='x-large'     # fontsize axis
-#FonSizAx='medium'     # fontsize axis
-#LiWiCrv=3            # line width curve in pt
-#LiWiCrvMid=2            # line width curve in pt
-#LiWiCrvThin=1.0        # line width curve in pt
-
 def ReadPlotOptionsFile(f1, SecDic):                            # read plot options
     SN, SN2, PE2DFlag, PE3DFlag  = 1.0, 0.0, True, False
     PlotTimes,  ScaleStress, Post1DFlag, PostNode, ShellL, ScaleShellL, Contour2D = [], [], True, True, False, 0., {}
@@ -58,7 +49,7 @@ def ReadPlotOptionsFile(f1, SecDic):                            # read plot opti
             elif z2[0].upper()=="*NOPOSTELEM2D":    PE2DFlag = False
             elif z2[0].upper()=="*POSTELEM3D":      PE3DFlag = True
             elif z2[0].upper()=="*POSTSHELLLAYERS": ShellL, ScaleShellL = True, float(z2[1])
-            elif z2[0].upper()=="*POSTELEM2DCONTOUR": # four data - elset, label, index for float data (0 is starter for 1st float) for data position in *.elemout_.txt, length for triangle masking, indicator 'H' for histogram - expected per item
+            elif z2[0].upper()=="*POSTELEM2DCONTOUR": # four data - elset, label, index for float data (0 is starter for 1st float) for data position in *.elemout.txt, length for triangle masking, indicator 'H' for histogram - expected per item
                 r = 5
                 n = int((len(z2)-1)/r)
                 for j in range(n):
@@ -213,16 +204,6 @@ def MatInput( z3, zLen, MatList, matName, IType2, mass, LineCounter, L1, RotCrac
             else :                                          TraPre = False     
             if i.upper().find("LAT_BOND_TEN_FACTOR")>-1:    LatBonTeFac=i.split("=")[1]     # factor for lateral bond tension stiffness
             else:                                           LatBonTeFac=1.0
-#    elif z3[0].upper()=="*MICROPLANE_DAMAGE1":
-#        IType2="mp_dam1"
-#        for i in z3:
-#            if i.upper().find("REDUCED_INTEGRATION")>-1:    RedInt = True
-#            if i.upper().find("ROTATING_CRACK")>-1:         RotCrack = True
-#            if i.upper().find("PRINCIPAL_STRESS")>-1:       PrinStrain = False
-#            if i.upper().find("2NDCRACK")>-1:               
-#                S2ndCrack = True
-#                S2ndCrackA = i.split("=")[1]                    # minimum deviation of 2nd crack from 1st crack in degree
-#            if i.upper().find("SHEAR_RETENTION_FACTOR")>-1: ShearRetFac=float(i.split("=")[1])     # shear retention factor
     elif z3[0].upper()=="*MICRODAMAGE":         IType2="mp_dam_"
     elif z3[0].upper()=="*NLSLAB":              IType2="nlslab"
     elif z3[0].upper()=="*RESHEET":             IType2="misesre"                                     # reinforcement membrane
@@ -354,6 +335,7 @@ def DataInput( f1, ff, Restart):
     z1 = f1.readline()
     z2 = z1.strip()
     z3 = z2.split(',')
+    z3 = [ i.strip() for i in z3 ]
     while z1!="":
         if   z3[0].find("**")>-1 :pass
         elif z3[0].find("*")>-1 and z3[0].upper() not in ["*HEADING","*NODE","*ELEMENT","*MATERIAL","*BEAM REINF","*BEAM SECTION","*SOLID SECTION","*SHELL SECTION","*STEP","*END STEP",
@@ -366,6 +348,7 @@ def DataInput( f1, ff, Restart):
         z1 = f1.readline()
         z2 = z1.strip()
         z3 = z2.split(',')
+        z3 = [ i.strip() for i in z3 ]
     f1.seek(0)
     #
     Header  = []
@@ -451,6 +434,7 @@ def DataInput( f1, ff, Restart):
             IType = "beamsection"
             reinf = "DEFAULT"
             nRebar = 1.0   #None
+#            nRebar = None
             bStiff_ = None
             for i in range(1,len(z3)):                                      # loop starts with 1
                 if   z3[i].upper().find("SECTION")>-1:  beamSecType=z3[i].split("=")[1]
@@ -926,13 +910,16 @@ def DataInput( f1, ff, Restart):
                 elif z3[0].upper()=="*DAMPING":                                                 # key STEP DAMPING
                     Step_.Damp = True
                     for i in z3:
-                        if i.upper().find("ALPHA")>-1: Step_.RaAlph=float(i.split("=")[1])
-                    for i in z3:
-                        if i.upper().find("BETA")>-1:  Step_.RaBeta=float(i.split("=")[1])
-                    for i in z3:
+                        if i.upper().find("EIGENVAL2ALPHA") > -1:
+                            Step_.EigenVal2Alph = True
+                            Step_.ZetaAlph      = float(i.split("=")[1])  # damping from mass related to critical damping
+                        elif i.upper().find("ALPHA")>-1:
+                            Step_.RaAlph=float(i.split("=")[1])
                         if i.upper().find("EIGENVAL2BETA") > -1:
                             Step_.EigenVal2Beta = True
-                            Step_.Zeta   = float(i.split("=")[1])                               # damping related to critical damping
+                            Step_.ZetaBeta   = float(i.split("=")[1])                               # damping from stiffness related to critical damping
+                        elif i.upper().find("BETA") > -1:
+                            Step_.RaBeta = float(i.split("=")[1])
                 #
                 # IType -- finalizing current step
                 elif z3[0].upper().strip().replace(" ","")=="*ENDSTEP":
@@ -1057,6 +1044,7 @@ def DataInput( f1, ff, Restart):
         z3 = z2.split(',')
         zLen = len(z3)
         if z3[-1].strip() == "": zLen=zLen-1                                # for blanks after last comma
+        z3 = [i.strip() for i in z3]
     f1.close()
     #
     # post -- input data checks and completion
@@ -1193,146 +1181,6 @@ def DataInput( f1, ff, Restart):
     if Restart: return MatList, StepList
     else:       return NodeList, ElemList, MatList, SecDic, NoLabToNoInd, StepList, ResultTypes, Header
 
-def WriteElemData( f2, f7, Time, ElList, NodeList,NoIndToCMInd, MatList, MaxType, ResultTypes):
-    f2.write('%s%8.4f\n'%('Time ',Time))
-    MaxOut = False
-    if f7!=None and len(MaxType)>0:                                 # to extract maximum and minimum values of element data
-        MaxOut = True 
-        f7.write('%s%8.4f\n'%('Time ',Time))
-        MaxVal, MinVal = {}, {}
-        for i in MaxType: MaxVal[i], MinVal[i] = [0, 0.,0.,0., 0.], [0, 0.,0.,0., 0.] # element number, coordinates, value
-    for Elem in ElList:
-        if Elem.Type=='SB3':
-            for j in Elem.Inzi:
-                no = NodeList[ NoIndToCMInd[j] ]
-                no.mx, no.my, no.mxy, no.C = 0,0,0,0                         # seems to be not needed
-    for Elem in ElList:
-        if not Elem.Active: continue
-        xN, yN, zN = [], [], []
-        f2.write('%s%7i%8s%40s%40s%20s'%('El',Elem.Label,Elem.Type,Elem.Set,Elem.MatN,MatList[Elem.MatN].Type))
-        for j in Elem.Inzi:
-            no = NodeList[NoIndToCMInd[j]]
-            f2.write('%7i'%(no.Label))
-            xN += [no.XCo]                                                  # nodal coordinates
-            yN += [no.YCo]
-            zN += [no.ZCo]
-        if Elem.Type not in ['SH4','SH3']: f2.write('\n')
-        if Elem.Type=='SB3': Elem.ShearForces( NodeList, NoIndToCMInd, True)# post processing kirchhoff slab for shear forces
-        #
-        if Elem.Type=='SH4' or Elem.Type=='SH3':                            # post processing continuum based shell
-            IntF = {}                                                       # internal forces dictionary initialization
-            if Elem.ShellRCFlag: nRe, marker = Elem.Geom.shape[0]-2, 'C'    # number of reinforcement layers
-            else:           nRe, marker = 0, 'U'
-            if   Elem.nInt==2: nC = 4                                       # number of concrete layers
-            elif Elem.nInt==5: nC = 5
-            else:              nC = 0
-            f2.write('     %7i%7i\n'%(nC,nRe))
-            Lis = Elem.Lists1()                                             # indices for start integration points in base area
-            if   Elem.Type=='SH4': Corr, CorM =0.5, 0.5             # to compensate for local iso-parametric coordinate t in range [-1..1] --> 2
-            elif Elem.Type=='SH3': Corr, CorM =3.0, 0.5             # " + Corr -->  0.5 * 8 *3/4 = 3, see ConFemBasic::SampleWeights SH3
-            for j in Lis:                                                   # loop over base area
-                Lis2, Lis3 = Elem.Lists2( nRe, j)                           # integration point indices along cross section height specific for current start point in base
-                                                                            # Lis2 all, Lis3 reinforcement layers only in case of RC
-                r = SamplePoints[Elem.IntT,Elem.nInt-1,j][0]                # intT: integration type, nInt: integration order
-                s = SamplePoints[Elem.IntT,Elem.nInt-1,j][1]
-                xI = dot( Elem.FormX(r,s,0), xN)
-                yI = dot( Elem.FormX(r,s,0), yN)
-                zI = dot( Elem.FormX(r,s,0), zN)
-                aa = dot( Elem.FormX(r,s,0), Elem.a)                        # interpolated shell thickness from node thickness
-                for k in ResultTypes[Elem.Set]: IntF[k] = 0. 
-                for k in Lis2:                                              # loop over cross section height indices
-                    jj = j+k                                                # j is base index
-                    if (k in Lis3):                                         # reinforcement only
-                        t  =         SamplePointsRCShell[Elem.Set,Elem.IntT,Elem.nInt-1,jj][2]
-                        ff = Corr*aa*SampleWeightRCShell[Elem.Set,Elem.IntT,Elem.nInt-1,jj]  
-                    else:           
-                        t  =                SamplePoints[         Elem.IntT,Elem.nInt-1,jj][2]
-                        ff = Corr*aa*       SampleWeight[         Elem.IntT,Elem.nInt-1,jj]  
-                    ppp = Elem.Data[jj]                                     # content ruled through the material methods returning Data for Elem.dim==21
-                    # isodamage: sig[0],sig[1],sig[2],sig[3],sig[4],sig[5], Eps__[0],Eps__[1],Eps__[5], sig[0],sig[1],sig[5], D, svs
-                    IntF['n_x']  = IntF['n_x']  + ff*ppp[0]  
-                    IntF['n_y']  = IntF['n_y']  + ff*ppp[1]
-                    IntF['q_y']  = IntF['q_y']  + ff*ppp[3]
-                    IntF['q_x']  = IntF['q_x']  + ff*ppp[4]
-                    IntF['n_xy'] = IntF['n_xy'] + ff*ppp[5]
-                    IntF['m_x']  = IntF['m_x']  - CorM*aa*t*ff*ppp[0]
-                    IntF['m_y']  = IntF['m_y']  - CorM*aa*t*ff*ppp[1]
-                    IntF['m_xy'] = IntF['m_xy'] - CorM*aa*t*ff*ppp[5]
-                    la_,v_ = eigh( [[ppp[0],ppp[5],ppp[4]] , [ppp[5],ppp[1],ppp[3]] , [ppp[4],ppp[3],ppp[2]]])  # principal values/eigenvalues -- in ascending order -- and eigenvectors of stress tensor
-#                    D =   ppp[-2]                                           # for damage of isodam
-#                    kap = ppp[-1]                                           # for equivalent damage strain of isodam
-                    # case R: reinforcement data          
-                    if (k in Lis3):                  #    R                 # Lis3 reinforcement layers only
-                        f2.write('%10.4f%10.4f%10.4f%7.3f R%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e                          '\
-                                       %(xI,yI,zI,t,ppp[0],ppp[1],ppp[2],ppp[3],ppp[4],ppp[5])) 
-                        f2.write('%9.2f  %7.3f%7.3f%7.3f%9.2f  %7.3f%7.3f%7.3f%9.2f  %7.3f%7.3f%7.3f'%(la_[0],v_[0,0],v_[1,0],v_[2,0],la_[1],v_[0,1],v_[1,1],v_[2,1],la_[2],v_[0,2],v_[1,2],v_[2,2]))
-                        f2.write('\n')
-                    # case marker == C but not in Lis3: concrete Data
-                    elif marker=='C':               #     C
-                        f2.write('%10.4f%10.4f%10.4f%7.3f C%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e'\
-                                       %(xI,yI,zI,t,ppp[0+6],ppp[1+6],ppp[2+6],ppp[3+6],ppp[4+6],ppp[5+6],ppp[6+6],ppp[7+6]))
-                        # eigenvalues + eigenvectors in ascending order
-                        f2.write('%9.2f  %7.3f%7.3f%7.3f%9.2f  %7.3f%7.3f%7.3f%9.2f  %7.3f%7.3f%7.3f'%(la_[0],v_[0,0],v_[1,0],v_[2,0],la_[1],v_[0,1],v_[1,1],v_[2,1],la_[2],v_[0,2],v_[1,2],v_[2,2]))
-                        f2.write('\n')
-                _, _, _, _, _, vv = Elem.Basics( r, s, 0.)                  # vv: orientation of local coordinate system 1st aligned to first edge, 2nd column perp in-plane, 3rd column director, see also SH4:Basics
-                # case Z                            Z
-                f2.write('%10.4f%10.4f%10.4f        Z%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e   %8.4f%8.4f%8.4f %8.4f%8.4f%8.4f\n'\
-                                       %(xI,yI,zI,IntF['n_x'],IntF['n_y'],IntF['n_xy'],IntF['m_x'],IntF['m_y'],IntF['m_xy'],IntF['q_x'],IntF['q_y'],vv[0,0],vv[1,0],vv[2,0],vv[0,1],vv[1,1],vv[2,1])) # integrated internal forces
-                if MaxOut:
-                    for k in MaxType:
-                        if IntF[k]>MaxVal[k][4]: MaxVal[k][0], MaxVal[k][1],MaxVal[k][2],MaxVal[k][3], MaxVal[k][4] = Elem.Label, xI,yI,zI, IntF[k]                
-                        if IntF[k]<MinVal[k][4]: MinVal[k][0], MinVal[k][1],MinVal[k][2],MinVal[k][3], MinVal[k][4] = Elem.Label, xI,yI,zI, IntF[k]                
-        # 3D
-        elif Elem.Type in ['C3D8','C3D8S','T3D2','T3D3','T3D2I','T3D3I',"Bond3D2","Bond3D3"]:
-            for j in range(Elem.nIntL):                                     # write sample point coordinates and element data into file
-                r = SamplePoints[Elem.IntT,Elem.nInt-1,j][0]
-                s = SamplePoints[Elem.IntT,Elem.nInt-1,j][1]
-                t = SamplePoints[Elem.IntT,Elem.nInt-1,j][2]
-                xI = dot( Elem.FormX(r,s,t), xN)
-                yI = dot( Elem.FormX(r,s,t), yN)
-                zI = dot( Elem.FormX(r,s,t), zN)
-                f2.write('%9.4f%9.4f%9.4f'%(xI,yI,zI))
-                Data_ = Elem.Data[j]
-                for D_ in Data_: f2.write('%13.4e'%(D_))
-                f2.write('\n')
-            if Elem.Type in ['C3D8S']:                                      # discontinuity data for SDA element - not yet finished
-                f2.write('%9.4f%9.4f%9.4f           C1'%(Elem.CrXCo,Elem.CrYCo,Elem.CrZCo)) 
-                for i in range(Elem.n_vertices): f2.write('%2i%11.4e%7.4f%11.4e%7.4f%11.4e%7.4f'%(i,Elem.wwL[i][0],Elem.wwT[i][0],Elem.wwL[i][1],Elem.wwT[i][1],Elem.wwL[i][2],Elem.wwT[i][2]))          
-                f2.write('%12.6f%12.6f%12.6f\n'%(Elem.CrNx,Elem.CrNy,Elem.CrNz))           
-        # else than shells and 3D
-        else:
-            for j in range(Elem.nIntL):                                     # write sample point coordinates and element data into file
-                r = SamplePoints[Elem.IntT,Elem.nInt-1,j][0]
-                s = SamplePoints[Elem.IntT,Elem.nInt-1,j][1]
-                t = SamplePoints[Elem.IntT,Elem.nInt-1,j][2]
-                xI = dot( Elem.FormX(r,s,t), xN)
-                yI = dot( Elem.FormX(r,s,t), yN)
-                f2.write('%9.4f%9.4f'%(xI,yI))
-                for k in range(Elem.Data.shape[1]): f2.write('%13.4e'%(Elem.Data[j,k]))
-                f2.write('\n')
-                if Elem.Type in ['CPS4S','CPE4S','CPS3S','CPE3S','CPS6S','CP63S']:  # discontinuity data for SDA elements
-                    f2.write('%9.4f%9.4f  C1%9.4f%9.4f%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e\n'%(Elem.CrXCo,Elem.CrYCo,Elem.CrN[0,0],Elem.CrN[0,1],Elem.wwL[0,0,0],Elem.wwL[0,0,1],Elem.wwL[0,1,0],Elem.wwL[0,1,1],Elem.wwT[0,0,0],Elem.wwT[0,0,1],Elem.wwT[0,1,0],Elem.wwT[0,1,1]))          
-                    f2.write('%9.4f%9.4f  C2%9.4f%9.4f%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e%13.4e\n'%(Elem.CrXCo,Elem.CrYCo,Elem.CrN[1,0],Elem.CrN[1,1],Elem.wwL[1,0,0],Elem.wwL[1,0,1],Elem.wwL[1,1,0],Elem.wwL[1,1,1],Elem.wwT[1,0,0],Elem.wwT[1,0,1],Elem.wwT[1,1,0],Elem.wwT[1,1,1]))          
-    #
-    if MaxOut: 
-        for k in MaxType:
-            f7.write('max%6s%8i%10.4f%10.4f%10.4f%13.4e\n'%(k,MaxVal[k][0],MaxVal[k][1],MaxVal[k][2],MaxVal[k][3],MaxVal[k][4]))
-            f7.write('min%6s%8i%10.4f%10.4f%10.4f%13.4e\n'%(k,MinVal[k][0],MinVal[k][1],MinVal[k][2],MinVal[k][3],MinVal[k][4]))
-    return 0
-
-def WriteNodalData( f3, Time, NodeList, VecU, VecB):
-    f3.write('%8.4f\n'%(Time))
-    for i in range(len(NodeList)):
-        Node = NodeList[i]
-        iS = Node.GlobDofStart
-        if len(Node.DofT)>0:
-            f3.write('%5i%9.4f%9.4f%9.4f'%(Node.Label,Node.XCo,Node.YCo,Node.ZCo))
-            for j in range(len(Node.DofT)): f3.write('%12.4e'%(VecU[iS+j]))                            # DofT might be 5 or 6 for SH$, the latter for presumably folded edges / unfavorable director
-            if Node.c>0: f3.write('  %12.4e%12.4e%12.4e  '%(Node.mx/Node.c,Node.my/Node.c,Node.mxy/Node.c)) # only for element type SB3
-            for j in range(len(Node.DofT)): f3.write('%12.4e'%(VecB[iS+j]))
-            f3.write('\n')
-    return 0
-
 def FinishAllStuff(PloF, DirName, FilName, Name, ResType, VTK):
     if PloF:
         from ConFemPost import ConFemPost
@@ -1374,69 +1222,20 @@ def LogResiduals(LogName, counter, i, NodeList, VecR, VecU):
     f1.close()
     return
 
-#def PlotResiduals( LogName, Name, counter, i, scale):
-#    def Stuff( Pl, Name, scale, scale2):
-#        ff, xx, yy, rr = open( Name, 'r'), [], [], 0.
-#        z1 = ff.readline()                                  # 1st input line
-#        z2 = z1.split()
-#        while z1!="":
-#            x, y, rx, ry = float(z2[1]),float(z2[2]), float(z2[5]), float(z2[6])
-##            x, y, rx, ry, ax, ay = float(z2[1]),float(z2[2]), float(z2[4]), float(z2[5]), float(z2[7]), float(z2[8])
-#            rr = rr + rx**2 + ry**2
-#            xx += [x]
-#            yy += [y]
-#            Pl.plot([x,x+scale*rx],[y,y+scale*ry],color='red')
-##            Pl.plot([x,x+scale*ry],[y,y+scale*rx],color='red')
-#    #        Pl.plot([x,x+scale2*ax],[y,y+scale2*ay],color='blue')
-#            z1 = ff.readline()                                  # 1st input line
-#            z2 = z1.split()
-#        ff.close()
-#        print(sqrt(rr))
-#        Pl.plot(xx,yy,'x')
-#        Pl.set_aspect('equal')
-#        Pl.grid()
-#        return
-#    Name = LogName+"/log-"+str(counter)+"-"+str(i)+".txt"
-#    Pl1 = plt.figure().add_subplot(111,title='Resid '+str(counter)+'/'+str(i))
-#    Stuff( Pl1, Name, scale, 1.0e1) # 1e1
-##    Stuff( Pl1, Name, 2.0e+3, 1.0e3) # 1e1
-##    Name = LogName+"/logD-"+str(counter)+"-"+str(i)+".txt"
-##    Pl2 = plt.figure().add_subplot(111,title='Displ '+str(counter)+'/'+str(i))
-##    Stuff( Pl2, Name, 1.0e2, 1.0e1)
-#    show()
-#    return
+#def WriteNodalData( f3, Time, NodeList, VecU, VecB):
+#    f3.write('%8.4f\n'%(Time))
+#    for i in range(len(NodeList)):
+#        Node = NodeList[i]
+#        iS = Node.GlobDofStart
+#        if len(Node.DofT)>0:
+#            f3.write('%5i%9.4f%9.4f%9.4f'%(Node.Label,Node.XCo,Node.YCo,Node.ZCo))
+#            for j in range(len(Node.DofT)): f3.write('%12.4e'%(VecU[iS+j]))                            # DofT might be 5 or 6 for SH$, the latter for presumably folded edges / unfavorable director
+#            if Node.c>0: f3.write('  %12.4e%12.4e%12.4e  '%(Node.mx/Node.c,Node.my/Node.c,Node.mxy/Node.c)) # only for element type SB3
+#            for j in range(len(Node.DofT)): f3.write('%12.4e'%(VecB[iS+j]))
+#            f3.write('\n')
+#    return 0
 
-#def WriteResiduals( LogName, counter, i, N):
-#    class Residual():                                  # 1D Truss 2 nodes
-#        def __init__(self, Label, X, Y, Z, Res):
-#            self.Label = Label
-#            self.X   = X
-#            self.Y   = Y
-#            self.Z   = Z
-#            self.Res = Res
-#    Name = LogName+"/log-"+str(counter)+"-"+str(i)+".txt"
-#    Nam1 = LogName+"/logWr-"+str(counter)+"-"+str(i)+".txt"
-#    ResList = []
-#    ff  = open( Name, 'r')
-#    f1  = open( Nam1, 'w')
-#    z1 = ff.readline()
-#    z2 = z1.split()
-#    while z1!="":
-#        nL, x, y, z, _, rr  = int(z2[0]), float(z2[1]), float(z2[2]), float(z2[3]), int(z2[4]), float(z2[-1])
-#        ResList += [Residual( nL, x, y, z, rr)]
-#        f1.write("%5i ; %8.2f ; %8.2f ; %8.2f ; %16.6e\n"%(nL,x,y,z,rr))
-#        z1 = ff.readline()
-#        z2 = z1.split()
-#    ff.close()
-#    f1.close()
-#    n = len(ResList)
-#    ResList.sort(key=lambda t: t.Res)
-#    print(Name)
-#    for i in range(N):
-#        r = ResList[n-1-i]
-#        print(i+1, r.Label, r.Res)
-        
-def DataOut(fileName, NodeList, uu, ff, rL, Time, WriteType ):
+def WriteNodeData(fileName, NodeList, uu, ff, rL, Time, WriteType):
     fp = open(fileName,WriteType)
     fp.write('Time, %8.4f\n'%Time)
     for no in NodeList:
@@ -1444,14 +1243,22 @@ def DataOut(fileName, NodeList, uu, ff, rL, Time, WriteType ):
         s = no.GlobDofStart
         for j in range(len(no.DofT)): fp.write('%12.4e,'%(uu[s+j]))         # displacements
         fp.write('    ')
-        for j in range(len(no.DofT)): fp.write('%12.4e,'%(ff[s+j]))         # residual / reaction force
+        for j in range(len(no.DofT)): fp.write('%12.4e,'%(ff[s+j]))         # external nodal forces - interl nodal forces -> boundary reactions
         fp.write('    ')
-        for j in range(len(no.DofT)): fp.write('%12.4e,'%(rL[s+j]))         # residual / reaction force
+        for j in range(len(no.DofT)): fp.write('%12.4e,'%(rL[s+j]))         # residual
+        if no.c>0:
+            fp.write('  %12.4e%12.4e%12.4e  ' % ( no.mx/no.c, no.my/no.c, no.mxy/no.c))  # only for element type SB3
         fp.write('\n')
     fp.flush()
     fp.close()
-  
-def DataOutStress(fileName, ElemList, NodeList, NoIndToCMInd, Time, WriteType, ff):
+
+def WriteElemData(fileName, ElemList, NodeList, NoIndToCMInd, Time, WriteType, f7):
+    MaxOut, MaxType = False, []
+    if f7!=None and len(MaxType)>0:                                         # to extract maximum and minimum values of element data
+        MaxOut = True
+        f7.write('%s%8.4f\n'%('Time ',Time))
+        MaxVal, MinVal = {}, {}
+        for i in MaxType: MaxVal[i], MinVal[i] = [0, 0.,0.,0., 0.], [0, 0.,0.,0., 0.] # element number, coordinates, value
     fp = open(fileName, WriteType)
     fp.write('Time, %8.4f\n'%Time)
     counter = 0
@@ -1463,26 +1270,47 @@ def DataOutStress(fileName, ElemList, NodeList, NoIndToCMInd, Time, WriteType, f
             Mat   = i.MatN
             xyN   = i.NodalCoordinates( NodeList, NoIndToCMInd)
             if i.Type in ['SH4','SH3']:
-                offset, nRe = 0, 0                                      # currently not clear for what offset is, does this reinforcement work ???  uhc 220621
-                if i.ShellRCFlag: nRe = i.Geom.shape[0]-2               # number of reinforcement layers
+                if i.ShellRCFlag: nRe = i.Geom.shape[0]-2                   # number of reinforcement layers
                 else:             nRe = 0
-                Lis = i.Lists1()                                        # indices for first integration points in base area
+                Lis = i.Lists1()                                            # indices for first integration points in base area
                 for j in Lis:
-                    r = SamplePoints[i.IntT,i.nInt-1,j][0]              # intT: integration type, nInt: integration order
+                    r = SamplePoints[i.IntT,i.nInt-1,j][0]                  # intT: integration type, nInt: integration order
                     s = SamplePoints[i.IntT,i.nInt-1,j][1]
-                    aa = dot(i.FormX(r, s, 0), i.a)                     # interpolated shell thickness from node thicknesses
+                    aa = dot(i.FormX(r, s, 0), i.a)                         # interpolated shell thickness from node thicknesses
                     XX  = i.FormX_( r, s, 0)
-                    xyP = dot(XX,array(xyN))                            # global integration point coordinates
-                    fp.write('%6i, %4s, %10s, %6s, %3i, '%(Label,ElSet,Mat,Type,j))
-                    for x in xyP:               fp.write('%10.4f,'%(x))         # write nodal coordinates
-                    nx, ny, nxy, qx, qy, mx, my, mxy, _ = i.StressIntegration( j, offset, nRe, None, ff) # None --> uses stresses from data to derive internal forces --> StressIntegration is method shellss
-                    fp.write('%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,%14.6e'%(nx, ny, nxy, mx, my, mxy, qx, qy, aa))
-                    fp.write('\n')
+                    xyP = dot(XX,array(xyN))                                # global integration point coordinates
+                    nx,ny,nxy,qx,qy,mx,my,mxy, _, cD,rD,cP,rP = i.StressIntegration( j, nRe) # StressIntegration is method of shells
+                    _, _, _, _, _, vv = i.Basics(r, s, 0.)                  # vv: orientation of local coordinate system 1st aligned to first edge, 2nd column perp in-plane, 3rd column director, see also SH4:Basics
+                    if len(cD)>0:
+                        for j_, d in enumerate(cD):
+                            fp.write('%6i, %4s, %10s, %6s, %3i,'%(Label,ElSet,Mat,Type+":C",j))
+                            fp.write(' %10.4f,%10.4f,%10.4f,%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,'% (xyP[0],xyP[1],d[1],d[2],d[3],d[4],d[5],d[6],d[7]))
+                            d_ = cP[j_]                                     # principal stress values and corr. eigenvectors / directions
+                            fp.write('%9.2f,  %7.3f,%7.3f,%7.3f,%9.2f,  %7.3f,%7.3f,%7.3f,%9.2f,  %7.3f,%7.3f,%7.3f'
+                                     % (d_[0], d_[1], d_[2], d_[3], d_[4], d_[5], d_[6], d_[7], d_[8], d_[9], d_[10], d_[11]))
+                            fp.write('\n')
+                    if len(rD)>0:
+                        for j_, d in enumerate(rD):
+                            fp.write('%6i, %4s, %10s, %6s, %3i,'%(Label,ElSet,Mat,Type+":R",j))
+                            #                                                        IipCoor           ,local strain, stress, yield stress
+                            fp.write(' %10.4f,%10.4f,%10.4f,%14.6e,%14.6e,%14.6e,'% (xyP[0],xyP[1],d[1],d[2],d[3],d[4]))
+                            d_ = rP[j_]                                     # principal stress values and corr. eigenvectors / directions
+                            fp.write('%9.2f,  %7.3f,%7.3f,%7.3f,%9.2f,  %7.3f,%7.3f,%7.3f,%9.2f,  %7.3f,%7.3f,%7.3f'
+                                    %(d_[0],d_[1],d_[2],d_[3],d_[4],d_[5],d_[6],d_[7],d_[8],d_[9],d_[10],d_[11]))
+                            fp.write('\n')
+                    fp.write('%6i, %4s, %10s, %6s, %3i, '%(Label,ElSet,Mat,Type+":Z",j)) # Type + marker for integrated intenal forces
+                    for x in xyP: fp.write('%10.4f,'%(x))               # write integration point coordinates
+                    fp.write('%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,%14.6e,%8.4f,'%(nx,ny,nxy,mx,my,mxy,qx,qy,aa,))
+                    fp.write(' %8.4f,%8.4f,%8.4f,%8.4f,%8.4f,%8.4f\n'%(vv[0,0],vv[1,0],vv[2,0],vv[0,1],vv[1,1],vv[2,1]))
             else:
                 if i.Type == 'SB3':
-                    i.ShearForces( NodeList,NoIndToCMInd, False)        # post processing for shear forces
+                    for j in i.Inzi:
+                        no = NodeList[NoIndToCMInd[j]]
+                        no.mx, no.my, no.mxy, no.c = 0, 0, 0, 0         # evaluated in ShearForces for output in nodeout
+#                    i.ShearForces( NodeList,NoIndToCMInd, False)        # post processing for shear forces
+                    i.ShearForces( NodeList,NoIndToCMInd, True)        # post processing for shear forces
                 for k in range(i.nIntL):
-                    Sig   = i.Data[k]                                   # consider: material type assigned to integration might be different for one element with side effect for actual length of Data
+                    Sig = i.Data[k]                                     # consider: material type assigned to integration might be different for one element with side effect for actual length of Data
                     r = SamplePoints[i.IntT,i.nInt-1,k][0]
                     s = SamplePoints[i.IntT,i.nInt-1,k][1]
                     t = SamplePoints[i.IntT,i.nInt-1,k][2]
@@ -1492,14 +1320,17 @@ def DataOutStress(fileName, ElemList, NodeList, NoIndToCMInd, Time, WriteType, f
                     for x in xyP: fp.write('%10.4f,'%(x))               # write integration point coordinates
                     # write element stresses, strains
                     if i.Type in ["T3D2I","T3D3I"]:                     # for truss elements, required for bond data in VTK
-                        fp.write('%14.6e,%14.6e,'%(Sig.tolist()[0],Sig.tolist()[1])) # looks like longituinal strain, stress
+                        fp.write('%14.6e,%14.6e,'%(Sig[0],Sig[1])) # looks like longituinal strain, stress
                     else:
-                        for x in Sig.tolist():  fp.write('%14.6e,'%(x))
+                        for x in Sig:  fp.write('%14.6e,'%(x))
                     # append bond data for embedded elements - 4 items for 2D, 6 items for 3D: 2 bond, 4 lateral
-                    if i.Type in ['T2D2I','T2D3I',"TAX2I","TAX3I",'T3D2I','T3D3I',"B23I","BAX23I","BAX23EI","B23EI","BAX21EI"] and i.BondLaw!=None:
-                        bel  = ElemList[i.BondElInd[k]]                 # corresponding bond element
-                        if counter!=bel.iT or k!=bel.ElInt: raise NameError("CaeFemInOut::DataOutStress: wrong assignment of embedded truss to bond element ")
-                        for kk in range(len(bel.Data[0])): fp.write('%14.6e,'%(bel.Data[0,kk])) # bond element should have only one integration point
+                    if i.Type in ['T2D2I','T2D3I',"TAX2I","TAX3I",'T3D2I','T3D3I',"B23I","BAX23I","BAX23EI","B23EI","BAX21EI"]:
+                        if i.BondLaw!=None:
+                            bel  = ElemList[i.BondElInd[k]]                 # corresponding bond element
+                            if counter!=bel.iT or k!=bel.ElInt: raise NameError("CaeFemInOut::DataOutStress: wrong assignment of embedded truss to bond element ")
+                            for kk in range(len(bel.Data[0])): fp.write('%14.6e,'%(bel.Data[0,kk])) # bond element should have only one integration point
+                        else:
+                            fp.write(" 0.0, 0.0, 0.0, 0.0, 0.0")
                     fp.write('\n')
                 if i.Type in ['CPS4S','CPE4S','CPS3S','CPE3S','CPS6S','CP63S']:
                     fp.write('%6i, %4s, %10s, %6s, Cra, %10.4f,%10.4f,%12.6f,%12.6f,%12.4e,%12.4e,%12.4e,%12.4e,%12.4e,%12.4e,%12.4e,%12.4e\n'%(Label,ElSet,Mat,Type,i.CrXCo,i.CrYCo,i.CrN[0,0],i.CrN[0,1],i.wwL[0,0,0],i.wwL[0,0,1],i.wwL[0,1,0],i.wwL[0,1,1],i.wwT[0,0,0],i.wwT[0,0,1],i.wwT[0,1,0],i.wwT[0,1,1]))
@@ -1513,9 +1344,18 @@ def DataOutStress(fileName, ElemList, NodeList, NoIndToCMInd, Time, WriteType, f
                     for c in i.xyzC: vL += [ dot( ab, c) ]
                     for j, c in enumerate(i.xyzC):                          # loop over vertices of crack face
                         fp.write('%6i, %4s, %10s, %6s, Cra, %10.4f,%10.4f,%10.4f,%12.4e,%12.4e\n'%(Label,ElSet,Mat,Type,c[0],c[1],c[2],vL[j],vT[j]))
+            if MaxOut:                                                      # not yet fully implemented and tested
+                for k in MaxType:
+                    if Sig[k]>MaxVal[k][4]: MaxVal[k][0], MaxVal[k][1],MaxVal[k][2],MaxVal[k][3], MaxVal[k][4] = i.Label, xyP[0],xyP[1],xyP[2], Sig[k]
+                    if Sig[k]<MinVal[k][4]: MinVal[k][0], MinVal[k][1],MinVal[k][2],MinVal[k][3], MinVal[k][4] = i.Label, xyP[0],xyP[1],xyP[2], Sig[k]
         counter+=1
     fp.flush()
     fp.close()
+    if MaxOut:
+        for k in MaxType:
+            f7.write('max%6s%8i%10.4f%10.4f%10.4f%13.4e\n'%(k,MaxVal[k][0],MaxVal[k][1],MaxVal[k][2],MaxVal[k][3],MaxVal[k][4]))
+            f7.write('min%6s%8i%10.4f%10.4f%10.4f%13.4e\n'%(k,MinVal[k][0],MinVal[k][1],MinVal[k][2],MinVal[k][3],MinVal[k][4]))
+    return 0
 
 def SelOutIni( FilName, Type, OutList):                 # initialize files for single element / node output
     FileHandles = []

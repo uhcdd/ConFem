@@ -41,4 +41,17 @@ used material MAT1, spec. inertial mass 0.00e+00, type RCBEAM
 Element data written 1.000000
 Nodal data written 1.000000
 Restart data written 1.000000
+last iteration data
+    1, 0.1000,    4
+    2, 0.2000,    3
+    3, 0.3000,    3
+    4, 0.4000,    2
+    5, 0.5000,    2
+    6, 0.6000,    2
+    7, 0.7000,    2
+    8, 0.8000,    2
+    9, 0.9000,    2
+   10, 1.0000,    2
+last timeout data
+reached time 1.0000
 total comp time 0 seconds

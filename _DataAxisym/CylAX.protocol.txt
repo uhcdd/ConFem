@@ -8,4 +8,8 @@ used material MATEL, spec. inertial mass 0.00e+00, type ELASTIC
 Element data written 1.000000
 Nodal data written 1.000000
 Restart data written 1.000000
+last iteration data
+    1, 1.0000,    1
+last timeout data
+reached time 1.0000
 total comp time 0 seconds

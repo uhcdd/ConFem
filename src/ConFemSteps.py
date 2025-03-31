@@ -90,15 +90,17 @@ class Step(object):
         self.Buckl     = False                                      # flag for buckling analysis
         self.Eigenmodes = False                                     # flag for computation of dynamic eigenmodes
         self.EigenmodesN = 5                                        # !!!!! default for number of comuted eigemodes in case of Eigenmodes=True - also used for buckling
-        self.EigenmodeIter = 100                                    # max number of iterations for eigenmode iteration - also used for buckling
+        self.EigenmodeIter = 100                                    # !!!!! max number of iterations for eigenmode iteration - also used for buckling
         self.Eigenvalues = zeros((10), dtype=double)                # array for eigenvalues -- hard coded length
         self.NMbeta    = 0.25                                       # Newmark parameter beta
         self.NMgamma   = 0.5                                        # Newmark parameter gamma
         self.Damp      = False                                      # flag for artificial / Rayleigh damping
         self.RaAlph    = 0.0                                        # default Rayleigh damping parameter with stiffness
         self.RaBeta    = 0.0                                        # default Rayleigh damping parameter with mass
-        self.EigenVal2Beta = False                                  # derive beta from eigenmode
-        self.Zeta      = 0.0                                        # damping related to critical damping
+        self.EigenVal2Beta = False                                  # derive beta (stiffness) from eigenmode
+        self.ZetaBeta  = 0.0                                        # damping beta (stiffness) related to critical damping
+        self.EigenVal2Alph = False                                  # derive alpha (mass) from eigenmode
+        self.ZetaAlph  = 0.0                                        # damping alpah (mass) related to critical damping
         self.ArcLen    = False                                      # flag for arc length control
         self.ArcLenV   = 0                                          # arc length parameter
         self.NLGeom    = False                                      # flag for large deformations

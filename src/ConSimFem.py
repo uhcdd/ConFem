@@ -36,13 +36,11 @@ class ConSimFem:
     def Run(self, Name, PloF, LinAlgFlag, ResType, ElPlotTimes=['1.0000']):
         DirName, FilName = DirFilFromName(Name)
         f1=open( Name+".in.txt", 'r')
-        f2=open( Name+".elemout.txt", 'w')
-        f3=open( Name+".nodeout.txt", 'w')
         f6=open( Name+".protocol.txt", 'w')
         Echo(f"SimFem  {Name:s}", f6)
         f5, f7 = None, None
-        NameElemOut_ = Name + ".elemout_.txt"
-        NameNodeOut_ = Name + ".nodeout_.txt"
+        NameElemOut_ = Name + ".elemout.txt"
+        NameNodeOut_ = Name + ".nodeout.txt"
         if pth.exists(NameElemOut_): os.remove(NameElemOut_)
         if pth.exists(NameNodeOut_): os.remove(NameNodeOut_)
         #        NodeList, ElList, MatList, StepList, NoLabToNoInd, SecDic = ReadInputFile(f1, f6, False)  # read input file and create node, element, material and step lists -> in SimFemInOut.py
@@ -155,11 +153,10 @@ class ConSimFem:
                 VecC[:] = VecU[:]                                                   # store current displacements as previous for next time step
                 FinishEquilibIteration( MatList, ElList, NodeList,NoIndToCMInd, f6, StLi.NLGeom, True)     # update state variables etc.
                 if Time+1.e-6>=TimeEl: 
-                    DataOutStress(NameElemOut_, ElList, NodeList, NoIndToCMInd, Time, "a", f6)
+                    WriteElemData(NameElemOut_, ElList, NodeList, NoIndToCMInd, Time, "a", f6)
                     if LinAlgFlag: NodeList.sort(key=lambda t: t.Label)
-                    DataOut(NameNodeOut_, NodeList, VecU, VecB, VecR, Time, "a" )
+                    WriteNodeData(NameNodeOut_, NodeList, VecU, VecB, VecR, Time, "a")
                     if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
-                    WriteElemData( f2, f7, Time, ElList, NodeList,NoIndToCMInd, MatList, MaxType, ResultTypes)# write element data
                     fd = open(Name+'.pkl', 'wb')                                    # Serialize data and store for restart
                     Flag, VecP0old, VecBold, VeaU, VevU, VeaC, VevC, VecY, FlElasticLT, ContinuumNodes, ConNoToNoLi = None, None, None, None, None, None, None, None, None, [], None # for compatibility with confem
                     pickle.dump(NodeList,fd);pickle.dump(ElList,fd);pickle.dump(MatList,fd);pickle.dump(StepList,fd);pickle.dump(N,fd);pickle.dump(WrNodes,fd);pickle.dump(LineS,fd);pickle.dump(FlElasticLT,fd);\
@@ -168,18 +165,16 @@ class ConSimFem:
                     pickle.dump(SLen,fd);pickle.dump(SymSys,fd);pickle.dump(NoLabToNoInd,fd);pickle.dump(NoIndToCMInd,fd);pickle.dump(ContinuumNodes,fd);pickle.dump(ConNoToNoLi,fd);pickle.dump(SecDic,fd);pickle.dump(LinAlgFlag,fd);pickle.dump(ResultTypes,fd);pickle.dump(Header,fd);
                     fd.close()
 
-                if LinAlgFlag: NodeList.sort(key=lambda t: t.Label)
                 if Time+1.e-6>=TimeNo:
-                    WriteNodalData( f3, Time, NodeList, VecU, VecB)                 # write nodal data
-                if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
+                    if LinAlgFlag: NodeList.sort(key=lambda t: t.Label)
+                    WriteNodeData(NameNodeOut_, NodeList, VecU, VecB, VecR, Time, "a")
+                    if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
                 if f5!=None:
                     WriteNodes( f5, WrNodes, Time, VecU,VecB,VecP, i, counter, queues,ndeq,maxWriteNodes)
                     f5.flush()
             Step += 1                                                       # next step
         # end of step loop 
         Echo(f"total comp time {process_time()-stime:.0f} seconds", f6)
-        f2.close()
-        f3.close()
         if f5!=None: f5.close()
         f6.close()
         RC = FinishAllStuff(PloF, DirName, FilName, Name, ResType, False)

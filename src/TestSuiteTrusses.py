@@ -27,16 +27,16 @@ class Test(unittest.TestCase):
         self.LogData = True
        
     def test_01(self):
-        Name="../_DataTrusses/staebe_1_1d"                 #                                        7s
-        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '9729d2bea31d9a557bd4ddea8c110432')
+        Name="../_DataTrusses/staebe_1_1d"
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '2463736c132112b1f94fc3406780c68a')
 
     def test_02(self):
-        Name="../_DataTrusses/staebe_4"                 #                                        7s
-        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), 'aac36ff814fa654f6291529b8b3513e0')
+        Name="../_DataTrusses/staebe_4"
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '10f900df349a486e41848332a91381c6')
 
     def test_03(self):
-        Name="../_DataTrusses/staebe3D2"                 #                                        7s
-        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '6a9f09bd47063a4e4217c95a82cca461')
+        Name="../_DataTrusses/staebe3D2"
+        self.assertEqual(self.ConFem_.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False, "elemout", [], False), '6afa884c23ec2d928b59f5d586366dd8')
 
 if __name__ == "__main__":
 #    numpy.seterr(all='raise')

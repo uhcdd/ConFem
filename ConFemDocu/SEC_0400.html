@@ -51,7 +51,7 @@
                                                                 height:0.533em; 
                                                                 vertical-align:0em" type="image/svg+xml"><img src="images/img-0001.png" alt="$\rightarrow $" style="vertical-align:0px; 
                                      width:15px; 
-                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> <br /><br />Most of the examples of this textbook are computed executing one of the above listed modules. Corresponding data are and are organized with a leading name according to a scheme </p><ul class="itemize">
+                                     height:8px" class="math gen" /></object> <a href="https://concrete-fem.com">https://concrete-fem.com</a> <br /><br />Most of the examples of this textbook are computed executing one of the above listed modules. Corresponding data are organized with a leading name according to a scheme </p><ul class="itemize">
 <li><p><tt>&lt;name&gt; := E&lt;chapter&gt;-&lt;example&gt;</tt> </p></li>
 </ul><p> whereby <tt>&lt;chapter&gt;</tt> and <tt>&lt;example&gt;</tt> have to be replaced with their actual numbers and <tt>&lt;name&gt;</tt> is a prefix for files belonging to a particular example problem. <br /><br />The data of a particular problem are given with plain ASCII-files with a naming scheme </p><ul class="itemize">
 <li><p><tt>&lt;name&gt;.&lt;type&gt;.txt</tt> </p></li>
@@ -68,7 +68,7 @@
     <td style="text-align:left"><p> user defined input </p></td>
 
     
-    <td style="text-align:left"><p> module written output </p></td>
+    <td style="text-align:left"><p> written output </p></td>
 
 </tr><tr>
 
@@ -87,7 +87,7 @@
 </tr><tr>
 
     
-    <td style="text-align:left"><p> <tt>input</tt>  </p></td>
+    <td style="text-align:left"><p> <tt>in</tt>  </p></td>
 
     
     <td style="text-align:left"><p> Model data </p></td>
@@ -104,7 +104,7 @@
     <td style="text-align:left"><p> <tt>opt</tt> </p></td>
 
     
-    <td style="text-align:left"><p> Options for written files </p></td>
+    <td style="text-align:left"><p> computing and output options </p></td>
 
     
     <td style="text-align:left"><p>optional </p></td>
@@ -118,13 +118,10 @@
     <td style="text-align:left"><p> <tt>plt</tt> </p></td>
 
     
-    <td style="text-align:left"><p> Scaling factors for plots </p></td>
+    <td style="text-align:left"><p> plot directives </p></td>
 
     
-    <td style="text-align:left"><p>optional </p></td>
-
-    
-    <td style="text-align:left"><p> - </p></td>
+    <td style="text-align:left"><p> optional </p></td>
 
 </tr><tr>
 
@@ -132,7 +129,7 @@
     <td style="text-align:left"><p> <tt>protocol</tt> </p></td>
 
     
-    <td style="text-align:left"><p> Protocol of computation </p></td>
+    <td style="text-align:left"><p> protocol of computation </p></td>
 
     
     <td style="text-align:left"><p>- </p></td>
@@ -146,21 +143,7 @@
     <td style="text-align:left"><p> <tt>elemout</tt> </p></td>
 
     
-    <td style="text-align:left"><p> Results for element integration points </p></td>
-
-    
-    <td style="text-align:left"><p>- </p></td>
-
-    
-    <td style="text-align:left"><p> always</p></td>
-
-</tr><tr>
-
-    
-    <td style="text-align:left"><p> <tt>elemout_</tt> </p></td>
-
-    
-    <td style="text-align:left"><p> Results for element integration points – alternative format </p></td>
+    <td style="text-align:left"><p> results for element integration points </p></td>
 
     
     <td style="text-align:left"><p>- </p></td>
@@ -174,21 +157,7 @@
     <td style="text-align:left"><p> <tt>nodeout</tt> </p></td>
 
     
-    <td style="text-align:left"><p> Results for nodes </p></td>
-
-    
-    <td style="text-align:left"><p>- </p></td>
-
-    
-    <td style="text-align:left"><p> always</p></td>
-
-</tr><tr>
-
-    
-    <td style="text-align:left"><p> <tt>nodeout_</tt> </p></td>
-
-    
-    <td style="text-align:left"><p> Results for nodes – alternative format </p></td>
+    <td style="text-align:left"><p> results for nodes </p></td>
 
     
     <td style="text-align:left"><p>- </p></td>
@@ -202,7 +171,7 @@
     <td style="text-align:left"><p> <tt>timeout</tt> </p></td>
 
     
-    <td style="text-align:left"><p> Results for every time increment for </p></td>
+    <td style="text-align:left"><p> results for every time increment for </p></td>
 
 </tr><tr>
 

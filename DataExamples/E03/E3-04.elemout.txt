@@ -1,1206 +1,604 @@
-Time   0.5000
-El      1    T1D2                                concrete                                    MAT1           ELASTICLT      1      3
-   0.0050   0.0000   8.3827e-06   3.0178e-01
-El      2    T1D2                                concrete                                    MAT1           ELASTICLT      3      5
-   0.0150   0.0000   1.6703e-05   6.0130e-01
-El      3    T1D2                                concrete                                    MAT1           ELASTICLT      5      7
-   0.0250   0.0000   2.4602e-05   8.8567e-01
-El      4    T1D2                                concrete                                    MAT1           ELASTICLT      7      9
-   0.0350   0.0000   3.1785e-05   1.1443e+00
-El      5    T1D2                                concrete                                    MAT1           ELASTICLT      9     11
-   0.0450   0.0000   3.8041e-05   1.3695e+00
-El      6    T1D2                                concrete                                    MAT1           ELASTICLT     11     13
-   0.0550   0.0000   4.3218e-05   1.5558e+00
-El      7    T1D2                                concrete                                    MAT1           ELASTICLT     13     15
-   0.0650   0.0000   4.7208e-05   1.6995e+00
-El      8    T1D2                                concrete                                    MAT1           ELASTICLT     15     17
-   0.0750   0.0000   4.9931e-05   1.7975e+00
-El      9    T1D2                                concrete                                    MAT1           ELASTICLT     17     19
-   0.0850   0.0000   5.1322e-05   1.8476e+00
-El     10    T1D2                                concrete                                    MAT1           ELASTICLT     19     21
-   0.0950   0.0000   5.1322e-05   1.8476e+00
-El     11    T1D2                                concrete                                    MAT1           ELASTICLT     21     23
-   0.1050   0.0000   4.9931e-05   1.7975e+00
-El     12    T1D2                                concrete                                    MAT1           ELASTICLT     23     25
-   0.1150   0.0000   4.7208e-05   1.6995e+00
-El     13    T1D2                                concrete                                    MAT1           ELASTICLT     25     27
-   0.1250   0.0000   4.3218e-05   1.5558e+00
-El     14    T1D2                                concrete                                    MAT1           ELASTICLT     27     29
-   0.1350   0.0000   3.8041e-05   1.3695e+00
-El     15    T1D2                                concrete                                    MAT1           ELASTICLT     29     31
-   0.1450   0.0000   3.1785e-05   1.1443e+00
-El     16    T1D2                                concrete                                    MAT1           ELASTICLT     31     33
-   0.1550   0.0000   2.4602e-05   8.8567e-01
-El     17    T1D2                                concrete                                    MAT1           ELASTICLT     33     35
-   0.1650   0.0000   1.6703e-05   6.0130e-01
-El     18    T1D2                                concrete                                    MAT1           ELASTICLT     35     37
-   0.1750   0.0000   8.3827e-06   3.0178e-01
-El     19    T1D2                                concrete                                    MAT1           ELASTICLT     37     39
-   0.1850   0.0000   0.0000e+00   0.0000e+00
-El     20    T1D2                                concrete                                    MAT1           ELASTICLT     39     41
-   0.1950   0.0000   8.3741e-06   3.0147e-01
-El     21    T1D2                                concrete                                    MAT1           ELASTICLT     41     43
-   0.2050   0.0000   1.6756e-05   6.0321e-01
-El     22    T1D2                                concrete                                    MAT1           ELASTICLT     43     45
-   0.2150   0.0000   2.5132e-05   9.0476e-01
-El     23    T1D2                                concrete                                    MAT1           ELASTICLT     45     47
-   0.2250   0.0000   3.3241e-05   1.1967e+00
-El     24    T1D2                                concrete                                    MAT1           ELASTICLT     47     49
-   0.2350   0.0000   4.0807e-05   1.4691e+00
-El     25    T1D2                                concrete                                    MAT1           ELASTICLT     49     51
-   0.2450   0.0000   4.7635e-05   1.7149e+00
-El     26    T1D2                                concrete                                    MAT1           ELASTICLT     51     53
-   0.2550   0.0000   5.3587e-05   1.9291e+00
-El     27    T1D2                                concrete                                    MAT1           ELASTICLT     53     55
-   0.2650   0.0000   5.8570e-05   2.1085e+00
-El     28    T1D2                                concrete                                    MAT1           ELASTICLT     55     57
-   0.2750   0.0000   6.2519e-05   2.2507e+00
-El     29    T1D2                                concrete                                    MAT1           ELASTICLT     57     59
-   0.2850   0.0000   6.5387e-05   2.3539e+00
-El     30    T1D2                                concrete                                    MAT1           ELASTICLT     59     61
-   0.2950   0.0000   6.7134e-05   2.4168e+00
-El     31    T1D2                                concrete                                    MAT1           ELASTICLT     61     63
-   0.3050   0.0000   6.7726e-05   2.4381e+00
-El     32    T1D2                                concrete                                    MAT1           ELASTICLT     63     65
-   0.3150   0.0000   6.7134e-05   2.4168e+00
-El     33    T1D2                                concrete                                    MAT1           ELASTICLT     65     67
-   0.3250   0.0000   6.5387e-05   2.3539e+00
-El     34    T1D2                                concrete                                    MAT1           ELASTICLT     67     69
-   0.3350   0.0000   6.2519e-05   2.2507e+00
-El     35    T1D2                                concrete                                    MAT1           ELASTICLT     69     71
-   0.3450   0.0000   5.8570e-05   2.1085e+00
-El     36    T1D2                                concrete                                    MAT1           ELASTICLT     71     73
-   0.3550   0.0000   5.3587e-05   1.9291e+00
-El     37    T1D2                                concrete                                    MAT1           ELASTICLT     73     75
-   0.3650   0.0000   4.7635e-05   1.7149e+00
-El     38    T1D2                                concrete                                    MAT1           ELASTICLT     75     77
-   0.3750   0.0000   4.0807e-05   1.4691e+00
-El     39    T1D2                                concrete                                    MAT1           ELASTICLT     77     79
-   0.3850   0.0000   3.3241e-05   1.1967e+00
-El     40    T1D2                                concrete                                    MAT1           ELASTICLT     79     81
-   0.3950   0.0000   2.5132e-05   9.0476e-01
-El     41    T1D2                                concrete                                    MAT1           ELASTICLT     81     83
-   0.4050   0.0000   1.6756e-05   6.0321e-01
-El     42    T1D2                                concrete                                    MAT1           ELASTICLT     83     85
-   0.4150   0.0000   8.3741e-06   3.0147e-01
-El     43    T1D2                                concrete                                    MAT1           ELASTICLT     85     87
-   0.4250   0.0000   0.0000e+00   0.0000e+00
-El     44    T1D2                                concrete                                    MAT1           ELASTICLT     87     89
-   0.4350   0.0000   8.3834e-06   3.0180e-01
-El     45    T1D2                                concrete                                    MAT1           ELASTICLT     89     91
-   0.4450   0.0000   1.6484e-05   5.9341e-01
-El     46    T1D2                                concrete                                    MAT1           ELASTICLT     91     93
-   0.4550   0.0000   2.3940e-05   8.6183e-01
-El     47    T1D2                                concrete                                    MAT1           ELASTICLT     93     95
-   0.4650   0.0000   3.0489e-05   1.0976e+00
-El     48    T1D2                                concrete                                    MAT1           ELASTICLT     95     97
-   0.4750   0.0000   3.5944e-05   1.2940e+00
-El     49    T1D2                                concrete                                    MAT1           ELASTICLT     97     99
-   0.4850   0.0000   4.0167e-05   1.4460e+00
-El     50    T1D2                                concrete                                    MAT1           ELASTICLT     99    101
-   0.4950   0.0000   4.3059e-05   1.5501e+00
-El     51    T1D2                                concrete                                    MAT1           ELASTICLT    101    103
-   0.5050   0.0000   4.4539e-05   1.6034e+00
-El     52    T1D2                                concrete                                    MAT1           ELASTICLT    103    105
-   0.5150   0.0000   4.4539e-05   1.6034e+00
-El     53    T1D2                                concrete                                    MAT1           ELASTICLT    105    107
-   0.5250   0.0000   4.3059e-05   1.5501e+00
-El     54    T1D2                                concrete                                    MAT1           ELASTICLT    107    109
-   0.5350   0.0000   4.0167e-05   1.4460e+00
-El     55    T1D2                                concrete                                    MAT1           ELASTICLT    109    111
-   0.5450   0.0000   3.5944e-05   1.2940e+00
-El     56    T1D2                                concrete                                    MAT1           ELASTICLT    111    113
-   0.5550   0.0000   3.0489e-05   1.0976e+00
-El     57    T1D2                                concrete                                    MAT1           ELASTICLT    113    115
-   0.5650   0.0000   2.3940e-05   8.6183e-01
-El     58    T1D2                                concrete                                    MAT1           ELASTICLT    115    117
-   0.5750   0.0000   1.6484e-05   5.9341e-01
-El     59    T1D2                                concrete                                    MAT1           ELASTICLT    117    119
-   0.5850   0.0000   8.3834e-06   3.0180e-01
-El     60    T1D2                                concrete                                    MAT1           ELASTICLT    119    121
-   0.5950   0.0000   0.0000e+00   0.0000e+00
-El     61    T1D2                                concrete                                    MAT1           ELASTICLT    121    123
-   0.6050   0.0000   8.3418e-06   3.0031e-01
-El     62    T1D2                                concrete                                    MAT1           ELASTICLT    123    125
-   0.6150   0.0000   1.6267e-05   5.8561e-01
-El     63    T1D2                                concrete                                    MAT1           ELASTICLT    125    127
-   0.6250   0.0000   2.3435e-05   8.4364e-01
-El     64    T1D2                                concrete                                    MAT1           ELASTICLT    127    129
-   0.6350   0.0000   2.9598e-05   1.0655e+00
-El     65    T1D2                                concrete                                    MAT1           ELASTICLT    129    131
-   0.6450   0.0000   3.4580e-05   1.2449e+00
-El     66    T1D2                                concrete                                    MAT1           ELASTICLT    131    133
-   0.6550   0.0000   3.8251e-05   1.3770e+00
-El     67    T1D2                                concrete                                    MAT1           ELASTICLT    133    135
-   0.6650   0.0000   4.0512e-05   1.4584e+00
-El     68    T1D2                                concrete                                    MAT1           ELASTICLT    135    137
-   0.6750   0.0000   4.1284e-05   1.4862e+00
-El     69    T1D2                                concrete                                    MAT1           ELASTICLT    137    139
-   0.6850   0.0000   4.0512e-05   1.4584e+00
-El     70    T1D2                                concrete                                    MAT1           ELASTICLT    139    141
-   0.6950   0.0000   3.8251e-05   1.3770e+00
-El     71    T1D2                                concrete                                    MAT1           ELASTICLT    141    143
-   0.7050   0.0000   3.4580e-05   1.2449e+00
-El     72    T1D2                                concrete                                    MAT1           ELASTICLT    143    145
-   0.7150   0.0000   2.9598e-05   1.0655e+00
-El     73    T1D2                                concrete                                    MAT1           ELASTICLT    145    147
-   0.7250   0.0000   2.3435e-05   8.4364e-01
-El     74    T1D2                                concrete                                    MAT1           ELASTICLT    147    149
-   0.7350   0.0000   1.6267e-05   5.8561e-01
-El     75    T1D2                                concrete                                    MAT1           ELASTICLT    149    151
-   0.7450   0.0000   8.3418e-06   3.0031e-01
-El     76    T1D2                                concrete                                    MAT1           ELASTICLT    151    153
-   0.7550   0.0000   0.0000e+00   0.0000e+00
-El     77    T1D2                                concrete                                    MAT1           ELASTICLT    153    155
-   0.7650   0.0000   8.3716e-06   3.0138e-01
-El     78    T1D2                                concrete                                    MAT1           ELASTICLT    155    157
-   0.7750   0.0000   1.6752e-05   6.0308e-01
-El     79    T1D2                                concrete                                    MAT1           ELASTICLT    157    159
-   0.7850   0.0000   2.5141e-05   9.0508e-01
-El     80    T1D2                                concrete                                    MAT1           ELASTICLT    159    161
-   0.7950   0.0000   3.3346e-05   1.2005e+00
-El     81    T1D2                                concrete                                    MAT1           ELASTICLT    161    163
-   0.8050   0.0000   4.1080e-05   1.4789e+00
-El     82    T1D2                                concrete                                    MAT1           ELASTICLT    163    165
-   0.8150   0.0000   4.8137e-05   1.7329e+00
-El     83    T1D2                                concrete                                    MAT1           ELASTICLT    165    167
-   0.8250   0.0000   5.4372e-05   1.9574e+00
-El     84    T1D2                                concrete                                    MAT1           ELASTICLT    167    169
-   0.8350   0.0000   5.9690e-05   2.1488e+00
-El     85    T1D2                                concrete                                    MAT1           ELASTICLT    169    171
-   0.8450   0.0000   6.4022e-05   2.3048e+00
-El     86    T1D2                                concrete                                    MAT1           ELASTICLT    171    173
-   0.8550   0.0000   6.7322e-05   2.4236e+00
-El     87    T1D2                                concrete                                    MAT1           ELASTICLT    173    175
-   0.8650   0.0000   6.9554e-05   2.5039e+00
-El     88    T1D2                                concrete                                    MAT1           ELASTICLT    175    177
-   0.8750   0.0000   7.0687e-05   2.5447e+00
-El     89    T1D2                                concrete                                    MAT1           ELASTICLT    177    179
-   0.8850   0.0000   7.0687e-05   2.5447e+00
-El     90    T1D2                                concrete                                    MAT1           ELASTICLT    179    181
-   0.8950   0.0000   6.9554e-05   2.5039e+00
-El     91    T1D2                                concrete                                    MAT1           ELASTICLT    181    183
-   0.9050   0.0000   6.7322e-05   2.4236e+00
-El     92    T1D2                                concrete                                    MAT1           ELASTICLT    183    185
-   0.9150   0.0000   6.4022e-05   2.3048e+00
-El     93    T1D2                                concrete                                    MAT1           ELASTICLT    185    187
-   0.9250   0.0000   5.9690e-05   2.1488e+00
-El     94    T1D2                                concrete                                    MAT1           ELASTICLT    187    189
-   0.9350   0.0000   5.4372e-05   1.9574e+00
-El     95    T1D2                                concrete                                    MAT1           ELASTICLT    189    191
-   0.9450   0.0000   4.8137e-05   1.7329e+00
-El     96    T1D2                                concrete                                    MAT1           ELASTICLT    191    193
-   0.9550   0.0000   4.1080e-05   1.4789e+00
-El     97    T1D2                                concrete                                    MAT1           ELASTICLT    193    195
-   0.9650   0.0000   3.3346e-05   1.2005e+00
-El     98    T1D2                                concrete                                    MAT1           ELASTICLT    195    197
-   0.9750   0.0000   2.5141e-05   9.0508e-01
-El     99    T1D2                                concrete                                    MAT1           ELASTICLT    197    199
-   0.9850   0.0000   1.6752e-05   6.0308e-01
-El    100    T1D2                                concrete                                    MAT1           ELASTICLT    199    201
-   0.9950   0.0000   8.3716e-06   3.0138e-01
-El    101    T1D2                                   reinf                                   MAT31               MISES      2      4
-   0.0050   0.0000   1.4540e-03   2.9080e+02   5.0000e+02
-El    102    T1D2                                   reinf                                   MAT31               MISES      4      6
-   0.0150   0.0000   1.3795e-03   2.7590e+02   5.0000e+02
-El    103    T1D2                                   reinf                                   MAT31               MISES      6      8
-   0.0250   0.0000   1.3088e-03   2.6175e+02   5.0000e+02
-El    104    T1D2                                   reinf                                   MAT31               MISES      8     10
-   0.0350   0.0000   1.2444e-03   2.4889e+02   5.0000e+02
-El    105    T1D2                                   reinf                                   MAT31               MISES     10     12
-   0.0450   0.0000   1.1884e-03   2.3768e+02   5.0000e+02
-El    106    T1D2                                   reinf                                   MAT31               MISES     12     14
-   0.0550   0.0000   1.1420e-03   2.2841e+02   5.0000e+02
-El    107    T1D2                                   reinf                                   MAT31               MISES     14     16
-   0.0650   0.0000   1.1063e-03   2.2126e+02   5.0000e+02
-El    108    T1D2                                   reinf                                   MAT31               MISES     16     18
-   0.0750   0.0000   1.0819e-03   2.1639e+02   5.0000e+02
-El    109    T1D2                                   reinf                                   MAT31               MISES     18     20
-   0.0850   0.0000   1.0695e-03   2.1389e+02   5.0000e+02
-El    110    T1D2                                   reinf                                   MAT31               MISES     20     22
-   0.0950   0.0000   1.0695e-03   2.1389e+02   5.0000e+02
-El    111    T1D2                                   reinf                                   MAT31               MISES     22     24
-   0.1050   0.0000   1.0819e-03   2.1639e+02   5.0000e+02
-El    112    T1D2                                   reinf                                   MAT31               MISES     24     26
-   0.1150   0.0000   1.1063e-03   2.2126e+02   5.0000e+02
-El    113    T1D2                                   reinf                                   MAT31               MISES     26     28
-   0.1250   0.0000   1.1420e-03   2.2841e+02   5.0000e+02
-El    114    T1D2                                   reinf                                   MAT31               MISES     28     30
-   0.1350   0.0000   1.1884e-03   2.3768e+02   5.0000e+02
-El    115    T1D2                                   reinf                                   MAT31               MISES     30     32
-   0.1450   0.0000   1.2444e-03   2.4889e+02   5.0000e+02
-El    116    T1D2                                   reinf                                   MAT31               MISES     32     34
-   0.1550   0.0000   1.3088e-03   2.6175e+02   5.0000e+02
-El    117    T1D2                                   reinf                                   MAT31               MISES     34     36
-   0.1650   0.0000   1.3795e-03   2.7590e+02   5.0000e+02
-El    118    T1D2                                   reinf                                   MAT31               MISES     36     38
-   0.1750   0.0000   1.4540e-03   2.9080e+02   5.0000e+02
-El    119    T1D2                                   reinf                                   MAT31               MISES     38     40
-   0.1850   0.0000   1.5291e-03   3.0581e+02   5.0000e+02
-El    120    T1D2                                   reinf                                   MAT31               MISES     40     42
-   0.1950   0.0000   1.4541e-03   2.9082e+02   5.0000e+02
-El    121    T1D2                                   reinf                                   MAT31               MISES     42     44
-   0.2050   0.0000   1.3790e-03   2.7580e+02   5.0000e+02
-El    122    T1D2                                   reinf                                   MAT31               MISES     44     46
-   0.2150   0.0000   1.3040e-03   2.6080e+02   5.0000e+02
-El    123    T1D2                                   reinf                                   MAT31               MISES     46     48
-   0.2250   0.0000   1.2314e-03   2.4628e+02   5.0000e+02
-El    124    T1D2                                   reinf                                   MAT31               MISES     48     50
-   0.2350   0.0000   1.1636e-03   2.3273e+02   5.0000e+02
-El    125    T1D2                                   reinf                                   MAT31               MISES     50     52
-   0.2450   0.0000   1.1025e-03   2.2050e+02   5.0000e+02
-El    126    T1D2                                   reinf                                   MAT31               MISES     52     54
-   0.2550   0.0000   1.0492e-03   2.0984e+02   5.0000e+02
-El    127    T1D2                                   reinf                                   MAT31               MISES     54     56
-   0.2650   0.0000   1.0046e-03   2.0091e+02   5.0000e+02
-El    128    T1D2                                   reinf                                   MAT31               MISES     56     58
-   0.2750   0.0000   9.6920e-04   1.9384e+02   5.0000e+02
-El    129    T1D2                                   reinf                                   MAT31               MISES     58     60
-   0.2850   0.0000   9.4352e-04   1.8870e+02   5.0000e+02
-El    130    T1D2                                   reinf                                   MAT31               MISES     60     62
-   0.2950   0.0000   9.2787e-04   1.8557e+02   5.0000e+02
-El    131    T1D2                                   reinf                                   MAT31               MISES     62     64
-   0.3050   0.0000   9.2257e-04   1.8451e+02   5.0000e+02
-El    132    T1D2                                   reinf                                   MAT31               MISES     64     66
-   0.3150   0.0000   9.2787e-04   1.8557e+02   5.0000e+02
-El    133    T1D2                                   reinf                                   MAT31               MISES     66     68
-   0.3250   0.0000   9.4352e-04   1.8870e+02   5.0000e+02
-El    134    T1D2                                   reinf                                   MAT31               MISES     68     70
-   0.3350   0.0000   9.6920e-04   1.9384e+02   5.0000e+02
-El    135    T1D2                                   reinf                                   MAT31               MISES     70     72
-   0.3450   0.0000   1.0046e-03   2.0091e+02   5.0000e+02
-El    136    T1D2                                   reinf                                   MAT31               MISES     72     74
-   0.3550   0.0000   1.0492e-03   2.0984e+02   5.0000e+02
-El    137    T1D2                                   reinf                                   MAT31               MISES     74     76
-   0.3650   0.0000   1.1025e-03   2.2050e+02   5.0000e+02
-El    138    T1D2                                   reinf                                   MAT31               MISES     76     78
-   0.3750   0.0000   1.1636e-03   2.3273e+02   5.0000e+02
-El    139    T1D2                                   reinf                                   MAT31               MISES     78     80
-   0.3850   0.0000   1.2314e-03   2.4628e+02   5.0000e+02
-El    140    T1D2                                   reinf                                   MAT31               MISES     80     82
-   0.3950   0.0000   1.3040e-03   2.6080e+02   5.0000e+02
-El    141    T1D2                                   reinf                                   MAT31               MISES     82     84
-   0.4050   0.0000   1.3790e-03   2.7580e+02   5.0000e+02
-El    142    T1D2                                   reinf                                   MAT31               MISES     84     86
-   0.4150   0.0000   1.4541e-03   2.9082e+02   5.0000e+02
-El    143    T1D2                                   reinf                                   MAT31               MISES     86     88
-   0.4250   0.0000   1.5291e-03   3.0581e+02   5.0000e+02
-El    144    T1D2                                   reinf                                   MAT31               MISES     88     90
-   0.4350   0.0000   1.4540e-03   2.9080e+02   5.0000e+02
-El    145    T1D2                                   reinf                                   MAT31               MISES     90     92
-   0.4450   0.0000   1.3815e-03   2.7629e+02   5.0000e+02
-El    146    T1D2                                   reinf                                   MAT31               MISES     92     94
-   0.4550   0.0000   1.3147e-03   2.6294e+02   5.0000e+02
-El    147    T1D2                                   reinf                                   MAT31               MISES     94     96
-   0.4650   0.0000   1.2560e-03   2.5121e+02   5.0000e+02
-El    148    T1D2                                   reinf                                   MAT31               MISES     96     98
-   0.4750   0.0000   1.2072e-03   2.4144e+02   5.0000e+02
-El    149    T1D2                                   reinf                                   MAT31               MISES     98    100
-   0.4850   0.0000   1.1694e-03   2.3387e+02   5.0000e+02
-El    150    T1D2                                   reinf                                   MAT31               MISES    100    102
-   0.4950   0.0000   1.1435e-03   2.2869e+02   5.0000e+02
-El    151    T1D2                                   reinf                                   MAT31               MISES    102    104
-   0.5050   0.0000   1.1302e-03   2.2604e+02   5.0000e+02
-El    152    T1D2                                   reinf                                   MAT31               MISES    104    106
-   0.5150   0.0000   1.1302e-03   2.2604e+02   5.0000e+02
-El    153    T1D2                                   reinf                                   MAT31               MISES    106    108
-   0.5250   0.0000   1.1435e-03   2.2869e+02   5.0000e+02
-El    154    T1D2                                   reinf                                   MAT31               MISES    108    110
-   0.5350   0.0000   1.1694e-03   2.3387e+02   5.0000e+02
-El    155    T1D2                                   reinf                                   MAT31               MISES    110    112
-   0.5450   0.0000   1.2072e-03   2.4144e+02   5.0000e+02
-El    156    T1D2                                   reinf                                   MAT31               MISES    112    114
-   0.5550   0.0000   1.2560e-03   2.5121e+02   5.0000e+02
-El    157    T1D2                                   reinf                                   MAT31               MISES    114    116
-   0.5650   0.0000   1.3147e-03   2.6294e+02   5.0000e+02
-El    158    T1D2                                   reinf                                   MAT31               MISES    116    118
-   0.5750   0.0000   1.3815e-03   2.7629e+02   5.0000e+02
-El    159    T1D2                                   reinf                                   MAT31               MISES    118    120
-   0.5850   0.0000   1.4540e-03   2.9080e+02   5.0000e+02
-El    160    T1D2                                   reinf                                   MAT31               MISES    120    122
-   0.5950   0.0000   1.5291e-03   3.0581e+02   5.0000e+02
-El    161    T1D2                                   reinf                                   MAT31               MISES    122    124
-   0.6050   0.0000   1.4544e-03   2.9087e+02   5.0000e+02
-El    162    T1D2                                   reinf                                   MAT31               MISES    124    126
-   0.6150   0.0000   1.3834e-03   2.7668e+02   5.0000e+02
-El    163    T1D2                                   reinf                                   MAT31               MISES    126    128
-   0.6250   0.0000   1.3192e-03   2.6384e+02   5.0000e+02
-El    164    T1D2                                   reinf                                   MAT31               MISES    128    130
-   0.6350   0.0000   1.2640e-03   2.5280e+02   5.0000e+02
-El    165    T1D2                                   reinf                                   MAT31               MISES    130    132
-   0.6450   0.0000   1.2194e-03   2.4388e+02   5.0000e+02
-El    166    T1D2                                   reinf                                   MAT31               MISES    132    134
-   0.6550   0.0000   1.1865e-03   2.3731e+02   5.0000e+02
-El    167    T1D2                                   reinf                                   MAT31               MISES    134    136
-   0.6650   0.0000   1.1663e-03   2.3325e+02   5.0000e+02
-El    168    T1D2                                   reinf                                   MAT31               MISES    136    138
-   0.6750   0.0000   1.1594e-03   2.3187e+02   5.0000e+02
-El    169    T1D2                                   reinf                                   MAT31               MISES    138    140
-   0.6850   0.0000   1.1663e-03   2.3325e+02   5.0000e+02
-El    170    T1D2                                   reinf                                   MAT31               MISES    140    142
-   0.6950   0.0000   1.1865e-03   2.3731e+02   5.0000e+02
-El    171    T1D2                                   reinf                                   MAT31               MISES    142    144
-   0.7050   0.0000   1.2194e-03   2.4388e+02   5.0000e+02
-El    172    T1D2                                   reinf                                   MAT31               MISES    144    146
-   0.7150   0.0000   1.2640e-03   2.5280e+02   5.0000e+02
-El    173    T1D2                                   reinf                                   MAT31               MISES    146    148
-   0.7250   0.0000   1.3192e-03   2.6384e+02   5.0000e+02
-El    174    T1D2                                   reinf                                   MAT31               MISES    148    150
-   0.7350   0.0000   1.3834e-03   2.7668e+02   5.0000e+02
-El    175    T1D2                                   reinf                                   MAT31               MISES    150    152
-   0.7450   0.0000   1.4544e-03   2.9087e+02   5.0000e+02
-El    176    T1D2                                   reinf                                   MAT31               MISES    152    154
-   0.7550   0.0000   1.5291e-03   3.0581e+02   5.0000e+02
-El    177    T1D2                                   reinf                                   MAT31               MISES    154    156
-   0.7650   0.0000   1.4541e-03   2.9082e+02   5.0000e+02
-El    178    T1D2                                   reinf                                   MAT31               MISES    156    158
-   0.7750   0.0000   1.3790e-03   2.7581e+02   5.0000e+02
-El    179    T1D2                                   reinf                                   MAT31               MISES    158    160
-   0.7850   0.0000   1.3039e-03   2.6078e+02   5.0000e+02
-El    180    T1D2                                   reinf                                   MAT31               MISES    160    162
-   0.7950   0.0000   1.2304e-03   2.4609e+02   5.0000e+02
-El    181    T1D2                                   reinf                                   MAT31               MISES    162    164
-   0.8050   0.0000   1.1612e-03   2.3224e+02   5.0000e+02
-El    182    T1D2                                   reinf                                   MAT31               MISES    164    166
-   0.8150   0.0000   1.0980e-03   2.1960e+02   5.0000e+02
-El    183    T1D2                                   reinf                                   MAT31               MISES    166    168
-   0.8250   0.0000   1.0422e-03   2.0843e+02   5.0000e+02
-El    184    T1D2                                   reinf                                   MAT31               MISES    168    170
-   0.8350   0.0000   9.9453e-04   1.9891e+02   5.0000e+02
-El    185    T1D2                                   reinf                                   MAT31               MISES    170    172
-   0.8450   0.0000   9.5574e-04   1.9115e+02   5.0000e+02
-El    186    T1D2                                   reinf                                   MAT31               MISES    172    174
-   0.8550   0.0000   9.2619e-04   1.8524e+02   5.0000e+02
-El    187    T1D2                                   reinf                                   MAT31               MISES    174    176
-   0.8650   0.0000   9.0620e-04   1.8124e+02   5.0000e+02
-El    188    T1D2                                   reinf                                   MAT31               MISES    176    178
-   0.8750   0.0000   8.9605e-04   1.7921e+02   5.0000e+02
-El    189    T1D2                                   reinf                                   MAT31               MISES    178    180
-   0.8850   0.0000   8.9605e-04   1.7921e+02   5.0000e+02
-El    190    T1D2                                   reinf                                   MAT31               MISES    180    182
-   0.8950   0.0000   9.0620e-04   1.8124e+02   5.0000e+02
-El    191    T1D2                                   reinf                                   MAT31               MISES    182    184
-   0.9050   0.0000   9.2619e-04   1.8524e+02   5.0000e+02
-El    192    T1D2                                   reinf                                   MAT31               MISES    184    186
-   0.9150   0.0000   9.5574e-04   1.9115e+02   5.0000e+02
-El    193    T1D2                                   reinf                                   MAT31               MISES    186    188
-   0.9250   0.0000   9.9453e-04   1.9891e+02   5.0000e+02
-El    194    T1D2                                   reinf                                   MAT31               MISES    188    190
-   0.9350   0.0000   1.0422e-03   2.0843e+02   5.0000e+02
-El    195    T1D2                                   reinf                                   MAT31               MISES    190    192
-   0.9450   0.0000   1.0980e-03   2.1960e+02   5.0000e+02
-El    196    T1D2                                   reinf                                   MAT31               MISES    192    194
-   0.9550   0.0000   1.1612e-03   2.3224e+02   5.0000e+02
-El    197    T1D2                                   reinf                                   MAT31               MISES    194    196
-   0.9650   0.0000   1.2304e-03   2.4609e+02   5.0000e+02
-El    198    T1D2                                   reinf                                   MAT31               MISES    196    198
-   0.9750   0.0000   1.3039e-03   2.6078e+02   5.0000e+02
-El    199    T1D2                                   reinf                                   MAT31               MISES    198    200
-   0.9850   0.0000   1.3790e-03   2.7581e+02   5.0000e+02
-El    200    T1D2                                   reinf                                   MAT31               MISES    200    202
-   0.9950   0.0000   1.4541e-03   2.9082e+02   5.0000e+02
-El    201    S1D2                                    bond                                    MAT5              SPRING      1      2
-   0.0000   0.0000  -1.0664e-04  -5.9995e+00
-El    202    S1D2                                    bond                                    MAT5              SPRING      3      4
-   0.0100   0.0000  -9.2180e-05  -5.9520e+00
-El    203    S1D2                                    bond                                    MAT5              SPRING      5      6
-   0.0200   0.0000  -7.8552e-05  -5.6517e+00
-El    204    S1D2                                    bond                                    MAT5              SPRING      7      8
-   0.0300   0.0000  -6.5711e-05  -5.1400e+00
-El    205    S1D2                                    bond                                    MAT5              SPRING      9     10
-   0.0400   0.0000  -5.3584e-05  -4.4765e+00
-El    206    S1D2                                    bond                                    MAT5              SPRING     11     12
-   0.0500   0.0000  -4.2081e-05  -3.7049e+00
-El    207    S1D2                                    bond                                    MAT5              SPRING     13     14
-   0.0600   0.0000  -3.1092e-05  -2.8558e+00
-El    208    S1D2                                    bond                                    MAT5              SPRING     15     16
-   0.0700   0.0000  -2.0501e-05  -1.9488e+00
-El    209    S1D2                                    bond                                    MAT5              SPRING     17     18
-   0.0800   0.0000  -1.0181e-05  -9.9531e-01
-El    210    S1D2                                    bond                                    MAT5              SPRING     19     20
-   0.0900   0.0000  -4.0658e-20  -4.0658e-15
-El    211    S1D2                                    bond                                    MAT5              SPRING     21     22
-   0.1000   0.0000   1.0181e-05   9.9531e-01
-El    212    S1D2                                    bond                                    MAT5              SPRING     23     24
-   0.1100   0.0000   2.0501e-05   1.9488e+00
-El    213    S1D2                                    bond                                    MAT5              SPRING     25     26
-   0.1200   0.0000   3.1092e-05   2.8558e+00
-El    214    S1D2                                    bond                                    MAT5              SPRING     27     28
-   0.1300   0.0000   4.2081e-05   3.7049e+00
-El    215    S1D2                                    bond                                    MAT5              SPRING     29     30
-   0.1400   0.0000   5.3584e-05   4.4765e+00
-El    216    S1D2                                    bond                                    MAT5              SPRING     31     32
-   0.1500   0.0000   6.5711e-05   5.1400e+00
-El    217    S1D2                                    bond                                    MAT5              SPRING     33     34
-   0.1600   0.0000   7.8552e-05   5.6517e+00
-El    218    S1D2                                    bond                                    MAT5              SPRING     35     36
-   0.1700   0.0000   9.2180e-05   5.9520e+00
-El    219    S1D2                                    bond                                    MAT5              SPRING     37     38
-   0.1800   0.0000   1.0664e-04   5.9995e+00
-El    220    S1D2                                    bond                                    MAT5              SPRING     39     40
-   0.1900   0.0000  -1.2477e-04  -5.9933e+00
-El    221    S1D2                                    bond                                    MAT5              SPRING     41     42
-   0.2000   0.0000  -1.1032e-04  -5.9988e+00
-El    222    S1D2                                    bond                                    MAT5              SPRING     43     44
-   0.2100   0.0000  -9.6692e-05  -5.9913e+00
-El    223    S1D2                                    bond                                    MAT5              SPRING     45     46
-   0.2200   0.0000  -8.3904e-05  -5.8011e+00
-El    224    S1D2                                    bond                                    MAT5              SPRING     47     48
-   0.2300   0.0000  -7.1922e-05  -5.4136e+00
-El    225    S1D2                                    bond                                    MAT5              SPRING     49     50
-   0.2400   0.0000  -6.0694e-05  -4.8855e+00
-El    226    S1D2                                    bond                                    MAT5              SPRING     51     52
-   0.2500   0.0000  -5.0145e-05  -4.2594e+00
-El    227    S1D2                                    bond                                    MAT5              SPRING     53     54
-   0.2600   0.0000  -4.0189e-05  -3.5661e+00
-El    228    S1D2                                    bond                                    MAT5              SPRING     55     56
-   0.2700   0.0000  -3.0730e-05  -2.8261e+00
-El    229    S1D2                                    bond                                    MAT5              SPRING     57     58
-   0.2800   0.0000  -2.1663e-05  -2.0521e+00
-El    230    S1D2                                    bond                                    MAT5              SPRING     59     60
-   0.2900   0.0000  -1.2882e-05  -1.2507e+00
-El    231    S1D2                                    bond                                    MAT5              SPRING     61     62
-   0.3000   0.0000  -4.2742e-06  -4.2361e-01
-El    232    S1D2                                    bond                                    MAT5              SPRING     63     64
-   0.3100   0.0000   4.2742e-06   4.2361e-01
-El    233    S1D2                                    bond                                    MAT5              SPRING     65     66
-   0.3200   0.0000   1.2882e-05   1.2507e+00
-El    234    S1D2                                    bond                                    MAT5              SPRING     67     68
-   0.3300   0.0000   2.1663e-05   2.0521e+00
-El    235    S1D2                                    bond                                    MAT5              SPRING     69     70
-   0.3400   0.0000   3.0730e-05   2.8261e+00
-El    236    S1D2                                    bond                                    MAT5              SPRING     71     72
-   0.3500   0.0000   4.0189e-05   3.5661e+00
-El    237    S1D2                                    bond                                    MAT5              SPRING     73     74
-   0.3600   0.0000   5.0145e-05   4.2594e+00
-El    238    S1D2                                    bond                                    MAT5              SPRING     75     76
-   0.3700   0.0000   6.0694e-05   4.8855e+00
-El    239    S1D2                                    bond                                    MAT5              SPRING     77     78
-   0.3800   0.0000   7.1922e-05   5.4136e+00
-El    240    S1D2                                    bond                                    MAT5              SPRING     79     80
-   0.3900   0.0000   8.3904e-05   5.8011e+00
-El    241    S1D2                                    bond                                    MAT5              SPRING     81     82
-   0.4000   0.0000   9.6692e-05   5.9913e+00
-El    242    S1D2                                    bond                                    MAT5              SPRING     83     84
-   0.4100   0.0000   1.1032e-04   5.9988e+00
-El    243    S1D2                                    bond                                    MAT5              SPRING     85     86
-   0.4200   0.0000   1.2477e-04   5.9933e+00
-El    244    S1D2                                    bond                                    MAT5              SPRING     87     88
-   0.4300   0.0000  -9.8134e-05  -5.9972e+00
-El    245    S1D2                                    bond                                    MAT5              SPRING     89     90
-   0.4400   0.0000  -8.3678e-05  -5.7956e+00
-El    246    S1D2                                    bond                                    MAT5              SPRING     91     92
-   0.4500   0.0000  -7.0028e-05  -5.3352e+00
-El    247    S1D2                                    bond                                    MAT5              SPRING     93     94
-   0.4600   0.0000  -5.7121e-05  -4.6868e+00
-El    248    S1D2                                    bond                                    MAT5              SPRING     95     96
-   0.4700   0.0000  -4.4865e-05  -3.9033e+00
-El    249    S1D2                                    bond                                    MAT5              SPRING     97     98
-   0.4800   0.0000  -3.3153e-05  -3.0226e+00
-El    250    S1D2                                    bond                                    MAT5              SPRING     99    100
-   0.4900   0.0000  -2.1861e-05  -2.0696e+00
-El    251    S1D2                                    bond                                    MAT5              SPRING    101    102
-   0.5000   0.0000  -1.0857e-05  -1.0595e+00
-El    252    S1D2                                    bond                                    MAT5              SPRING    103    104
-   0.5100   0.0000  -2.0892e-12  -2.0892e-07
-El    253    S1D2                                    bond                                    MAT5              SPRING    105    106
-   0.5200   0.0000   1.0857e-05   1.0595e+00
-El    254    S1D2                                    bond                                    MAT5              SPRING    107    108
-   0.5300   0.0000   2.1861e-05   2.0696e+00
-El    255    S1D2                                    bond                                    MAT5              SPRING    109    110
-   0.5400   0.0000   3.3153e-05   3.0226e+00
-El    256    S1D2                                    bond                                    MAT5              SPRING    111    112
-   0.5500   0.0000   4.4865e-05   3.9033e+00
-El    257    S1D2                                    bond                                    MAT5              SPRING    113    114
-   0.5600   0.0000   5.7121e-05   4.6868e+00
-El    258    S1D2                                    bond                                    MAT5              SPRING    115    116
-   0.5700   0.0000   7.0028e-05   5.3352e+00
-El    259    S1D2                                    bond                                    MAT5              SPRING    117    118
-   0.5800   0.0000   8.3678e-05   5.7956e+00
-El    260    S1D2                                    bond                                    MAT5              SPRING    119    120
-   0.5900   0.0000   9.8134e-05   5.9972e+00
-El    261    S1D2                                    bond                                    MAT5              SPRING    121    122
-   0.6000   0.0000  -9.3612e-05  -5.9679e+00
-El    262    S1D2                                    bond                                    MAT5              SPRING    123    124
-   0.6100   0.0000  -7.9152e-05  -5.6704e+00
-El    263    S1D2                                    bond                                    MAT5              SPRING    125    126
-   0.6200   0.0000  -6.5481e-05  -5.1290e+00
-El    264    S1D2                                    bond                                    MAT5              SPRING    127    128
-   0.6300   0.0000  -5.2523e-05  -4.4108e+00
-El    265    S1D2                                    bond                                    MAT5              SPRING    129    130
-   0.6400   0.0000  -4.0179e-05  -3.5653e+00
-El    266    S1D2                                    bond                                    MAT5              SPRING    131    132
-   0.6500   0.0000  -2.8331e-05  -2.6271e+00
-El    267    S1D2                                    bond                                    MAT5              SPRING    133    134
-   0.6600   0.0000  -1.6848e-05  -1.6185e+00
-El    268    S1D2                                    bond                                    MAT5              SPRING    135    136
-   0.6700   0.0000  -5.5904e-06  -5.5244e-01
-El    269    S1D2                                    bond                                    MAT5              SPRING    137    138
-   0.6800   0.0000   5.5904e-06   5.5244e-01
-El    270    S1D2                                    bond                                    MAT5              SPRING    139    140
-   0.6900   0.0000   1.6848e-05   1.6185e+00
-El    271    S1D2                                    bond                                    MAT5              SPRING    141    142
-   0.7000   0.0000   2.8331e-05   2.6271e+00
-El    272    S1D2                                    bond                                    MAT5              SPRING    143    144
-   0.7100   0.0000   4.0179e-05   3.5653e+00
-El    273    S1D2                                    bond                                    MAT5              SPRING    145    146
-   0.7200   0.0000   5.2523e-05   4.4108e+00
-El    274    S1D2                                    bond                                    MAT5              SPRING    147    148
-   0.7300   0.0000   6.5481e-05   5.1290e+00
-El    275    S1D2                                    bond                                    MAT5              SPRING    149    150
-   0.7400   0.0000   7.9152e-05   5.6704e+00
-El    276    S1D2                                    bond                                    MAT5              SPRING    151    152
-   0.7500   0.0000   9.3612e-05   5.9679e+00
-El    277    S1D2                                    bond                                    MAT5              SPRING    153    154
-   0.7600   0.0000  -1.2789e-04  -5.9915e+00
-El    278    S1D2                                    bond                                    MAT5              SPRING    155    156
-   0.7700   0.0000  -1.1343e-04  -5.9980e+00
-El    279    S1D2                                    bond                                    MAT5              SPRING    157    158
-   0.7800   0.0000  -9.9811e-05  -6.0000e+00
-El    280    S1D2                                    bond                                    MAT5              SPRING    159    160
-   0.7900   0.0000  -8.7023e-05  -5.8696e+00
-El    281    S1D2                                    bond                                    MAT5              SPRING    161    162
-   0.8000   0.0000  -7.5052e-05  -5.5331e+00
-El    282    S1D2                                    bond                                    MAT5              SPRING    163    164
-   0.8100   0.0000  -6.3851e-05  -5.0491e+00
-El    283    S1D2                                    bond                                    MAT5              SPRING    165    166
-   0.8200   0.0000  -5.3352e-05  -4.4622e+00
-El    284    S1D2                                    bond                                    MAT5              SPRING    167    168
-   0.8300   0.0000  -4.3474e-05  -3.8051e+00
-El    285    S1D2                                    bond                                    MAT5              SPRING    169    170
-   0.8400   0.0000  -3.4126e-05  -3.1002e+00
-El    286    S1D2                                    bond                                    MAT5              SPRING    171    172
-   0.8500   0.0000  -2.5209e-05  -2.3617e+00
-El    287    S1D2                                    bond                                    MAT5              SPRING    173    174
-   0.8600   0.0000  -1.6620e-05  -1.5976e+00
-El    288    S1D2                                    bond                                    MAT5              SPRING    175    176
-   0.8700   0.0000  -8.2537e-06  -8.1062e-01
-El    289    S1D2                                    bond                                    MAT5              SPRING    177    178
-   0.8800   0.0000   1.3010e-18   1.3010e-13
-El    290    S1D2                                    bond                                    MAT5              SPRING    179    180
-   0.8900   0.0000   8.2537e-06   8.1062e-01
-El    291    S1D2                                    bond                                    MAT5              SPRING    181    182
-   0.9000   0.0000   1.6620e-05   1.5976e+00
-El    292    S1D2                                    bond                                    MAT5              SPRING    183    184
-   0.9100   0.0000   2.5209e-05   2.3617e+00
-El    293    S1D2                                    bond                                    MAT5              SPRING    185    186
-   0.9200   0.0000   3.4126e-05   3.1002e+00
-El    294    S1D2                                    bond                                    MAT5              SPRING    187    188
-   0.9300   0.0000   4.3474e-05   3.8051e+00
-El    295    S1D2                                    bond                                    MAT5              SPRING    189    190
-   0.9400   0.0000   5.3352e-05   4.4622e+00
-El    296    S1D2                                    bond                                    MAT5              SPRING    191    192
-   0.9500   0.0000   6.3851e-05   5.0491e+00
-El    297    S1D2                                    bond                                    MAT5              SPRING    193    194
-   0.9600   0.0000   7.5052e-05   5.5331e+00
-El    298    S1D2                                    bond                                    MAT5              SPRING    195    196
-   0.9700   0.0000   8.7023e-05   5.8696e+00
-El    299    S1D2                                    bond                                    MAT5              SPRING    197    198
-   0.9800   0.0000   9.9811e-05   6.0000e+00
-El    300    S1D2                                    bond                                    MAT5              SPRING    199    200
-   0.9900   0.0000   1.1343e-04   5.9980e+00
-El    301    S1D2                                    bond                                    MAT5              SPRING    201    202
-   1.0000   0.0000   1.2789e-04   5.9915e+00
-Time   1.0000
-El      1    T1D2                                concrete                                    MAT1           ELASTICLT      1      3
-   0.0050   0.0000   8.2595e-06   2.9734e-01
-El      2    T1D2                                concrete                                    MAT1           ELASTICLT      3      5
-   0.0150   0.0000   1.6575e-05   5.9669e-01
-El      3    T1D2                                concrete                                    MAT1           ELASTICLT      5      7
-   0.0250   0.0000   2.4928e-05   8.9742e-01
-El      4    T1D2                                concrete                                    MAT1           ELASTICLT      7      9
-   0.0350   0.0000   3.3305e-05   1.1990e+00
-El      5    T1D2                                concrete                                    MAT1           ELASTICLT      9     11
-   0.0450   0.0000   4.1688e-05   1.5008e+00
-El      6    T1D2                                concrete                                    MAT1           ELASTICLT     11     13
-   0.0550   0.0000   4.9576e-05   1.7847e+00
-El      7    T1D2                                concrete                                    MAT1           ELASTICLT     13     15
-   0.0650   0.0000   5.6192e-05   2.0229e+00
-El      8    T1D2                                concrete                                    MAT1           ELASTICLT     15     17
-   0.0750   0.0000   6.0971e-05   2.1949e+00
-El      9    T1D2                                concrete                                    MAT1           ELASTICLT     17     19
-   0.0850   0.0000   6.3505e-05   2.2862e+00
-El     10    T1D2                                concrete                                    MAT1           ELASTICLT     19     21
-   0.0950   0.0000   6.3505e-05   2.2862e+00
-El     11    T1D2                                concrete                                    MAT1           ELASTICLT     21     23
-   0.1050   0.0000   6.0971e-05   2.1949e+00
-El     12    T1D2                                concrete                                    MAT1           ELASTICLT     23     25
-   0.1150   0.0000   5.6192e-05   2.0229e+00
-El     13    T1D2                                concrete                                    MAT1           ELASTICLT     25     27
-   0.1250   0.0000   4.9576e-05   1.7847e+00
-El     14    T1D2                                concrete                                    MAT1           ELASTICLT     27     29
-   0.1350   0.0000   4.1688e-05   1.5008e+00
-El     15    T1D2                                concrete                                    MAT1           ELASTICLT     29     31
-   0.1450   0.0000   3.3305e-05   1.1990e+00
-El     16    T1D2                                concrete                                    MAT1           ELASTICLT     31     33
-   0.1550   0.0000   2.4928e-05   8.9742e-01
-El     17    T1D2                                concrete                                    MAT1           ELASTICLT     33     35
-   0.1650   0.0000   1.6575e-05   5.9669e-01
-El     18    T1D2                                concrete                                    MAT1           ELASTICLT     35     37
-   0.1750   0.0000   8.2595e-06   2.9734e-01
-El     19    T1D2                                concrete                                    MAT1           ELASTICLT     37     39
-   0.1850   0.0000   0.0000e+00   0.0000e+00
-El     20    T1D2                                concrete                                    MAT1           ELASTICLT     39     41
-   0.1950   0.0000   8.1312e-06   2.9272e-01
-El     21    T1D2                                concrete                                    MAT1           ELASTICLT     41     43
-   0.2050   0.0000   1.6343e-05   5.8833e-01
-El     22    T1D2                                concrete                                    MAT1           ELASTICLT     43     45
-   0.2150   0.0000   2.4618e-05   8.8625e-01
-El     23    T1D2                                concrete                                    MAT1           ELASTICLT     45     47
-   0.2250   0.0000   3.2942e-05   1.1859e+00
-El     24    T1D2                                concrete                                    MAT1           ELASTICLT     47     49
-   0.2350   0.0000   4.1300e-05   1.4868e+00
-El     25    T1D2                                concrete                                    MAT1           ELASTICLT     49     51
-   0.2450   0.0000   4.9677e-05   1.7884e+00
-El     26    T1D2                                concrete                                    MAT1           ELASTICLT     51     53
-   0.2550   0.0000   5.8060e-05   2.0902e+00
-El     27    T1D2                                concrete                                    MAT1           ELASTICLT     53     55
-   0.2650   0.0000   6.6022e-05   2.3768e+00
-El     28    T1D2                                concrete                                    MAT1           ELASTICLT     55     57
-   0.2750   0.0000   7.2896e-05   2.6243e+00
-El     29    T1D2                                concrete                                    MAT1           ELASTICLT     57     59
-   0.2850   0.0000   7.8193e-05   2.8149e+00
-El     30    T1D2                                concrete                                    MAT1           ELASTICLT     59     61
-   0.2950   0.0000   8.1557e-05   2.9360e+00
-El     31    T1D2                                concrete                                    MAT1           ELASTICLT     61     63
-   0.3050   0.0000   8.2728e-05   2.9782e+00
-El     32    T1D2                                concrete                                    MAT1           ELASTICLT     63     65
-   0.3150   0.0000   8.1557e-05   2.9360e+00
-El     33    T1D2                                concrete                                    MAT1           ELASTICLT     65     67
-   0.3250   0.0000   7.8193e-05   2.8149e+00
-El     34    T1D2                                concrete                                    MAT1           ELASTICLT     67     69
-   0.3350   0.0000   7.2896e-05   2.6243e+00
-El     35    T1D2                                concrete                                    MAT1           ELASTICLT     69     71
-   0.3450   0.0000   6.6022e-05   2.3768e+00
-El     36    T1D2                                concrete                                    MAT1           ELASTICLT     71     73
-   0.3550   0.0000   5.8060e-05   2.0902e+00
-El     37    T1D2                                concrete                                    MAT1           ELASTICLT     73     75
-   0.3650   0.0000   4.9677e-05   1.7884e+00
-El     38    T1D2                                concrete                                    MAT1           ELASTICLT     75     77
-   0.3750   0.0000   4.1300e-05   1.4868e+00
-El     39    T1D2                                concrete                                    MAT1           ELASTICLT     77     79
-   0.3850   0.0000   3.2942e-05   1.1859e+00
-El     40    T1D2                                concrete                                    MAT1           ELASTICLT     79     81
-   0.3950   0.0000   2.4618e-05   8.8625e-01
-El     41    T1D2                                concrete                                    MAT1           ELASTICLT     81     83
-   0.4050   0.0000   1.6343e-05   5.8833e-01
-El     42    T1D2                                concrete                                    MAT1           ELASTICLT     83     85
-   0.4150   0.0000   8.1312e-06   2.9272e-01
-El     43    T1D2                                concrete                                    MAT1           ELASTICLT     85     87
-   0.4250   0.0000   0.0000e+00   0.0000e+00
-El     44    T1D2                                concrete                                    MAT1           ELASTICLT     87     89
-   0.4350   0.0000   8.3020e-06   2.9887e-01
-El     45    T1D2                                concrete                                    MAT1           ELASTICLT     89     91
-   0.4450   0.0000   1.6648e-05   5.9933e-01
-El     46    T1D2                                concrete                                    MAT1           ELASTICLT     91     93
-   0.4550   0.0000   2.5021e-05   9.0075e-01
-El     47    T1D2                                concrete                                    MAT1           ELASTICLT     93     95
-   0.4650   0.0000   3.3404e-05   1.2025e+00
-El     48    T1D2                                concrete                                    MAT1           ELASTICLT     95     97
-   0.4750   0.0000   4.1422e-05   1.4912e+00
-El     49    T1D2                                concrete                                    MAT1           ELASTICLT     97     99
-   0.4850   0.0000   4.8220e-05   1.7359e+00
-El     50    T1D2                                concrete                                    MAT1           ELASTICLT     99    101
-   0.4950   0.0000   5.3161e-05   1.9138e+00
-El     51    T1D2                                concrete                                    MAT1           ELASTICLT    101    103
-   0.5050   0.0000   5.5791e-05   2.0085e+00
-El     52    T1D2                                concrete                                    MAT1           ELASTICLT    103    105
-   0.5150   0.0000   5.5791e-05   2.0085e+00
-El     53    T1D2                                concrete                                    MAT1           ELASTICLT    105    107
-   0.5250   0.0000   5.3161e-05   1.9138e+00
-El     54    T1D2                                concrete                                    MAT1           ELASTICLT    107    109
-   0.5350   0.0000   4.8220e-05   1.7359e+00
-El     55    T1D2                                concrete                                    MAT1           ELASTICLT    109    111
-   0.5450   0.0000   4.1422e-05   1.4912e+00
-El     56    T1D2                                concrete                                    MAT1           ELASTICLT    111    113
-   0.5550   0.0000   3.3404e-05   1.2025e+00
-El     57    T1D2                                concrete                                    MAT1           ELASTICLT    113    115
-   0.5650   0.0000   2.5021e-05   9.0075e-01
-El     58    T1D2                                concrete                                    MAT1           ELASTICLT    115    117
-   0.5750   0.0000   1.6648e-05   5.9933e-01
-El     59    T1D2                                concrete                                    MAT1           ELASTICLT    117    119
-   0.5850   0.0000   8.3020e-06   2.9887e-01
-El     60    T1D2                                concrete                                    MAT1           ELASTICLT    119    121
-   0.5950   0.0000   0.0000e+00   0.0000e+00
-El     61    T1D2                                concrete                                    MAT1           ELASTICLT    121    123
-   0.6050   0.0000   8.3206e-06   2.9954e-01
-El     62    T1D2                                concrete                                    MAT1           ELASTICLT    123    125
-   0.6150   0.0000   1.6679e-05   6.0045e-01
-El     63    T1D2                                concrete                                    MAT1           ELASTICLT    125    127
-   0.6250   0.0000   2.5058e-05   9.0209e-01
-El     64    T1D2                                concrete                                    MAT1           ELASTICLT    127    129
-   0.6350   0.0000   3.3404e-05   1.2025e+00
-El     65    T1D2                                concrete                                    MAT1           ELASTICLT    129    131
-   0.6450   0.0000   4.0983e-05   1.4754e+00
-El     66    T1D2                                concrete                                    MAT1           ELASTICLT    131    133
-   0.6550   0.0000   4.7006e-05   1.6922e+00
-El     67    T1D2                                concrete                                    MAT1           ELASTICLT    133    135
-   0.6650   0.0000   5.0906e-05   1.8326e+00
-El     68    T1D2                                concrete                                    MAT1           ELASTICLT    135    137
-   0.6750   0.0000   5.2280e-05   1.8821e+00
-El     69    T1D2                                concrete                                    MAT1           ELASTICLT    137    139
-   0.6850   0.0000   5.0906e-05   1.8326e+00
-El     70    T1D2                                concrete                                    MAT1           ELASTICLT    139    141
-   0.6950   0.0000   4.7006e-05   1.6922e+00
-El     71    T1D2                                concrete                                    MAT1           ELASTICLT    141    143
-   0.7050   0.0000   4.0983e-05   1.4754e+00
-El     72    T1D2                                concrete                                    MAT1           ELASTICLT    143    145
-   0.7150   0.0000   3.3404e-05   1.2025e+00
-El     73    T1D2                                concrete                                    MAT1           ELASTICLT    145    147
-   0.7250   0.0000   2.5058e-05   9.0209e-01
-El     74    T1D2                                concrete                                    MAT1           ELASTICLT    147    149
-   0.7350   0.0000   1.6679e-05   6.0045e-01
-El     75    T1D2                                concrete                                    MAT1           ELASTICLT    149    151
-   0.7450   0.0000   8.3206e-06   2.9954e-01
-El     76    T1D2                                concrete                                    MAT1           ELASTICLT    151    153
-   0.7550   0.0000   0.0000e+00   0.0000e+00
-El     77    T1D2                                concrete                                    MAT1           ELASTICLT    153    155
-   0.7650   0.0000   8.1028e-06   2.9170e-01
-El     78    T1D2                                concrete                                    MAT1           ELASTICLT    155    157
-   0.7750   0.0000   1.6290e-05   5.8645e-01
-El     79    T1D2                                concrete                                    MAT1           ELASTICLT    157    159
-   0.7850   0.0000   2.4546e-05   8.8366e-01
-El     80    T1D2                                concrete                                    MAT1           ELASTICLT    159    161
-   0.7950   0.0000   3.2855e-05   1.1828e+00
-El     81    T1D2                                concrete                                    MAT1           ELASTICLT    161    163
-   0.8050   0.0000   4.1203e-05   1.4833e+00
-El     82    T1D2                                concrete                                    MAT1           ELASTICLT    163    165
-   0.8150   0.0000   4.9574e-05   1.7847e+00
-El     83    T1D2                                concrete                                    MAT1           ELASTICLT    165    167
-   0.8250   0.0000   5.7957e-05   2.0864e+00
-El     84    T1D2                                concrete                                    MAT1           ELASTICLT    167    169
-   0.8350   0.0000   6.6180e-05   2.3825e+00
-El     85    T1D2                                concrete                                    MAT1           ELASTICLT    169    171
-   0.8450   0.0000   7.3578e-05   2.6488e+00
-El     86    T1D2                                concrete                                    MAT1           ELASTICLT    171    173
-   0.8550   0.0000   7.9615e-05   2.8661e+00
-El     87    T1D2                                concrete                                    MAT1           ELASTICLT    173    175
-   0.8650   0.0000   8.3900e-05   3.0204e+00
-El     88    T1D2                                concrete                                    MAT1           ELASTICLT    175    177
-   0.8750   0.0000   8.6148e-05   3.1013e+00
-El     89    T1D2                                concrete                                    MAT1           ELASTICLT    177    179
-   0.8850   0.0000   8.6148e-05   3.1013e+00
-El     90    T1D2                                concrete                                    MAT1           ELASTICLT    179    181
-   0.8950   0.0000   8.3900e-05   3.0204e+00
-El     91    T1D2                                concrete                                    MAT1           ELASTICLT    181    183
-   0.9050   0.0000   7.9615e-05   2.8661e+00
-El     92    T1D2                                concrete                                    MAT1           ELASTICLT    183    185
-   0.9150   0.0000   7.3578e-05   2.6488e+00
-El     93    T1D2                                concrete                                    MAT1           ELASTICLT    185    187
-   0.9250   0.0000   6.6180e-05   2.3825e+00
-El     94    T1D2                                concrete                                    MAT1           ELASTICLT    187    189
-   0.9350   0.0000   5.7957e-05   2.0864e+00
-El     95    T1D2                                concrete                                    MAT1           ELASTICLT    189    191
-   0.9450   0.0000   4.9574e-05   1.7847e+00
-El     96    T1D2                                concrete                                    MAT1           ELASTICLT    191    193
-   0.9550   0.0000   4.1203e-05   1.4833e+00
-El     97    T1D2                                concrete                                    MAT1           ELASTICLT    193    195
-   0.9650   0.0000   3.2855e-05   1.1828e+00
-El     98    T1D2                                concrete                                    MAT1           ELASTICLT    195    197
-   0.9750   0.0000   2.4546e-05   8.8366e-01
-El     99    T1D2                                concrete                                    MAT1           ELASTICLT    197    199
-   0.9850   0.0000   1.6290e-05   5.8645e-01
-El    100    T1D2                                concrete                                    MAT1           ELASTICLT    199    201
-   0.9950   0.0000   8.1028e-06   2.9170e-01
-El    101    T1D2                                   reinf                                   MAT31               MISES      2      4
-   0.0050   0.0000   2.4579e-03   4.9158e+02   5.0000e+02
-El    102    T1D2                                   reinf                                   MAT31               MISES      4      6
-   0.0150   0.0000   2.3834e-03   4.7668e+02   5.0000e+02
-El    103    T1D2                                   reinf                                   MAT31               MISES      6      8
-   0.0250   0.0000   2.3086e-03   4.6172e+02   5.0000e+02
-El    104    T1D2                                   reinf                                   MAT31               MISES      8     10
-   0.0350   0.0000   2.2336e-03   4.4672e+02   5.0000e+02
-El    105    T1D2                                   reinf                                   MAT31               MISES     10     12
-   0.0450   0.0000   2.1585e-03   4.3170e+02   5.0000e+02
-El    106    T1D2                                   reinf                                   MAT31               MISES     12     14
-   0.0550   0.0000   2.0879e-03   4.1758e+02   5.0000e+02
-El    107    T1D2                                   reinf                                   MAT31               MISES     14     16
-   0.0650   0.0000   2.0286e-03   4.0573e+02   5.0000e+02
-El    108    T1D2                                   reinf                                   MAT31               MISES     16     18
-   0.0750   0.0000   1.9858e-03   3.9717e+02   5.0000e+02
-El    109    T1D2                                   reinf                                   MAT31               MISES     18     20
-   0.0850   0.0000   1.9631e-03   3.9263e+02   5.0000e+02
-El    110    T1D2                                   reinf                                   MAT31               MISES     20     22
-   0.0950   0.0000   1.9631e-03   3.9263e+02   5.0000e+02
-El    111    T1D2                                   reinf                                   MAT31               MISES     22     24
-   0.1050   0.0000   1.9858e-03   3.9717e+02   5.0000e+02
-El    112    T1D2                                   reinf                                   MAT31               MISES     24     26
-   0.1150   0.0000   2.0286e-03   4.0573e+02   5.0000e+02
-El    113    T1D2                                   reinf                                   MAT31               MISES     26     28
-   0.1250   0.0000   2.0879e-03   4.1758e+02   5.0000e+02
-El    114    T1D2                                   reinf                                   MAT31               MISES     28     30
-   0.1350   0.0000   2.1585e-03   4.3170e+02   5.0000e+02
-El    115    T1D2                                   reinf                                   MAT31               MISES     30     32
-   0.1450   0.0000   2.2336e-03   4.4672e+02   5.0000e+02
-El    116    T1D2                                   reinf                                   MAT31               MISES     32     34
-   0.1550   0.0000   2.3086e-03   4.6172e+02   5.0000e+02
-El    117    T1D2                                   reinf                                   MAT31               MISES     34     36
-   0.1650   0.0000   2.3834e-03   4.7668e+02   5.0000e+02
-El    118    T1D2                                   reinf                                   MAT31               MISES     36     38
-   0.1750   0.0000   2.4579e-03   4.9158e+02   5.0000e+02
-El    119    T1D2                                   reinf                                   MAT31               MISES     38     40
-   0.1850   0.0000   8.5336e-03   5.0637e+02   5.0581e+02
-El    120    T1D2                                   reinf                                   MAT31               MISES     40     42
-   0.1950   0.0000   2.4590e-03   4.9181e+02   5.0000e+02
-El    121    T1D2                                   reinf                                   MAT31               MISES     42     44
-   0.2050   0.0000   2.3855e-03   4.7710e+02   5.0000e+02
-El    122    T1D2                                   reinf                                   MAT31               MISES     44     46
-   0.2150   0.0000   2.3114e-03   4.6228e+02   5.0000e+02
-El    123    T1D2                                   reinf                                   MAT31               MISES     46     48
-   0.2250   0.0000   2.2368e-03   4.4737e+02   5.0000e+02
-El    124    T1D2                                   reinf                                   MAT31               MISES     48     50
-   0.2350   0.0000   2.1620e-03   4.3240e+02   5.0000e+02
-El    125    T1D2                                   reinf                                   MAT31               MISES     50     52
-   0.2450   0.0000   2.0870e-03   4.1739e+02   5.0000e+02
-El    126    T1D2                                   reinf                                   MAT31               MISES     52     54
-   0.2550   0.0000   2.0119e-03   4.0238e+02   5.0000e+02
-El    127    T1D2                                   reinf                                   MAT31               MISES     54     56
-   0.2650   0.0000   1.9406e-03   3.8812e+02   5.0000e+02
-El    128    T1D2                                   reinf                                   MAT31               MISES     56     58
-   0.2750   0.0000   1.8790e-03   3.7581e+02   5.0000e+02
-El    129    T1D2                                   reinf                                   MAT31               MISES     58     60
-   0.2850   0.0000   1.8316e-03   3.6632e+02   5.0000e+02
-El    130    T1D2                                   reinf                                   MAT31               MISES     60     62
-   0.2950   0.0000   1.8015e-03   3.6030e+02   5.0000e+02
-El    131    T1D2                                   reinf                                   MAT31               MISES     62     64
-   0.3050   0.0000   1.7910e-03   3.5820e+02   5.0000e+02
-El    132    T1D2                                   reinf                                   MAT31               MISES     64     66
-   0.3150   0.0000   1.8015e-03   3.6030e+02   5.0000e+02
-El    133    T1D2                                   reinf                                   MAT31               MISES     66     68
-   0.3250   0.0000   1.8316e-03   3.6632e+02   5.0000e+02
-El    134    T1D2                                   reinf                                   MAT31               MISES     68     70
-   0.3350   0.0000   1.8790e-03   3.7581e+02   5.0000e+02
-El    135    T1D2                                   reinf                                   MAT31               MISES     70     72
-   0.3450   0.0000   1.9406e-03   3.8812e+02   5.0000e+02
-El    136    T1D2                                   reinf                                   MAT31               MISES     72     74
-   0.3550   0.0000   2.0119e-03   4.0238e+02   5.0000e+02
-El    137    T1D2                                   reinf                                   MAT31               MISES     74     76
-   0.3650   0.0000   2.0870e-03   4.1739e+02   5.0000e+02
-El    138    T1D2                                   reinf                                   MAT31               MISES     76     78
-   0.3750   0.0000   2.1620e-03   4.3240e+02   5.0000e+02
-El    139    T1D2                                   reinf                                   MAT31               MISES     78     80
-   0.3850   0.0000   2.2368e-03   4.4737e+02   5.0000e+02
-El    140    T1D2                                   reinf                                   MAT31               MISES     80     82
-   0.3950   0.0000   2.3114e-03   4.6228e+02   5.0000e+02
-El    141    T1D2                                   reinf                                   MAT31               MISES     82     84
-   0.4050   0.0000   2.3855e-03   4.7710e+02   5.0000e+02
-El    142    T1D2                                   reinf                                   MAT31               MISES     84     86
-   0.4150   0.0000   2.4590e-03   4.9181e+02   5.0000e+02
-El    143    T1D2                                   reinf                                   MAT31               MISES     86     88
-   0.4250   0.0000   8.5336e-03   5.0637e+02   5.0581e+02
-El    144    T1D2                                   reinf                                   MAT31               MISES     88     90
-   0.4350   0.0000   2.4575e-03   4.9150e+02   5.0000e+02
-El    145    T1D2                                   reinf                                   MAT31               MISES     90     92
-   0.4450   0.0000   2.3828e-03   4.7655e+02   5.0000e+02
-El    146    T1D2                                   reinf                                   MAT31               MISES     92     94
-   0.4550   0.0000   2.3078e-03   4.6156e+02   5.0000e+02
-El    147    T1D2                                   reinf                                   MAT31               MISES     94     96
-   0.4650   0.0000   2.2327e-03   4.4654e+02   5.0000e+02
-El    148    T1D2                                   reinf                                   MAT31               MISES     96     98
-   0.4750   0.0000   2.1609e-03   4.3218e+02   5.0000e+02
-El    149    T1D2                                   reinf                                   MAT31               MISES     98    100
-   0.4850   0.0000   2.1000e-03   4.2001e+02   5.0000e+02
-El    150    T1D2                                   reinf                                   MAT31               MISES    100    102
-   0.4950   0.0000   2.0558e-03   4.1116e+02   5.0000e+02
-El    151    T1D2                                   reinf                                   MAT31               MISES    102    104
-   0.5050   0.0000   2.0322e-03   4.0644e+02   5.0000e+02
-El    152    T1D2                                   reinf                                   MAT31               MISES    104    106
-   0.5150   0.0000   2.0322e-03   4.0644e+02   5.0000e+02
-El    153    T1D2                                   reinf                                   MAT31               MISES    106    108
-   0.5250   0.0000   2.0558e-03   4.1116e+02   5.0000e+02
-El    154    T1D2                                   reinf                                   MAT31               MISES    108    110
-   0.5350   0.0000   2.1000e-03   4.2001e+02   5.0000e+02
-El    155    T1D2                                   reinf                                   MAT31               MISES    110    112
-   0.5450   0.0000   2.1609e-03   4.3218e+02   5.0000e+02
-El    156    T1D2                                   reinf                                   MAT31               MISES    112    114
-   0.5550   0.0000   2.2327e-03   4.4654e+02   5.0000e+02
-El    157    T1D2                                   reinf                                   MAT31               MISES    114    116
-   0.5650   0.0000   2.3078e-03   4.6156e+02   5.0000e+02
-El    158    T1D2                                   reinf                                   MAT31               MISES    116    118
-   0.5750   0.0000   2.3828e-03   4.7655e+02   5.0000e+02
-El    159    T1D2                                   reinf                                   MAT31               MISES    118    120
-   0.5850   0.0000   2.4575e-03   4.9150e+02   5.0000e+02
-El    160    T1D2                                   reinf                                   MAT31               MISES    120    122
-   0.5950   0.0000   8.5336e-03   5.0637e+02   5.0581e+02
-El    161    T1D2                                   reinf                                   MAT31               MISES    122    124
-   0.6050   0.0000   2.4573e-03   4.9147e+02   5.0000e+02
-El    162    T1D2                                   reinf                                   MAT31               MISES    124    126
-   0.6150   0.0000   2.3825e-03   4.7650e+02   5.0000e+02
-El    163    T1D2                                   reinf                                   MAT31               MISES    126    128
-   0.6250   0.0000   2.3074e-03   4.6149e+02   5.0000e+02
-El    164    T1D2                                   reinf                                   MAT31               MISES    128    130
-   0.6350   0.0000   2.2327e-03   4.4654e+02   5.0000e+02
-El    165    T1D2                                   reinf                                   MAT31               MISES    130    132
-   0.6450   0.0000   2.1648e-03   4.3297e+02   5.0000e+02
-El    166    T1D2                                   reinf                                   MAT31               MISES    132    134
-   0.6550   0.0000   2.1109e-03   4.2218e+02   5.0000e+02
-El    167    T1D2                                   reinf                                   MAT31               MISES    134    136
-   0.6650   0.0000   2.0760e-03   4.1519e+02   5.0000e+02
-El    168    T1D2                                   reinf                                   MAT31               MISES    136    138
-   0.6750   0.0000   2.0637e-03   4.1273e+02   5.0000e+02
-El    169    T1D2                                   reinf                                   MAT31               MISES    138    140
-   0.6850   0.0000   2.0760e-03   4.1519e+02   5.0000e+02
-El    170    T1D2                                   reinf                                   MAT31               MISES    140    142
-   0.6950   0.0000   2.1109e-03   4.2218e+02   5.0000e+02
-El    171    T1D2                                   reinf                                   MAT31               MISES    142    144
-   0.7050   0.0000   2.1648e-03   4.3297e+02   5.0000e+02
-El    172    T1D2                                   reinf                                   MAT31               MISES    144    146
-   0.7150   0.0000   2.2327e-03   4.4654e+02   5.0000e+02
-El    173    T1D2                                   reinf                                   MAT31               MISES    146    148
-   0.7250   0.0000   2.3074e-03   4.6149e+02   5.0000e+02
-El    174    T1D2                                   reinf                                   MAT31               MISES    148    150
-   0.7350   0.0000   2.3825e-03   4.7650e+02   5.0000e+02
-El    175    T1D2                                   reinf                                   MAT31               MISES    150    152
-   0.7450   0.0000   2.4573e-03   4.9147e+02   5.0000e+02
-El    176    T1D2                                   reinf                                   MAT31               MISES    152    154
-   0.7550   0.0000   8.5336e-03   5.0637e+02   5.0581e+02
-El    177    T1D2                                   reinf                                   MAT31               MISES    154    156
-   0.7650   0.0000   2.4593e-03   4.9186e+02   5.0000e+02
-El    178    T1D2                                   reinf                                   MAT31               MISES    156    158
-   0.7750   0.0000   2.3860e-03   4.7719e+02   5.0000e+02
-El    179    T1D2                                   reinf                                   MAT31               MISES    158    160
-   0.7850   0.0000   2.3120e-03   4.6241e+02   5.0000e+02
-El    180    T1D2                                   reinf                                   MAT31               MISES    160    162
-   0.7950   0.0000   2.2376e-03   4.4752e+02   5.0000e+02
-El    181    T1D2                                   reinf                                   MAT31               MISES    162    164
-   0.8050   0.0000   2.1629e-03   4.3257e+02   5.0000e+02
-El    182    T1D2                                   reinf                                   MAT31               MISES    164    166
-   0.8150   0.0000   2.0879e-03   4.1758e+02   5.0000e+02
-El    183    T1D2                                   reinf                                   MAT31               MISES    166    168
-   0.8250   0.0000   2.0128e-03   4.0257e+02   5.0000e+02
-El    184    T1D2                                   reinf                                   MAT31               MISES    168    170
-   0.8350   0.0000   1.9392e-03   3.8784e+02   5.0000e+02
-El    185    T1D2                                   reinf                                   MAT31               MISES    170    172
-   0.8450   0.0000   1.8729e-03   3.7459e+02   5.0000e+02
-El    186    T1D2                                   reinf                                   MAT31               MISES    172    174
-   0.8550   0.0000   1.8189e-03   3.6377e+02   5.0000e+02
-El    187    T1D2                                   reinf                                   MAT31               MISES    174    176
-   0.8650   0.0000   1.7805e-03   3.5610e+02   5.0000e+02
-El    188    T1D2                                   reinf                                   MAT31               MISES    176    178
-   0.8750   0.0000   1.7604e-03   3.5207e+02   5.0000e+02
-El    189    T1D2                                   reinf                                   MAT31               MISES    178    180
-   0.8850   0.0000   1.7604e-03   3.5207e+02   5.0000e+02
-El    190    T1D2                                   reinf                                   MAT31               MISES    180    182
-   0.8950   0.0000   1.7805e-03   3.5610e+02   5.0000e+02
-El    191    T1D2                                   reinf                                   MAT31               MISES    182    184
-   0.9050   0.0000   1.8189e-03   3.6377e+02   5.0000e+02
-El    192    T1D2                                   reinf                                   MAT31               MISES    184    186
-   0.9150   0.0000   1.8729e-03   3.7459e+02   5.0000e+02
-El    193    T1D2                                   reinf                                   MAT31               MISES    186    188
-   0.9250   0.0000   1.9392e-03   3.8784e+02   5.0000e+02
-El    194    T1D2                                   reinf                                   MAT31               MISES    188    190
-   0.9350   0.0000   2.0128e-03   4.0257e+02   5.0000e+02
-El    195    T1D2                                   reinf                                   MAT31               MISES    190    192
-   0.9450   0.0000   2.0879e-03   4.1758e+02   5.0000e+02
-El    196    T1D2                                   reinf                                   MAT31               MISES    192    194
-   0.9550   0.0000   2.1629e-03   4.3257e+02   5.0000e+02
-El    197    T1D2                                   reinf                                   MAT31               MISES    194    196
-   0.9650   0.0000   2.2376e-03   4.4752e+02   5.0000e+02
-El    198    T1D2                                   reinf                                   MAT31               MISES    196    198
-   0.9750   0.0000   2.3120e-03   4.6241e+02   5.0000e+02
-El    199    T1D2                                   reinf                                   MAT31               MISES    198    200
-   0.9850   0.0000   2.3860e-03   4.7719e+02   5.0000e+02
-El    200    T1D2                                   reinf                                   MAT31               MISES    200    202
-   0.9950   0.0000   2.4593e-03   4.9186e+02   5.0000e+02
-El    201    S1D2                                    bond                                    MAT5              SPRING      1      2
-   0.0000   0.0000  -1.9253e-04  -5.9114e+00
-El    202    S1D2                                    bond                                    MAT5              SPRING      3      4
-   0.0100   0.0000  -1.6803e-04  -5.9512e+00
-El    203    S1D2                                    bond                                    MAT5              SPRING      5      6
-   0.0200   0.0000  -1.4436e-04  -5.9789e+00
-El    204    S1D2                                    bond                                    MAT5              SPRING      7      8
-   0.0300   0.0000  -1.2152e-04  -5.9949e+00
-El    205    S1D2                                    bond                                    MAT5              SPRING      9     10
-   0.0400   0.0000  -9.9521e-05  -5.9998e+00
-El    206    S1D2                                    bond                                    MAT5              SPRING     11     12
-   0.0500   0.0000  -7.8353e-05  -5.6454e+00
-El    207    S1D2                                    bond                                    MAT5              SPRING     13     14
-   0.0600   0.0000  -5.7970e-05  -4.7352e+00
-El    208    S1D2                                    bond                                    MAT5              SPRING     15     16
-   0.0700   0.0000  -3.8245e-05  -3.4201e+00
-El    209    S1D2                                    bond                                    MAT5              SPRING     17     18
-   0.0800   0.0000  -1.8996e-05  -1.8138e+00
-El    210    S1D2                                    bond                                    MAT5              SPRING     19     20
-   0.0900   0.0000   2.7105e-20   2.7105e-15
-El    211    S1D2                                    bond                                    MAT5              SPRING     21     22
-   0.1000   0.0000   1.8996e-05   1.8138e+00
-El    212    S1D2                                    bond                                    MAT5              SPRING     23     24
-   0.1100   0.0000   3.8245e-05   3.4201e+00
-El    213    S1D2                                    bond                                    MAT5              SPRING     25     26
-   0.1200   0.0000   5.7970e-05   4.7352e+00
-El    214    S1D2                                    bond                                    MAT5              SPRING     27     28
-   0.1300   0.0000   7.8353e-05   5.6454e+00
-El    215    S1D2                                    bond                                    MAT5              SPRING     29     30
-   0.1400   0.0000   9.9521e-05   5.9998e+00
-El    216    S1D2                                    bond                                    MAT5              SPRING     31     32
-   0.1500   0.0000   1.2152e-04   5.9949e+00
-El    217    S1D2                                    bond                                    MAT5              SPRING     33     34
-   0.1600   0.0000   1.4436e-04   5.9789e+00
-El    218    S1D2                                    bond                                    MAT5              SPRING     35     36
-   0.1700   0.0000   1.6803e-04   5.9512e+00
-El    219    S1D2                                    bond                                    MAT5              SPRING     37     38
-   0.1800   0.0000   1.9253e-04   5.9114e+00
-El    220    S1D2                                    bond                                    MAT5              SPRING     39     40
-   0.1900   0.0000  -2.3431e-04  -5.8195e+00
-El    221    S1D2                                    bond                                    MAT5              SPRING     41     42
-   0.2000   0.0000  -2.0980e-04  -5.8769e+00
-El    222    S1D2                                    bond                                    MAT5              SPRING     43     44
-   0.2100   0.0000  -1.8611e-04  -5.9229e+00
-El    223    S1D2                                    bond                                    MAT5              SPRING     45     46
-   0.2200   0.0000  -1.6324e-04  -5.9576e+00
-El    224    S1D2                                    bond                                    MAT5              SPRING     47     48
-   0.2300   0.0000  -1.4120e-04  -5.9817e+00
-El    225    S1D2                                    bond                                    MAT5              SPRING     49     50
-   0.2400   0.0000  -1.1999e-04  -5.9956e+00
-El    226    S1D2                                    bond                                    MAT5              SPRING     51     52
-   0.2500   0.0000  -9.9620e-05  -5.9999e+00
-El    227    S1D2                                    bond                                    MAT5              SPRING     53     54
-   0.2600   0.0000  -8.0082e-05  -5.6984e+00
-El    228    S1D2                                    bond                                    MAT5              SPRING     55     56
-   0.2700   0.0000  -6.1336e-05  -4.9197e+00
-El    229    S1D2                                    bond                                    MAT5              SPRING     57     58
-   0.2800   0.0000  -4.3275e-05  -3.7909e+00
-El    230    S1D2                                    bond                                    MAT5              SPRING     59     60
-   0.2900   0.0000  -2.5741e-05  -2.4074e+00
-El    231    S1D2                                    bond                                    MAT5              SPRING     61     62
-   0.3000   0.0000  -8.5413e-06  -8.3830e-01
-El    232    S1D2                                    bond                                    MAT5              SPRING     63     64
-   0.3100   0.0000   8.5413e-06   8.3830e-01
-El    233    S1D2                                    bond                                    MAT5              SPRING     65     66
-   0.3200   0.0000   2.5741e-05   2.4074e+00
-El    234    S1D2                                    bond                                    MAT5              SPRING     67     68
-   0.3300   0.0000   4.3275e-05   3.7909e+00
-El    235    S1D2                                    bond                                    MAT5              SPRING     69     70
-   0.3400   0.0000   6.1336e-05   4.9197e+00
-El    236    S1D2                                    bond                                    MAT5              SPRING     71     72
-   0.3500   0.0000   8.0082e-05   5.6984e+00
-El    237    S1D2                                    bond                                    MAT5              SPRING     73     74
-   0.3600   0.0000   9.9620e-05   5.9999e+00
-El    238    S1D2                                    bond                                    MAT5              SPRING     75     76
-   0.3700   0.0000   1.1999e-04   5.9956e+00
-El    239    S1D2                                    bond                                    MAT5              SPRING     77     78
-   0.3800   0.0000   1.4120e-04   5.9817e+00
-El    240    S1D2                                    bond                                    MAT5              SPRING     79     80
-   0.3900   0.0000   1.6324e-04   5.9576e+00
-El    241    S1D2                                    bond                                    MAT5              SPRING     81     82
-   0.4000   0.0000   1.8611e-04   5.9229e+00
-El    242    S1D2                                    bond                                    MAT5              SPRING     83     84
-   0.4100   0.0000   2.0980e-04   5.8769e+00
-El    243    S1D2                                    bond                                    MAT5              SPRING     85     86
-   0.4200   0.0000   2.3431e-04   5.8195e+00
-El    244    S1D2                                    bond                                    MAT5              SPRING     87     88
-   0.4300   0.0000  -1.7448e-04  -5.9418e+00
-El    245    S1D2                                    bond                                    MAT5              SPRING     89     90
-   0.4400   0.0000  -1.4998e-04  -5.9733e+00
-El    246    S1D2                                    bond                                    MAT5              SPRING     91     92
-   0.4500   0.0000  -1.2632e-04  -5.9925e+00
-El    247    S1D2                                    bond                                    MAT5              SPRING     93     94
-   0.4600   0.0000  -1.0350e-04  -5.9999e+00
-El    248    S1D2                                    bond                                    MAT5              SPRING     95     96
-   0.4700   0.0000  -8.1503e-05  -5.7390e+00
-El    249    S1D2                                    bond                                    MAT5              SPRING     97     98
-   0.4800   0.0000  -6.0309e-05  -4.8647e+00
-El    250    S1D2                                    bond                                    MAT5              SPRING     99    100
-   0.4900   0.0000  -3.9790e-05  -3.5364e+00
-El    251    S1D2                                    bond                                    MAT5              SPRING    101    102
-   0.5000   0.0000  -1.9764e-05  -1.8829e+00
-El    252    S1D2                                    bond                                    MAT5              SPRING    103    104
-   0.5100   0.0000   2.8189e-18   2.8189e-13
-El    253    S1D2                                    bond                                    MAT5              SPRING    105    106
-   0.5200   0.0000   1.9764e-05   1.8829e+00
-El    254    S1D2                                    bond                                    MAT5              SPRING    107    108
-   0.5300   0.0000   3.9790e-05   3.5364e+00
-El    255    S1D2                                    bond                                    MAT5              SPRING    109    110
-   0.5400   0.0000   6.0309e-05   4.8647e+00
-El    256    S1D2                                    bond                                    MAT5              SPRING    111    112
-   0.5500   0.0000   8.1503e-05   5.7390e+00
-El    257    S1D2                                    bond                                    MAT5              SPRING    113    114
-   0.5600   0.0000   1.0350e-04   5.9999e+00
-El    258    S1D2                                    bond                                    MAT5              SPRING    115    116
-   0.5700   0.0000   1.2632e-04   5.9925e+00
-El    259    S1D2                                    bond                                    MAT5              SPRING    117    118
-   0.5800   0.0000   1.4998e-04   5.9733e+00
-El    260    S1D2                                    bond                                    MAT5              SPRING    119    120
-   0.5900   0.0000   1.7448e-04   5.9418e+00
-El    261    S1D2                                    bond                                    MAT5              SPRING    121    122
-   0.6000   0.0000  -1.6515e-04  -5.9551e+00
-El    262    S1D2                                    bond                                    MAT5              SPRING    123    124
-   0.6100   0.0000  -1.4066e-04  -5.9822e+00
-El    263    S1D2                                    bond                                    MAT5              SPRING    125    126
-   0.6200   0.0000  -1.1700e-04  -5.9968e+00
-El    264    S1D2                                    bond                                    MAT5              SPRING    127    128
-   0.6300   0.0000  -9.4178e-05  -5.9733e+00
-El    265    S1D2                                    bond                                    MAT5              SPRING    129    130
-   0.6400   0.0000  -7.2185e-05  -5.4241e+00
-El    266    S1D2                                    bond                                    MAT5              SPRING    131    132
-   0.6500   0.0000  -5.0946e-05  -4.3111e+00
-El    267    S1D2                                    bond                                    MAT5              SPRING    133    134
-   0.6600   0.0000  -3.0308e-05  -2.7914e+00
-El    268    S1D2                                    bond                                    MAT5              SPRING    135    136
-   0.6700   0.0000  -1.0057e-05  -9.8343e-01
-El    269    S1D2                                    bond                                    MAT5              SPRING    137    138
-   0.6800   0.0000   1.0057e-05   9.8343e-01
-El    270    S1D2                                    bond                                    MAT5              SPRING    139    140
-   0.6900   0.0000   3.0308e-05   2.7914e+00
-El    271    S1D2                                    bond                                    MAT5              SPRING    141    142
-   0.7000   0.0000   5.0946e-05   4.3111e+00
-El    272    S1D2                                    bond                                    MAT5              SPRING    143    144
-   0.7100   0.0000   7.2185e-05   5.4241e+00
-El    273    S1D2                                    bond                                    MAT5              SPRING    145    146
-   0.7200   0.0000   9.4178e-05   5.9733e+00
-El    274    S1D2                                    bond                                    MAT5              SPRING    147    148
-   0.7300   0.0000   1.1700e-04   5.9968e+00
-El    275    S1D2                                    bond                                    MAT5              SPRING    149    150
-   0.7400   0.0000   1.4066e-04   5.9822e+00
-El    276    S1D2                                    bond                                    MAT5              SPRING    151    152
-   0.7500   0.0000   1.6515e-04   5.9551e+00
-El    277    S1D2                                    bond                                    MAT5              SPRING    153    154
-   0.7600   0.0000  -2.4210e-04  -5.7992e+00
-El    278    S1D2                                    bond                                    MAT5              SPRING    155    156
-   0.7700   0.0000  -2.1759e-04  -5.8597e+00
-El    279    S1D2                                    bond                                    MAT5              SPRING    157    158
-   0.7800   0.0000  -1.9390e-04  -5.9089e+00
-El    280    S1D2                                    bond                                    MAT5              SPRING    159    160
-   0.7900   0.0000  -1.7102e-04  -5.9469e+00
-El    281    S1D2                                    bond                                    MAT5              SPRING    161    162
-   0.8000   0.0000  -1.4897e-04  -5.9743e+00
-El    282    S1D2                                    bond                                    MAT5              SPRING    163    164
-   0.8100   0.0000  -1.2776e-04  -5.9916e+00
-El    283    S1D2                                    bond                                    MAT5              SPRING    165    166
-   0.8200   0.0000  -1.0737e-04  -5.9994e+00
-El    284    S1D2                                    bond                                    MAT5              SPRING    167    168
-   0.8300   0.0000  -8.7824e-05  -5.8850e+00
-El    285    S1D2                                    bond                                    MAT5              SPRING    169    170
-   0.8400   0.0000  -6.9094e-05  -5.2949e+00
-El    286    S1D2                                    bond                                    MAT5              SPRING    171    172
-   0.8500   0.0000  -5.1101e-05  -4.3209e+00
-El    287    S1D2                                    bond                                    MAT5              SPRING    173    174
-   0.8600   0.0000  -3.3708e-05  -3.0670e+00
-El    288    S1D2                                    bond                                    MAT5              SPRING    175    176
-   0.8700   0.0000  -1.6742e-05  -1.6088e+00
-El    289    S1D2                                    bond                                    MAT5              SPRING    177    178
-   0.8800   0.0000  -8.6736e-19  -8.6736e-14
-El    290    S1D2                                    bond                                    MAT5              SPRING    179    180
-   0.8900   0.0000   1.6742e-05   1.6088e+00
-El    291    S1D2                                    bond                                    MAT5              SPRING    181    182
-   0.9000   0.0000   3.3708e-05   3.0670e+00
-El    292    S1D2                                    bond                                    MAT5              SPRING    183    184
-   0.9100   0.0000   5.1101e-05   4.3209e+00
-El    293    S1D2                                    bond                                    MAT5              SPRING    185    186
-   0.9200   0.0000   6.9094e-05   5.2949e+00
-El    294    S1D2                                    bond                                    MAT5              SPRING    187    188
-   0.9300   0.0000   8.7824e-05   5.8850e+00
-El    295    S1D2                                    bond                                    MAT5              SPRING    189    190
-   0.9400   0.0000   1.0737e-04   5.9994e+00
-El    296    S1D2                                    bond                                    MAT5              SPRING    191    192
-   0.9500   0.0000   1.2776e-04   5.9916e+00
-El    297    S1D2                                    bond                                    MAT5              SPRING    193    194
-   0.9600   0.0000   1.4897e-04   5.9743e+00
-El    298    S1D2                                    bond                                    MAT5              SPRING    195    196
-   0.9700   0.0000   1.7102e-04   5.9469e+00
-El    299    S1D2                                    bond                                    MAT5              SPRING    197    198
-   0.9800   0.0000   1.9390e-04   5.9089e+00
-El    300    S1D2                                    bond                                    MAT5              SPRING    199    200
-   0.9900   0.0000   2.1759e-04   5.8597e+00
-El    301    S1D2                                    bond                                    MAT5              SPRING    201    202
-   1.0000   0.0000   2.4210e-04   5.7992e+00
+Time,   0.5000
+     1, concrete,       MAT1,   T1D2,   0,     0.0050,    0.0000,  8.382723e-06,  3.017780e-01,
+     2, concrete,       MAT1,   T1D2,   0,     0.0150,    0.0000,  1.670270e-05,  6.012970e-01,
+     3, concrete,       MAT1,   T1D2,   0,     0.0250,    0.0000,  2.460183e-05,  8.856658e-01,
+     4, concrete,       MAT1,   T1D2,   0,     0.0350,    0.0000,  3.178511e-05,  1.144264e+00,
+     5, concrete,       MAT1,   T1D2,   0,     0.0450,    0.0000,  3.804062e-05,  1.369462e+00,
+     6, concrete,       MAT1,   T1D2,   0,     0.0550,    0.0000,  4.321765e-05,  1.555835e+00,
+     7, concrete,       MAT1,   T1D2,   0,     0.0650,    0.0000,  4.720803e-05,  1.699489e+00,
+     8, concrete,       MAT1,   T1D2,   0,     0.0750,    0.0000,  4.993109e-05,  1.797519e+00,
+     9, concrete,       MAT1,   T1D2,   0,     0.0850,    0.0000,  5.132177e-05,  1.847584e+00,
+    10, concrete,       MAT1,   T1D2,   0,     0.0950,    0.0000,  5.132177e-05,  1.847584e+00,
+    11, concrete,       MAT1,   T1D2,   0,     0.1050,    0.0000,  4.993109e-05,  1.797519e+00,
+    12, concrete,       MAT1,   T1D2,   0,     0.1150,    0.0000,  4.720803e-05,  1.699489e+00,
+    13, concrete,       MAT1,   T1D2,   0,     0.1250,    0.0000,  4.321765e-05,  1.555835e+00,
+    14, concrete,       MAT1,   T1D2,   0,     0.1350,    0.0000,  3.804062e-05,  1.369462e+00,
+    15, concrete,       MAT1,   T1D2,   0,     0.1450,    0.0000,  3.178511e-05,  1.144264e+00,
+    16, concrete,       MAT1,   T1D2,   0,     0.1550,    0.0000,  2.460183e-05,  8.856658e-01,
+    17, concrete,       MAT1,   T1D2,   0,     0.1650,    0.0000,  1.670270e-05,  6.012970e-01,
+    18, concrete,       MAT1,   T1D2,   0,     0.1750,    0.0000,  8.382723e-06,  3.017780e-01,
+    19, concrete,       MAT1,   T1D2,   0,     0.1850,    0.0000,  0.000000e+00,  0.000000e+00,
+    20, concrete,       MAT1,   T1D2,   0,     0.1950,    0.0000,  8.374088e-06,  3.014672e-01,
+    21, concrete,       MAT1,   T1D2,   0,     0.2050,    0.0000,  1.675587e-05,  6.032114e-01,
+    22, concrete,       MAT1,   T1D2,   0,     0.2150,    0.0000,  2.513210e-05,  9.047557e-01,
+    23, concrete,       MAT1,   T1D2,   0,     0.2250,    0.0000,  3.324098e-05,  1.196675e+00,
+    24, concrete,       MAT1,   T1D2,   0,     0.2350,    0.0000,  4.080730e-05,  1.469063e+00,
+    25, concrete,       MAT1,   T1D2,   0,     0.2450,    0.0000,  4.763491e-05,  1.714857e+00,
+    26, concrete,       MAT1,   T1D2,   0,     0.2550,    0.0000,  5.358722e-05,  1.929140e+00,
+    27, concrete,       MAT1,   T1D2,   0,     0.2650,    0.0000,  5.857036e-05,  2.108533e+00,
+    28, concrete,       MAT1,   T1D2,   0,     0.2750,    0.0000,  6.251926e-05,  2.250694e+00,
+    29, concrete,       MAT1,   T1D2,   0,     0.2850,    0.0000,  6.538662e-05,  2.353918e+00,
+    30, concrete,       MAT1,   T1D2,   0,     0.2950,    0.0000,  6.713415e-05,  2.416829e+00,
+    31, concrete,       MAT1,   T1D2,   0,     0.3050,    0.0000,  6.772603e-05,  2.438137e+00,
+    32, concrete,       MAT1,   T1D2,   0,     0.3150,    0.0000,  6.713415e-05,  2.416829e+00,
+    33, concrete,       MAT1,   T1D2,   0,     0.3250,    0.0000,  6.538662e-05,  2.353918e+00,
+    34, concrete,       MAT1,   T1D2,   0,     0.3350,    0.0000,  6.251926e-05,  2.250694e+00,
+    35, concrete,       MAT1,   T1D2,   0,     0.3450,    0.0000,  5.857036e-05,  2.108533e+00,
+    36, concrete,       MAT1,   T1D2,   0,     0.3550,    0.0000,  5.358722e-05,  1.929140e+00,
+    37, concrete,       MAT1,   T1D2,   0,     0.3650,    0.0000,  4.763491e-05,  1.714857e+00,
+    38, concrete,       MAT1,   T1D2,   0,     0.3750,    0.0000,  4.080730e-05,  1.469063e+00,
+    39, concrete,       MAT1,   T1D2,   0,     0.3850,    0.0000,  3.324098e-05,  1.196675e+00,
+    40, concrete,       MAT1,   T1D2,   0,     0.3950,    0.0000,  2.513210e-05,  9.047557e-01,
+    41, concrete,       MAT1,   T1D2,   0,     0.4050,    0.0000,  1.675587e-05,  6.032114e-01,
+    42, concrete,       MAT1,   T1D2,   0,     0.4150,    0.0000,  8.374088e-06,  3.014672e-01,
+    43, concrete,       MAT1,   T1D2,   0,     0.4250,    0.0000,  0.000000e+00,  0.000000e+00,
+    44, concrete,       MAT1,   T1D2,   0,     0.4350,    0.0000,  8.383432e-06,  3.018035e-01,
+    45, concrete,       MAT1,   T1D2,   0,     0.4450,    0.0000,  1.648375e-05,  5.934149e-01,
+    46, concrete,       MAT1,   T1D2,   0,     0.4550,    0.0000,  2.393985e-05,  8.618344e-01,
+    47, concrete,       MAT1,   T1D2,   0,     0.4650,    0.0000,  3.048927e-05,  1.097614e+00,
+    48, concrete,       MAT1,   T1D2,   0,     0.4750,    0.0000,  3.594360e-05,  1.293970e+00,
+    49, concrete,       MAT1,   T1D2,   0,     0.4850,    0.0000,  4.016706e-05,  1.446014e+00,
+    50, concrete,       MAT1,   T1D2,   0,     0.4950,    0.0000,  4.305884e-05,  1.550118e+00,
+    51, concrete,       MAT1,   T1D2,   0,     0.5050,    0.0000,  4.453927e-05,  1.603414e+00,
+    52, concrete,       MAT1,   T1D2,   0,     0.5150,    0.0000,  4.453927e-05,  1.603414e+00,
+    53, concrete,       MAT1,   T1D2,   0,     0.5250,    0.0000,  4.305885e-05,  1.550118e+00,
+    54, concrete,       MAT1,   T1D2,   0,     0.5350,    0.0000,  4.016706e-05,  1.446014e+00,
+    55, concrete,       MAT1,   T1D2,   0,     0.5450,    0.0000,  3.594360e-05,  1.293970e+00,
+    56, concrete,       MAT1,   T1D2,   0,     0.5550,    0.0000,  3.048927e-05,  1.097614e+00,
+    57, concrete,       MAT1,   T1D2,   0,     0.5650,    0.0000,  2.393985e-05,  8.618345e-01,
+    58, concrete,       MAT1,   T1D2,   0,     0.5750,    0.0000,  1.648375e-05,  5.934150e-01,
+    59, concrete,       MAT1,   T1D2,   0,     0.5850,    0.0000,  8.383433e-06,  3.018036e-01,
+    60, concrete,       MAT1,   T1D2,   0,     0.5950,    0.0000,  0.000000e+00,  0.000000e+00,
+    61, concrete,       MAT1,   T1D2,   0,     0.6050,    0.0000,  8.341824e-06,  3.003057e-01,
+    62, concrete,       MAT1,   T1D2,   0,     0.6150,    0.0000,  1.626683e-05,  5.856058e-01,
+    63, concrete,       MAT1,   T1D2,   0,     0.6250,    0.0000,  2.343451e-05,  8.436423e-01,
+    64, concrete,       MAT1,   T1D2,   0,     0.6350,    0.0000,  2.959810e-05,  1.065532e+00,
+    65, concrete,       MAT1,   T1D2,   0,     0.6450,    0.0000,  3.457999e-05,  1.244880e+00,
+    66, concrete,       MAT1,   T1D2,   0,     0.6550,    0.0000,  3.825075e-05,  1.377027e+00,
+    67, concrete,       MAT1,   T1D2,   0,     0.6650,    0.0000,  4.051215e-05,  1.458437e+00,
+    68, concrete,       MAT1,   T1D2,   0,     0.6750,    0.0000,  4.128403e-05,  1.486225e+00,
+    69, concrete,       MAT1,   T1D2,   0,     0.6850,    0.0000,  4.051215e-05,  1.458437e+00,
+    70, concrete,       MAT1,   T1D2,   0,     0.6950,    0.0000,  3.825075e-05,  1.377027e+00,
+    71, concrete,       MAT1,   T1D2,   0,     0.7050,    0.0000,  3.457999e-05,  1.244880e+00,
+    72, concrete,       MAT1,   T1D2,   0,     0.7150,    0.0000,  2.959810e-05,  1.065532e+00,
+    73, concrete,       MAT1,   T1D2,   0,     0.7250,    0.0000,  2.343451e-05,  8.436425e-01,
+    74, concrete,       MAT1,   T1D2,   0,     0.7350,    0.0000,  1.626683e-05,  5.856059e-01,
+    75, concrete,       MAT1,   T1D2,   0,     0.7450,    0.0000,  8.341827e-06,  3.003058e-01,
+    76, concrete,       MAT1,   T1D2,   0,     0.7550,    0.0000,  0.000000e+00,  0.000000e+00,
+    77, concrete,       MAT1,   T1D2,   0,     0.7650,    0.0000,  8.371621e-06,  3.013783e-01,
+    78, concrete,       MAT1,   T1D2,   0,     0.7750,    0.0000,  1.675228e-05,  6.030820e-01,
+    79, concrete,       MAT1,   T1D2,   0,     0.7850,    0.0000,  2.514125e-05,  9.050848e-01,
+    80, concrete,       MAT1,   T1D2,   0,     0.7950,    0.0000,  3.334644e-05,  1.200472e+00,
+    81, concrete,       MAT1,   T1D2,   0,     0.8050,    0.0000,  4.108018e-05,  1.478887e+00,
+    82, concrete,       MAT1,   T1D2,   0,     0.8150,    0.0000,  4.813665e-05,  1.732919e+00,
+    83, concrete,       MAT1,   T1D2,   0,     0.8250,    0.0000,  5.437246e-05,  1.957409e+00,
+    84, concrete,       MAT1,   T1D2,   0,     0.8350,    0.0000,  5.968970e-05,  2.148829e+00,
+    85, concrete,       MAT1,   T1D2,   0,     0.8450,    0.0000,  6.402172e-05,  2.304782e+00,
+    86, concrete,       MAT1,   T1D2,   0,     0.8550,    0.0000,  6.732177e-05,  2.423584e+00,
+    87, concrete,       MAT1,   T1D2,   0,     0.8650,    0.0000,  6.955402e-05,  2.503945e+00,
+    88, concrete,       MAT1,   T1D2,   0,     0.8750,    0.0000,  7.068665e-05,  2.544719e+00,
+    89, concrete,       MAT1,   T1D2,   0,     0.8850,    0.0000,  7.068665e-05,  2.544719e+00,
+    90, concrete,       MAT1,   T1D2,   0,     0.8950,    0.0000,  6.955402e-05,  2.503945e+00,
+    91, concrete,       MAT1,   T1D2,   0,     0.9050,    0.0000,  6.732177e-05,  2.423584e+00,
+    92, concrete,       MAT1,   T1D2,   0,     0.9150,    0.0000,  6.402172e-05,  2.304782e+00,
+    93, concrete,       MAT1,   T1D2,   0,     0.9250,    0.0000,  5.968970e-05,  2.148829e+00,
+    94, concrete,       MAT1,   T1D2,   0,     0.9350,    0.0000,  5.437246e-05,  1.957409e+00,
+    95, concrete,       MAT1,   T1D2,   0,     0.9450,    0.0000,  4.813665e-05,  1.732919e+00,
+    96, concrete,       MAT1,   T1D2,   0,     0.9550,    0.0000,  4.108018e-05,  1.478887e+00,
+    97, concrete,       MAT1,   T1D2,   0,     0.9650,    0.0000,  3.334644e-05,  1.200472e+00,
+    98, concrete,       MAT1,   T1D2,   0,     0.9750,    0.0000,  2.514125e-05,  9.050848e-01,
+    99, concrete,       MAT1,   T1D2,   0,     0.9850,    0.0000,  1.675228e-05,  6.030820e-01,
+   100, concrete,       MAT1,   T1D2,   0,     0.9950,    0.0000,  8.371621e-06,  3.013783e-01,
+   101, reinf,      MAT31,   T1D2,   0,     0.0050,    0.0000,  1.454000e-03,  2.908000e+02,  5.000000e+02,
+   102, reinf,      MAT31,   T1D2,   0,     0.0150,    0.0000,  1.379493e-03,  2.758986e+02,  5.000000e+02,
+   103, reinf,      MAT31,   T1D2,   0,     0.0250,    0.0000,  1.308754e-03,  2.617509e+02,  5.000000e+02,
+   104, reinf,      MAT31,   T1D2,   0,     0.0350,    0.0000,  1.244427e-03,  2.488853e+02,  5.000000e+02,
+   105, reinf,      MAT31,   T1D2,   0,     0.0450,    0.0000,  1.188407e-03,  2.376814e+02,  5.000000e+02,
+   106, reinf,      MAT31,   T1D2,   0,     0.0550,    0.0000,  1.142046e-03,  2.284091e+02,  5.000000e+02,
+   107, reinf,      MAT31,   T1D2,   0,     0.0650,    0.0000,  1.106311e-03,  2.212622e+02,  5.000000e+02,
+   108, reinf,      MAT31,   T1D2,   0,     0.0750,    0.0000,  1.081925e-03,  2.163850e+02,  5.000000e+02,
+   109, reinf,      MAT31,   T1D2,   0,     0.0850,    0.0000,  1.069471e-03,  2.138943e+02,  5.000000e+02,
+   110, reinf,      MAT31,   T1D2,   0,     0.0950,    0.0000,  1.069471e-03,  2.138943e+02,  5.000000e+02,
+   111, reinf,      MAT31,   T1D2,   0,     0.1050,    0.0000,  1.081925e-03,  2.163850e+02,  5.000000e+02,
+   112, reinf,      MAT31,   T1D2,   0,     0.1150,    0.0000,  1.106311e-03,  2.212622e+02,  5.000000e+02,
+   113, reinf,      MAT31,   T1D2,   0,     0.1250,    0.0000,  1.142046e-03,  2.284091e+02,  5.000000e+02,
+   114, reinf,      MAT31,   T1D2,   0,     0.1350,    0.0000,  1.188407e-03,  2.376814e+02,  5.000000e+02,
+   115, reinf,      MAT31,   T1D2,   0,     0.1450,    0.0000,  1.244427e-03,  2.488853e+02,  5.000000e+02,
+   116, reinf,      MAT31,   T1D2,   0,     0.1550,    0.0000,  1.308754e-03,  2.617509e+02,  5.000000e+02,
+   117, reinf,      MAT31,   T1D2,   0,     0.1650,    0.0000,  1.379493e-03,  2.758986e+02,  5.000000e+02,
+   118, reinf,      MAT31,   T1D2,   0,     0.1750,    0.0000,  1.454000e-03,  2.908000e+02,  5.000000e+02,
+   119, reinf,      MAT31,   T1D2,   0,     0.1850,    0.0000,  1.529069e-03,  3.058139e+02,  5.000000e+02,
+   120, reinf,      MAT31,   T1D2,   0,     0.1950,    0.0000,  1.454077e-03,  2.908155e+02,  5.000000e+02,
+   121, reinf,      MAT31,   T1D2,   0,     0.2050,    0.0000,  1.379017e-03,  2.758033e+02,  5.000000e+02,
+   122, reinf,      MAT31,   T1D2,   0,     0.2150,    0.0000,  1.304006e-03,  2.608011e+02,  5.000000e+02,
+   123, reinf,      MAT31,   T1D2,   0,     0.2250,    0.0000,  1.231389e-03,  2.462778e+02,  5.000000e+02,
+   124, reinf,      MAT31,   T1D2,   0,     0.2350,    0.0000,  1.163631e-03,  2.327262e+02,  5.000000e+02,
+   125, reinf,      MAT31,   T1D2,   0,     0.2450,    0.0000,  1.102488e-03,  2.204976e+02,  5.000000e+02,
+   126, reinf,      MAT31,   T1D2,   0,     0.2550,    0.0000,  1.049184e-03,  2.098367e+02,  5.000000e+02,
+   127, reinf,      MAT31,   T1D2,   0,     0.2650,    0.0000,  1.004559e-03,  2.009117e+02,  5.000000e+02,
+   128, reinf,      MAT31,   T1D2,   0,     0.2750,    0.0000,  9.691953e-04,  1.938391e+02,  5.000000e+02,
+   129, reinf,      MAT31,   T1D2,   0,     0.2850,    0.0000,  9.435175e-04,  1.887035e+02,  5.000000e+02,
+   130, reinf,      MAT31,   T1D2,   0,     0.2950,    0.0000,  9.278680e-04,  1.855736e+02,  5.000000e+02,
+   131, reinf,      MAT31,   T1D2,   0,     0.3050,    0.0000,  9.225675e-04,  1.845135e+02,  5.000000e+02,
+   132, reinf,      MAT31,   T1D2,   0,     0.3150,    0.0000,  9.278680e-04,  1.855736e+02,  5.000000e+02,
+   133, reinf,      MAT31,   T1D2,   0,     0.3250,    0.0000,  9.435175e-04,  1.887035e+02,  5.000000e+02,
+   134, reinf,      MAT31,   T1D2,   0,     0.3350,    0.0000,  9.691953e-04,  1.938391e+02,  5.000000e+02,
+   135, reinf,      MAT31,   T1D2,   0,     0.3450,    0.0000,  1.004559e-03,  2.009117e+02,  5.000000e+02,
+   136, reinf,      MAT31,   T1D2,   0,     0.3550,    0.0000,  1.049184e-03,  2.098367e+02,  5.000000e+02,
+   137, reinf,      MAT31,   T1D2,   0,     0.3650,    0.0000,  1.102488e-03,  2.204976e+02,  5.000000e+02,
+   138, reinf,      MAT31,   T1D2,   0,     0.3750,    0.0000,  1.163631e-03,  2.327262e+02,  5.000000e+02,
+   139, reinf,      MAT31,   T1D2,   0,     0.3850,    0.0000,  1.231389e-03,  2.462778e+02,  5.000000e+02,
+   140, reinf,      MAT31,   T1D2,   0,     0.3950,    0.0000,  1.304006e-03,  2.608011e+02,  5.000000e+02,
+   141, reinf,      MAT31,   T1D2,   0,     0.4050,    0.0000,  1.379017e-03,  2.758033e+02,  5.000000e+02,
+   142, reinf,      MAT31,   T1D2,   0,     0.4150,    0.0000,  1.454077e-03,  2.908155e+02,  5.000000e+02,
+   143, reinf,      MAT31,   T1D2,   0,     0.4250,    0.0000,  1.529069e-03,  3.058139e+02,  5.000000e+02,
+   144, reinf,      MAT31,   T1D2,   0,     0.4350,    0.0000,  1.453994e-03,  2.907987e+02,  5.000000e+02,
+   145, reinf,      MAT31,   T1D2,   0,     0.4450,    0.0000,  1.381454e-03,  2.762907e+02,  5.000000e+02,
+   146, reinf,      MAT31,   T1D2,   0,     0.4550,    0.0000,  1.314683e-03,  2.629365e+02,  5.000000e+02,
+   147, reinf,      MAT31,   T1D2,   0,     0.4650,    0.0000,  1.256031e-03,  2.512062e+02,  5.000000e+02,
+   148, reinf,      MAT31,   T1D2,   0,     0.4750,    0.0000,  1.207186e-03,  2.414373e+02,  5.000000e+02,
+   149, reinf,      MAT31,   T1D2,   0,     0.4850,    0.0000,  1.169364e-03,  2.338729e+02,  5.000000e+02,
+   150, reinf,      MAT31,   T1D2,   0,     0.4950,    0.0000,  1.143468e-03,  2.286935e+02,  5.000000e+02,
+   151, reinf,      MAT31,   T1D2,   0,     0.5050,    0.0000,  1.130210e-03,  2.260420e+02,  5.000000e+02,
+   152, reinf,      MAT31,   T1D2,   0,     0.5150,    0.0000,  1.130210e-03,  2.260420e+02,  5.000000e+02,
+   153, reinf,      MAT31,   T1D2,   0,     0.5250,    0.0000,  1.143468e-03,  2.286935e+02,  5.000000e+02,
+   154, reinf,      MAT31,   T1D2,   0,     0.5350,    0.0000,  1.169364e-03,  2.338729e+02,  5.000000e+02,
+   155, reinf,      MAT31,   T1D2,   0,     0.5450,    0.0000,  1.207186e-03,  2.414373e+02,  5.000000e+02,
+   156, reinf,      MAT31,   T1D2,   0,     0.5550,    0.0000,  1.256031e-03,  2.512062e+02,  5.000000e+02,
+   157, reinf,      MAT31,   T1D2,   0,     0.5650,    0.0000,  1.314683e-03,  2.629365e+02,  5.000000e+02,
+   158, reinf,      MAT31,   T1D2,   0,     0.5750,    0.0000,  1.381454e-03,  2.762907e+02,  5.000000e+02,
+   159, reinf,      MAT31,   T1D2,   0,     0.5850,    0.0000,  1.453994e-03,  2.907987e+02,  5.000000e+02,
+   160, reinf,      MAT31,   T1D2,   0,     0.5950,    0.0000,  1.529069e-03,  3.058139e+02,  5.000000e+02,
+   161, reinf,      MAT31,   T1D2,   0,     0.6050,    0.0000,  1.454366e-03,  2.908733e+02,  5.000000e+02,
+   162, reinf,      MAT31,   T1D2,   0,     0.6150,    0.0000,  1.383396e-03,  2.766792e+02,  5.000000e+02,
+   163, reinf,      MAT31,   T1D2,   0,     0.6250,    0.0000,  1.319208e-03,  2.638416e+02,  5.000000e+02,
+   164, reinf,      MAT31,   T1D2,   0,     0.6350,    0.0000,  1.264012e-03,  2.528023e+02,  5.000000e+02,
+   165, reinf,      MAT31,   T1D2,   0,     0.6450,    0.0000,  1.219398e-03,  2.438795e+02,  5.000000e+02,
+   166, reinf,      MAT31,   T1D2,   0,     0.6550,    0.0000,  1.186525e-03,  2.373050e+02,  5.000000e+02,
+   167, reinf,      MAT31,   T1D2,   0,     0.6650,    0.0000,  1.166274e-03,  2.332548e+02,  5.000000e+02,
+   168, reinf,      MAT31,   T1D2,   0,     0.6750,    0.0000,  1.159362e-03,  2.318723e+02,  5.000000e+02,
+   169, reinf,      MAT31,   T1D2,   0,     0.6850,    0.0000,  1.166274e-03,  2.332548e+02,  5.000000e+02,
+   170, reinf,      MAT31,   T1D2,   0,     0.6950,    0.0000,  1.186525e-03,  2.373050e+02,  5.000000e+02,
+   171, reinf,      MAT31,   T1D2,   0,     0.7050,    0.0000,  1.219398e-03,  2.438795e+02,  5.000000e+02,
+   172, reinf,      MAT31,   T1D2,   0,     0.7150,    0.0000,  1.264012e-03,  2.528023e+02,  5.000000e+02,
+   173, reinf,      MAT31,   T1D2,   0,     0.7250,    0.0000,  1.319208e-03,  2.638416e+02,  5.000000e+02,
+   174, reinf,      MAT31,   T1D2,   0,     0.7350,    0.0000,  1.383396e-03,  2.766792e+02,  5.000000e+02,
+   175, reinf,      MAT31,   T1D2,   0,     0.7450,    0.0000,  1.454366e-03,  2.908733e+02,  5.000000e+02,
+   176, reinf,      MAT31,   T1D2,   0,     0.7550,    0.0000,  1.529069e-03,  3.058139e+02,  5.000000e+02,
+   177, reinf,      MAT31,   T1D2,   0,     0.7650,    0.0000,  1.454100e-03,  2.908199e+02,  5.000000e+02,
+   178, reinf,      MAT31,   T1D2,   0,     0.7750,    0.0000,  1.379049e-03,  2.758098e+02,  5.000000e+02,
+   179, reinf,      MAT31,   T1D2,   0,     0.7850,    0.0000,  1.303924e-03,  2.607848e+02,  5.000000e+02,
+   180, reinf,      MAT31,   T1D2,   0,     0.7950,    0.0000,  1.230444e-03,  2.460889e+02,  5.000000e+02,
+   181, reinf,      MAT31,   T1D2,   0,     0.8050,    0.0000,  1.161187e-03,  2.322374e+02,  5.000000e+02,
+   182, reinf,      MAT31,   T1D2,   0,     0.8150,    0.0000,  1.097995e-03,  2.195990e+02,  5.000000e+02,
+   183, reinf,      MAT31,   T1D2,   0,     0.8250,    0.0000,  1.042152e-03,  2.084303e+02,  5.000000e+02,
+   184, reinf,      MAT31,   T1D2,   0,     0.8350,    0.0000,  9.945346e-04,  1.989069e+02,  5.000000e+02,
+   185, reinf,      MAT31,   T1D2,   0,     0.8450,    0.0000,  9.557404e-04,  1.911481e+02,  5.000000e+02,
+   186, reinf,      MAT31,   T1D2,   0,     0.8550,    0.0000,  9.261877e-04,  1.852375e+02,  5.000000e+02,
+   187, reinf,      MAT31,   T1D2,   0,     0.8650,    0.0000,  9.061975e-04,  1.812395e+02,  5.000000e+02,
+   188, reinf,      MAT31,   T1D2,   0,     0.8750,    0.0000,  8.960545e-04,  1.792109e+02,  5.000000e+02,
+   189, reinf,      MAT31,   T1D2,   0,     0.8850,    0.0000,  8.960545e-04,  1.792109e+02,  5.000000e+02,
+   190, reinf,      MAT31,   T1D2,   0,     0.8950,    0.0000,  9.061975e-04,  1.812395e+02,  5.000000e+02,
+   191, reinf,      MAT31,   T1D2,   0,     0.9050,    0.0000,  9.261877e-04,  1.852375e+02,  5.000000e+02,
+   192, reinf,      MAT31,   T1D2,   0,     0.9150,    0.0000,  9.557404e-04,  1.911481e+02,  5.000000e+02,
+   193, reinf,      MAT31,   T1D2,   0,     0.9250,    0.0000,  9.945346e-04,  1.989069e+02,  5.000000e+02,
+   194, reinf,      MAT31,   T1D2,   0,     0.9350,    0.0000,  1.042152e-03,  2.084303e+02,  5.000000e+02,
+   195, reinf,      MAT31,   T1D2,   0,     0.9450,    0.0000,  1.097995e-03,  2.195990e+02,  5.000000e+02,
+   196, reinf,      MAT31,   T1D2,   0,     0.9550,    0.0000,  1.161187e-03,  2.322374e+02,  5.000000e+02,
+   197, reinf,      MAT31,   T1D2,   0,     0.9650,    0.0000,  1.230444e-03,  2.460889e+02,  5.000000e+02,
+   198, reinf,      MAT31,   T1D2,   0,     0.9750,    0.0000,  1.303924e-03,  2.607848e+02,  5.000000e+02,
+   199, reinf,      MAT31,   T1D2,   0,     0.9850,    0.0000,  1.379049e-03,  2.758098e+02,  5.000000e+02,
+   200, reinf,      MAT31,   T1D2,   0,     0.9950,    0.0000,  1.454100e-03,  2.908199e+02,  5.000000e+02,
+   201, bond,       MAT5,   S1D2,   0,     0.0000,    0.0000, -1.066364e-04, -5.999513e+00,
+   202, bond,       MAT5,   S1D2,   0,     0.0100,    0.0000, -9.218025e-05, -5.952038e+00,
+   203, bond,       MAT5,   S1D2,   0,     0.0200,    0.0000, -7.855235e-05, -5.651730e+00,
+   204, bond,       MAT5,   S1D2,   0,     0.0300,    0.0000, -6.571082e-05, -5.140033e+00,
+   205, bond,       MAT5,   S1D2,   0,     0.0400,    0.0000, -5.358441e-05, -4.476470e+00,
+   206, bond,       MAT5,   S1D2,   0,     0.0500,    0.0000, -4.208074e-05, -3.704884e+00,
+   207, bond,       MAT5,   S1D2,   0,     0.0600,    0.0000, -3.109246e-05, -2.855781e+00,
+   208, bond,       MAT5,   S1D2,   0,     0.0700,    0.0000, -2.050144e-05, -1.948848e+00,
+   209, bond,       MAT5,   S1D2,   0,     0.0800,    0.0000, -1.018150e-05, -9.953061e-01,
+   210, bond,       MAT5,   S1D2,   0,     0.0900,    0.0000, -4.065758e-20, -4.065758e-15,
+   211, bond,       MAT5,   S1D2,   0,     0.1000,    0.0000,  1.018150e-05,  9.953061e-01,
+   212, bond,       MAT5,   S1D2,   0,     0.1100,    0.0000,  2.050144e-05,  1.948848e+00,
+   213, bond,       MAT5,   S1D2,   0,     0.1200,    0.0000,  3.109246e-05,  2.855781e+00,
+   214, bond,       MAT5,   S1D2,   0,     0.1300,    0.0000,  4.208074e-05,  3.704884e+00,
+   215, bond,       MAT5,   S1D2,   0,     0.1400,    0.0000,  5.358441e-05,  4.476470e+00,
+   216, bond,       MAT5,   S1D2,   0,     0.1500,    0.0000,  6.571082e-05,  5.140033e+00,
+   217, bond,       MAT5,   S1D2,   0,     0.1600,    0.0000,  7.855235e-05,  5.651730e+00,
+   218, bond,       MAT5,   S1D2,   0,     0.1700,    0.0000,  9.218025e-05,  5.952038e+00,
+   219, bond,       MAT5,   S1D2,   0,     0.1800,    0.0000,  1.066364e-04,  5.999513e+00,
+   220, bond,       MAT5,   S1D2,   0,     0.1900,    0.0000, -1.247721e-04, -5.993307e+00,
+   221, bond,       MAT5,   S1D2,   0,     0.2000,    0.0000, -1.103150e-04, -5.998827e+00,
+   222, bond,       MAT5,   S1D2,   0,     0.2100,    0.0000, -9.669244e-05, -5.991320e+00,
+   223, bond,       MAT5,   S1D2,   0,     0.2200,    0.0000, -8.390371e-05, -5.801068e+00,
+   224, bond,       MAT5,   S1D2,   0,     0.2300,    0.0000, -7.192223e-05, -5.413582e+00,
+   225, bond,       MAT5,   S1D2,   0,     0.2400,    0.0000, -6.069399e-05, -4.885483e+00,
+   226, bond,       MAT5,   S1D2,   0,     0.2500,    0.0000, -5.014546e-05, -4.259444e+00,
+   227, bond,       MAT5,   S1D2,   0,     0.2600,    0.0000, -4.018950e-05, -3.566083e+00,
+   228, bond,       MAT5,   S1D2,   0,     0.2700,    0.0000, -3.072961e-05, -2.826063e+00,
+   229, bond,       MAT5,   S1D2,   0,     0.2800,    0.0000, -2.166285e-05, -2.052098e+00,
+   230, bond,       MAT5,   S1D2,   0,     0.2900,    0.0000, -1.288155e-05, -1.250693e+00,
+   231, bond,       MAT5,   S1D2,   0,     0.3000,    0.0000, -4.274207e-06, -4.236108e-01,
+   232, bond,       MAT5,   S1D2,   0,     0.3100,    0.0000,  4.274207e-06,  4.236108e-01,
+   233, bond,       MAT5,   S1D2,   0,     0.3200,    0.0000,  1.288155e-05,  1.250693e+00,
+   234, bond,       MAT5,   S1D2,   0,     0.3300,    0.0000,  2.166285e-05,  2.052098e+00,
+   235, bond,       MAT5,   S1D2,   0,     0.3400,    0.0000,  3.072961e-05,  2.826063e+00,
+   236, bond,       MAT5,   S1D2,   0,     0.3500,    0.0000,  4.018950e-05,  3.566083e+00,
+   237, bond,       MAT5,   S1D2,   0,     0.3600,    0.0000,  5.014546e-05,  4.259444e+00,
+   238, bond,       MAT5,   S1D2,   0,     0.3700,    0.0000,  6.069399e-05,  4.885483e+00,
+   239, bond,       MAT5,   S1D2,   0,     0.3800,    0.0000,  7.192223e-05,  5.413582e+00,
+   240, bond,       MAT5,   S1D2,   0,     0.3900,    0.0000,  8.390371e-05,  5.801068e+00,
+   241, bond,       MAT5,   S1D2,   0,     0.4000,    0.0000,  9.669244e-05,  5.991320e+00,
+   242, bond,       MAT5,   S1D2,   0,     0.4100,    0.0000,  1.103150e-04,  5.998827e+00,
+   243, bond,       MAT5,   S1D2,   0,     0.4200,    0.0000,  1.247721e-04,  5.993307e+00,
+   244, bond,       MAT5,   S1D2,   0,     0.4300,    0.0000, -9.813384e-05, -5.997227e+00,
+   245, bond,       MAT5,   S1D2,   0,     0.4400,    0.0000, -8.367774e-05, -5.795564e+00,
+   246, bond,       MAT5,   S1D2,   0,     0.4500,    0.0000, -7.002804e-05, -5.335194e+00,
+   247, bond,       MAT5,   S1D2,   0,     0.4600,    0.0000, -5.712062e-05, -4.686766e+00,
+   248, bond,       MAT5,   S1D2,   0,     0.4700,    0.0000, -4.486520e-05, -3.903326e+00,
+   249, bond,       MAT5,   S1D2,   0,     0.4800,    0.0000, -3.315277e-05, -3.022579e+00,
+   250, bond,       MAT5,   S1D2,   0,     0.4900,    0.0000, -2.186080e-05, -2.069607e+00,
+   251, bond,       MAT5,   S1D2,   0,     0.5000,    0.0000, -1.085671e-05, -1.059538e+00,
+   252, bond,       MAT5,   S1D2,   0,     0.5100,    0.0000, -2.089243e-12, -2.089243e-07,
+   253, bond,       MAT5,   S1D2,   0,     0.5200,    0.0000,  1.085671e-05,  1.059538e+00,
+   254, bond,       MAT5,   S1D2,   0,     0.5300,    0.0000,  2.186079e-05,  2.069606e+00,
+   255, bond,       MAT5,   S1D2,   0,     0.5400,    0.0000,  3.315277e-05,  3.022579e+00,
+   256, bond,       MAT5,   S1D2,   0,     0.5500,    0.0000,  4.486519e-05,  3.903325e+00,
+   257, bond,       MAT5,   S1D2,   0,     0.5600,    0.0000,  5.712061e-05,  4.686766e+00,
+   258, bond,       MAT5,   S1D2,   0,     0.5700,    0.0000,  7.002804e-05,  5.335194e+00,
+   259, bond,       MAT5,   S1D2,   0,     0.5800,    0.0000,  8.367774e-05,  5.795564e+00,
+   260, bond,       MAT5,   S1D2,   0,     0.5900,    0.0000,  9.813384e-05,  5.997227e+00,
+   261, bond,       MAT5,   S1D2,   0,     0.6000,    0.0000, -9.361234e-05, -5.967880e+00,
+   262, bond,       MAT5,   S1D2,   0,     0.6100,    0.0000, -7.915210e-05, -5.670414e+00,
+   263, bond,       MAT5,   S1D2,   0,     0.6200,    0.0000, -6.548080e-05, -5.129004e+00,
+   264, bond,       MAT5,   S1D2,   0,     0.6300,    0.0000, -5.252307e-05, -4.410784e+00,
+   265, bond,       MAT5,   S1D2,   0,     0.6400,    0.0000, -4.017893e-05, -3.565298e+00,
+   266, bond,       MAT5,   S1D2,   0,     0.6500,    0.0000, -2.833075e-05, -2.627071e+00,
+   267, bond,       MAT5,   S1D2,   0,     0.6600,    0.0000, -1.684801e-05, -1.618465e+00,
+   268, bond,       MAT5,   S1D2,   0,     0.6700,    0.0000, -5.590392e-06, -5.524393e-01,
+   269, bond,       MAT5,   S1D2,   0,     0.6800,    0.0000,  5.590382e-06,  5.524383e-01,
+   270, bond,       MAT5,   S1D2,   0,     0.6900,    0.0000,  1.684800e-05,  1.618464e+00,
+   271, bond,       MAT5,   S1D2,   0,     0.7000,    0.0000,  2.833074e-05,  2.627070e+00,
+   272, bond,       MAT5,   S1D2,   0,     0.7100,    0.0000,  4.017892e-05,  3.565298e+00,
+   273, bond,       MAT5,   S1D2,   0,     0.7200,    0.0000,  5.252306e-05,  4.410784e+00,
+   274, bond,       MAT5,   S1D2,   0,     0.7300,    0.0000,  6.548079e-05,  5.129004e+00,
+   275, bond,       MAT5,   S1D2,   0,     0.7400,    0.0000,  7.915208e-05,  5.670414e+00,
+   276, bond,       MAT5,   S1D2,   0,     0.7500,    0.0000,  9.361233e-05,  5.967879e+00,
+   277, bond,       MAT5,   S1D2,   0,     0.7600,    0.0000, -1.278909e-04, -5.991535e+00,
+   278, bond,       MAT5,   S1D2,   0,     0.7700,    0.0000, -1.134336e-04, -5.998015e+00,
+   279, bond,       MAT5,   S1D2,   0,     0.7800,    0.0000, -9.981066e-05, -5.999971e+00,
+   280, bond,       MAT5,   S1D2,   0,     0.7900,    0.0000, -8.702283e-05, -5.869645e+00,
+   281, bond,       MAT5,   S1D2,   0,     0.8000,    0.0000, -7.505185e-05, -5.533128e+00,
+   282, bond,       MAT5,   S1D2,   0,     0.8100,    0.0000, -6.385078e-05, -5.049064e+00,
+   283, bond,       MAT5,   S1D2,   0,     0.8200,    0.0000, -5.335220e-05, -4.462199e+00,
+   284, bond,       MAT5,   S1D2,   0,     0.8300,    0.0000, -4.347441e-05, -3.805101e+00,
+   285, bond,       MAT5,   S1D2,   0,     0.8400,    0.0000, -3.412596e-05, -3.100195e+00,
+   286, bond,       MAT5,   S1D2,   0,     0.8500,    0.0000, -2.520877e-05, -2.361741e+00,
+   287, bond,       MAT5,   S1D2,   0,     0.8600,    0.0000, -1.662011e-05, -1.597584e+00,
+   288, bond,       MAT5,   S1D2,   0,     0.8700,    0.0000, -8.253679e-06, -8.106187e-01,
+   289, bond,       MAT5,   S1D2,   0,     0.8800,    0.0000,  1.301043e-18,  1.301043e-13,
+   290, bond,       MAT5,   S1D2,   0,     0.8900,    0.0000,  8.253679e-06,  8.106187e-01,
+   291, bond,       MAT5,   S1D2,   0,     0.9000,    0.0000,  1.662011e-05,  1.597584e+00,
+   292, bond,       MAT5,   S1D2,   0,     0.9100,    0.0000,  2.520877e-05,  2.361741e+00,
+   293, bond,       MAT5,   S1D2,   0,     0.9200,    0.0000,  3.412596e-05,  3.100195e+00,
+   294, bond,       MAT5,   S1D2,   0,     0.9300,    0.0000,  4.347441e-05,  3.805101e+00,
+   295, bond,       MAT5,   S1D2,   0,     0.9400,    0.0000,  5.335220e-05,  4.462199e+00,
+   296, bond,       MAT5,   S1D2,   0,     0.9500,    0.0000,  6.385078e-05,  5.049064e+00,
+   297, bond,       MAT5,   S1D2,   0,     0.9600,    0.0000,  7.505185e-05,  5.533128e+00,
+   298, bond,       MAT5,   S1D2,   0,     0.9700,    0.0000,  8.702283e-05,  5.869645e+00,
+   299, bond,       MAT5,   S1D2,   0,     0.9800,    0.0000,  9.981066e-05,  5.999971e+00,
+   300, bond,       MAT5,   S1D2,   0,     0.9900,    0.0000,  1.134336e-04,  5.998015e+00,
+   301, bond,       MAT5,   S1D2,   0,     1.0000,    0.0000,  1.278909e-04,  5.991535e+00,
+Time,   1.0000
+     1, concrete,       MAT1,   T1D2,   0,     0.0050,    0.0000,  8.259538e-06,  2.973434e-01,
+     2, concrete,       MAT1,   T1D2,   0,     0.0150,    0.0000,  1.657464e-05,  5.966872e-01,
+     3, concrete,       MAT1,   T1D2,   0,     0.0250,    0.0000,  2.492843e-05,  8.974236e-01,
+     4, concrete,       MAT1,   T1D2,   0,     0.0350,    0.0000,  3.330469e-05,  1.198969e+00,
+     5, concrete,       MAT1,   T1D2,   0,     0.0450,    0.0000,  4.168779e-05,  1.500760e+00,
+     6, concrete,       MAT1,   T1D2,   0,     0.0550,    0.0000,  4.957567e-05,  1.784724e+00,
+     7, concrete,       MAT1,   T1D2,   0,     0.0650,    0.0000,  5.619187e-05,  2.022907e+00,
+     8, concrete,       MAT1,   T1D2,   0,     0.0750,    0.0000,  6.097050e-05,  2.194938e+00,
+     9, concrete,       MAT1,   T1D2,   0,     0.0850,    0.0000,  6.350472e-05,  2.286170e+00,
+    10, concrete,       MAT1,   T1D2,   0,     0.0950,    0.0000,  6.350472e-05,  2.286170e+00,
+    11, concrete,       MAT1,   T1D2,   0,     0.1050,    0.0000,  6.097050e-05,  2.194938e+00,
+    12, concrete,       MAT1,   T1D2,   0,     0.1150,    0.0000,  5.619187e-05,  2.022907e+00,
+    13, concrete,       MAT1,   T1D2,   0,     0.1250,    0.0000,  4.957567e-05,  1.784724e+00,
+    14, concrete,       MAT1,   T1D2,   0,     0.1350,    0.0000,  4.168779e-05,  1.500760e+00,
+    15, concrete,       MAT1,   T1D2,   0,     0.1450,    0.0000,  3.330469e-05,  1.198969e+00,
+    16, concrete,       MAT1,   T1D2,   0,     0.1550,    0.0000,  2.492843e-05,  8.974236e-01,
+    17, concrete,       MAT1,   T1D2,   0,     0.1650,    0.0000,  1.657464e-05,  5.966872e-01,
+    18, concrete,       MAT1,   T1D2,   0,     0.1750,    0.0000,  8.259538e-06,  2.973434e-01,
+    19, concrete,       MAT1,   T1D2,   0,     0.1850,    0.0000,  0.000000e+00,  0.000000e+00,
+    20, concrete,       MAT1,   T1D2,   0,     0.1950,    0.0000,  8.131153e-06,  2.927215e-01,
+    21, concrete,       MAT1,   T1D2,   0,     0.2050,    0.0000,  1.634255e-05,  5.883318e-01,
+    22, concrete,       MAT1,   T1D2,   0,     0.2150,    0.0000,  2.461812e-05,  8.862523e-01,
+    23, concrete,       MAT1,   T1D2,   0,     0.2250,    0.0000,  3.294228e-05,  1.185922e+00,
+    24, concrete,       MAT1,   T1D2,   0,     0.2350,    0.0000,  4.130006e-05,  1.486802e+00,
+    25, concrete,       MAT1,   T1D2,   0,     0.2450,    0.0000,  4.967728e-05,  1.788382e+00,
+    26, concrete,       MAT1,   T1D2,   0,     0.2550,    0.0000,  5.806048e-05,  2.090177e+00,
+    27, concrete,       MAT1,   T1D2,   0,     0.2650,    0.0000,  6.602245e-05,  2.376808e+00,
+    28, concrete,       MAT1,   T1D2,   0,     0.2750,    0.0000,  7.289635e-05,  2.624269e+00,
+    29, concrete,       MAT1,   T1D2,   0,     0.2850,    0.0000,  7.819302e-05,  2.814949e+00,
+    30, concrete,       MAT1,   T1D2,   0,     0.2950,    0.0000,  8.155675e-05,  2.936043e+00,
+    31, concrete,       MAT1,   T1D2,   0,     0.3050,    0.0000,  8.272803e-05,  2.978209e+00,
+    32, concrete,       MAT1,   T1D2,   0,     0.3150,    0.0000,  8.155675e-05,  2.936043e+00,
+    33, concrete,       MAT1,   T1D2,   0,     0.3250,    0.0000,  7.819302e-05,  2.814949e+00,
+    34, concrete,       MAT1,   T1D2,   0,     0.3350,    0.0000,  7.289635e-05,  2.624269e+00,
+    35, concrete,       MAT1,   T1D2,   0,     0.3450,    0.0000,  6.602245e-05,  2.376808e+00,
+    36, concrete,       MAT1,   T1D2,   0,     0.3550,    0.0000,  5.806048e-05,  2.090177e+00,
+    37, concrete,       MAT1,   T1D2,   0,     0.3650,    0.0000,  4.967728e-05,  1.788382e+00,
+    38, concrete,       MAT1,   T1D2,   0,     0.3750,    0.0000,  4.130006e-05,  1.486802e+00,
+    39, concrete,       MAT1,   T1D2,   0,     0.3850,    0.0000,  3.294228e-05,  1.185922e+00,
+    40, concrete,       MAT1,   T1D2,   0,     0.3950,    0.0000,  2.461812e-05,  8.862523e-01,
+    41, concrete,       MAT1,   T1D2,   0,     0.4050,    0.0000,  1.634255e-05,  5.883318e-01,
+    42, concrete,       MAT1,   T1D2,   0,     0.4150,    0.0000,  8.131153e-06,  2.927215e-01,
+    43, concrete,       MAT1,   T1D2,   0,     0.4250,    0.0000,  0.000000e+00,  0.000000e+00,
+    44, concrete,       MAT1,   T1D2,   0,     0.4350,    0.0000,  8.301972e-06,  2.988710e-01,
+    45, concrete,       MAT1,   T1D2,   0,     0.4450,    0.0000,  1.664795e-05,  5.993263e-01,
+    46, concrete,       MAT1,   T1D2,   0,     0.4550,    0.0000,  2.502074e-05,  9.007466e-01,
+    47, concrete,       MAT1,   T1D2,   0,     0.4650,    0.0000,  3.340388e-05,  1.202540e+00,
+    48, concrete,       MAT1,   T1D2,   0,     0.4750,    0.0000,  4.142249e-05,  1.491210e+00,
+    49, concrete,       MAT1,   T1D2,   0,     0.4850,    0.0000,  4.821960e-05,  1.735906e+00,
+    50, concrete,       MAT1,   T1D2,   0,     0.4950,    0.0000,  5.316072e-05,  1.913786e+00,
+    51, concrete,       MAT1,   T1D2,   0,     0.5050,    0.0000,  5.579150e-05,  2.008494e+00,
+    52, concrete,       MAT1,   T1D2,   0,     0.5150,    0.0000,  5.579150e-05,  2.008494e+00,
+    53, concrete,       MAT1,   T1D2,   0,     0.5250,    0.0000,  5.316072e-05,  1.913786e+00,
+    54, concrete,       MAT1,   T1D2,   0,     0.5350,    0.0000,  4.821960e-05,  1.735906e+00,
+    55, concrete,       MAT1,   T1D2,   0,     0.5450,    0.0000,  4.142249e-05,  1.491210e+00,
+    56, concrete,       MAT1,   T1D2,   0,     0.5550,    0.0000,  3.340388e-05,  1.202540e+00,
+    57, concrete,       MAT1,   T1D2,   0,     0.5650,    0.0000,  2.502074e-05,  9.007466e-01,
+    58, concrete,       MAT1,   T1D2,   0,     0.5750,    0.0000,  1.664795e-05,  5.993263e-01,
+    59, concrete,       MAT1,   T1D2,   0,     0.5850,    0.0000,  8.301972e-06,  2.988710e-01,
+    60, concrete,       MAT1,   T1D2,   0,     0.5950,    0.0000,  0.000000e+00,  0.000000e+00,
+    61, concrete,       MAT1,   T1D2,   0,     0.6050,    0.0000,  8.320619e-06,  2.995423e-01,
+    62, concrete,       MAT1,   T1D2,   0,     0.6150,    0.0000,  1.667906e-05,  6.004462e-01,
+    63, concrete,       MAT1,   T1D2,   0,     0.6250,    0.0000,  2.505796e-05,  9.020867e-01,
+    64, concrete,       MAT1,   T1D2,   0,     0.6350,    0.0000,  3.340397e-05,  1.202543e+00,
+    65, concrete,       MAT1,   T1D2,   0,     0.6450,    0.0000,  4.098265e-05,  1.475375e+00,
+    66, concrete,       MAT1,   T1D2,   0,     0.6550,    0.0000,  4.700617e-05,  1.692222e+00,
+    67, concrete,       MAT1,   T1D2,   0,     0.6650,    0.0000,  5.090632e-05,  1.832628e+00,
+    68, concrete,       MAT1,   T1D2,   0,     0.6750,    0.0000,  5.228039e-05,  1.882094e+00,
+    69, concrete,       MAT1,   T1D2,   0,     0.6850,    0.0000,  5.090632e-05,  1.832628e+00,
+    70, concrete,       MAT1,   T1D2,   0,     0.6950,    0.0000,  4.700617e-05,  1.692222e+00,
+    71, concrete,       MAT1,   T1D2,   0,     0.7050,    0.0000,  4.098265e-05,  1.475375e+00,
+    72, concrete,       MAT1,   T1D2,   0,     0.7150,    0.0000,  3.340397e-05,  1.202543e+00,
+    73, concrete,       MAT1,   T1D2,   0,     0.7250,    0.0000,  2.505796e-05,  9.020867e-01,
+    74, concrete,       MAT1,   T1D2,   0,     0.7350,    0.0000,  1.667906e-05,  6.004462e-01,
+    75, concrete,       MAT1,   T1D2,   0,     0.7450,    0.0000,  8.320619e-06,  2.995423e-01,
+    76, concrete,       MAT1,   T1D2,   0,     0.7550,    0.0000,  0.000000e+00,  0.000000e+00,
+    77, concrete,       MAT1,   T1D2,   0,     0.7650,    0.0000,  8.102836e-06,  2.917021e-01,
+    78, concrete,       MAT1,   T1D2,   0,     0.7750,    0.0000,  1.629020e-05,  5.864470e-01,
+    79, concrete,       MAT1,   T1D2,   0,     0.7850,    0.0000,  2.454618e-05,  8.836624e-01,
+    80, concrete,       MAT1,   T1D2,   0,     0.7950,    0.0000,  3.285533e-05,  1.182792e+00,
+    81, concrete,       MAT1,   T1D2,   0,     0.8050,    0.0000,  4.120278e-05,  1.483300e+00,
+    82, concrete,       MAT1,   T1D2,   0,     0.8150,    0.0000,  4.957440e-05,  1.784678e+00,
+    83, concrete,       MAT1,   T1D2,   0,     0.8250,    0.0000,  5.795689e-05,  2.086448e+00,
+    84, concrete,       MAT1,   T1D2,   0,     0.8350,    0.0000,  6.617958e-05,  2.382465e+00,
+    85, concrete,       MAT1,   T1D2,   0,     0.8450,    0.0000,  7.357776e-05,  2.648799e+00,
+    86, concrete,       MAT1,   T1D2,   0,     0.8550,    0.0000,  7.961508e-05,  2.866143e+00,
+    87, concrete,       MAT1,   T1D2,   0,     0.8650,    0.0000,  8.390032e-05,  3.020411e+00,
+    88, concrete,       MAT1,   T1D2,   0,     0.8750,    0.0000,  8.614813e-05,  3.101333e+00,
+    89, concrete,       MAT1,   T1D2,   0,     0.8850,    0.0000,  8.614813e-05,  3.101333e+00,
+    90, concrete,       MAT1,   T1D2,   0,     0.8950,    0.0000,  8.390032e-05,  3.020411e+00,
+    91, concrete,       MAT1,   T1D2,   0,     0.9050,    0.0000,  7.961508e-05,  2.866143e+00,
+    92, concrete,       MAT1,   T1D2,   0,     0.9150,    0.0000,  7.357776e-05,  2.648799e+00,
+    93, concrete,       MAT1,   T1D2,   0,     0.9250,    0.0000,  6.617958e-05,  2.382465e+00,
+    94, concrete,       MAT1,   T1D2,   0,     0.9350,    0.0000,  5.795689e-05,  2.086448e+00,
+    95, concrete,       MAT1,   T1D2,   0,     0.9450,    0.0000,  4.957440e-05,  1.784678e+00,
+    96, concrete,       MAT1,   T1D2,   0,     0.9550,    0.0000,  4.120278e-05,  1.483300e+00,
+    97, concrete,       MAT1,   T1D2,   0,     0.9650,    0.0000,  3.285533e-05,  1.182792e+00,
+    98, concrete,       MAT1,   T1D2,   0,     0.9750,    0.0000,  2.454618e-05,  8.836624e-01,
+    99, concrete,       MAT1,   T1D2,   0,     0.9850,    0.0000,  1.629020e-05,  5.864470e-01,
+   100, concrete,       MAT1,   T1D2,   0,     0.9950,    0.0000,  8.102836e-06,  2.917021e-01,
+   101, reinf,      MAT31,   T1D2,   0,     0.0050,    0.0000,  2.457878e-03,  4.915756e+02,  5.000000e+02,
+   102, reinf,      MAT31,   T1D2,   0,     0.0150,    0.0000,  2.383414e-03,  4.766828e+02,  5.000000e+02,
+   103, reinf,      MAT31,   T1D2,   0,     0.0250,    0.0000,  2.308604e-03,  4.617208e+02,  5.000000e+02,
+   104, reinf,      MAT31,   T1D2,   0,     0.0350,    0.0000,  2.233593e-03,  4.467186e+02,  5.000000e+02,
+   105, reinf,      MAT31,   T1D2,   0,     0.0450,    0.0000,  2.158520e-03,  4.317041e+02,  5.000000e+02,
+   106, reinf,      MAT31,   T1D2,   0,     0.0550,    0.0000,  2.087883e-03,  4.175765e+02,  5.000000e+02,
+   107, reinf,      MAT31,   T1D2,   0,     0.0650,    0.0000,  2.028633e-03,  4.057266e+02,  5.000000e+02,
+   108, reinf,      MAT31,   T1D2,   0,     0.0750,    0.0000,  1.985839e-03,  3.971679e+02,  5.000000e+02,
+   109, reinf,      MAT31,   T1D2,   0,     0.0850,    0.0000,  1.963145e-03,  3.926290e+02,  5.000000e+02,
+   110, reinf,      MAT31,   T1D2,   0,     0.0950,    0.0000,  1.963145e-03,  3.926290e+02,  5.000000e+02,
+   111, reinf,      MAT31,   T1D2,   0,     0.1050,    0.0000,  1.985839e-03,  3.971679e+02,  5.000000e+02,
+   112, reinf,      MAT31,   T1D2,   0,     0.1150,    0.0000,  2.028633e-03,  4.057266e+02,  5.000000e+02,
+   113, reinf,      MAT31,   T1D2,   0,     0.1250,    0.0000,  2.087883e-03,  4.175765e+02,  5.000000e+02,
+   114, reinf,      MAT31,   T1D2,   0,     0.1350,    0.0000,  2.158520e-03,  4.317041e+02,  5.000000e+02,
+   115, reinf,      MAT31,   T1D2,   0,     0.1450,    0.0000,  2.233593e-03,  4.467186e+02,  5.000000e+02,
+   116, reinf,      MAT31,   T1D2,   0,     0.1550,    0.0000,  2.308604e-03,  4.617208e+02,  5.000000e+02,
+   117, reinf,      MAT31,   T1D2,   0,     0.1650,    0.0000,  2.383414e-03,  4.766828e+02,  5.000000e+02,
+   118, reinf,      MAT31,   T1D2,   0,     0.1750,    0.0000,  2.457878e-03,  4.915756e+02,  5.000000e+02,
+   119, reinf,      MAT31,   T1D2,   0,     0.1850,    0.0000,  8.533588e-03,  5.063688e+02,  5.058072e+02,
+   120, reinf,      MAT31,   T1D2,   0,     0.1950,    0.0000,  2.459028e-03,  4.918055e+02,  5.000000e+02,
+   121, reinf,      MAT31,   T1D2,   0,     0.2050,    0.0000,  2.385493e-03,  4.770985e+02,  5.000000e+02,
+   122, reinf,      MAT31,   T1D2,   0,     0.2150,    0.0000,  2.311383e-03,  4.622766e+02,  5.000000e+02,
+   123, reinf,      MAT31,   T1D2,   0,     0.2250,    0.0000,  2.236838e-03,  4.473677e+02,  5.000000e+02,
+   124, reinf,      MAT31,   T1D2,   0,     0.2350,    0.0000,  2.161993e-03,  4.323985e+02,  5.000000e+02,
+   125, reinf,      MAT31,   T1D2,   0,     0.2450,    0.0000,  2.086973e-03,  4.173945e+02,  5.000000e+02,
+   126, reinf,      MAT31,   T1D2,   0,     0.2550,    0.0000,  2.011899e-03,  4.023799e+02,  5.000000e+02,
+   127, reinf,      MAT31,   T1D2,   0,     0.2650,    0.0000,  1.940598e-03,  3.881196e+02,  5.000000e+02,
+   128, reinf,      MAT31,   T1D2,   0,     0.2750,    0.0000,  1.879041e-03,  3.758081e+02,  5.000000e+02,
+   129, reinf,      MAT31,   T1D2,   0,     0.2850,    0.0000,  1.831608e-03,  3.663216e+02,  5.000000e+02,
+   130, reinf,      MAT31,   T1D2,   0,     0.2950,    0.0000,  1.801485e-03,  3.602970e+02,  5.000000e+02,
+   131, reinf,      MAT31,   T1D2,   0,     0.3050,    0.0000,  1.790996e-03,  3.581992e+02,  5.000000e+02,
+   132, reinf,      MAT31,   T1D2,   0,     0.3150,    0.0000,  1.801485e-03,  3.602970e+02,  5.000000e+02,
+   133, reinf,      MAT31,   T1D2,   0,     0.3250,    0.0000,  1.831608e-03,  3.663216e+02,  5.000000e+02,
+   134, reinf,      MAT31,   T1D2,   0,     0.3350,    0.0000,  1.879041e-03,  3.758081e+02,  5.000000e+02,
+   135, reinf,      MAT31,   T1D2,   0,     0.3450,    0.0000,  1.940598e-03,  3.881196e+02,  5.000000e+02,
+   136, reinf,      MAT31,   T1D2,   0,     0.3550,    0.0000,  2.011899e-03,  4.023799e+02,  5.000000e+02,
+   137, reinf,      MAT31,   T1D2,   0,     0.3650,    0.0000,  2.086973e-03,  4.173945e+02,  5.000000e+02,
+   138, reinf,      MAT31,   T1D2,   0,     0.3750,    0.0000,  2.161993e-03,  4.323985e+02,  5.000000e+02,
+   139, reinf,      MAT31,   T1D2,   0,     0.3850,    0.0000,  2.236838e-03,  4.473677e+02,  5.000000e+02,
+   140, reinf,      MAT31,   T1D2,   0,     0.3950,    0.0000,  2.311383e-03,  4.622766e+02,  5.000000e+02,
+   141, reinf,      MAT31,   T1D2,   0,     0.4050,    0.0000,  2.385493e-03,  4.770985e+02,  5.000000e+02,
+   142, reinf,      MAT31,   T1D2,   0,     0.4150,    0.0000,  2.459028e-03,  4.918055e+02,  5.000000e+02,
+   143, reinf,      MAT31,   T1D2,   0,     0.4250,    0.0000,  8.533588e-03,  5.063688e+02,  5.058072e+02,
+   144, reinf,      MAT31,   T1D2,   0,     0.4350,    0.0000,  2.457498e-03,  4.914996e+02,  5.000000e+02,
+   145, reinf,      MAT31,   T1D2,   0,     0.4450,    0.0000,  2.382758e-03,  4.765515e+02,  5.000000e+02,
+   146, reinf,      MAT31,   T1D2,   0,     0.4550,    0.0000,  2.307778e-03,  4.615555e+02,  5.000000e+02,
+   147, reinf,      MAT31,   T1D2,   0,     0.4650,    0.0000,  2.232705e-03,  4.465409e+02,  5.000000e+02,
+   148, reinf,      MAT31,   T1D2,   0,     0.4750,    0.0000,  2.160896e-03,  4.321792e+02,  5.000000e+02,
+   149, reinf,      MAT31,   T1D2,   0,     0.4850,    0.0000,  2.100027e-03,  4.200053e+02,  5.000000e+02,
+   150, reinf,      MAT31,   T1D2,   0,     0.4950,    0.0000,  2.055778e-03,  4.111555e+02,  5.000000e+02,
+   151, reinf,      MAT31,   T1D2,   0,     0.5050,    0.0000,  2.032218e-03,  4.064437e+02,  5.000000e+02,
+   152, reinf,      MAT31,   T1D2,   0,     0.5150,    0.0000,  2.032218e-03,  4.064437e+02,  5.000000e+02,
+   153, reinf,      MAT31,   T1D2,   0,     0.5250,    0.0000,  2.055778e-03,  4.111555e+02,  5.000000e+02,
+   154, reinf,      MAT31,   T1D2,   0,     0.5350,    0.0000,  2.100027e-03,  4.200053e+02,  5.000000e+02,
+   155, reinf,      MAT31,   T1D2,   0,     0.5450,    0.0000,  2.160896e-03,  4.321792e+02,  5.000000e+02,
+   156, reinf,      MAT31,   T1D2,   0,     0.5550,    0.0000,  2.232705e-03,  4.465409e+02,  5.000000e+02,
+   157, reinf,      MAT31,   T1D2,   0,     0.5650,    0.0000,  2.307778e-03,  4.615555e+02,  5.000000e+02,
+   158, reinf,      MAT31,   T1D2,   0,     0.5750,    0.0000,  2.382758e-03,  4.765515e+02,  5.000000e+02,
+   159, reinf,      MAT31,   T1D2,   0,     0.5850,    0.0000,  2.457498e-03,  4.914996e+02,  5.000000e+02,
+   160, reinf,      MAT31,   T1D2,   0,     0.5950,    0.0000,  8.533588e-03,  5.063688e+02,  5.058072e+02,
+   161, reinf,      MAT31,   T1D2,   0,     0.6050,    0.0000,  2.457331e-03,  4.914662e+02,  5.000000e+02,
+   162, reinf,      MAT31,   T1D2,   0,     0.6150,    0.0000,  2.382479e-03,  4.764958e+02,  5.000000e+02,
+   163, reinf,      MAT31,   T1D2,   0,     0.6250,    0.0000,  2.307444e-03,  4.614888e+02,  5.000000e+02,
+   164, reinf,      MAT31,   T1D2,   0,     0.6350,    0.0000,  2.232704e-03,  4.465408e+02,  5.000000e+02,
+   165, reinf,      MAT31,   T1D2,   0,     0.6450,    0.0000,  2.164835e-03,  4.329670e+02,  5.000000e+02,
+   166, reinf,      MAT31,   T1D2,   0,     0.6550,    0.0000,  2.110893e-03,  4.221786e+02,  5.000000e+02,
+   167, reinf,      MAT31,   T1D2,   0,     0.6650,    0.0000,  2.075966e-03,  4.151933e+02,  5.000000e+02,
+   168, reinf,      MAT31,   T1D2,   0,     0.6750,    0.0000,  2.063661e-03,  4.127323e+02,  5.000000e+02,
+   169, reinf,      MAT31,   T1D2,   0,     0.6850,    0.0000,  2.075966e-03,  4.151933e+02,  5.000000e+02,
+   170, reinf,      MAT31,   T1D2,   0,     0.6950,    0.0000,  2.110893e-03,  4.221786e+02,  5.000000e+02,
+   171, reinf,      MAT31,   T1D2,   0,     0.7050,    0.0000,  2.164835e-03,  4.329670e+02,  5.000000e+02,
+   172, reinf,      MAT31,   T1D2,   0,     0.7150,    0.0000,  2.232704e-03,  4.465408e+02,  5.000000e+02,
+   173, reinf,      MAT31,   T1D2,   0,     0.7250,    0.0000,  2.307444e-03,  4.614888e+02,  5.000000e+02,
+   174, reinf,      MAT31,   T1D2,   0,     0.7350,    0.0000,  2.382479e-03,  4.764958e+02,  5.000000e+02,
+   175, reinf,      MAT31,   T1D2,   0,     0.7450,    0.0000,  2.457331e-03,  4.914662e+02,  5.000000e+02,
+   176, reinf,      MAT31,   T1D2,   0,     0.7550,    0.0000,  8.533588e-03,  5.063688e+02,  5.058072e+02,
+   177, reinf,      MAT31,   T1D2,   0,     0.7650,    0.0000,  2.459281e-03,  4.918562e+02,  5.000000e+02,
+   178, reinf,      MAT31,   T1D2,   0,     0.7750,    0.0000,  2.385962e-03,  4.771923e+02,  5.000000e+02,
+   179, reinf,      MAT31,   T1D2,   0,     0.7850,    0.0000,  2.312027e-03,  4.624055e+02,  5.000000e+02,
+   180, reinf,      MAT31,   T1D2,   0,     0.7950,    0.0000,  2.237617e-03,  4.475234e+02,  5.000000e+02,
+   181, reinf,      MAT31,   T1D2,   0,     0.8050,    0.0000,  2.162864e-03,  4.325728e+02,  5.000000e+02,
+   182, reinf,      MAT31,   T1D2,   0,     0.8150,    0.0000,  2.087894e-03,  4.175788e+02,  5.000000e+02,
+   183, reinf,      MAT31,   T1D2,   0,     0.8250,    0.0000,  2.012827e-03,  4.025654e+02,  5.000000e+02,
+   184, reinf,      MAT31,   T1D2,   0,     0.8350,    0.0000,  1.939191e-03,  3.878382e+02,  5.000000e+02,
+   185, reinf,      MAT31,   T1D2,   0,     0.8450,    0.0000,  1.872939e-03,  3.745877e+02,  5.000000e+02,
+   186, reinf,      MAT31,   T1D2,   0,     0.8550,    0.0000,  1.818873e-03,  3.637746e+02,  5.000000e+02,
+   187, reinf,      MAT31,   T1D2,   0,     0.8650,    0.0000,  1.780498e-03,  3.560995e+02,  5.000000e+02,
+   188, reinf,      MAT31,   T1D2,   0,     0.8750,    0.0000,  1.760368e-03,  3.520736e+02,  5.000000e+02,
+   189, reinf,      MAT31,   T1D2,   0,     0.8850,    0.0000,  1.760368e-03,  3.520736e+02,  5.000000e+02,
+   190, reinf,      MAT31,   T1D2,   0,     0.8950,    0.0000,  1.780498e-03,  3.560995e+02,  5.000000e+02,
+   191, reinf,      MAT31,   T1D2,   0,     0.9050,    0.0000,  1.818873e-03,  3.637746e+02,  5.000000e+02,
+   192, reinf,      MAT31,   T1D2,   0,     0.9150,    0.0000,  1.872939e-03,  3.745877e+02,  5.000000e+02,
+   193, reinf,      MAT31,   T1D2,   0,     0.9250,    0.0000,  1.939191e-03,  3.878382e+02,  5.000000e+02,
+   194, reinf,      MAT31,   T1D2,   0,     0.9350,    0.0000,  2.012827e-03,  4.025654e+02,  5.000000e+02,
+   195, reinf,      MAT31,   T1D2,   0,     0.9450,    0.0000,  2.087894e-03,  4.175788e+02,  5.000000e+02,
+   196, reinf,      MAT31,   T1D2,   0,     0.9550,    0.0000,  2.162864e-03,  4.325728e+02,  5.000000e+02,
+   197, reinf,      MAT31,   T1D2,   0,     0.9650,    0.0000,  2.237617e-03,  4.475234e+02,  5.000000e+02,
+   198, reinf,      MAT31,   T1D2,   0,     0.9750,    0.0000,  2.312027e-03,  4.624055e+02,  5.000000e+02,
+   199, reinf,      MAT31,   T1D2,   0,     0.9850,    0.0000,  2.385962e-03,  4.771923e+02,  5.000000e+02,
+   200, reinf,      MAT31,   T1D2,   0,     0.9950,    0.0000,  2.459281e-03,  4.918562e+02,  5.000000e+02,
+   201, bond,       MAT5,   S1D2,   0,     0.0000,    0.0000, -1.925251e-04, -5.911398e+00,
+   202, bond,       MAT5,   S1D2,   0,     0.0100,    0.0000, -1.680289e-04, -5.951170e+00,
+   203, bond,       MAT5,   S1D2,   0,     0.0200,    0.0000, -1.443605e-04, -5.978853e+00,
+   204, bond,       MAT5,   S1D2,   0,     0.0300,    0.0000, -1.215238e-04, -5.994935e+00,
+   205, bond,       MAT5,   S1D2,   0,     0.0400,    0.0000, -9.952090e-05, -5.999817e+00,
+   206, bond,       MAT5,   S1D2,   0,     0.0500,    0.0000, -7.835257e-05, -5.645400e+00,
+   207, bond,       MAT5,   S1D2,   0,     0.0600,    0.0000, -5.796950e-05, -4.735249e+00,
+   208, bond,       MAT5,   S1D2,   0,     0.0700,    0.0000, -3.824509e-05, -3.420090e+00,
+   209, bond,       MAT5,   S1D2,   0,     0.0800,    0.0000, -1.899640e-05, -1.813757e+00,
+   210, bond,       MAT5,   S1D2,   0,     0.0900,    0.0000,  2.710505e-20,  2.710505e-15,
+   211, bond,       MAT5,   S1D2,   0,     0.1000,    0.0000,  1.899640e-05,  1.813757e+00,
+   212, bond,       MAT5,   S1D2,   0,     0.1100,    0.0000,  3.824509e-05,  3.420090e+00,
+   213, bond,       MAT5,   S1D2,   0,     0.1200,    0.0000,  5.796950e-05,  4.735249e+00,
+   214, bond,       MAT5,   S1D2,   0,     0.1300,    0.0000,  7.835257e-05,  5.645400e+00,
+   215, bond,       MAT5,   S1D2,   0,     0.1400,    0.0000,  9.952090e-05,  5.999817e+00,
+   216, bond,       MAT5,   S1D2,   0,     0.1500,    0.0000,  1.215238e-04,  5.994935e+00,
+   217, bond,       MAT5,   S1D2,   0,     0.1600,    0.0000,  1.443605e-04,  5.978853e+00,
+   218, bond,       MAT5,   S1D2,   0,     0.1700,    0.0000,  1.680289e-04,  5.951170e+00,
+   219, bond,       MAT5,   S1D2,   0,     0.1800,    0.0000,  1.925251e-04,  5.911398e+00,
+   220, bond,       MAT5,   S1D2,   0,     0.1900,    0.0000, -2.343073e-04, -5.819513e+00,
+   221, bond,       MAT5,   S1D2,   0,     0.2000,    0.0000, -2.097983e-04, -5.876943e+00,
+   222, bond,       MAT5,   S1D2,   0,     0.2100,    0.0000, -1.861068e-04, -5.922872e+00,
+   223, bond,       MAT5,   S1D2,   0,     0.2200,    0.0000, -1.632392e-04, -5.957646e+00,
+   224, bond,       MAT5,   S1D2,   0,     0.2300,    0.0000, -1.412002e-04, -5.981715e+00,
+   225, bond,       MAT5,   S1D2,   0,     0.2400,    0.0000, -1.199933e-04, -5.995624e+00,
+   226, bond,       MAT5,   S1D2,   0,     0.2500,    0.0000, -9.962036e-05, -5.999885e+00,
+   227, bond,       MAT5,   S1D2,   0,     0.2600,    0.0000, -8.008197e-05, -5.698422e+00,
+   228, bond,       MAT5,   S1D2,   0,     0.2700,    0.0000, -6.133621e-05, -4.919685e+00,
+   229, bond,       MAT5,   S1D2,   0,     0.2800,    0.0000, -4.327477e-05, -3.790854e+00,
+   230, bond,       MAT5,   S1D2,   0,     0.2900,    0.0000, -2.574062e-05, -2.407436e+00,
+   231, bond,       MAT5,   S1D2,   0,     0.3000,    0.0000, -8.541339e-06, -8.382967e-01,
+   232, bond,       MAT5,   S1D2,   0,     0.3100,    0.0000,  8.541339e-06,  8.382967e-01,
+   233, bond,       MAT5,   S1D2,   0,     0.3200,    0.0000,  2.574062e-05,  2.407436e+00,
+   234, bond,       MAT5,   S1D2,   0,     0.3300,    0.0000,  4.327477e-05,  3.790854e+00,
+   235, bond,       MAT5,   S1D2,   0,     0.3400,    0.0000,  6.133621e-05,  4.919685e+00,
+   236, bond,       MAT5,   S1D2,   0,     0.3500,    0.0000,  8.008197e-05,  5.698422e+00,
+   237, bond,       MAT5,   S1D2,   0,     0.3600,    0.0000,  9.962036e-05,  5.999885e+00,
+   238, bond,       MAT5,   S1D2,   0,     0.3700,    0.0000,  1.199933e-04,  5.995624e+00,
+   239, bond,       MAT5,   S1D2,   0,     0.3800,    0.0000,  1.412002e-04,  5.981715e+00,
+   240, bond,       MAT5,   S1D2,   0,     0.3900,    0.0000,  1.632392e-04,  5.957646e+00,
+   241, bond,       MAT5,   S1D2,   0,     0.4000,    0.0000,  1.861068e-04,  5.922872e+00,
+   242, bond,       MAT5,   S1D2,   0,     0.4100,    0.0000,  2.097983e-04,  5.876943e+00,
+   243, bond,       MAT5,   S1D2,   0,     0.4200,    0.0000,  2.343073e-04,  5.819513e+00,
+   244, bond,       MAT5,   S1D2,   0,     0.4300,    0.0000, -1.744769e-04, -5.941769e+00,
+   245, bond,       MAT5,   S1D2,   0,     0.4400,    0.0000, -1.499849e-04, -5.973267e+00,
+   246, bond,       MAT5,   S1D2,   0,     0.4500,    0.0000, -1.263238e-04, -5.992451e+00,
+   247, bond,       MAT5,   S1D2,   0,     0.4600,    0.0000, -1.034963e-04, -5.999865e+00,
+   248, bond,       MAT5,   S1D2,   0,     0.4700,    0.0000, -8.150325e-05, -5.738953e+00,
+   249, bond,       MAT5,   S1D2,   0,     0.4800,    0.0000, -6.030851e-05, -4.864730e+00,
+   250, bond,       MAT5,   S1D2,   0,     0.4900,    0.0000, -3.979044e-05, -3.536389e+00,
+   251, bond,       MAT5,   S1D2,   0,     0.5000,    0.0000, -1.976427e-05, -1.882861e+00,
+   252, bond,       MAT5,   S1D2,   0,     0.5100,    0.0000,  2.818926e-18,  2.818926e-13,
+   253, bond,       MAT5,   S1D2,   0,     0.5200,    0.0000,  1.976427e-05,  1.882861e+00,
+   254, bond,       MAT5,   S1D2,   0,     0.5300,    0.0000,  3.979044e-05,  3.536389e+00,
+   255, bond,       MAT5,   S1D2,   0,     0.5400,    0.0000,  6.030851e-05,  4.864730e+00,
+   256, bond,       MAT5,   S1D2,   0,     0.5500,    0.0000,  8.150325e-05,  5.738953e+00,
+   257, bond,       MAT5,   S1D2,   0,     0.5600,    0.0000,  1.034963e-04,  5.999865e+00,
+   258, bond,       MAT5,   S1D2,   0,     0.5700,    0.0000,  1.263238e-04,  5.992451e+00,
+   259, bond,       MAT5,   S1D2,   0,     0.5800,    0.0000,  1.499849e-04,  5.973267e+00,
+   260, bond,       MAT5,   S1D2,   0,     0.5900,    0.0000,  1.744769e-04,  5.941769e+00,
+   261, bond,       MAT5,   S1D2,   0,     0.6000,    0.0000, -1.651499e-04, -5.955115e+00,
+   262, bond,       MAT5,   S1D2,   0,     0.6100,    0.0000, -1.406598e-04, -5.982184e+00,
+   263, bond,       MAT5,   S1D2,   0,     0.6200,    0.0000, -1.170018e-04, -5.996829e+00,
+   264, bond,       MAT5,   S1D2,   0,     0.6300,    0.0000, -9.417790e-05, -5.973277e+00,
+   265, bond,       MAT5,   S1D2,   0,     0.6400,    0.0000, -7.218490e-05, -5.424096e+00,
+   266, bond,       MAT5,   S1D2,   0,     0.6500,    0.0000, -5.094637e-05, -4.311065e+00,
+   267, bond,       MAT5,   S1D2,   0,     0.6600,    0.0000, -3.030750e-05, -2.791364e+00,
+   268, bond,       MAT5,   S1D2,   0,     0.6700,    0.0000, -1.005690e-05, -9.834278e-01,
+   269, bond,       MAT5,   S1D2,   0,     0.6800,    0.0000,  1.005690e-05,  9.834278e-01,
+   270, bond,       MAT5,   S1D2,   0,     0.6900,    0.0000,  3.030750e-05,  2.791364e+00,
+   271, bond,       MAT5,   S1D2,   0,     0.7000,    0.0000,  5.094637e-05,  4.311065e+00,
+   272, bond,       MAT5,   S1D2,   0,     0.7100,    0.0000,  7.218490e-05,  5.424096e+00,
+   273, bond,       MAT5,   S1D2,   0,     0.7200,    0.0000,  9.417790e-05,  5.973277e+00,
+   274, bond,       MAT5,   S1D2,   0,     0.7300,    0.0000,  1.170018e-04,  5.996829e+00,
+   275, bond,       MAT5,   S1D2,   0,     0.7400,    0.0000,  1.406598e-04,  5.982184e+00,
+   276, bond,       MAT5,   S1D2,   0,     0.7500,    0.0000,  1.651499e-04,  5.955115e+00,
+   277, bond,       MAT5,   S1D2,   0,     0.7600,    0.0000, -2.421039e-04, -5.799245e+00,
+   278, bond,       MAT5,   S1D2,   0,     0.7700,    0.0000, -2.175921e-04, -5.859740e+00,
+   279, bond,       MAT5,   S1D2,   0,     0.7800,    0.0000, -1.938954e-04, -5.908854e+00,
+   280, bond,       MAT5,   S1D2,   0,     0.7900,    0.0000, -1.710206e-04, -5.946905e+00,
+   281, bond,       MAT5,   S1D2,   0,     0.8000,    0.0000, -1.489730e-04, -5.974318e+00,
+   282, bond,       MAT5,   S1D2,   0,     0.8100,    0.0000, -1.277564e-04, -5.991616e+00,
+   283, bond,       MAT5,   S1D2,   0,     0.8200,    0.0000, -1.073732e-04, -5.999399e+00,
+   284, bond,       MAT5,   S1D2,   0,     0.8300,    0.0000, -8.782447e-05, -5.885015e+00,
+   285, bond,       MAT5,   S1D2,   0,     0.8400,    0.0000, -6.909436e-05, -5.294913e+00,
+   286, bond,       MAT5,   S1D2,   0,     0.8500,    0.0000, -5.110075e-05, -4.320940e+00,
+   287, bond,       MAT5,   S1D2,   0,     0.8600,    0.0000, -3.370817e-05, -3.066968e+00,
+   288, bond,       MAT5,   S1D2,   0,     0.8700,    0.0000, -1.674220e-05, -1.608774e+00,
+   289, bond,       MAT5,   S1D2,   0,     0.8800,    0.0000, -8.673617e-19, -8.673617e-14,
+   290, bond,       MAT5,   S1D2,   0,     0.8900,    0.0000,  1.674220e-05,  1.608774e+00,
+   291, bond,       MAT5,   S1D2,   0,     0.9000,    0.0000,  3.370817e-05,  3.066968e+00,
+   292, bond,       MAT5,   S1D2,   0,     0.9100,    0.0000,  5.110075e-05,  4.320940e+00,
+   293, bond,       MAT5,   S1D2,   0,     0.9200,    0.0000,  6.909436e-05,  5.294913e+00,
+   294, bond,       MAT5,   S1D2,   0,     0.9300,    0.0000,  8.782447e-05,  5.885015e+00,
+   295, bond,       MAT5,   S1D2,   0,     0.9400,    0.0000,  1.073732e-04,  5.999399e+00,
+   296, bond,       MAT5,   S1D2,   0,     0.9500,    0.0000,  1.277564e-04,  5.991616e+00,
+   297, bond,       MAT5,   S1D2,   0,     0.9600,    0.0000,  1.489730e-04,  5.974318e+00,
+   298, bond,       MAT5,   S1D2,   0,     0.9700,    0.0000,  1.710206e-04,  5.946905e+00,
+   299, bond,       MAT5,   S1D2,   0,     0.9800,    0.0000,  1.938954e-04,  5.908854e+00,
+   300, bond,       MAT5,   S1D2,   0,     0.9900,    0.0000,  2.175921e-04,  5.859740e+00,
+   301, bond,       MAT5,   S1D2,   0,     1.0000,    0.0000,  2.421039e-04,  5.799245e+00,

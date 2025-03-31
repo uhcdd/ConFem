@@ -105,4 +105,4 @@ last iteration data
    10, 2.0000,    7
 last timeout data
 reached time 2.0000
-total comp time 1 seconds
+total comp time 2 seconds

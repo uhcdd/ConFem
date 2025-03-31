@@ -370,5 +370,34 @@ create SDA      2, xy   13.333  13.333, LL  18.896, nn  0.733 0.680, ts  0.195, 
 0 109 5.000 1.07000 iter 47 8.644149e+01 1.000000e+00    1.592753e-03
 0 109 5.000 1.07000 iter 48 8.644150e+01 1.000000e+00    6.511125e-19
 0 109 5.000 1.07000 iter 49 8.644149e+01 1.000000e+00    1.592753e-03
-terminated quasi-static computations after  3 attempts for equilibrium iteration
-total comp time 2 seconds
+../_DataRegularization/TwoElementCPS3_SDATest_6n
+ premature termination 1 - 3 iteration attempts - time 1.0700 of target 5.0000
+last iteration data
+   98, 0.9800,    1
+   99, 0.9900,    1
+  100, 1.0000,    1
+  101, 1.0100,    1
+  102, 1.0200,    1
+  103, 1.0300,    1
+  104, 1.0400,    1
+  105, 1.0500,    1
+  106, 1.0600,    1
+  107, 1.0700,   49
+  108, 1.0700,   49
+  109, 1.0700,   49
+last timeout data
+   97, 0.005820, 11.83
+   98, 0.005880, 11.96
+   99, 0.005940, 12.08
+  100, 0.006000, 12.20
+  101, 0.006060, 12.32
+  102, 0.006120, 12.44
+  103, 0.006180, 12.57
+  104, 0.006240, 12.69
+  105, 0.006300, 12.81
+  106, 0.006360, 12.93
+  107, 0.006420, 21.44
+  108, 0.006420, 12.26
+reached time 1.0700
+total comp time 1 seconds
+ time target not reached -- no finish with plot or hash value

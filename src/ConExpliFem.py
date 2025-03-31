@@ -176,11 +176,9 @@ class ConExpliFem:
             f1=open( Name+".in.txt", 'r')
             MatList, StepList = DataInput(f1, f6, Restart)              # read input file 
             f1.close()
-            f2=open( Name+".elemout.txt", 'a')                              #
-            f3=open( Name+".nodeout.txt", 'a')                              #
             f5=open( Name+".timeout.txt", 'a')                              #
-            NameElemOut_ = Name+".elemout_.txt"
-            NameNodeOut_ = Name+".nodeout_.txt"
+            NameElemOut_ = Name+".elemout.txt"
+            NameNodeOut_ = Name+".nodeout.txt"
             f7, MaxType =None, None
             ElemDataAll = {}                                                # skip this in case it is retrieved from pickle !!!
         else:
@@ -208,12 +206,10 @@ class ConExpliFem:
                 NoIndToCMInd = Sloan(NodeList, ElList)                      # to reduce the skyline
                 NodeList.sort(key=lambda t: t.CMIndex)
             N, Skyline, SDiag, SLen, ElemDataAll = AssignGlobalDof( NodeList, ElList, MatList, SecDic, NoIndToCMInd) # assign degrees of freedom (dof) to nodes and elements -> see above
-            f2=open( Name+".elemout.txt", 'w')
-            NameElemOut_ = Name+".elemout_.txt"
-            NameNodeOut_ = Name+".nodeout_.txt"
+            NameElemOut_ = Name+".elemout.txt"
+            NameNodeOut_ = Name+".nodeout.txt"
             if pth.exists(NameElemOut_): os.remove(NameElemOut_)
             if pth.exists(NameNodeOut_): os.remove(NameNodeOut_)
-            f3=open( Name+".nodeout.txt", 'w')
             WrNodes, LineS = None, None
             MaxType = [] 
             f5, f7 = None, None
@@ -228,23 +224,23 @@ class ConExpliFem:
                 if ElsticLTFlag: break
 
             # Initializations
-            VecU0 = zeros((N), dtype=double)                                # displacement vector time t
-            VecU1 = zeros((N), dtype=double)                                # displacement vector time t+1
-            VecVm = zeros((N), dtype=double)                                # velocity vector time t-1
-            VecV0 = zeros((N), dtype=double)                                # velocity vector time t
-            VecA  = zeros((N), dtype=double)                                # acceleration vector time t
-#            VecI1 = zeros((N), dtype=double)                                # internal nodal forces vector time t+1
-            VecI0 = zeros((N), dtype=double)                                # internal nodal forces vector time t
-            VecP1 = zeros((N), dtype=double)                                # load vector time t+1
-            VecP0 = zeros((N), dtype=double)                                # load vector time t
-            VecPN = zeros((N), dtype=double)                                # nominal load vector for step time target  -- for compatibility only
-            VecT  = zeros((N), dtype=double)                                # current temperatures vector - for compatibility only
-            VecS  = zeros((N), dtype=double)                                # temperatures vector of previous time step  - for compatibility only
+            VecU0 = zeros((N), dtype=float)                                # displacement vector time t
+            VecU1 = zeros((N), dtype=float)                                # displacement vector time t+1
+            VecVm = zeros((N), dtype=float)                                # velocity vector time t-1
+            VecV0 = zeros((N), dtype=float)                                # velocity vector time t
+            VecA  = zeros((N), dtype=float)                                # acceleration vector time t
+#            VecI1 = zeros((N), dtype=float)                                # internal nodal forces vector time t+1
+            VecI0 = zeros((N), dtype=float)                                # internal nodal forces vector time t
+            VecP1 = zeros((N), dtype=float)                                # load vector time t+1
+            VecP0 = zeros((N), dtype=float)                                # load vector time t
+            VecPN = zeros((N), dtype=float)                                # nominal load vector for step time target  -- for compatibility only
+            VecT  = zeros((N), dtype=float)                                # current temperatures vector - for compatibility only
+            VecS  = zeros((N), dtype=float)                                # temperatures vector of previous time step  - for compatibility only
             BCIn  = ones((N),  dtype=int)                                   # indices for dofs with prescribed displacements
             BCIi  = zeros((N), dtype=int)                                   # indices for dofs with prescribed displacements --> 1, --> 0 otherwise
-#            VecB  = zeros((N),dtype=double)                                 # reaction forces
-            VecBm = zeros((N),dtype=double)                                 # previous time step t-1 reaction forces of - presumably not used, for compatibility
-            VecAm = zeros((N),dtype=double)                                 # previous time step t-1 accelerations - presumably not used, for compatibility
+#            VecB  = zeros((N),dtype=float)                                 # reaction forces
+            VecBm = zeros((N),dtype=float)                                 # previous time step t-1 reaction forces of - presumably not used, for compatibility
+            VecAm = zeros((N),dtype=float)                                 # previous time step t-1 accelerations - presumably not used, for compatibility
             Time  = 0.
             TimeOld = 0.
             StepCounter = 0                                                        # step counter
@@ -252,18 +248,18 @@ class ConExpliFem:
 
         Eint  = 0
         Eext  = 0
-        VecD  = zeros((N), dtype=double)
-        VecV0_= zeros((N), dtype=double)
-        VecVm_= zeros((N), dtype=double)
-        VecV1 = zeros((N), dtype=double)
-        VecR  = zeros((N), dtype=double)
-        VecM  = zeros((N), dtype=double)                                    # lumped masses
-        VecMI = zeros((N), dtype=double)                                    # lumped masses inverted
-        VecD1 = zeros((N), dtype=double)                                    # nodal damping forces vector
-        VecD0 = zeros((N), dtype=double)                                    # nodal damping forces vector
-        VecI1 = zeros((N), dtype=double)  # internal nodal forces vector time t+1
-        VecI0 = zeros((N), dtype=double)  # internal nodal forces vector time t
-        VecB = zeros((N), dtype=double)  # reaction forces
+        VecD  = zeros((N), dtype=float)
+        VecV0_= zeros((N), dtype=float)
+        VecVm_= zeros((N), dtype=float)
+        VecV1 = zeros((N), dtype=float)
+        VecR  = zeros((N), dtype=float)
+        VecM  = zeros((N), dtype=float)                                    # lumped masses
+        VecMI = zeros((N), dtype=float)                                    # lumped masses inverted
+        VecD1 = zeros((N), dtype=float)                                    # nodal damping forces vector
+        VecD0 = zeros((N), dtype=float)                                    # nodal damping forces vector
+        VecI1 = zeros((N), dtype=float)  # internal nodal forces vector time t+1
+        VecI0 = zeros((N), dtype=float)  # internal nodal forces vector time t
+        VecB = zeros((N), dtype=float)  # reaction forces
         Node.ActiveNodes = 0
         for no in NodeList: 
             if len(no.NodeEl)>0: 
@@ -373,18 +369,12 @@ class ConExpliFem:
 #                    if Time+1.e-6>=TimeX or StepFinishedFlag: return True
 #                    else:                                     return False
                 if WriteXData( TimeEl,Time,StepFinishedFlag):
-                    DataOutStress(NameElemOut_, ElList, NodeList, NoIndToCMInd, Time, "a", f6)
-                    if LinAlgFlag: NodeList.sort(key=lambda t: t.Label)
-                    DataOut(NameNodeOut_, NodeList, VecU0, VecB, VecR, Time, "a" )
-                    if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
-                    WriteElemData( f2, f7, Time, ElList, NodeList,NoIndToCMInd, MatList, MaxType, ResultTypes)# write element data
-                    f2.flush()
+                    WriteElemData(NameElemOut_, ElList, NodeList, NoIndToCMInd, Time, "a", f6)
                     Echo(f"Element Data written {Time:f} {TimeEl:f}", f6)
                 if WriteXData( TimeNo,Time,StepFinishedFlag):
                     if LinAlgFlag: NodeList.sort(key=lambda t: t.Label)
-                    WriteNodalData( f3, Time, NodeList, VecU0, VecB)         # write nodal data
+                    WriteNodeData(NameNodeOut_, NodeList, VecU0, VecB, VecR, Time, "a")
                     if LinAlgFlag: NodeList.sort(key=lambda t: t.CMIndex)
-                    f3.flush()
                     Echo(f"Nodal Data written {Time:f} {TimeNo:f}", f6)
                 if WriteXData( TimeRe,Time,StepFinishedFlag):
                     fd = open(Name+'.pkl', 'wb')                            # Serialize data and store for restart
@@ -403,8 +393,6 @@ class ConExpliFem:
         # end of step loop 
 
         Echo(f"total comp time {process_time()-stime:.0f} seconds", f6)
-        f2.close()
-        f3.close()
         if f5!=None: f5.close()
         f6.close()
         if f7!=None: f7.close()

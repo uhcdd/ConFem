@@ -58,7 +58,7 @@ LiWiCrvMid=2            # line width curve in pt
 LiWiCrvThin=1.0        # line width curve in pt
 
 class ValMinMax():
-    def __init__(self, ni, nf):
+    def __init__(self, ni, nf):                                             # ni: dim of int values; nf: dim of float values
         self.Max = -1.0e+9
         self.Min =  1.0e+9
         self.datafMax = zeros((nf), dtype=float)
@@ -666,6 +666,85 @@ def PostElemVTK( fileName, timeStr, ElList, NodeList,NoIndToCMInd, ElResults,Nod
         VTKNoData,VTKElData, _, _, _, _ = DataProcessor( Res, ["0:5"], DatLen )
         WriteVTKFile(fileName, "T3D", timeStr, VTKNoData,VTKElData, 1,6)
 
+def PostElem1D_( f2, ResultTypes, PlotTimes ):  # ResultTypes defined in ConFemInOut considering element and material type
+    DataDict, elsetType = {}, {}
+    # fill dictionaries
+    with ( f2 ) as ff:
+        for z1 in ff:
+            z2 = z1.split(',')
+            # new time
+            if z2[0].strip()=="Time":
+                Time = float(z2[1])
+                if Time in PlotTimes or len(PlotTimes)==0: PlotTFlag = True
+                else:                                      PlotTFlag = False
+                continue                                            # next line
+            elif PlotTFlag:
+                ElSet  = z2[1].strip()
+#                ElMat  = z2[2].strip()
+                ElType = z2[3].split(":")[0].strip()
+                elsetType[ElSet] = ElType
+                if ElType in ['CPS4','CPS4R','CPE4','CPE4R', 'CPS3','CPE3','CPS4S','CPE4S','CPS3S','CPE3S','CAX4',
+                              'SB3','SH4','SH3',
+                              'T2D2','T2D2I','T2D3I','T3D2','T3D3','T3D2I','T3D3I',
+                              "Bond2D2","Bond2D3","Bond3D2","Bond3D3","BondAX2","BondAX3",
+                              'C3D8','C3D8S']:
+                    continue
+                else:
+                    key = ElSet #+ "*" + ElMat + "*" + ElType
+                    if key not in DataDict:
+                        DataDict[key] = {}
+                    if Time not in DataDict[key]:
+                        DataDict[key][Time] = []
+                    data = [ int(z2[4]), float(z2[5]), float(z2[6])]
+                    dataLen = len(ResultTypes[ElSet])                       # number of result items without coordinates
+                    for i in range(7,7+dataLen): data += [ float(z2[i])]    # first 7 items are elnumber, elset, mat, eltype, ip, x, y
+                    DataDict[key][Time] += [ data ]
+    # plot
+    # no rotation in this !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    for elset in DataDict:
+        ElType = elsetType[elset]
+        pp, YminAll, YmaxAll = [], [], []
+        for r in ResultTypes[elset]:
+            P0 = plt.figure()
+            p0 = P0.add_subplot(111)
+            p0.set_title( elset + ': ' + r, fontsize=FonSizTi)
+            p0.tick_params(axis='x', labelsize=FonSizAx)
+            p0.tick_params(axis='y', labelsize=FonSizAx)
+            p0.grid()
+            pp += [ p0 ]
+            YminAll += [ 0 ]
+            YmaxAll += [ 0 ]
+        for j, time in enumerate(DataDict[elset]):
+            AllData = DataDict[elset][time]
+            offset = 3                                                      # ip, x, y
+            Colr = Colors[j % len(Colors)]
+            for i, r in enumerate(ResultTypes[elset]):
+#                Ymin, Ymax = 0,0
+                X, Y, p0 = [], [], pp[i]
+                for d in AllData:
+                    factor = 1.0
+                    if False:
+                        if ElType in ["BAX21E"]:
+                            if r=="normal force":
+                                if d[0]!= 1:                                # integration point
+                                    continue
+                                else:
+                                    factor = 1. / 2.46                              # quick and dirty for special case 1-M0-25-1.23.elemout to have stresses
+                    X += [ d[1] ]
+                    Y += [ factor*d[offset+i] ]
+                p0.plot(X, Y, '-', color=Colr, linewidth=LiWiCrv)
+                p0.plot(X, Y, 'o', color='tab:red', ms=5.)
+                if min(Y) < YminAll[i]: YminAll[i] = min(Y)                 # i is for result types
+                if max(Y) > YmaxAll[i]: YmaxAll[i] = max(Y)
+#                Ymin = min(Ymin, min(Y))
+#                Ymax = max(Ymax, max(Y))
+#                if abs(Ymax-Ymin)>ZeroD: p0.set_ylim(1.1*Ymin,1.1*Ymax)
+        for i, r in enumerate(ResultTypes[elset]):
+            p0 = pp[i]
+            Ymin = YminAll[i]
+            Ymax = YmaxAll[i]
+            if abs(Ymax-Ymin)>ZeroD: p0.set_ylim(1.1*Ymin,1.1*Ymax)
+
 # uses data from *.elemout.txt
 def PostElem1D( f2, ResultTypes, PlotTimes ):                       # ResultTypes defined in ConFemInOut considering element and material type
     def Rotate( dataXe, dataYe):
@@ -857,38 +936,6 @@ def PostScales( SecDic, ElemList, ElResults, ScaleStress):
         Scale[S] = Sc_
     return Scale
 
-
-#def DataToSig( ElemKey):                                                    # extracts integration point data from ElemResults data
-#    Data= ElemKey[5]
-#    # data specific for element type
-#    if   ElemKey[3] in ["CPS4","CPE4","CPS4S","CPE4S","CPS3","CPE3","CPS3S","CPE3S","CPS6","CPE6","CPS6S","CPE6S"]:
-#        sig = [Data[6],Data[7],Data[9]]
-#    elif ElemKey[3] in ["T2D2","T2D3","T3D2","T3D3"]:
-#        sig = [Data[3]]                                                     # Data should hold all floating point from elemout, [3] long. stress, [12] bond stress
-#    elif ElemKey[3] in ["TAX2",'TAX3']:
-#        sig = [Data[4],Data[5]]
-#    elif ElemKey[3] in ["T2D2I","T2D3I"]:
-#        sig = [Data[3],Data[6],Data[7]]                                     # Data should hold all floating point from elemout, [3] long. stress, [12] bond stress, [13] penalty stress
-#    elif ElemKey[3] in ["TAX2I", 'TAX3E']:
-##        sig = [Data[4],Data[5],Data[8],Data[9]]
-#        sig = [Data[4],Data[8],Data[9]]
-#    elif ElemKey[3] in ["B23I","B23EI"]:
-#        sig = [Data[6],Data[7],Data[10],Data[11]]                           # low and up stress, long. and lat. bond stress
-#    elif ElemKey[3] in ["B23","BAX23"]:
-#        sig = [Data[6],Data[7]]                                             # low and up stress
-#    elif ElemKey[3] in ["SB3"]:
-#        sig = [Data[5],Data[6],Data[7],Data[8],Data[9]]                     # bending moments
-#    elif ElemKey[3] in ["SH3","SH4"]:
-#        sig = [Data[3],Data[4],Data[5],Data[6],Data[7],Data[8]]             # membrane forces, bending moments
-#    elif ElemKey[3] in ["C3D8"]:
-#        sig = [Data[3],Data[4],Data[5],Data[6],Data[7],Data[8]]
-#    elif ElemKey[3] in ["CAX4"]:
-#        sig = [Data[6],Data[7],Data[9]]
-#    elif ElemKey[3] in ["BAX21EI"]:
-#        sig = [Data[5],Data[6],Data[7], Data[10],Data[11]]                  # normal force, bending moment, shear force (elastic), bond stress, laterial penalty stress
-#    else: raise NameError("ConFem::PostElem2D: unknown element type for reading from files",ElemKey[3])
-#    return sig
-
 def PloPrin(pp, scaleP, XX, YY, p0, MaPlLib,ffred,ffgre ):
     SS = pp[0]                                                              # larger principal stress - signed
     if SS >= 0:
@@ -1055,7 +1102,7 @@ def PostElem2D( Header,ElemList,NodeList, ScaleU,Contour2D, SolSecs, MaPlLib, No
             gi = 0
         xxMin, xxMax, yyMin, yyMax = 999., -999., 999., -999.
         #
-        NorMinMax = ValMinMax(1, 3)                                         # to indicate extremal values in plot
+        NorMinMax = ValMinMax(1, 3)                                         # to indicate extremal values in plot -- 1 int value, 3 float values
         MomMinMax = ValMinMax(1, 3)                                         #
         # initializations for Contour plots and "D line plots
         if MaPlLib:
@@ -1069,7 +1116,7 @@ def PostElem2D( Header,ElemList,NodeList, ScaleU,Contour2D, SolSecs, MaPlLib, No
                     PC, pc = DefPlot("Contour " + head + ' ' + c.split()[1] + " " + SolSecs[S].Set + " time " + "%6.3f" % TimeEl)
                     pc.axis('equal')
                     ContourP[c] = [PC, pc]
-                    ContourM[c] = ValMinMax(1, 3)  # for min / max values
+                    ContourM[c] = ValMinMax(1, 3)                           # for min / max values -- 1 int value, 3 float values
             #
             if SolSecs[S].ElemTypes in __Length2D__ or SolSecs[S].ElemTypes in [["T3D2"],["T3D3I"]]:
                 LinePlotData = {}
@@ -1085,9 +1132,9 @@ def PostElem2D( Header,ElemList,NodeList, ScaleU,Contour2D, SolSecs, MaPlLib, No
         SetResultsIpIn = SetResults["IntPointIndex"]
         SetResultsSlic = SetResults["Slices"]
         #
-        # loop over all elements with each integration point
         pDaX, pDaY = {}, {}  # for permanent storage of line plot data
-        for ElLabel, ElIpCo, ElData, ElIpIn, ElDaSl in zip(SetResultsLabl, SetResultsIPCo, SetResultsData, SetResultsIpIn, SetResultsSlic):
+        # loop over all elements with each integration point -- basically a loop over integration points
+        for ElLabel,ElIpCo,ElData,ElIpIn,ElDaSl in zip(SetResultsLabl, SetResultsIPCo, SetResultsData, SetResultsIpIn, SetResultsSlic):
             #
             # starts with deformed mesh plot + cracks - evaluation using one ip is sufficient
             if ElIpIn.strip() in ["0","Cra","Cra2"]:
@@ -1185,24 +1232,25 @@ def PostElem2D( Header,ElemList,NodeList, ScaleU,Contour2D, SolSecs, MaPlLib, No
                 pass
             # plot / assemble data in ip
             if AreaF:                                                       # plot for continuum/area elements
-                if el.Type == 'SB3':           pp = PrinC(-sig_[0][0],-sig_[0][1],-sig_[0][2]) # to make positive values -- compression upper side -- 'green'
+#                if el.Type == 'SB3':           pp = PrinC(-sig_[0][0],-sig_[0][1],-sig_[0][2]) # to make positive values -- compression upper side -- 'green' --> confusing plot
+                if el.Type == 'SB3':           pp = PrinC( sig_[0][0], sig_[0][1], sig_[0][2]) #
                 elif el.Type in ['SH4','SH3']: pp = PrinC( sig_[0][0], sig_[0][1], sig_[0][2]) # slice for normal forces
                 else:                          pp = PrinC( sig_[0][0], sig_[0][1], sig_[0][3]) # slice for 2D stresses
-                SS, S2 = PloPrin(pp, ScaleSec[0], ElIpCo[0],ElIpCo[1], p1, MaPlLib,ffred,ffgre)
-                NorMinMax.used = True
+                SS, S2 = PloPrin(pp, ScaleSec[0], ElIpCo[0],ElIpCo[1], p1, MaPlLib,ffred,ffgre) # SS larger principal value, S2 smaller principal value
+                NorMinMax.used = True                                       # also used for SB3 moments
                 NorMinMax.CheckMax(SS, [el.Label], [ElIpCo[0], ElIpCo[1], S2])
                 NorMinMax.CheckMin(S2, [el.Label], [ElIpCo[0], ElIpCo[1], SS])
                 if MaPlLib:
                     if el.Type in ['SH4','SH3']:
                         pp = PrinC(sig_[1][0], sig_[1][1], sig_[1][2])      # slice for bending moments
-                        SS, S2 = PloPrin(pp, ScaleSec[1], ElIpCo[0], ElIpCo[1], p2, MaPlLib, ffred, ffgre)
+                        SS, S2 = PloPrin(pp,ScaleSec[1], ElIpCo[0],ElIpCo[1],p2,MaPlLib, ffred,ffgre)  # SS larger principal value, S2 smaller principal value
                         MomMinMax.used = True
                         MomMinMax.CheckMax(SS, [el.Label], [ElIpCo[0], ElIpCo[1], S2])
                         MomMinMax.CheckMin(S2, [el.Label], [ElIpCo[0], ElIpCo[1], SS])
                     if el.Type == 'SB3' and ElIpIn.strip() in ["0"]:        # for shear forces -- determined for center of elmement only
                         xS = (NodeList[NoIndToCMInd[el.Inzi[0]]].XCo + NodeList[NoIndToCMInd[el.Inzi[1]]].XCo + NodeList[NoIndToCMInd[el.Inzi[2]]].XCo) / 3.
                         yS = (NodeList[NoIndToCMInd[el.Inzi[0]]].YCo + NodeList[NoIndToCMInd[el.Inzi[1]]].YCo + NodeList[NoIndToCMInd[el.Inzi[2]]].YCo) / 3.
-                        qx, qy = sig_[0][0], sig_[1][1]
+                        qx, qy = sig_[1][0], sig_[1][1]                     # second slice
                         if qx>0: p2.plot([xS, xS + scaleQ * qx], [yS, yS], '-', color='red')
                         else:    p2.plot([xS, xS + scaleQ * qx], [yS, yS], '-', color='green')
                         if qy>0: p2.plot([xS, xS], [yS, yS + scaleQ * qy], '-', color='red')
@@ -1241,6 +1289,7 @@ def PostElem2D( Header,ElemList,NodeList, ScaleU,Contour2D, SolSecs, MaPlLib, No
                     else:
                         pass
 #                p1.plot([ElIpCo[0]], [ElIpCo[1]], 'x', color='darkred')         # cross in integration point
+
             # that's it for plotting of data within deformed mesh
             # end of loop over elements with each integration point
         # plot lines, contour and gnuplot
@@ -1354,82 +1403,56 @@ def PostElem2D( Header,ElemList,NodeList, ScaleU,Contour2D, SolSecs, MaPlLib, No
     #
     return 0
  
-# from former PostElem2D -- here specialized to plot layers of shells
-def PostElemSH4( ElList, MatList, f2, ElPlotTimes, ScaleShellL ):
+# for 3D plor of continuum shell elements with material *RCSHELL
+def PostElemSH4( SolSec, Time, ScaleShellL, ElResults ):
     def IniP(Text, Time, ElSet, proj):
-        if proj=='3d': 
-            P0 = plt.figure().add_subplot(111,title=Text+'Time '+Time+', Element Set '+ElSet, projection=proj)
+        if proj=='3d':
+            P0 = plt.figure().add_subplot(111,title=Text+'Time '+str(Time)+', Element Set '+ElSet, projection=proj)
         else:
             P0 = plt.figure().add_subplot(111,title=Text+'Time '+Time+', Element Set '+ElSet)
             P0.axis('equal')
             P0.grid()
-        P0.tick_params(axis='x', labelsize=FonSizAx) #yticks(fontsize=FonSizAx) 
+        P0.tick_params(axis='x', labelsize=FonSizAx) #yticks(fontsize=FonSizAx)
         P0.tick_params(axis='y', labelsize=FonSizAx) #xticks(fontsize=FonSizAx)
         P0.set_xlabel('x')
-        P0.set_ylabel('y') 
-        return True, P0
-    ElPlotTimes = [float(i) for i in ElPlotTimes]
-    ESet, Tim, TimesDone, FlagFoundEl = ' ', ' ', [], False
-    FlagStrain = False                                                      # Flag for strain in continuum based structural elements
-    z1 = f2.readline()
-    z2 = z1.split()
-    while z1!="":
-        if z2[0]=="Time":                                                   # TIME KEY FOUND
-            Time = z2[1]
-            if float(Time) in ElPlotTimes or len(ElPlotTimes)==0:           # plot all times in case len==0
-                if FlagFoundEl and len(TimesDone)>0: print('PostElem2D process plot for time ', TimesDone[-1])
-                TimesDone += [Time] 
-                FlagProc = True
-                FlagFoundEl = False
-            else:
-                FlagProc = False
-        elif FlagProc and z2[0]=="El":                                      # ELEMENT KEY FOUND
-            ElType = z2[2]                                                  # key for element type
-            if ElType in ['SH4','SH3']:
-                FlagFoundEl = True
-                ElSet = z2[3] 
-                from ConFemBasics import FindIndexByLabel                                              # key for element set
-                Elem  = ElList[FindIndexByLabel(ElList, int(z2[1]))]
-                from ConFemMat import ElasticLT
-                if isinstance( MatList[Elem.MatN], ElasticLT) or Elem.ShellRCFlag:
-                    FlagStrain=True
-                NewPlot = ElSet!=ESet or Time!=Tim
-                if NewPlot:                                             # new time or element set found
-                    if FlagStrain:                    IniFl, P2 = IniP('strains: ',Time, ElSet, '3d')   # strains in 3d
-                    ESet, Tim, NewPlot = ElSet, Time, False
-        elif FlagProc:                                                      # DATA FOUND
-            XX = float(z2[0])                                               # ip global x-coordinate
-            YY = float(z2[1])                                               # ip global y-coordinate
-            if z2[3]=='Z':                                          # integrated internal forces plotted to P0, P1
-                pass
-            elif FlagStrain:                                        # plot data of every layer
-                ZZ = float(z2[3])                                   # local local isoparametric t-coordinate
-                if z2[4]=='R':                                      # reinforcement
-                    col='blue'
-#                    P2.plot([XX],[YY],[ZZ],'o',color=col)           # single ip point plot
-                elif ZZ<-0.9 or ZZ>0.9:
+        P0.set_ylabel('y')
+        return P0
+    for s_, S in enumerate(SolSec):
+        SetResults = ElResults[ElResults["ElSet"] == S]                     # subset of dataframe
+        ShRes = SetResults[SetResults["Type"].isin(["SH4", "SH3"])]
+        if len(ShRes) == 0: return 0
+        ShResLabl = ShRes["Label"]
+        ShResData = ShRes["Data"]
+        ShResIpIn = ShRes["IntPointIndex"]
+        ShResIpCo = ShRes["IntPointCoordinates"]
+        ShResType = ShRes["Type"]
+        ShResMark = ShRes["Marker"]
+        P2 = IniP('strains: ', Time, S, '3d')
+        for Labl,Data,IpIn,IpCo,Type,Marker in zip( ShResLabl,ShResData,ShResIpIn,ShResIpCo,ShResType,ShResMark):  # loop over integration points
+            XX = IpCo[0]
+            YY = IpCo[1]
+            ZZ = IpCo[2]                                                    # local local isoparametric t-coordinate
+            if Marker=='R':                                                 # reinforcement
+                col='blue'
+#                    P2.plot([XX],[YY],[ZZ],'o',color=col)                  # single ip point plot
+            elif ZZ<-0.9 or ZZ>0.9:
 #                else:
-                    scaleX = ScaleShellL # SP*Scales[ScaleKey][2]
-                    pp = PrinC( float(z2[5]), float(z2[6]), 0.5*float(z2[7])) # principal strains concrete
-                    linesty = 'dotted'
-                    SS = pp[0]                                      # larger principal strain
-                    if SS > 0.1e-3: linesty = 'solid'
-                    if SS>=0: P2.plot([XX-SS*scaleX*pp[1],XX+SS*scaleX*pp[1]],[YY-SS*scaleX*pp[2],YY+SS*scaleX*pp[2]],[ZZ,ZZ],'r',linestyle=linesty)
-                    else:     P2.plot([XX-SS*scaleX*pp[1],XX+SS*scaleX*pp[1]],[YY-SS*scaleX*pp[2],YY+SS*scaleX*pp[2]],[ZZ,ZZ],'g',linestyle=linesty)
-                    linesty = 'dotted'
-                    SS = pp[3]
-                    if SS > 0.1e-3: linesty = 'solid'
-                    if SS>=0: P2.plot([XX-SS*scaleX*pp[2],XX+SS*scaleX*pp[2]],[YY+SS*scaleX*pp[1],YY-SS*scaleX*pp[1]],[ZZ,ZZ],'r',linestyle=linesty)
-                    else:     P2.plot([XX-SS*scaleX*pp[2],XX+SS*scaleX*pp[2]],[YY+SS*scaleX*pp[1],YY-SS*scaleX*pp[1]],[ZZ,ZZ],'g',linestyle=linesty)
-                    col='blue' # 'red'
-                    P2.plot([XX],[YY],[ZZ],'o',color=col,markersize=3)           # single ip point plot
-        else:
-            pass
-        z1 = f2.readline()
-        z2 = z1.split()
-    if FlagFoundEl: 
-        print('PostElemSH process plot for time ', TimesDone[-1])
-    return 0
+                scaleX = ScaleShellL # SP*Scales[ScaleKey][2]
+                pp = PrinC( Data[0], Data[1], 0.5*Data[2] )                 # principal strains concrete
+                linesty = 'dotted'
+                SS = pp[0]                                                  # larger principal strain
+                if SS > 0.1e-3: linesty = 'solid'
+                if SS>=0: P2.plot([XX-SS*scaleX*pp[1],XX+SS*scaleX*pp[1]],[YY-SS*scaleX*pp[2],YY+SS*scaleX*pp[2]],[ZZ,ZZ],'r',linestyle=linesty)
+                else:     P2.plot([XX-SS*scaleX*pp[1],XX+SS*scaleX*pp[1]],[YY-SS*scaleX*pp[2],YY+SS*scaleX*pp[2]],[ZZ,ZZ],'g',linestyle=linesty)
+                linesty = 'dotted'
+                SS = pp[3]
+                if SS > 0.1e-3: linesty = 'solid'
+                if SS>=0: P2.plot([XX-SS*scaleX*pp[2],XX+SS*scaleX*pp[2]],[YY+SS*scaleX*pp[1],YY-SS*scaleX*pp[1]],[ZZ,ZZ],'r',linestyle=linesty)
+                else:     P2.plot([XX-SS*scaleX*pp[2],XX+SS*scaleX*pp[2]],[YY+SS*scaleX*pp[1],YY-SS*scaleX*pp[1]],[ZZ,ZZ],'g',linestyle=linesty)
+                col='blue' # 'red'
+                P2.plot([XX],[YY],[ZZ],'o',color=col,markersize=3)           # single ip point plot
+
+        print('PostElemSH process plot for time ', Time)
 
 def PostNode( ElList, NodeList,NICM, VecU, SN, ft):
     LX, LY, LZ, LU = [], [], [], []
@@ -1829,22 +1852,23 @@ def ReadLine(ff):
     return z2.split(',')
 
 def ReadResultsFromFile( MatList, ff, ffN):
-    ElemResults, NodeResults, EndFlag, EndFlagN  = {}, {}, False, False
+    NodeResults, EndFlag, EndFlagN  = {}, False, False
     # specifications for plotting
     ElResultsL = { # no of integration points, slices for data items to plot - each slice with own scaling, not consider elements for scaling
-        "ELASTIC" :  {  "CPS4":    [2, ["4:7"], False],                       # index for slices counts zero from 1st data - not integration point coordinates ?
-                        "CPS3":    [2, ["4:7"], False],
-                        "CAX4":    [2, ["4:7"], False],
-                        "C3D8":    [3, ["6:11"], False],
+                                                                            # slices refer to elemout-data, index counts zero from 1st data - not from integration point coordinates
+        "ELASTIC" :  {  "CPS4":    [2, ["4:7"], False],                     # 4 stress components
+                        "CPS3":    [2, ["4:7"], False],                     # "
+                        "CAX4":    [2, ["4:7"], False],                     # "
+                        "C3D8":    [3, ["6:11"], False],                    # 6 stress compmonents
                         "BAX21EI": [2, ["3:3","4:4","5:5","8:8","9:9"], True],
                         "B23E":    [2,[], True],                            # currently dummy
                         "SB3":     [2, ["3:5","6:7"], False],               # bending moments, shear forces
-                        "SH4":     [3, ["0:2","3:5","6:7"], False],         # normal forces,bending moments, shear forces, tlhickness nx, ny, nxy, mx, my, mxy, qx, qy, aa
-                        "SH3":     [3, ["0:2","3:5","6:7"], False],
+                        "SH4":     [3, ["0:2","3:5","6:7"], False],         # normal forces,bending moments, shear forces  ? tlhickness nx, ny, nxy, mx, my, mxy, qx, qy, aa
+                        "SH3":     [3, ["0:2","3:5","6:7"], False],         # "
                         "T2D2I":   [2, ["1:1","4:4","5:5"], True],          # uniaxial stress, bond stress, penalty stress
                         "T2D3I":   [2, ["1:1","4:4","5:5"], True],          # uniaxial stress, bond stress, penalty stress
                         "T3D3I":   [3, ["1:1", "5:5"], True],               # uniaxial stress, bond stress
-                        "T3D2I":   [3, ["1:1", "5:5"], True],
+                        "T3D2I":   [3, ["1:1", "5:5"], True],               # "
                         "T2D2":    [2, ["1:1"], True],
                         "TAX2":    [2, ["1:1"], True],
                         "TAX2I":   [2, ["2:2", "6:6", "7:7"], True],
@@ -1899,7 +1923,9 @@ def ReadResultsFromFile( MatList, ff, ffN):
                         "B23I":    [2, ["2:2","3:3","12:12","13:13"], True],
                         "B23EI":   [2, ["2:2","3:3", "5:5","12:12"], True],     # normal force, bending moment, bond stress
                         "BAX23I":  [2, ["2:2","3:3","12:12","13:13"], True],
-                        "BAX23EI": [2, ["2:2","3:3","12:12","13:13"], True],
+                        "BAX23EI": [2, ["2:2","3:3","12:12","13:13"], True],    # normal force, bending moment
+                        "BAX23EI": [2, ["2:2","3:3","12:12","13:13"], True],    # normal force, bending moment
+#                        "BAX23EI": [2, ["2:2","3:3"], True],    # normal force, bending moment
                         "BAX21EI": [2, ["3:3","4:4", "5:5","12:12"], True],        # normal force, bending moment, shear force, bond stress
                         "BAX21E":  [2, [], True]
                         #                        "BAX23EI": [2, ["2:2", "3:3"], True]
@@ -1915,8 +1941,9 @@ def ReadResultsFromFile( MatList, ff, ffN):
         "NLSLAB":    { "SB3":   [2, ["3:5","6:7"], False]               # bending moments, shear forces
 
                     },
-        "RCSHELL":  {  "SH4":   [ 3, ["0:2","3:5","6:7"], False]
-
+        "RCSHELL":  {  "SH4":   [ 3, ["0:2","3:5","6:7"], False]        # marker Z: nx, ny, nxy, mx, my, mxy, qx, qy
+                                                                        # marker C: inplane strains, inplane stresses, principal stress values & directions
+                                                                        # marker R: local uniaxial strain stress yield limmit, principal stress values & directions
                        },
         "MICRODAMAGE": { "C3D8":  [3, ["6:11"], False ],
                          "CPS4":  [2, ["4:7"], False ],
@@ -1928,7 +1955,7 @@ def ReadResultsFromFile( MatList, ff, ffN):
 #        "BOND":      { "Bond2D3": [2,4, ["",""]] }
     }
     # data frame for plotting
-    ElResults = pd.DataFrame({
+    ElemResults = pd.DataFrame({
         "Label" : [ -1 ] ,
         "ElSet" : [""],
         "Material": [""],
@@ -1937,15 +1964,18 @@ def ReadResultsFromFile( MatList, ff, ffN):
         "IntPointCoordinates": [[]],
         "Data": [[]],
         "Slices": [[]],
-        "NoEl": [False] #,
+        "NoEl": [False],
+        "Marker": [""]                                                      # relevant for SH3, SH4 only
 #        "Active":[False]
     })
+    ElemResultsRCShell = ElemResults.copy()
+
     SetSlices = {}                                                          # to hold slices of a set
-    # read from elemout_ -- current line should be line with time value
+    # read from elemout -- current line should be line with time value
     z1 = ff.readline()
     z2 = z1.strip()
     z3 = z2.split(',')
-    if z3[0]!="Time": raise NameError("ConFemPostProcStandAlone: something wrong with elemout_")
+    if z3[0]!="Time": raise NameError("ConFemPostProcStandAlone: something wrong with elemout")
     else:             Time = float(z3[1])
     while z1!="":                                                           # current line is dataline
         pos= ff.tell()
@@ -1958,7 +1988,9 @@ def ReadResultsFromFile( MatList, ff, ffN):
         # assign data to data frame
         mat = z3[2].strip()                                                 # material name
         mty = MatList[mat].Type                                             # material type
-        eltype = z3[3].strip()                                              # element type
+        eltype = z3[3].split(":")[0].strip()                                # element type - to get rid of markers in case of SH3, SH4
+        try:    marker = z3[3].split(":")[1].strip()                        # Z, R, C in case of  SH3, SH4 only
+        except: marker = ""
         if mty in ElResultsL:                                               # material type from dictionary above
             if eltype in ["Bond2D2","Bond2D3","Bond3D2","Bond3D3","BondAX2","BondAX3"]:
                 pass
@@ -1970,8 +2002,13 @@ def ReadResultsFromFile( MatList, ff, ffN):
                 ef = ElResultsL[mty][eltype][2]                             # consider no of elements for plot scaling
                 se = z3[1].strip()                                          # set label
                 # sequence of data corresponds to definition of data frame
-                #                                       Label,     ElSet,                   IntPointIndex, IntPointCoordinates,         Data - includes all slices
-                ElResults.loc[len(ElResults.index)] = [ int(z3[0]),z3[1].strip(),mat,eltype,z3[4],[float(z3[i]) for i in range(5,5+l1)],[float(z3[i]) for i in range(5+l1,5+l1+l2)],sl,ef ]
+                if marker not in ["R","C"]:                                 # excludes SH4, SH3 with material *RCSHELL
+                    #                                           Label,     ElSet,                   IntPointIndex, IntPointCoordinates,         Data - includes all slices
+                    ElemResults.loc[len(ElemResults.index)] = [ int(z3[0]),z3[1].strip(),mat,eltype,z3[4],[float(z3[i]) for i in range(5,5+l1)],
+                                                                [float(z3[i]) for i in range(5+l1,5+l1+l2)],sl,ef,marker]
+                else:
+                    ElemResultsRCShell.loc[len(ElemResultsRCShell.index)] = [ int(z3[0]),z3[1].strip(),mat,eltype,z3[4],[float(z3[i]) for i in range(5,5+l1)],
+                                                                [float(z3[i]) for i in range(5+l1,5+l1+l2)],sl,ef,marker]
                 if se not in SetSlices:
                     SetSlices[se] = sl
             else:
@@ -1982,11 +2019,11 @@ def ReadResultsFromFile( MatList, ff, ffN):
             raise NameError("ConFemPost::ReadResultsFromFile: not defined in dictionary for element results", mty)
 
     if z1=="": EndFlag = True
-    # read from nodeout_
+    # read from nodeout
     z1 = ffN.readline()
     z2 = z1.strip()
     z3N= z2.split(',')
-    if z3N[0]!="Time": raise NameError("ConFemPostProcStandAlone: something wrong with nodeout_ ",z3N)
+    if z3N[0]!="Time": raise NameError("ConFemPostProcStandAlone: something wrong with nodeout ",z3N)
     else:             TimeN = float(z3N[1])
     while z1!="":
         pos= ffN.tell()
@@ -2002,7 +2039,7 @@ def ReadResultsFromFile( MatList, ff, ffN):
         NodeResults[key] = [ key, nDof, Data]
     if z1=="": EndFlagN = True
     #
-    return EndFlag, EndFlagN, Time,TimeN, ElemResults,NodeResults,ElResults,SetSlices
+    return EndFlag, EndFlagN, Time,TimeN, NodeResults,ElemResults,SetSlices,ElemResultsRCShell
 
 def PickleLoad( FilDir, FilName, StepCounter):
     import pickle
@@ -2119,21 +2156,25 @@ class ConFemPost:
         # 
         if Version == 1:
             if Post1DFlag:
+#                f2= open( Name+".elemout.txt", "r")
+#                PostElem1D( f2,  ResultTypes, PlotTimes)
+#                f2.close()
                 f2= open( Name+".elemout.txt", "r")
-                PostElem1D( f2,  ResultTypes, PlotTimes)
+                PostElem1D_(f2, ResultTypes, PlotTimes)
                 f2.close()
             #
             if PostNodeFlag:
                 PostNode( ElemList, NodeList,NoIndToCMInd, VecU, ScaleDis, None)
                 print('PostNode   process plot for last time', "%6.4f"%LastTime)
             #
-            try:
-                ff  = open(Name+".elemout_"+".txt",'r')
-                ffN = open(Name+".nodeout_"+".txt",'r')
+#            try:
+            if True:
+                ff  = open(Name+".elemout"+".txt",'r')
+                ffN = open(Name+".nodeout"+".txt",'r')
                 EndFlag, EndFlagN = False, False
                 # loop over times in result data sets
                 while not EndFlag and not EndFlagN:
-                    EndFlag, EndFlagN, Time, TimeN, ElemResults, NodeResults, ElResults, SetSlices = ReadResultsFromFile( MatList, ff, ffN)
+                    EndFlag, EndFlagN, Time, TimeN, NodeResults, ElResults, SetSlices, ElResultsRCShell = ReadResultsFromFile( MatList, ff, ffN)
                     if Time != TimeN: raise NameError("ConFemPostProcStandAlone: async time for elements and nodes",Time, TimeN)
                     print("ElemData found time",Time)
                     if Time in PlotTimes or len(PlotTimes)==0:
@@ -2146,16 +2187,11 @@ class ConFemPost:
                             if l>0: print('PostElem3D process plot for time ', Time)
                         if VTK:
                             PostElemVTK( Name, str(int(1000*round(Time,5))), ElemList, NodeList,NoIndToCMInd, ElResults,NodeResults)
+                        if ShellL:
+                            PostElemSH4(SecDic, Time, ScaleShellL, ElResultsRCShell)
                 ff.close()
                 ffN.close()
-            except:
-                print(" no elemout_.txt available -- skipped PostElem2D & PostElem3D")
             #
-            if ShellL:
-                f2=open( Name+".elemout.txt", 'r')
-                PostElemSH4( ElemList, MatList, f2, PlotTimes, ScaleShellL )
-                f2.close()
-            #   
             if pth.isfile(Name+".opt.txt"):
                 f4=open( Name+".opt.txt", 'r')
                 WrNodes,_,_,_,_,_,_,_ = ReadOptionsFile(f4, NodeList, NoLabToNoInd, NoIndToCMInd)
@@ -2196,7 +2232,7 @@ if __name__ == "__main__":
 #    Name = "../DataExamples/E07/E7-05"                                   # 1D phase field
 #    Name, VTK = "../DataExamples/E07-06/E7-06a", True                               # SDA
 #    Name = "../DataExamples/E08-02/ElasticLT/E8-02"                      # deep beam nonlinear
-    Name, VTK = "../DataExamples/E08/E8-03B23e", False
+#    Name, VTK = "../DataExamples/E08/E8-03B23e", False
 #    Name, VTK = "../DataExamples/E08/E8-04", False
 #    Name, VTK = "../DataExamples/E08-02/E8-02", False
 #    Name = "../DataExamples/E09/E9-01"
@@ -2208,7 +2244,8 @@ if __name__ == "__main__":
 #    Name = "../_DataBenchmarks/Nooru/Nooru-1550-5"
 #    Name = "../_DataTmp/Deep_beam_AacNL"
 #    Name = "../_DataBenchmarks/Aachentests/Deep_beam"
-    Name = "../_DataTmp/AxiSlab"
+#    Name = "../_DataShellsSlabs/IuriisExamples/slab_SH4"
+    Name ="../DataExamples/E10-02/IsoDam/E10-02"
 
 #    Name, VTK,VTK3D = "../_DataC3D/Cube8", True, True
 #    Name, VTK, VTK3D = "../_DataC3D/Deep_beam_SDA", True, True
@@ -2216,15 +2253,16 @@ if __name__ == "__main__":
 #    Name = "../_DataShellsSlabs/c_1461(0.08)_2.1e5_0.3_segment load" # Shell, bridge_el05m, c_1461(0.08)_2.1e5_0.3_segment load
     #
 #    Name = "C:/Users/uhc/Documents/Work/FoilPap/2023/Note_ShearPlateRandom/ConFem/ShearPanel/Restart/ShearPanelR.89"
-    Name = "C:/Users/uhc/Documents/Work/FoilPap/2024/Note_FlatSlab/ExpDataSets//_61-I-6/Restart/61-I-6"
+#    Name = "C:/Users/uhc/Desktop/Note_FlatSlab_Comp/ExpDataLandler_25-02-07/1-M0-25-1.23/1-M0-25-1.23"
+#    Name = "C:/Users/uhc/Desktop/Note_FlatSlab_Comp/ExpDataLandler_25-01-30/1-M0-25-1.23/1-M0-25-1.23"
 #    Name = "../_DataBond/PulloutAxiSym"
 #    Name = "../_DataAxisym/BAX23"
-#    Name = "../_DataTmp/xxxT"
+#    Name = "../_DataTmp/1-M0-25-1.23"
 
     DirName, FilName = DirFilFromName( Name )
     #
     print('ConFemPost for ',Name)
-    Version = 2                                                             # 1: plot results, 2: plot residuals
+    Version = 1                                                             # 1: plot results, 2: plot residuals
     ResiData = [ 30, 18, 5.0e+01]                                            # incr, iter, scale
     ComFemPost_ = ConFemPost()
     MaPlLib = True                                                          # flag for using matplotlib
