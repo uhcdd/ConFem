@@ -94,7 +94,7 @@ class Test(unittest.TestCase):
     def testE5_02u03(self):
         self.ConFem12 = ConFem.ConFem()
         Name="../DataExamples/E05/E5-03"              # ConFem Corbel as strut and tie nonlinear arc length              2s            
-        self.assertEqual(self.ConFem12.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False,"elemout", [], False), 'eca9e193a5da7b969b7b2674b66433b6')
+        self.assertEqual(self.ConFem12.Run(Name, self.LogData,self.NameLog, False, LinAlgFlag, False,"elemout", [], False), 'b18e51d429d43fb6d7a5c22c627c74ef')
         """
         plates
         """

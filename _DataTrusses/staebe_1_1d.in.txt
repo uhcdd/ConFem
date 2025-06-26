@@ -21,7 +21,6 @@ ABAQUS job
    1.0000
 ***Step 1 statisch*******************************************************
 *STEP
-Testbeispiel Dynamik - konsistente Massen
 *STATIC
   0.01, 2.7
 *AMPLITUDE, NAME=LOAD

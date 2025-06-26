@@ -1,7 +1,15 @@
-ConFem:  ../TestIn/spring_test
-symmetric system True
-0 step starts NR
-1 0 1.0 0.0 0 0.0 0.0 1.0
-1 0 1.0 1.0 1 3.85683505369e-17 1.44609751755e-05 1.0
-Element Data written 1.0 1.0
-0.0160000324249
+ConFem  ../_DataBeams/spring_test
+symmetric system True, used LinAlg2 True, used ConFemMatC True, used CaeFemElemC True
+ndofs 36, elems 11, active nodes 12, abs.size 0.17 MItems, rel.size 0.1319 (abs.size/(ndofs**2)
+used material MAT1, spec. inertial mass 0.00e+00, type ELASTIC
+used material MAT3, spec. inertial mass 0.00e+00, type ElasticOrtho
+0 step starts, solution type NR
+0   1 1.000 0.00000 iter 0 0.000000e+00 1.000000e+00    0.000000e+00
+0   1 1.000 1.00000 iter 1 4.160155e-17 1.000000e+00    1.446098e-05
+Element data written 1.000000
+Nodal data written 1.000000
+Restart data written 1.000000
+last iteration data
+    1, 1.0000,    1
+reached time 1.0000
+total comp time 0 seconds

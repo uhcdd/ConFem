@@ -13,10 +13,10 @@ def DefData():
     # DataExamples E03
 #    Name="../DataExamples/E03/E3-01"                                        # 25-02-18
 #    Name="../DataExamples/E03/E3-02C3"                                      # C1, C2, C3 25-02-18
-    Name="../DataExamples/E03/E3-04"                                        # 25-02-18
+#    Name="../DataExamples/E03/E3-04"                                        # 25-02-18
     # E04 beams
 #    Name="../DataExamples/E04/E3-02"                                        # 25-02-18
-#    Name="../DataExamples/E04/E4-09"                                        # -03 , -04, -06, -08, -09 25-02-18
+    Name="../DataExamples/E04/E4-06"                                        # -03 , -04, -06, -08, -09 25-02-18
 #    Name="../DataExamples/E04/E3-02_CircMises"                              # 25-02-18
     # E05 strut-and-tie
 #    Name="../DataExamples/E05/E5-01plate"                                   # 25-02-18
@@ -43,12 +43,12 @@ def DefData():
 #    Name, Plot ="../DataExamples/E10/E10-02a", True                         # 25-03-12 one element RC shell
 #    Name, Plot ="../DataExamples/E10-02/E10-02", False                      # simple slab nonlinear reinforcement
     # _DataAxisym
-#    Name, Plot ="../_DataAxisym/BAX2E", True                                # 25-03-04
+    Name, Plot ="../_DataAxisym/BAX2E", True                                # 25-03-04
 #    Name, Plot ="../_DataAxisym/CAX3", True                                 # 25-03-04
 #    Name, Plot = "../_DataAxisym/CylAX", True                               # 25-03-04
-#    Name, Plot = "../_DataAxisym/TAX23", True                               # 25-03-04
+    Name, Plot = "../_DataAxisym/TAX23", True                               # 25-03-04
     # _DataBeams
-#    Name, Plot = "../_DataBeams/E3-02_B23", True                            # 25-03-12
+#    Name, Plot = "../_DataBeams/spring_test", True                            # 25-03-12
 #    Name, Plot = "../_DataBeams/E3-02_B21E", True                           # 25-03-12
 #    Name, Plot = "../_DataBeams/E3-02_B23E_PolyL", True                     # 23-03-12
     # _DataBenchmarks
@@ -62,7 +62,7 @@ def DefData():
 #    Name, Plot, StressStrainOut = "../_DataBenchmarks/Aachentests/Deep_beam_AacNL", True, []  # 25-03-14
     # _DataBond
 #    Name, Plot, StressStrainOut = "../_DataBond/bond_T2", True, []          # 25-03-15 TestSuite0
-#    Name, Plot, StressStrainOut = "../_DataBond/Pullout", True, []          # 25-03-15 Pullout, Pullout2
+#    Name, Plot, StressStrainOut = "../_DataBond/Pullout2", True, []          # 25-03-15 Pullout, Pullout2
 #    Name, Plot, StressStrainOut = "../_DataBond/PulloutAxiSym", True, []    # 25-03-15 Isodamage
 #    Name, Plot, StressStrainOut = "../_DataBond/PulloutLatPressure", True, []  # 25-03-15
     # _DataBuckling
@@ -90,8 +90,8 @@ def DefData():
 #    Name, Plot = "../_DataTrusses/staebe_4", True                           # 25-03-18 2D elastic large displacement
 #    Name, Plot = "../_DataTrusses/staebe3D2", True                          # 25-03-18 3D elastic large displacement
     # _DataTmp
-#    Name, Plot, StressStrainOut = "../_DataTmp/shellconfem", True, []
-#    Name, Plot, StressStrainOut = "../_DataTmp/E7-06a", True, []
+    Name, Plot, StressStrainOut = "../_DataTmp/E10-02_10_restart/E10-02", True, []
+#    Name, Plot, StressStrainOut = "../_DataTmp/E8-03B23E", True, []
     #
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2023/Note_ShearPlateRandom/ConFem/ShearPanel/ShearPanelR_med", True, [] #[[1,0]]
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Documents/Work/FoilPap/2023/Note_ShearPlateRandom/ConFem/ShearPanel/Explicit/ShearPanelR", False, []
@@ -103,6 +103,6 @@ def DefData():
 #    Name, Plot, StressStrainOut = "C:/Users/uhc/Desktop/Note_FlatSlab_Comp/ExpDataLandler/1-M0-25-1.23/1-M0-25-1.23", True, []
 
     Restart = False
-#    Restart = True
+    Restart = True
     Name = Name.strip()
     return Name, Plot, Restart, "elemout", ElPlotTimes, StressStrainOut, VTK

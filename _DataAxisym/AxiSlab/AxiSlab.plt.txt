@@ -1,0 +1,8 @@
+*PlotTimes, 0.4
+*ScaleStress, CONC, 5.0
+*ScaleDispl, 0.2
+***PostElem2DContour, EL1,sig_xx,6,25.,-
+***PostElem2DContour, EL1,sig_yy,7,25.,-
+***PostElem2DContour, EL1,sig_zz,8,25.,-
+***PostElem2DContour, EL1,sig_xy,9,25.,-
+***PostElem2DContour, CONC,D,10,25.,-

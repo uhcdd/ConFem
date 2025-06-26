@@ -296,7 +296,7 @@ class Element(object):
         self.Geom = zeros( (2+nRe,6), dtype=double)                 # all geometry data for concrete and reinforcement, tension stiffening
         self.Geom[0,0] = 1.                                         # Jacobian for integration set in Ini2
         self.Geom[1,0] = 1                                          # for compatibility reasons
-        if self.Type in ["B23I","B23EI","BAX21EI","BAX23","BAX23EI"]:
+        if self.Type in ["B23I","B23EI","BAX21EI","BAX23EI"]:
             if BeamSec.Type != "CIRCLE":
                 raise NameError("ConFemElem::IniBeam: option SECTION=CIRCULAR allowed for element types B23I, B23EI, BAX21EI, BAX23EI only",self.Type)
         if BeamSec.bStiff == None:
@@ -413,18 +413,25 @@ class S1D2(Element):                                                        # 1D
         """ Dummy for jacobian determinant.
         """
         return 1
-class S2D6(Element):                                                # 2D rotational Spring 2 nodes
+class S2D6(Element):                                                        # 2D rotational Spring 2 nodes
     def __init__(self, Label, SetLabel, InzList, MatName, NoList, SolSecDic, StateV, NData, NoLabToNoInd):
         Element.__init__(self,"S2D6",InzList, 3, 0,1,1, (set([1,2,6]),set([1,2,6])), 98,False,Label,SetLabel,2, MatName,StateV,NData, NoList,NoLabToNoInd,[])
-        self.DofI = zeros( (self.nNod,3), dtype=int)                # indices of global dofs per node
-        self.Geom = zeros( (2,1), dtype=double)
-        self.Geom[0,0] = 0.5                                        # Jacobi determinant value
-        self.Geom[1,0] = SolSecDic.Val
     def Ini2(self, NoList,NoIndToCMInd, MaList, SecDict):
-        self.Lch_ = 0                                               # dummy
+        self.DofI = zeros( (self.nNod,3), dtype=int)                        # indices of global dofs per node
+        self.Geom = zeros( (2,1), dtype=double)
+        self.Geom[0,0] = 0.5                                                # Jacobi determinant value
+        self.Geom[1,0] = SecDict[self.Set].Val
+        mat = SecDict[self.Set].Mat
+        self.MatN = mat
+        self.Material = MaList[mat]
+        self.Lch_ = 0                                                       # dummy
         return []
     def FormX(self, r, s, t):
         X = array([ 0.5, 0.5])
+        return X
+    def FormX_(self, r, s, t):
+        X = array([[ 0.5, 0.0, 0.5, 0.0],
+                   [ 0.0, 0.5, 0.0, 0.5]])
         return X
     def FormN(self, r, s, t):
         N = array([[ -1.,  0.,  0., 1., 0., 0.],
@@ -4485,7 +4492,7 @@ class SH4(Element):
                 ConFemBasics.SampleWeightRCShell[SetLabel,4,i1,i2+4*j+2]= 2.*ShellSec.Reinf[j][0]/ShellSec.Height
                 ConFemBasics.SampleWeightRCShell[SetLabel,4,i1,i2+4*j+3]= 2.*ShellSec.Reinf[j][0]/ShellSec.Height
         return []
-            
+
     def Ini3(self, NoList, NoIndToCMInd):
         i0 = NoIndToCMInd[self.Inzi[0]]
         i1 = NoIndToCMInd[self.Inzi[1]]
@@ -5043,8 +5050,6 @@ class SH3( SH4 ):
         if self.nInt==2: 
             Lis2, Lis3 = [0,1,2,3,4], []            
         return Lis2, Lis3                                   # RC not yet implemented
-    def Ini2_(self, NoList,NoIndToCMInd, MaList, SecDict):  # Ini2 from SH4
-        return []
     def Ini3(self, NoList,NoIndToCMInd ):
         i0 = NoIndToCMInd[self.Inzi[0]]
         i1 = NoIndToCMInd[self.Inzi[1]]

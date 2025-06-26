@@ -105,8 +105,8 @@ BAX23
    99,  9.9000e-01,  0.0000e+00,  0.0
   100,  9.9500e-01,  0.0000e+00,  0.0
   101,  1.0000e+00,  0.0000e+00,  0.0
-*ELEMENT, ELSET=EL1, TYPE=BAX21
-***ELEMENT, ELSET=EL1, TYPE=BAX23
+***ELEMENT, ELSET=EL1, TYPE=BAX21
+*ELEMENT, ELSET=EL1, TYPE=BAX23
     1,       1,       2,   
     2,       2,       3,   
     3,       3,       4,   

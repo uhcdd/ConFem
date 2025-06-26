@@ -182,4 +182,4 @@ last iteration data
    40, 1.0000,    3
 last timeout data
 reached time 1.0000
-total comp time 5 seconds
+total comp time 6 seconds

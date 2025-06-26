@@ -1,0 +1,50 @@
+*HEADING
+axisym
+*ELEMENTSET
+ CONC, MATMICRODAM, CAX4, 1.0, Box
+ [0.0,  0.0], [ 500.0, 200.0], [ 25, 10]
+*ELEMENTSET
+ SUPPORT, MATEL, CAX4, 1.0, Box
+ [0.0,  -20.0], [ 60.0, 0.0],  [ 3, 1]
+ [460., 200.0], [ 500., 220.], [ 2, 1]
+**
+*ELEMENTSET
+** independent nodes are not found for boundary conditions - add manually
+ UReinfR, MATMISES, BAX23E, 20.0, line, independentnodes, bondlaw=matbond, beam, SECTION=CIRCLE, nrebar=0.010
+ [0.0,180.],  [ 500., 180.0], [25] 
+*ELEMENTSET
+ UReinfC, MATREC, TAX2, 3.1415, line
+ [0.0,180.0],  [500.0, 180.0], [25] 
+*ELEMENTSET
+** independent nodes are not found for boundary conditions - add manually
+ LReinfR, MATMISES, BAX23E, 14.0, line, independentnodes, bondlaw=matbond, beam, SECTION=CIRCLE, nrebar=0.010
+ [0.0,20.],  [ 500., 20.0], [25] 
+*ELEMENTSET
+ LReinfC, MATREC, TAX2, 1.54, line
+ [0.0,20.0],  [500.0, 20.0], [25] 
+*ELEMENTSET
+ ColC, MATREC, TAX2, 1.54, line
+ [40.0,-20.0],  [40.0, 20.0], [2] 
+*ELEMENTSET
+ ColR, MATMISES, BAX23E, 14.0, line, independentnodes, bondlaw=matbond, beam, SECTION=CIRCLE, nrebar=0.010
+ [40.0,-20.0],  [40.0, 20.0], [2] 
+**
+*MATERIAL
+ MATEL,  *ELASTIC,   [30000.,0.2, 0.0], *DENSITY,   2.5e-9
+ MATDAM, *ISODAMAGE, [  30000.,0.2,  30.,3.0,  1,1.2,0.2,2.0,   2,100.e-3, 1.,0.],*DENSITY,2.5e-9
+ MATMICRODAM, *MICRODAMAGE, [ 30000., 0.20, 2, 3.0, 15.0,    0., 0.,   2, 100.e-3, 0., 0.],*DENSITY,2.5e-9
+ MATREC, *ElasticC1D,[200000., 0.2, 0.0],*DENSITY, 7.8e-9
+ MATRER, *ElasticR1D,[200000., 0.2, 0.0],*DENSITY, 7.8e-9
+ MATMISES, *MISESBEAM, [200000.,      0.2,   500,  550,  0.025, 1.e-5, 0.0],*DENSITY, 7.8e-9 
+ MATBOND, *BOND, [ 1., 0.5e+5, LF,  1., 0.10, 6., 1.0, 6.0, 0, 100]
+ MATBONDEL, *ELASTIC, [50., 500.0, 0.0]
+**
+*DYNAMIC
+[0.001, 0.50], [*DAMPING, ALPHA=1.0e+3]
+*BOUNDARYLINE
+ [ [0.0,-20.0],[  60.0, -20.0], 3 ] , [2,0.0]
+ [ [0.0,-20.0],[  00.0, 200.0], 11 ] , [1,0.0]
+*BOUNDARY
+ [500.,        220., 2, -2.53] 
+*OPDATA
+ [ writeNodes, [500.,220., 2, b-u] ] 

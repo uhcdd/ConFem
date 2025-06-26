@@ -376,7 +376,7 @@ def AssignGlobalDof( NodeList, ElList, MatList, SecDict, NoIndToCMInd):     # as
     for El in ElList:
         ElemData = El.Ini2( NodeList,NoIndToCMInd, MatList, SecDict)        # initialization of data depending on Sequence of nodes in NodeList which has been determined by Cuthill McKee
         El.ElemDimData( NodeList,NoIndToCMInd )
-        El.Ini3( NodeList,NoIndToCMInd )
+        El.Ini3( NodeList,NoIndToCMInd )                                    # required for shell elements after ElemDimData
         ElemDataAll[El.Type] += [ElemData]
     Index = 0
     for No in NodeList:                                                     # loop over nodes

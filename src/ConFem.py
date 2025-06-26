@@ -58,13 +58,16 @@ class ConFem:
             NameNodeOut_ = Name+".nodeout.txt"
             f7, MaxType =None, None
             ElemDataAll = {}                                                # skip this in case it is retrieved from pickle !!!
+            for El in ElList:
+                if El.Type in ["SH3","SH4"]:
+                    _ = El.Ini2(NodeList,NoIndToCMInd,MatList,SecDic)       # for definition of  ConFemBasics.SamplePointsRCShell, ConFemBasics.SampleWeightRCShell
         else:
             try: f1=open( Name+".in.txt", 'r')
             except: raise NameError(Name,"not found")
             f6=open( Name+".protocol.txt", 'w')
             Echo(f"ConFem  {Name:s}", f6)
             NodeList, ElList, MatList, SecDic, NoLabToNoInd, StepList, ResultTypes, Header = DataInput( f1, f6, Restart)
-            f1.close()
+            f1.close()#
             NoIndToCMInd = [i for i in range(len(NodeList))]                # maps identical before Cuthill McKee
             EvNodeEl( NodeList, ElList, NoLabToNoInd)                       # determine element indices belonging to each node and more - update required for Cuthill McKee
             ContinuumNodes, ConNoToNoLi = EvNodeC2D( NodeList )             # build list of [[nodal coordinates]] for 2D/3D continuum nodes only and list to map them to NodeList indices

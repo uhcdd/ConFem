@@ -77,7 +77,7 @@ class Step(object):
         self.CLoadList = []                                         # nodal loads
         self.DLoadList = []                                         # distributed loads
         self.TempList  = []                                         # nodal temperatures
-        self.PrestList = []                                         # prestressing data with reference to step
+        self.PrestList = []                                         # prestressing data with reference to step - defined in ConFemInOut:DataInput, used by Step.NodalPrestress
         self.ElFilList = []
         self.NoFilList = []
         self.ReFilList = [1.]                                       # in case no "restart file" defined in input

@@ -144,671 +144,591 @@ def WriteNodes( f5, WrNodes, Time, VecU,VecB,VecP, step,counter, queues,ndeq,max
     f5.write('%3d%8d\n'%(step,counter))
     return 0
 
-def MatInput( z3, zLen, MatList, matName, IType2, mass, LineCounter, L1, RotCrack, PrinStrain, ShearRetFac, S2ndCrack, S2ndCrackA, Visco, PhaseField, SDA, TraPre, LatBonTeFac, RedInt, sval, ff ):
-    #
-    if z3[0].upper()=="*DENSITY":    
-        IType2="density"
-    elif   z3[0].upper()=="*ELASTIC":    
-        for i in z3:
-            if i.upper().find("PHASE_FIELD")>-1:            PhaseField = True
-        for i in z3:
-            if i.upper().find("VISCO")>-1:                  Visco = True
-        IType2="elastic"
-    elif z3[0].upper()=="*ELASTICR1D":
-        IType2 = "elastic1dr"
-    elif z3[0].upper()=="*ELASTICC1D":
-        IType2 = "elasticc1d"
-    elif z3[0].upper()=="*ELASTICLT":  
-        IType2="elasticlt"
-        for i in z3:
-            if i.upper().find("REDUCED_INTEGRATION")>-1:    RedInt = True
-            if i.upper().find("ROTATING_CRACK")>-1:         RotCrack = True
-            if i.upper().find("PRINCIPAL_STRESS")>-1:       PrinStrain = False
-            if i.upper().find("2NDCRACK")>-1:               
-                S2ndCrack = True
-                S2ndCrackA = i.split("=")[1]                                                # minimum deviation of 2nd crack from 1st crack in degree
-            if i.upper().find("SHEAR_RETENTION_FACTOR")>-1: ShearRetFac=i.split("=")[1]     # shear retention factor
-            if i.upper().find("SDA")>-1:                    SDA = True
-        for i in z3:
-            if SDA and i.upper().find("FULLINT")>-1:        RedInt = False                  # e.g. for one element systems
-            else:                                           RedInt = True                   # default approach with reduced integration for SDA elements
-    elif z3[0].upper()=="*ELASTIC_SDA":
-#        IType2="elastic_sda"  be careful to activate original ELASTIC_SDA, input format changed for last items
-        SDA = True
-        for i in z3:
-            if i.upper().find("REDUCED_INTEGRATION")>-1:    RedInt = True
-            if i.upper().find("ROTATING_CRACK")>-1:         RotCrack = True
-            if i.upper().find("PRINCIPAL_STRESS")>-1:       PrinStrain = False
-            if i.upper().find("2NDCRACK")>-1:               
-                S2ndCrack = True
-                S2ndCrackA = i.split("=")[1]                                                # minimum deviation of 2nd crack from 1st crack in degree
-            if i.upper().find("SHEAR_RETENTION_FACTOR")>-1: ShearRetFac=float(i.split("=")[1])     # shear retention factor
-    elif z3[0].upper()=="*ELASTICORTHO":        
-        IType2="elasticOR"
-    elif z3[0].upper()=="*MISES":               
-        IType2="mises"
-    elif z3[0].upper()=="*ISODAMAGE":  
-        IType2="isodam"
-        for i in z3:
-            if i.upper().find("REDUCED_INTEGRATION")>-1:    RedInt = True
-            if i.upper().find("ROTATING_CRACK")>-1:         RotCrack = True
-            if i.upper().find("PRINCIPAL_STRESS")>-1:       PrinStrain = False
-            if i.upper().find("2NDCRACK")>-1:               
-                S2ndCrack = True
-                S2ndCrackA = i.split("=")[1]                    # minimum deviation of 2nd crack from 1st crack in degree
-            if i.upper().find("SHEAR_RETENTION_FACTOR")>-1: ShearRetFac=float(i.split("=")[1])     # shear retention factor
-    elif z3[0].upper()=="*BOND":  
-        IType2="bond"
-        for i in z3:                    # transverse pressure option - Ahmad
-            if i.upper().find("TRANSVERSE_PRESSURE")>-1:    TraPre = True
-            else :                                          TraPre = False     
-            if i.upper().find("LAT_BOND_TEN_FACTOR")>-1:    LatBonTeFac=i.split("=")[1]     # factor for lateral bond tension stiffness
-            else:                                           LatBonTeFac=1.0
-    elif z3[0].upper()=="*MICRODAMAGE":         IType2="mp_dam_"
-    elif z3[0].upper()=="*NLSLAB":              IType2="nlslab"
-    elif z3[0].upper()=="*RESHEET":             IType2="misesre"                                     # reinforcement membrane
-#    elif z3[0].upper()=="*MICROPLANE_DAMAGE1":  IType2="micropl"                             # microplane
-    elif z3[0].upper()=="*LUBLINER":            IType2="lubliner"
-    elif z3[0].upper()=="*SPRING":              IType2="spring"                                        # nonlinear spring - currently 1D
-    elif z3[0].upper()=="*RCSHELL":             IType2="rcshell"
-    elif z3[0].upper()=="*RCBEAM":                                      # sub-items MATERIAL
-        IType2="rcBeam"
-        LineCounter = 0                                         # more than one material data line
-    elif z3[0].upper()=="*POLYBEAM":
-        IType2="polyBeam"
-        LineCounter = 0                                         # more than one material line
-    elif z3[0].upper() in ["*CONCRETE DAMAGED PLASTICITY","*CONCRETE COMPRESSION HARDENING","*CONCRETE TENSION STIFFENING"]:
-        IType2 = "AbaConc"
-        sval = z3[0]
-    elif z3[0].upper() == "*MISESBEAM":         IType2="misesbeam"
-    #
-    elif IType2=="density":
-        mass = float(z3[0])
-    elif IType2=="elastic":
-        if PhaseField and Visco: raise NameError ("ConFemInOut::DataInput: *ELASTIC options PHASE_FIELD and VISCO not allowed simultaneously",matName)           
-        if PhaseField:              
-            if zLen<6: raise NameError ("ConFemInOut::DataInput: not enough data for *ELASTIC with PHASEFIELD option")
-            MatList[matName] = Elastic( [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), 0., 0., mass])
-        elif Visco:
-            if zLen<5: raise NameError ("ConFemInOut::DataInput: not enough data for *ELASTIC with VISCO option")
-#           MatList[matName] = ElasticLT([float(z3[0]),float(z3[1]),1.,1.,1.,float(z3[3]),1./float(z3[4]),0.,0.,0., mass] )
-            MatList[matName] = Elastic( [float(z3[0]), float(z3[1]), float(z3[2]), 0., 0., 0., float(z3[3]), float(z3[4]), mass])
-        else: 
-            if zLen==3: MatList[matName] = Elastic( [float(z3[0]), float(z3[1]), float(z3[2]), 0., 0., 0., 0., 0., mass])
-            else:       MatList[matName] = Elastic( [float(z3[0]), float(z3[1]), 0.,           0., 0., 0., 0., 0., mass])
-    elif IType2=="elastic1dr":
-        MatList[matName] =              ElasticR1D([float(z3[0]), float(z3[1]), float(z3[2]), mass])
-    elif IType2 =="elasticc1d":
-        MatList[matName] =              ElasticC1D( [float(z3[0]), float(z3[1]), float(z3[2]), mass])
-    elif IType2=="elasticlt":
-        if SDA:
-            if zLen<8: raise NameError ("ConFemInOut::DataInput: not enough data for *ELASTIC option SDA",matName)
-#           MatList[matName] = ElasticSDA( [float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]), mass],RedInt,RotCrack,PrinStrain, ShearRetFac, S2ndCrack,float(S2ndCrackA) )
-            if float(z3[5])>0.: S2ndCrack = True
-            else:               S2ndCrack = False
-            PrinStrain = False
-            MatList[matName] = ElasticSDA( [float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[6]),float(z3[7]), mass],RedInt,RotCrack,PrinStrain, float(z3[4]),S2ndCrack,float(z3[5]) )
-        else:
-            if zLen<7: raise NameError ("ConFemInOut::DataInput: not enough data for *ELASTICLT",matName)
-#           MatList[matName] = ElasticLT([float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]),float(z3[6]),int(z3[7]),float(z3[8]),float(z3[9]), mass] )
-            MatList[matName] = ElasticLT([float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]),float(z3[6]), mass] )
-    elif IType2=="elasticOR":                # data MATERIAL elastic
-        MatList[matName] = ElasticOrtho( [float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]),float(z3[6]),float(z3[7]),float(z3[8]), mass])
-    elif IType2=="elastic_sda" and SDA:                     # not addressed anymore above - replaced by ELASTICLT, SDA
-        MatList[matName] = ElasticSDA( [float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]), mass],RedInt,RotCrack,PrinStrain, ShearRetFac, S2ndCrack,float(S2ndCrackA) )
-    elif IType2=="mises":
-        if zLen<7: raise NameError ("ConFemInOut::DataInput: not enough data for *MISES",matName,z3)
-        MatList[matName] =     Mises(         [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass], [0, 0] )
-        MatList[matName+'1'] = MisesUniaxial( [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass], [0, 0] ) # provision for uniaxial behavior
-        MatList[matName+'2'] = MisesBeam2D_([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass], [0, 0]) # provision for uniaxial behavior with beams
-    elif IType2=="misesre":
-        if   len(z3)==6: val = 0.
-        elif len(z3)==7: val = float(z3[6])
-        else: raise NameError ("ConFemInOut::DataInput: number of mises reinforcement membrane data")
-        MatList[matName] = WraMisesReMem( [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), 0., val, mass], [0, 0] )
-    elif IType2=="isodam":
-        if zLen<12: raise NameError ("ConFemInOut::DataInput: not enough data for *ISODAMAGE",zLen)
-        iList = []
-        iList=[float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),int(z3[4]),float(z3[5]),float(z3[6]),float(z3[7]),int(z3[8]),float(z3[9]),float(z3[10]),float(z3[11]),0.]
-        iList.append(mass)
-        MatList[matName] = IsoDamage( iList, RotCrack,PrinStrain,ShearRetFac, S2ndCrack,float(S2ndCrackA))
-    elif IType2=="mp_dam_":
-        if zLen<11: raise NameError ("ConFemInOut::DataInput: not enough data for *MICRODAMAGE")
-        iList = []
-        iList=[float(z3[0]),float(z3[1]),int(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]),float(z3[6]),int(z3[7]),float(z3[8]),float(z3[9]),float(z3[10]), 0.]
-        iList.append(mass)
-        MatList[matName] = MicroPlaneDam( iList, None,None,None, None,None, ff)
-    elif IType2=="lubliner":
-        if   zLen==13: pass
-        else: raise NameError ("ConFemInOut::ReadInputFile: number of Lubliner data")
-        MatList[matName] = Lubliner( [float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]),float(z3[6]),float(z3[7]),float(z3[8]),float(z3[9]),float(z3[10]),float(z3[11]),float(z3[12]), mass])
-    elif IType2=="rcBeam":                   # data MATERIAL rcBeam -- also notice tcbeam 
-        if LineCounter==0:                  # material data concrete
-            if    zLen<10: raise NameError ("ConFemInOut::DataInput: too less concrete material data",z3)
-            L1 = [float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),int(z3[5]),float(z3[6]),float(z3[7]),float(z3[8]),mass,float(z3[9])] # material data concrete
-            LineCounter = LineCounter+1
-        else:                               # material data reinforcement of mises type
-            if    zLen<7: raise NameError ("ConFemInOut::DataInput: too less reinforcement material data")
-            MatList[matName] = RCBeam( [L1, [float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]), float(z3[6]), mass]])  # material data reinforcement
-    elif IType2=="nlslab":
-        IList =                [float(z3[0]), float(z3[1]),  float(z3[2]),  float(z3[3]),  float(z3[4]),  float(z3[5]),  float(z3[6]),  float(z3[7]), float(z3[8])]
-        if len(z3)>9: IList += [float(z3[9]), float(z3[10]), float(z3[11]), float(z3[12]), float(z3[13]), float(z3[14]), float(z3[15]), float(z3[16])]
-        MatList[matName] = NLSlab( IList )
-    elif IType2=="rcshell":                  # data MATERIAL wrapper for reinforced shell
-        if   zLen==7: val, matn, matT = 0., z3[6].strip(), None
-        elif zLen==8: val, matn, matT = float(z3[6]), z3[7].strip(), None
-        elif zLen==9: val, matn, matT = float(z3[6]), z3[7].strip(), z3[8]   # to allow for a selection of reinforcement type: TR -> TextileR, otherwise -> MisesUniaxial
-        if matn in MatList: 
-            L1 = MatList[matn].PropMat   
-        else: raise NameError ("ConFemInOut::DataInput: unknown bulk for RC shell wrapper - maybe wrong sequence of materials in input",val,matn)
-        L2 = [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), val, mass] # see mises:__init__ for meaning of parameters
-        MatList[matName] = WraRCShell([L1, L2], MatList[matn], matT, ff)
-    elif IType2=="spring":
-        MatList[matName] = Spring( [float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6])] )
-    elif IType2=="bond":
-        if LineCounter == 0:
-            L1 = [float(z3[0]), float(z3[1]), float(LatBonTeFac)]
-            LineCounter += 1
-        elif LineCounter == 1:
-            L2 = [float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6])]
-            MatList[matName] = Bond( L1, L2, TraPre )                       # adding transverse pressure option to bond material - Ahmad
-    elif IType2=="polyBeam":
-        if LineCounter == 0:
-            L1 = [[float(z3[0]), float(z3[1])]]
-            LineCounter += 1
-        elif LineCounter == 1:
-            L1 += [[float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5])]]
-            LineCounter += 1
-        elif LineCounter == 2:
-            L1 += [[float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5])]]
-            MatList[matName] = PolyBeam( matName, L1[0][0],L1[0][1], L1[1],L1[2])
-    elif IType2=="AbaConc":
-        Echo(f"ignored {sval:s}", ff)
-    elif IType2 == "misesbeam":
-        MatList[matName] = MisesBeam2D([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass], [0, 0])
-    else: 
-        raise NameError("ConFemInOut::DataInput: material not defined for name", matName, IType2)
-    return IType2, mass, LineCounter, L1, RotCrack, PrinStrain, ShearRetFac, S2ndCrack, S2ndCrackA, Visco, PhaseField, SDA, TraPre, LatBonTeFac, RedInt, sval 
+def ElemListBuild( ElsetDicElems, ElsetDicProps, MatList, NodeList,NoLabToNoInd, SecDic):
+    ElemList = []
+    for elset in SecDic:
+        eltype = ElsetDicProps[elset][0]
+        bondl  = ElsetDicProps[elset][1]
+        Mat       = SecDic[elset].Mat                                       # material name
+        Material  = MatList[Mat]
+        Material.Used = True
 
-def DataInput( f1, ff, Restart):
-    # first check input for correct keywords
-    z1 = f1.readline()
-    z2 = z1.strip()
-    z3 = z2.split(',')
-    z3 = [ i.strip() for i in z3 ]
-    while z1!="":
-        if   z3[0].find("**")>-1 :pass
-        elif z3[0].find("*")>-1 and z3[0].upper() not in ["*HEADING","*NODE","*ELEMENT","*MATERIAL","*BEAM REINF","*BEAM SECTION","*SOLID SECTION","*SHELL SECTION","*STEP","*END STEP",
-                                   "*DENSITY","*RCBEAM","*TCTBAR","*ELASTIC","*ELASTICORTHO","*ELASTICLT","*RCSHELL","*ISODAMAGE","*SPRING","*MISES","*LUBLINER","*RESHEET","*NLSLAB","*MICRODAMAGE","*BOND","*ELASTIC_SDA","*ELASTICR1D","*ELASTICC1D",
-                                   "*CONTROLS","*STATIC","*DYNAMIC", "*DAMPING","*BUCKLING","*BOUNDARY","*DLOAD","*CLOAD","*TEMPERATURE","*EL FILE","*NODE FILE","*SOLUTION TECHNIQUE","*AMPLITUDE","*PRESTRESS","*ELSET","*NSET",
-                                   "*CONCRETE DAMAGED PLASTICITY","*CONCRETE COMPRESSION HARDENING","*CONCRETE TENSION STIFFENING","*CONCRETE COMPRESSION DAMAGE","*CONCRETE TENSION DAMAGE","*DEPVAR","*USER MATERIAL","*MISESBEAM",
-                                   "*PREPRINT","*PART","*END PART","*ASSEMBLY","*INSTANCE","*END INSTANCE","*END ASSEMBLY","*RESTART","*OUTPUT","*PREPRINT","*SYSTEM","*NODE OUTPUT","*ELEMENT OUTPUT","*MONITOR","*POLYBEAM","*RESTART FILE",
-                                                          "*EIGENMODES"]:
-            raise NameError ("ConFemInOut::DataInput: unknown keyword", z3[0])
-        z1 = f1.readline()
-        z2 = z1.strip()
-        z3 = z2.split(',')
-        z3 = [ i.strip() for i in z3 ]
-    f1.seek(0)
-    #
-    Header  = []
-    MatList = {}                                                            # dictionary for materials
-    SecDic  = {}                                                            # local, dictionary for sections
-    BeamSec = {}                                                            # dictionary for sections, for beam section only
-    BreiDic = {}                                                            # dictionary for beam reinforcement, local use only, key is a label, data is list of lists
-    BreiDic["DEFAULT"] = []                                                 # default value empty dic / no reinforcement
-    ElemList  = []
-    ElemList_ = []
-    NodeList  = []
-    StepList  = []
-    ElSetDic  = {}
-    NSetDic   = {}
-    AmpDict = {}                                                            # local, also defined for steps where it is persistent -- both are combined in following post section  
-    NoLabToNoInd = {}
-    ResultTypes = {}                                                        # dictionary for each element type
-    RandomData = {}                                                         # local -- random data for material property definition per element
-    NoCounter = 0
-    StepCounter = 0
-    z1 = f1.readline()
-    z2 = z1.strip()
-    z3 = z2.split(',')
-    zLen = len(z3)
-    IType  = ""
-    IType2 = ""                                                     # initialization of key
-    while z1!="":
-        if   z3[0].upper()=="*HEADING":
-            IType = "heading"
-        elif z3[0].upper()=="*NODE":        
-            IType = "node"
-        elif z3[0].upper()=="*NSET":        
-            IType = "nset"
-            generate = False
-            for i in z3:
-                if i.upper().find("NSET=")>-1:    nset =i.split("=")[1]
-                if i.upper().find("GENERATE")>-1: generate = True
-                L1 = []
-        #    
-        elif z3[0].upper()=="*ELEMENT":
-            IType = "element"
-            elset = None
-            bondl = None
-#            bStiff= None
-            for i in z3:                                                    # eltype must be determined first  
-                if i.upper().find("TYPE")>-1:      eltype= i.split("=")[1].strip().upper()
-                elif i.upper().find("ELSET")>-1:   elset = i.split("=")[1].strip()
-                elif i.upper().find("BONDLAW")>-1: bondl = i.split("=")[1].strip().upper()
-#                elif i.upper().find("BSTIFF")>-1:  bStiff = float(i.split("=")[1])
-        elif z3[0].upper()=="*ELSET":
-            IType = "elset"
-            generate, internal = False, False
-            for i in z3:
-                if i.upper().find("ELSET=")>-1:   elset =i.split("=")[1]  
-                if i.upper().find("GENERATE")>-1: generate = True
-                if i.upper().find("INTERNAL")>-1: internal = True           # currently not used
-            L1 = []
-        #
-        elif z3[0].upper()=="*MATERIAL":
-            IType = "mat"
-            for i in z3:
-                if i.upper().find("NAME")>-1:     
-                    matName=i.split("=")[1].upper()
-                    if MatList.get(matName)!=None: raise NameError ("ConFemInOut::DataInput: material with same name already exists")
-            IType2= " "                                                     # IType2 will become active ???
-            mass  = 0.
-            LineCounter = 0                                                 # option may have more than one data line with different format
-            RedInt, RotCrack, PrinStrain, S2ndCrack, S2ndCrackA, Visco, PhaseField, SDA, sval = False, False, True, False, 0., False, False, False, "" 
-            ShearRetFac=-1                                                  # see default value in init
-            L1 = []
-            LatBonTeFac = 1.0
-            TraPre = False
-        #
-        elif z3[0].upper()=="*BEAM REINF":                                  # key BEAM REINFORCEMENT - another option for input of reinforcement geometry presumably if beam section is not RECT
-            IType = "beamreinforcement"
-            for i in range(1,zLen):                                         # loop starts with 1
-                if z3[i].find("NAME")>-1:
-                    breiName=z3[i].split("=")[1]                            # set current reinforcement name
-                    if BreiDic.get(breiName)!=None: raise NameError ("ConFemInOut::DataInput: beam reinf with same name")
-            linecounter = 0
-        #
-        elif z3[0].upper()=="*BEAM SECTION":                                # key BEAM SECTION
-            IType = "beamsection"
-            reinf = "DEFAULT"
-            nRebar = 1.0   #None
-#            nRebar = None
-            bStiff_ = None
-            for i in range(1,len(z3)):                                      # loop starts with 1
-                if   z3[i].upper().find("SECTION")>-1:  beamSecType=z3[i].split("=")[1]
-                elif z3[i].upper().find("ELSET")>-1:    elset=z3[i].split("=")[1]
-                elif z3[i].upper().find("MATERIAL")>-1: mat=z3[i].split("=")[1].upper()
-                elif z3[i].upper().find("REINF")>-1:    reinf=z3[i].split("=")[1]
-                elif z3[i].upper().find("NREBAR") >-1:  nRebar = float(z3[i].split("=")[1])
-                elif z3[i].upper().find("BSTIFF") >-1:  bStiff_ = float(z3[i].split("=")[1])
-            linecounter = 0
-        elif z3[0].upper()=="*SOLID SECTION":                               # key SOLID SECTION
-            IType = "solidsection"
-            nRebar = None
-            for i in z3:
-                if   i.upper().find("ELSET")>-1:        elset   =i.split("=")[1]
-                elif i.upper().find("MATERIAL")>-1:     mat     =i.split("=")[1].upper()
-                elif i.upper().find("NREBAR") >-1:      nRebar = float(i.split("=")[1])
-        elif z3[0].upper()=="*SHELL SECTION":                               # key SHELL SECTION
-            IType = "shellsection"
-            for i in range(1,zLen):                                         # loop starts with 1
-                if   z3[i].find("ELSET")>-1:    elset=z3[i].split("=")[1]
-                elif z3[i].find("MATERIAL")>-1: mat=z3[i].split("=")[1].upper()
-            linecounter = 0
-        #
-        elif IType!= 'step' and z3[0].upper()=="*AMPLITUDE":                # amplitude definition out of step
-            IType = "amplitude" 
-            for i in z3:  
-                if i.upper().find("NAME")>-1:      AmpName= i.split("=")[1] # name of amplitude
-        #
-        elif z3[0].upper()=="*STEP":
-            ### build final list for elements #############################################################
-            if len(ElemList_)>0:
-                for i in range(len(ElemList_)):
-                    eltype = ElemList_[i][0]
-                    #                    B23__init__(self, Label,          SetLabel,       InzList,        MatName, NodeList, BeamSec, ReinfD, StateV, NData, ff, NoLabToNoInd, Material)
-                    if   eltype=='B23':  ElemList +=[B23(  ElemList_[i][1],ElemList_[i][3],ElemList_[i][2],None,    NodeList, BeamSec, None,   None,   None,  ff, NoLabToNoInd, None)]
-                    elif eltype=='B23I':                                    # full data needed for creation of bond elements
-                        elset = ElemList_[i][3]
-                        mat   = SecDic[elset].Mat 
-                        #B23I__init__(self,Label,         InzList,        BeamSec, NoList,  elSet, MatName, BondLaw,                          NoLabToNoInd,Material,    NoIndToCMInd)
-                        ElemList +=[B23I( ElemList_[i][1],ElemList_[i][2],BeamSec, NodeList,elset, mat,     ElemList_[i][4],NoLabToNoInd,MatList[mat],[])]
-                        #               B23E__init__(self, Label,          SetLabel,       InzList,        MatName, NodeList, BeamSec, ReinfD, StateV, NData, ff, NoLabToNoInd, Material)
-                    elif eltype=='B23E': ElemList +=[B23E( ElemList_[i][1],ElemList_[i][3],ElemList_[i][2],None,    NodeList, BeamSec, None,   None,   None,  ff, NoLabToNoInd, None)]
-                    elif eltype=='B23EI':                                   # full data needed for creation of bond elements
-                        elset = ElemList_[i][3]
-                        mat   = SecDic[elset].Mat 
-                        #B23EI__init__(self,Label,        InzList,        BeamSec, NoList,  elSet, MatName, BondLaw,                          NoLabToNoInd, Material,    NoIndToCMInd)
-                        ElemList +=[B23EI(ElemList_[i][1],ElemList_[i][2],BeamSec, NodeList,elset, mat,     ElemList_[i][4],NoLabToNoInd, MatList[mat],[])]
-                    elif eltype=='BAX23': ElemList += [BAX23(ElemList_[i][1],ElemList_[i][3],ElemList_[i][2], NodeList,NoLabToNoInd)]
-                    elif eltype=='BAX23I':        #          label,           elset            InzList          BondLaw
-                        ElemList += [                 BAX23I(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], ElemList_[i][4], NodeList, NoLabToNoInd)]
-                    elif eltype=='BAX23E':                 # label,           elset            InzList          BondLaw
-                        ElemList += [                 BAX23EI(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], None,            NodeList, NoLabToNoInd)]
-                    elif eltype=='BAX23EI':                 # label,           elset            InzList          BondLaw
-                        ElemList += [                 BAX23EI(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], ElemList_[i][4], NodeList, NoLabToNoInd)]
-                    elif eltype=='B21':   ElemList +=[B21(   ElemList_[i][1],ElemList_[i][2],ElemList_[i][3], NodeList,NoLabToNoInd)]
-                    elif eltype=='BAX21': ElemList +=[BAX21( ElemList_[i][1],ElemList_[i][2],ElemList_[i][3], NodeList,NoLabToNoInd)]
-#                   elif eltype=='BAX21I':ElemList +=[BAX21I(ElemList_[i][1],ElemList_[i][2],ElemList_[i][3], NodeList, NoLabToNoInd)]
-                    elif eltype=='B21E':  ElemList +=[B21E(  ElemList_[i][1],ElemList_[i][2],ElemList_[i][3], NodeList,NoLabToNoInd)]
-                    elif eltype=='BAX21E':ElemList +=[BAX21E(ElemList_[i][1],ElemList_[i][2],ElemList_[i][3], NodeList,NoLabToNoInd)]
-                    elif eltype=='BAX21EI':
-                        ElemList += [BAX21EI( ElemList_[i][1], ElemList_[i][2],ElemList_[i][3],ElemList_[i][4], NodeList,NoLabToNoInd)]
-                    elif eltype=='S2D6': ElemList +=[S2D6( ElemList_[i][1],ElemList_[i][2],ElemList_[i][3],           ElemList_[i][4], ElemList_[i][5], SecDic[ElemList_[i][2]], MatList[ElemList_[i][4]].StateVar, MatList[ElemList_[i][4]].NData, NoLabToNoInd)]
-                    #                   T2D2__init__(self, Label,         SetLabel,        InzList,         MatName, NodeList, SolSecDic, StateV, NData, Val,                  NoLabToNoInd)
-                    elif eltype=='T2D2': ElemList +=[T2D2( ElemList_[i][1],ElemList_[i][3],ElemList_[i][2], None,    NodeList, SecDic,    None,   None,  ElemList_[i][4], NoLabToNoInd)]
-                    elif eltype=='T2D2I':                                   # full data needed for creation of bond elements
-                        elset = ElemList_[i][3]
-                        mat   = SecDic[elset].Mat
-                        # T2D2I__init__(self,Label,         InzList,        SolSecDic,Val,            NoList,  elSet,          MatName,  BondLaw,       NoLabToNoInd, Material, NoIndToCMInd)
-                        ElemList += [T2D2I(ElemList_[i][1], ElemList_[i][2], SecDic, ElemList_[i][4], NodeList, ElemList_[i][3], mat, ElemList_[i][5], NoLabToNoInd, MatList[mat], [])]
-                    elif eltype=='T2D3':
-                        elset = ElemList_[i][3]
-                        mat   = SecDic[elset].Mat
-                        #T2D3__init__(self, Label,           InzList,         AA,              NoList,   elSet,           MatName, NoLabToNoInd, Material, NoIndToCMInd):
-                        ElemList += [ T2D3( ElemList_[i][1], ElemList_[i][2],        ElemList_[i][4],NodeList,SecDic, elset,          mat,                                      NoLabToNoInd, MatList[mat], [])]
-                    elif eltype=='T2D3I':                                   # full data needed for creation of bond elements
-                        elset = ElemList_[i][3]
-                        mat   = SecDic[elset].Mat
-                        # T2D3I__init__(self,Label,         InzList,        SolSecDic,Val,             NodeList, elSet, MatName, BondLaw,                         NoLabToNoInd, Material, NoIndToCMInd):
-                        ElemList += [T2D3I(ElemList_[i][1], ElemList_[i][2], SecDic, ElemList_[i][4], NodeList, elset, mat, ElemList_[i][5], NoLabToNoInd, MatList[mat], [])]
-                    elif eltype=='T3D2': ElemList += [T3D2(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], None, NodeList, None, None, None, ElemList_[i][4], NoLabToNoInd)]
-                    elif eltype=='T3D2I':                                   # full data needed for creation of bond elements
-                        elset = ElemList_[i][3]
-                        mat   = SecDic[elset].Mat
-                        ElemList += [T3D2I(ElemList_[i][1], ElemList_[i][2], SecDic, ElemList_[i][4], NodeList, elset, mat, ElemList_[i][5], NoLabToNoInd, MatList[mat], [])]
-                    elif eltype=='T3D3':
-                        # T3D3__init__(self,Label,         SetLabel,        InzList,         MatName, NodeList, SolSecDic, StateV, NData, Val,             NoLabToNoInd)
-                        ElemList += [T3D3(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], None,    NodeList, None,      None,   None,  ElemList_[i][4], NoLabToNoInd)]
-                    elif eltype=='T3D3I':                                   # full data needed for creation of bond elements
-                        elset = ElemList_[i][3]
-                        mat   = SecDic[elset].Mat
-                        # T3D3I__init__(self,Label,         InzList,        SolSecDic,Val,             NodeList, elSet, MatName, BondLaw,         NoLabToNoInd, Material, NoIndToCMInd)
-                        ElemList += [T3D3I(ElemList_[i][1], ElemList_[i][2], SecDic, ElemList_[i][4], NodeList, elset, mat, ElemList_[i][5], NoLabToNoInd, MatList[mat], [])]
-                    elif eltype=='TAX2':
-                        # T2D2__init__(self,Label,           SetLabel,        InzList,         NodeList, Val,             NoLabToNoInd)
-                        ElemList += [TAX2(  ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], NodeList, SecDic, ElemList_[i][4], NoLabToNoInd)]
-                    elif eltype=='TAX2I':
-                        ElemList += [TAX2I(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], NodeList, SecDic, ElemList_[i][4], NoLabToNoInd, ElemList_[i][5])]
-                    elif eltype=='TAX3':
-                        ElemList += [TAX3( ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], NodeList, SecDic, ElemList_[i][4], NoLabToNoInd)]
-                    elif eltype=='TAX3I':
-                        ElemList += [TAX3I(ElemList_[i][1], ElemList_[i][3], ElemList_[i][2], NodeList, SecDic, ElemList_[i][4], NoLabToNoInd, ElemList_[i][5])]
+        for z3 in ElsetDicElems[elset]:
+            elLabel = int( int(z3[0]))
+            zLen = len(z3)
 
-                ElemList_ = []
-            # finally, complete assignment of elset to elements for considering *ELSET keyword                    
-            for elset in ElSetDic:                                          # loop over elsets defined with *ELSET, ElSetDic is local
-                    for i in ElSetDic[elset]:                               # loop over elements
-                        j = FindIndexByLabel(ElemList, i)
-                        el = ElemList[j] 
-                        if el.Set != None: 
-                            Echo(f"element {el.Label:d} has already set directly assigned, skipped in related assignment", ff)
-                        else:
-                            el.Set = elset
-            # finally assign element types to SecDic    
-            for i, e in enumerate(ElemList):
-                elset  = e.Set
-                eltype = e.Type
-                if elset in SecDic:                                         # SecDic is global
-                    s = SecDic[elset]
-                    if eltype not in s.ElemTypes:
-                        s.ElemTypes += [eltype]
-                else: raise NameError("ConFemInOut::DataInput: section not found for element set",elset,e.Label)
-            for s in SecDic:
-                if len(SecDic[s].ElemTypes)==1: 
-                    pass
-                else:
-                    for t in SecDic[s].ElemTypes:
-                        if t in ['CPS3','CPE3','CPS4','CPE4']: pass # CP*3, CP*4 may be in same set
-                        else: raise NameError("ConFemInOut::DataInput: element set should have one element type assigned",SecDic[s].ElemTypes)
-            ### end of build final list for elements #######################################################
-            ###
-#            from ConFem import CheckInz
-#            CheckInz(ElemList, 681)
-            ###
-            # initialize step
-            IType = "step"
-            IType2=" "                                                  # IType2 will become active ???
-            StepCLoad  = []
-            StepBoundC = []
-            StepDLoad  = []
-            StepTemp   = []
-            StepCounter += 1
-            if len(StepList) == 0:
-                StepList += [Step()]                                        # initializing step
-                for i in range(1,zLen):                                     # loop starts with 1
-                    if z3[i].upper().find("NLGEOM")>-1:
-                        if z3[i].split("=")[1]=="YES": StepList[len(StepList)-1].NLGeom = True # acts on itself
-                    if z3[i].upper().find("SCALEMASS") > -1:
-                        StepList[len(StepList) - 1].ScaleMass = float(z3[i].split("=")[1])   # acts on itself
-            else:
-                StepList += [copy.deepcopy(StepList[-1])]                   # take over everything for additional step from previous step
-                StepList[-1].PrestList = []                                 # prestressing data may have different formats in subsequent step, are fully initialized for each step  
-                for i in range(1,zLen):                                     # loop starts with 1
-                    if z3[i].find("NLGEOM")>-1:                             
-                        if z3[i].split("=")[1]=="YES": StepList[len(StepList)-1].NLGeom = True # acts on last
-
-            Step_ = StepList[len(StepList)-1]                               # Step_ is a pointer to last entry of StepList -- in case of 1st step an initialized instance of object Step
-            # end initialize step
-        elif z3[0].upper() in ['*PREPRINT','*PART','*END PART','*ASSEMBLY','*INSTANCE','*END INSTANCE','*END ASSEMBLY','*RESTART','*OUTPUT','*SYSTEM']:
-            Echo(f"ignored {z3[0]:s}", ff)                                  # Abaqus stuff
-        elif z3[0]=="" or z3[0].find("**")>-1: # or (z3[0][0]=="*" and IType2==""): 
-            pass                                                            # blank line / comment line / no secondary keyword
-        elif z3[0].find("*")>-1 and IType!="mat" and IType!="step":     # unknown key, comment, connected line
-            raise NameError("ConFemInOut::DataInput: unknown keyword",z3[0])
-        #
-        elif IType!="":
-            if   IType=="heading":
-                Header += [z3[0]]
-            elif IType=="node":
-                if zLen<3: raise NameError ("not enough nodal data")
-                if zLen==3:   NodeList += [Node( int(z3[0]), float(z3[1]), float(z3[2]), 0., 0.,0.,0. )]
-                elif zLen==4: NodeList += [Node( int(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), 0.,0.,0. )]
-                elif zLen==7: NodeList += [Node( int(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]) )]
-                NoLabToNoInd[ int(z3[0]) ] = NoCounter
-                NoCounter += 1
-            #
-            elif IType=="nset":
-                if generate:
-                    L1 = [ i for i in range( int(z3[0]), int(z3[1])+1, int(z3[2]) ) ]
-                else:
-                    if len(z3[-1])==0: nL = len(z3)-1                       # for data like .... 632, 
-                    else:              nL = len(z3)
-                    L1 = L1 + [int(z3[i]) for i in range(nL)]                                            # 
-                NSetDic[nset] = L1                                          # dic only used locally, brute repeated updating, not a smart way
-            #
-            elif IType=="element":
-                # what follows refers to ElList_
-                if eltype=='B23':
-                    if bondl!=None: ElemList_+=[['B23I', int(z3[0]),[int(z3[1]),int(z3[2])], elset,bondl]]
-                    else:           ElemList_+=[[eltype, int(z3[0]),[int(z3[1]),int(z3[2])], elset]]
-                elif eltype=='B23E':
-                    if len(z3)==6:          
-                        '''accept 2 randomly distributed variables'''
-                        RandomField_Routines().add_elset(elset)
-                        RandomField_Routines().add_propertyEntry(float(z3[4]),elset,int(z3[0]))
-                        RandomField_Routines().add_propertyEntry(float(z3[5]),elset,int(z3[0]))
-#                    if bondl!=None:  ElemList_+=[['B23EI',int(z3[0]),[int(z3[1]),int(z3[2]),int(z3[3])],elset,bondl]]
-#                    else:            ElemList_+=[[eltype, int(z3[0]),[int(z3[1]),int(z3[2]),int(z3[3])],elset      ]]
-                    if bondl!=None:  ElemList_+=[['B23EI',int(z3[0]),[int(z3[1]),int(z3[3]),int(z3[2])],elset,bondl]] # enhanced node moves last in input, right node now in center of incidence
-                    else:            ElemList_+=[[eltype, int(z3[0]),[int(z3[1]),int(z3[3]),int(z3[2])],elset      ]]
-                elif eltype == 'BAX23':
-                    if bondl!=None:  ElemList_ += [["BAX23I", int(z3[0]), [int(z3[1]), int(z3[2])], elset, bondl]]
-                    else:            ElemList_ += [[eltype, int(z3[0]), [int(z3[1]), int(z3[2])], elset]]
-                elif eltype == 'BAX23E':
-                    if bondl!=None:  ElemList_ += [["BAX23EI", int(z3[0]),[int(z3[1]),int(z3[3]),int(z3[2])],elset,bondl]]
-                    else:            ElemList_ += [[eltype,    int(z3[0]),[int(z3[1]),int(z3[3]),int(z3[2])], elset]]
-                elif eltype in ['B21','BAX21']:
-                    if bondl!=None:  ElemList_+=[[eltype, int(z3[0]),elset,[int(z3[1]),int(z3[2])],bondl]]
-                    else:            ElemList_+=[[eltype, int(z3[0]),elset,[int(z3[1]),int(z3[2])]]]
-                elif eltype=='B21E':
-                    ElemList_+=[[eltype, int(z3[0]),elset,[int(z3[1]),int(z3[2]),int(z3[3])]]]
-                elif eltype=='BAX21E':
-                    if bondl!=None:  ElemList_+=[['BAX21EI', int(z3[0]),elset,[int(z3[1]),int(z3[2]),int(z3[3])],bondl]]
-                    else:            ElemList_+=[[eltype, int(z3[0]),elset,[int(z3[1]),int(z3[2]),int(z3[3])]]]
-                elif eltype=='S2D6': ElemList_+=[[eltype, int(z3[0]),elset,[int(z3[1]),int(z3[2])],           None,NodeList,None]]
-                elif eltype=='T2D2':
-                    if zLen==3: Val = 1.0
-                    else:       Val = float(z3[3])                          # modifying factor for cross section
-                    if bondl!=None: ElemList_+=[['T2D2I',int(z3[0]),[int(z3[1]),int(z3[2])], elset, Val, bondl]]
-                    else:           ElemList_+=[[eltype, int(z3[0]),[int(z3[1]),int(z3[2])], elset, Val]]
-                elif eltype=='T2D3':
-                    if zLen==4: Val = 1.0
-                    else:       Val = float(z3[4])                          # modifying factor for cross section
-                    if bondl!=None:  ElemList_+=[['T2D3I',int(z3[0]),[int(z3[1]),int(z3[2]),int(z3[3])], elset, Val, bondl]]
-                    else:            ElemList_+=[[eltype, int(z3[0]),[int(z3[1]),int(z3[2]),int(z3[3])], elset, Val]]
-                elif eltype=='T3D2':
-                    if zLen==3: Val = 1.0
-                    else:       Val = float(z3[3])                          # modifying factor for cross section
-                    if bondl!=None:  ElemList_+=[['T3D2I',int(z3[0]),[int(z3[1]),int(z3[2])], elset, Val, bondl]]
-                    else:            ElemList_+=[[eltype, int(z3[0]),[int(z3[1]),int(z3[2])], elset, Val]]
-                elif eltype=='T3D3':
-                    if zLen==4: Val = 1.0
-                    else:       Val = float(z3[4])                          # modifying factor for cross section
-                    if bondl!=None:  ElemList_+=[['T3D3I',int(z3[0]),[int(z3[1]),int(z3[2]),int(z3[3])], elset, Val, bondl]]
-                    else:            ElemList_+=[[eltype, int(z3[0]),[int(z3[1]),int(z3[2]),int(z3[3])], elset, Val]]
-                elif eltype=='TAX2':
-                    if bondl!= None: ElemList_+=[["TAX2I",int(z3[0]),[int(z3[1]),int(z3[2])], elset, 1.0, bondl]]
-                    else:            ElemList_+=[[eltype, int(z3[0]),[int(z3[1]),int(z3[2])], elset, 1.0 ]]
-                elif eltype=='TAX3':
-                    if bondl!= None: ElemList_+=[["TAX3I",int(z3[0]),[int(z3[1]),int(z3[2]),int(z3[3])], elset, 1.0, bondl, None]]
-                    else:            ElemList_+=[[eltype, int(z3[0]),[int(z3[1]),int(z3[2]),int(z3[3])], elset, 1.0 ]]
-
-                # what follows refers to ElemList
-                elif eltype in ['CPS4','CPE4']:
-                    if eltype=='CPS4': PlStrFl = True                       # flag for plane stress (True->plane stress, False->plane strain)
-                    else:              PlStrFl = False
-                    l3 = len(z3)
-                    if z3[-1].strip()=="": l3=l3-1                          # white spaces after comma
-                    if   l3==5:                                             # quad element
-                        ElemList += [CPE4( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], NodeList, PlStrFl, 2, NoLabToNoInd)]
-                    elif l3==9:                                             # quad element -- with further random ip parameter
-                        ElemList += [CPE4( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], NodeList, PlStrFl, 2, NoLabToNoInd)]
-                        RandomData[int(z3[0])] = [float(z3[5]),float(z3[6]),float(z3[7]),float(z3[8])]
-                    elif l3==4:                                             # tri element
-                        ElemList += [CPE3( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3])], NodeList, PlStrFl, NoLabToNoInd)]
-                    else: raise NameError("ConFemInOut::ReadInputFile: wrong number of nodes for CPXn elements")
-                elif eltype in ['CPS4R']:
-                    PlStrFl = True
-                    ElemList += [CPE4( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], None,None,        NodeList, None,          None,                  None,               PlStrFl,  1, None,               ff, NoLabToNoInd)]
-                elif eltype in ['CPS3','CPE3']:
-                    if eltype=='CPS3': PlStrFl = True                       # flag for plane stress (True->plane stress, False->plane strain)
-                    else:              PlStrFl = False
-                    ElemList += [CPE3( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3])], NodeList, PlStrFl, NoLabToNoInd)]
-                elif eltype=='CAX4':
-                    ElemList += [CAX4(int(z3[0]), elset, [int(z3[1]), int(z3[2]), int(z3[3]), int(z3[4])], NodeList, 2,NoLabToNoInd)]
-                elif eltype=='CPS6':
-                    ElemList += [CPE6( int(z2[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4]),int(z3[5]),int(z3[6])], None,None, NodeList, None, None, None, True, NoLabToNoInd)]
-                elif eltype=='CPE6': 
-                    ElemList += [CPE6( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4]),int(z3[5]),int(z3[6])], None,None, NodeList, None, None, None, False,NoLabToNoInd)]
+            if eltype=='B23':
+                if bondl!=None: ElemList+=[B23I( elLabel, [int(z3[1]),int(z3[2])], None, NodeList, elset, None, bondl, NoLabToNoInd, Material, None)]
+                else:           ElemList+=[ B23( elLabel, elset, [int(z3[1]),int(z3[2])], None, NodeList, None, None, None, None, None, NoLabToNoInd, None)]
+            elif eltype=='B23E':
+                if len(z3)==6:
+                    '''accept 2 randomly distributed variables'''
+                    RandomField_Routines().add_elset(elset)
+                    RandomField_Routines().add_propertyEntry(float(z3[4]),elset,int(z3[0]))
+                    RandomField_Routines().add_propertyEntry(float(z3[5]),elset,int(z3[0]))
+                if bondl!=None:  ElemList+=[B23EI(elLabel,[int(z3[1]),int(z3[3]),int(z3[2])], None, NodeList, elset, None, bondl, NoLabToNoInd, Material, None)] # enhanced node moves last in input, right node now in center of incidence
+                else:            ElemList+=[ B23E( elLabel, elset, [int(z3[1]),int(z3[3]),int(z3[2])], None, NodeList, None, None, None, None, None, NoLabToNoInd, None)]
+            elif eltype == 'BAX23':
+                if bondl!=None:  ElemList += [BAX23I( elLabel, elset, [int(z3[1]), int(z3[2])], bondl, NodeList, NoLabToNoInd)]  # uhc not yet tested
+                else:            ElemList += [ BAX23( elLabel, elset, [int(z3[1]), int(z3[2])], NodeList, NoLabToNoInd)]
+            elif eltype == 'BAX23E':
+                if bondl!=None:  ElemList += [BAX23EI( elLabel, elset,[int(z3[1]),int(z3[3]),int(z3[2])], bondl, NodeList,NoLabToNoInd)]
+                else:            raise NameError("ConFemInOut::ElemListBuild: this element type makes sense only with bonding - is not implemented without bonding", eltype) #ElemList += []
+            elif eltype in ['B21']:
+                if bondl!=None:  raise NameError("ConFemInOut::ElemListBuild: this element type does not make sense bonded - is not implemented to be bonded", eltype) # ElemList += []
+                else:            ElemList += [B21(elLabel, elset, [int(z3[1]),int(z3[2])], NodeList, NoLabToNoInd)]
+            elif eltype in ['BAX21']:
+                if bondl!=None:  raise NameError("ConFemInOut::ElemListBuild: this element type does not make sense bonded - is not implemented to be bonded", eltype) #ElemList += []
+                else:            ElemList += [BAX21(elLabel, elset, [int(z3[1]), int(z3[2])], NodeList, NoLabToNoInd)]
+            elif eltype=='B21E':
+                ElemList += [ B21E( elLabel,elset,[int(z3[1]),int(z3[2]),int(z3[3])], NodeList, NoLabToNoInd)]
+            elif eltype=='BAX21E':
+                if bondl!=None:  ElemList += [ BAX21EI(elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3])], bondl, NodeList, NoLabToNoInd)]
+                else:            ElemList += [ BAX21E( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3])], NodeList, NoLabToNoInd) ]
+            elif eltype=='S2D6':
+                ElemList += [ S2D6(elLabel, elset, [int(z3[1]),int(z3[2])], None, NodeList, SecDic, None, None, NoLabToNoInd)]
+            elif eltype=='T2D2':
+                if zLen==3: Val = 1.0
+                else:       Val = float(z3[3])                              # modifying factor for cross section
+                if bondl!=None: ElemList+=[ T2D2I(elLabel, [int(z3[1]),int(z3[2])],SecDic,   Val,NodeList,elset,Mat,    bondl,  NoLabToNoInd, Material, None)]
+                else:           ElemList+=[ T2D2(elLabel,elset, [int(z3[1]),int(z3[2])], Mat,     NodeList, SecDic,    None,   None,  Val, NoLabToNoInd)]
+            elif eltype=='T2D3':
+                if zLen==4: Val = 1.0
+                else:       Val = float(z3[4])                              # modifying factor for cross section
+                if bondl!=None:  ElemList+=[ T2D3I(elLabel, [int(z3[1]),int(z3[2]),int(z3[3])],SecDic,   Val,NodeList,elset, Mat,    bondl,   NoLabToNoInd,  None, None    )]
+                else:            raise NameError("ConFemInOut::ElemListBuild: this element type makes sense only with bonding - is not implemented without bonding", eltype) #ElemList+=[ ]
+            elif eltype=='T3D2':
+                if zLen==3: Val = 1.0
+                else:       Val = float(z3[3])                              # modifying factor for cross section
+                if bondl!=None:  ElemList+=[ T3D2I(elLabel, [int(z3[1]),int(z3[2])],SecDic,Val, NodeList, elset, Mat, bondl, NoLabToNoInd, Material, None)]
+                else:            ElemList+=[  T3D2(elLabel,elset, [int(z3[1]),int(z3[2])], Mat,     NodeList, SecDic,    None,   None,  Val, NoLabToNoInd)]
+            elif eltype=='T3D3':
+                if zLen==4: Val = 1.0
+                else:       Val = float(z3[4])                              # modifying factor for cross section
+                if bondl!=None:  ElemList+=[ T3D3I(elLabel, [int(z3[1]),int(z3[2]),int(z3[3])], SecDic,Val, NodeList, elset, Mat, bondl, NoLabToNoInd, Material, None)]
+                else:            raise NameError("ConFemInOut::ElemListBuild: this element type makes sense only with bonding - is not implemented without bonding", eltype) # ElemList+=[ ]
+            elif eltype=='TAX2':
+                if bondl!= None: ElemList+=[ TAX2I(elLabel, elset, [int(z3[1]),int(z3[2])], NodeList, SecDic, 1.0, NoLabToNoInd, bondl)]
+                else:            ElemList+=[  TAX2(elLabel, elset, [int(z3[1]),int(z3[2])], NodeList, SecDic, 1.0, NoLabToNoInd)]
+            elif eltype=='TAX3':
+                if bondl!= None: ElemList+=[ TAX3I(elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3])], NodeList, SecDic, 1.0, NoLabToNoInd, bondl)]
+                else:            ElemList+=[  TAX3(elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3])], NodeList, SecDic, 1.0, NoLabToNoInd)]
+            elif eltype in ['CPS4','CPE4']:
+                if eltype=='CPS4': PlStrFl = True                           # flag for plane stress (True->plane stress, False->plane strain)
+                else:              PlStrFl = False
+                l3 = len(z3)
+                if z3[-1].strip()=="": l3=l3-1                              # white spaces after comma
+                if   l3==5:                                                 # quad element
+                    ElemList += [CPE4( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], NodeList, PlStrFl, 2, NoLabToNoInd)]
+                elif l3==9:                                                 # quad element -- with further random ip parameter
+                    ElemList += [CPE4( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], NodeList, PlStrFl, 2, NoLabToNoInd)]
+                    RandomData[elLabel] = [float(z3[5]),float(z3[6]),float(z3[7]),float(z3[8])]
+                elif l3==4:                                                 # tri element
+                    ElemList += [CPE3( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3])], NodeList, PlStrFl, NoLabToNoInd)]
+                else: raise NameError("ConFemInOut::ElemListBuild: wrong number of nodes for CPXn elements")
+            elif eltype in ['CPS4R']:
+                PlStrFl = True
+                ElemList += [CPE4( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], None,None,        NodeList, None,          None,                  None,               PlStrFl,  1, None,               ff, NoLabToNoInd)]
+            elif eltype in ['CPS3','CPE3']:
+                if eltype=='CPS3': PlStrFl = True                           # flag for plane stress (True->plane stress, False->plane strain)
+                else:              PlStrFl = False
+                ElemList += [CPE3( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3])], NodeList, PlStrFl, NoLabToNoInd)]
+            elif eltype=='CAX4':
+                ElemList += [CAX4(elLabel, elset, [int(z3[1]), int(z3[2]), int(z3[3]), int(z3[4])], NodeList, 2,NoLabToNoInd)]
+            elif eltype=='CPS6':
+                ElemList += [CPE6( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4]),int(z3[5]),int(z3[6])], None,None, NodeList, None, None, None, True, NoLabToNoInd)]
+            elif eltype=='CPE6':
+                ElemList += [CPE6( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4]),int(z3[5]),int(z3[6])], None,None, NodeList, None, None, None, False,NoLabToNoInd)]
 #                elif eltype=='C3D4':
 #                    if Flag:
 ##                        SectionList += [ SolidSection( elset, mat, elsetVal, "FEM") ]
-#                        ElemList += [C3D4( int(z3[0]), [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], elsetVal, NodeList, elset, mat, NoLabToNoInd, None, [])]
+#                        ElemList += [C3D4( elLabel, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], elsetVal, NodeList, elset, mat, NoLabToNoInd, None, [])]
 #                        Flag = False
 #                    else:
-#                        ElemList += [C3D4( int(z3[0]), [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], elsetVal, NodeList, elset, mat, NoLabToNoInd, None, [])]
-                elif eltype=='C3D8':
-#                   ElemList += [C3D8( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4]),int(z3[5]),int(z3[6]),int(z3[7]),int(z3[8])], mat,MatList[mat], NodeList, MatList[mat].StateVar, MatList[mat].NData,    MatList[mat].RType, NoLabToNoInd)]
-                    ElemList += [C3D8( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4]),int(z3[5]),int(z3[6]),int(z3[7]),int(z3[8])], None,None,        NodeList, None,                  None,               2, None,               NoLabToNoInd)]# for 2 -->nI for default integration
-                elif eltype=='C3D8R':
-                    ElemList += [C3D8( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4]),int(z3[5]),int(z3[6]),int(z3[7]),int(z3[8])], None,None,        NodeList, None,                  None,               1, None,               NoLabToNoInd)]# for 2 -->nI for default integration
-                elif eltype=='S1D2':
-                    if len(z3)==3: LenFactor = 1.0
-                    else:          LenFactor = float(z3[3])
-                    ElemList += [S1D2( int(z3[0]), elset, [int(z3[1]),int(z3[2])], None, NodeList, None, None,None, NoLabToNoInd, LenFactor)]
-                elif eltype=='T1D2': 
-                    if len(z3)==4:
-                        '''accept 1 randomly distributed variables'''
-                        RandomField_Routines().add_elset(elset)
-                        RandomField_Routines().add_propertyEntry(float(z3[3]),elset,int(z3[0]))
-                    ElemList += [T1D2( int(z3[0]), elset, [int(z3[1]),int(z3[2])], None,None, NodeList, None, None, None, None, NoLabToNoInd)]
-                elif eltype=='SB3':
-                    ElemList+= [SB3( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3])], None,NodeList, None, None, None, NoLabToNoInd)]
-                elif eltype=='SH4':
-                    ElemList+= [SH4( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], None,None, NodeList, None, None, None, None, NoLabToNoInd)]
-                elif eltype=='SH3':
-#                    NData = MatList[mat].NData
-#                    NStateVar = MatList[mat].StateVar
-#                    ElemList+= [SH3( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3])],            mat,MatList[mat], NodeList, SecDic[elset], NStateVar, NData, False, NoLabToNoInd)]
-                    ElemList+= [SH3( int(z3[0]), elset, [int(z3[1]),int(z3[2]),int(z3[3])],            None,None, NodeList, None, None, None, None, NoLabToNoInd)]
+#                        ElemList += [C3D4( elLabel, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], elsetVal, NodeList, elset, mat, NoLabToNoInd, None, [])]
+            elif eltype=='C3D8':
+                ElemList += [C3D8( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4]),int(z3[5]),int(z3[6]),int(z3[7]),int(z3[8])], None,None,        NodeList, None,                  None,               2, None,               NoLabToNoInd)]# for 2 -->nI for default integration
+            elif eltype=='C3D8R':
+                ElemList += [C3D8( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4]),int(z3[5]),int(z3[6]),int(z3[7]),int(z3[8])], None,None,        NodeList, None,                  None,               1, None,               NoLabToNoInd)]# for 2 -->nI for default integration
+            elif eltype=='S1D2':
+                if len(z3)==3: LenFactor = 1.0
+                else:          LenFactor = float(z3[3])
+                ElemList += [S1D2( elLabel, elset, [int(z3[1]),int(z3[2])], None, NodeList, None, None,None, NoLabToNoInd, LenFactor)]
+            elif eltype=='T1D2':
+                if len(z3)==4:
+                    '''accept 1 randomly distributed variables'''
+                    RandomField_Routines().add_elset(elset)
+                    RandomField_Routines().add_propertyEntry(float(z3[3]),elset,int(z3[0]))
+                ElemList += [T1D2( elLabel, elset, [int(z3[1]),int(z3[2])], None,None, NodeList, None, None, None, None, NoLabToNoInd)]
+            elif eltype=='SB3':
+                ElemList+= [SB3( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3])], None,NodeList, None, None, None, NoLabToNoInd)]
+            elif eltype=='SH4':
+                ElemList+= [SH4( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3]),int(z3[4])], None,None, NodeList, None, None, None, None, NoLabToNoInd)]
+            elif eltype=='SH3':
+                ElemList+= [SH3( elLabel, elset, [int(z3[1]),int(z3[2]),int(z3[3])],            None,None, NodeList, None, None, None, None, NoLabToNoInd)]
+            else:
+                raise NameError("ConFemInOut::ElemListBuild: unknown element type "+eltype)
+
+        # finally assign element types to SecDic
+        for e in ElemList:
+            elset  = e.Set
+            eltype = e.Type
+            if elset in SecDic:
+                s = SecDic[elset]
+                if eltype not in s.ElemTypes:
+                    s.ElemTypes += [eltype]
+            else: raise NameError("ConFemInOut::DataInput: section not found for element set",elset,e.Label)
+        for s in SecDic:
+            if len(SecDic[s].ElemTypes)==1:
+                pass
+            else:
+                for t in SecDic[s].ElemTypes:
+                    if t in ['CPS3','CPE3','CPS4','CPE4']: pass # CP*3, CP*4 may be in same set
+                    else: raise NameError("ConFemInOut::DataInput: element set should have one element type assigned",SecDic[s].ElemTypes)
+
+    return ElemList
+
+def ElemListPost( SecDic,BreiDic, ElsetDicProps, MatList, ElemList, AmpDict, StepList, RandomData, ff):
+    # post -- input data checks and completion
+    ResultTypes = {}                                                        # dictionary for each element type
+    for elset in SecDic:
+        # checks for materials defined with sections
+        mat   = SecDic[elset].Mat
+        bondl = ElsetDicProps[elset][1]
+
+        try:
+            Material = MatList[mat]
+        except:
+            raise NameError("ConFemInOut::DataInput: Material not defined", mat)
+        Material.Used = True
+        if SecDic[elset].bStiff != None:
+            Material.matbStiff = SecDic[elset].bStiff
+        if len(SecDic[elset].ElemTypes) > 0:
+            eltype = SecDic[elset].ElemTypes[0]
+        else:
+            raise NameError("ConFemInOut::DataInput: seems to be no element for element set", elset)
+        # assigns result types to element sets
+        if eltype in _BeamsBernAll_:
+            if bondl != None:
+                ResultTypes[elset] = ('longitudinal strain', 'curvature', 'normal force', 'moment', 'sig_bottom',
+                                      'sig_top')  # 4 more bond items in DataOutStress
+            elif isinstance(Material, RCBeam):
+                ResultTypes[elset] = (
+                'longitudinal strain', 'curvature', 'normal force', 'moment', 'max reinf strain', 'min conc strain')
+            elif isinstance(Material, Elastic):
+                ResultTypes[elset] = ('longitudinal strain', 'curvature', 'normal force', 'moment')
+            elif isinstance(Material, Mises):
+                ResultTypes[elset] = ('longitudinal strain', 'curvature', 'normal force', 'moment')
+            elif isinstance(Material, MisesBeam2D):
+                ResultTypes[elset] = ('longitudinal strain', 'curvature', 'normal force', 'moment')
+            elif isinstance(Material, PolyBeam):
+                ResultTypes[elset] = ('longitudinal strain', 'curvature', 'normal force', 'moment')
+        elif eltype in _BeamsTimoAll_:
+            if isinstance(Material, RCBeam):
+                ResultTypes[elset] = (
+                'longitudinal strain', 'curvature', 'shear def', 'normal force', 'moment', 'shear force',
+                'max reinf strain', 'min conc strain')
+            elif isinstance(Material, Elastic):
+                ResultTypes[elset] = (
+                'longitudinal strain', 'curvature', 'shear def', 'normal force', 'moment', 'shear force')
+            elif isinstance(Material, MisesBeam2D):
+                ResultTypes[elset] = (
+                'longitudinal strain', 'curvature', 'shear def', 'normal force', 'moment', 'shear force')
+        elif eltype in ['T1D2', 'T2D2', 'T3D2', 'T2D3', 'T3D3', 'T2D2I', 'T2D3I', 'T3D2I', 'T3D3I']:
+            ResultTypes[elset] = ('strain', 'stress')
+            if isinstance(Material, Elastic):
+                if Material.PhaseField:
+                    ResultTypes[elset] = ('strain', 'stress', 'damage')
+        elif eltype in ['TAX2', 'TAX3', 'TAX2I', 'TAX3I']:
+            ResultTypes[elset] = ('eps_xx', 'eps_zz', 'sig_xx', 'sig_zz')
+        elif eltype == 'S1D2':
+            ResultTypes[elset] = ('displ', 'stress')
+        elif eltype in ['CPE4', 'CPE4R', 'CPE3', 'CPE6', 'CPS4', 'CPS4R', 'CPS3', 'CPS6']:
+            ResultTypes[elset] = ('strain', 'stress')
+        elif eltype == 'SB3':
+            ResultTypes[elset] = ('curv x', 'curv y', 'curv xy', 'mom x', 'mom y', 'mom xy')
+        elif eltype == 'SH4':
+            ResultTypes[elset] = ('n_x', 'n_y', 'n_xy', 'm_x', 'm_y', 'm_xy', 'q_x', 'q_y')
+        elif eltype == 'SH3':
+            ResultTypes[elset] = ('n_x', 'n_y', 'n_xy', 'm_x', 'm_y', 'm_xy', 'q_x', 'q_y')
+        elif eltype == 'C3D8':
+            ResultTypes[elset] = ('strain', 'stress')
+        elif eltype == 'CAX4':
+            ResultTypes[elset] = ('strain', 'stress')
+        elif eltype == 'S2D6':
+            ResultTypes[elset] = ('displ', 'force')
+        elif eltype in ["Bond2D2", "Bond2D3", "Bond3D2", "Bond3D3"]:
+            ResultTypes[elset] = ('slip', 'bond stress')  # ??? are never in input data
+        else:
+            raise NameError("no result types for this element defined", eltype)
+    #
+    for el in ElemList:
+        # assign material to elements
+        elset = el.Set
+        mat = SecDic[elset].Mat
+        eltype = el.Type
+        if eltype in ['T1D2', 'T2D2', 'T3D2', 'T2D3', 'T3D3', 'T2D2I', 'T2D3I', 'T3D2I', 'T3D3I']:
+            if isinstance(MatList[mat],
+                          Mises): mat = mat + '1'                           # becomes uniaxial Mises, mat --> element definition --> Elem.MatN: seems to be a label only
+        if eltype in _BeamsBernAll_:                                        # mises not appropriate for B21,'B21E due to shear component
+            if isinstance(MatList[mat],
+                          Mises): mat = mat + '2'  # becomes Bernoulli beam Mises, mat --> element definition --> Elem.MatN: seems to be a label only, shows up in written output
+        el.MatN = mat
+        el.Material = MatList[mat]
+        elLabel = el.Label
+        Material = el.Material  # material set here  !!!
+        NData = Material.NData
+        NStateVar = Material.StateVar
+        RandDat = []
+        # init storage for data and state variables
+        if eltype in _BeamsAll_:
+            BeamSec = SecDic[elset]
+            ReinfName = BeamSec.ReinfName
+            if el.dim == 10:                                                # Bernoulli beam - NData size of filed Data, DatP
+                if Material.Type in ['RCBEAM', 'MISES']:
+                    NData = 6
+                elif Material.Type in ['ELASTIC']:
+                    NData = 6
+            else:                                                           # Timoshenko beam
+                if Material.Type in ['RCBEAM']:
+                    NData = 8
+                elif Material.Type in ['ELASTIC']:
+                    NData = 6
+            el.IniBeam(BeamSec, BreiDic[ReinfName], NData, NStateVar, ff, Material)  # defines also Data, StateVar
+        else:
+            if el.Type in ["T1D2", "T2D2", "T2D2I", "T2D3", "T2D3I", "T3D2", "T3D2I", "T3D3", "T3D3I"]:
+                if Material.Type in ['ELASTICLT', 'ELASTIC', 'ELASTIC_VISCO', 'ELASTICC1D']:
+                    NData = 2
+                elif Material.Type in ['ISODAMAGE', 'MISES', 'ELASTIC_PHASEFIELD']:
+                    NData = 3
                 else:
-                    raise NameError("unknown element type "+eltype)
-            elif IType=="elset":
-                if generate:
-                    L1 = [ i for i in range( int(z3[0]), int(z3[1])+1, int(z3[2]) ) ]
+                    raise NameError("ConFemInOut::DataInput: material type not implemented for truss element", elset, Material.Type)
+            elif eltype in ['TAX2', 'TAX3', "TAX2I", "TAX3I", "TAX3E"]:
+                if Material.Type in ['ELASTIC', 'ELASTIC1DR', 'ELASTICC1D']:
+                    NData = 4
                 else:
-                    if len(z3[-1])==0: nL = len(z3)-1                       # for data like .... 632, 
-                    else:              nL = len(z3)
-                    L1 = L1 +  [int(z3[i]) for i in range(nL)]              # 
-                ElSetDic[elset] = L1                                        # ElSetDic only used locally, brute repeated updating, not a smart way 
-            # materials
-            elif IType=="mat": 
-                IType2, mass, LineCounter, L1, RotCrack, PrinStrain, ShearRetFac, S2ndCrack, S2ndCrackA, Visco, PhaseField, SDA, TraPre, LatBonTeFac, RedInt, sval \
-                        = MatInput( z3, zLen, MatList, matName, IType2, mass, LineCounter, L1, RotCrack, PrinStrain, ShearRetFac, S2ndCrack, S2ndCrackA, Visco, PhaseField, SDA, TraPre, LatBonTeFac, RedInt, sval, ff )
-            # reinforcement
-            elif IType=="beamreinforcement":
-                if zLen<4: raise NameError("ConFemInOut::DataInput: too less reinforcement data")
-                if zLen>4 and z3[4][0:2]=='TC': RType='TC'                  # textile or other reinforcement than ordinary rebars
-                else:                           RType='RC'
-                if linecounter==0:
-                    BreiDic[breiName] = [[float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),RType]] # reinforcement cross section and tension stiffening data
-                    linecounter = linecounter+1
+                    raise NameError("ConFemInOut::DataInput: material type not implemented for axisym truss element", elset, Material.Type)
+            elif eltype in ['CPS4', 'CPE4', 'CPS3', 'CPE3', 'CPS6', 'CPE6', 'CAX4']:
+                if Material.Type in ['ELASTIC']:
+                    NData = 8
+                elif Material.Type in ['MISES', 'ISODAMAGE', 'MICRODAMAGE']:
+                    NData = 10  # 9 # gradient damage ???
+                if Material.Type in ['ISODAMAGE'] and elLabel in RandomData:  # prepare data for element initialization of random data
+                    RandData = RandomData[ elLabel]  # RandomData is local dictionary and holds random values for each integration point
+                    if len(RandData) != el.nIntL: raise NameError("ConFemInOut::DataInput: number of ip mismatch with random data", elset)
+                    for r in RandData:
+                        _, _, _, _,  cc0, cc1, cc2, cc3 = Material.EvalPar_(Material.Emod, Material.nu, Material.fc, r, Material.beta, Material.ga, Material.a3)
+                        RandDat += [[cc0, cc1, cc2, cc3, r]]  # RandDat is used for initialization of element data, see el.InitData
+            elif eltype in ['CPS4S', 'CPE4S', 'CPS3S', 'CPE3S', 'CPS6S', 'CPE6S']:  # strong discontinuity elements
+                pass                                                        # cannot yet be addressed
+            elif eltype in ['C3D8']:
+                if Material.Type in ['ELASTIC', 'ELASTICLT_SDA']:
+                    NData = 12
+                elif Material.Type in ['MISES', 'ISODAMAGE', 'MICRODAMAGE']:
+                    NData = 14                                              # gradient damage ???
                 else:
-                    BreiDic[breiName] += [[float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),RType]] # reinforcement cross section and tension stiffening data
-            # sections
-            elif IType=="solidsection":                                     # data SOLID SECTION
-                SecDic[elset] = SolidSection( elset, mat,nRebar, float(z3[0]))
-            elif IType=="beamsection":                                      # data BEAM SECTION 
-                if beamSecType=="RECT":
-                    if linecounter==0:
-                        SecDic[elset] = BeamSectionRect( beamSecType,elset,mat,nRebar,bStiff_, float(z3[0]), float(z3[1]), [], ReinfName=reinf) # concrete cross section data
-                        linecounter = linecounter+1
+                    raise NameError("ConFemInOut::DataInput: material type not implemented for C3D* element", elset,Material.Type)
+            elif eltype in ['SB3']:
+                if Material.Type in ['ELASTIC', 'NLSLAB']:
+                    NData = 8  # storage for element data, extra 2 for shear forces computed from moment derivatives
+                else:
+                    raise NameError("ConFemInOut::DataInput: material type not implemented for SB3 element", elset,Material.Type)
+            elif eltype in ['SH4', 'SH3']:
+                el.ShellRCFlag = False
+                if Material.Type in ['ELASTIC', 'MISES']:
+                    NData = 6
+                elif isinstance(Material, WraRCShell):
+                    if eltype == 'SH3': raise NameError('not yet implemented')
+                    nre = len(SecDic[elset].Reinf)
+                    if nre > 0: el.nIntL = el.nIntL + 4 * nre  # for reinforcement integration points in base area
+                    NData = NData + 6
+                    el.ShellRCFlag = True
+                    if Material.StateVar == None:
+                        NStateVar = 5  # for mises reinforcement, TR included (-> 1)
                     else:
-                        if zLen<4: raise NameError ("ConFemInOut::DataInput: too less reinforcement data")
-                        if zLen>4 and z3[4][0:2]=='TC': RType='TC' # textile or other reinforcement than ordinary rebars
-                        else:                           RType='RC'
-                        SecDic[elset].Reinf += [[float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),RType]] # reinforcement cross section and tension stiffening data
-                elif beamSecType.upper()=="CIRCLE":
-                    SecDic[elset] = BeamSectionCircle( beamSecType,elset,mat,nRebar,bStiff_, float(z3[0]), ReinfName=reinf) # concrete cross section data
-                elif beamSecType.upper()=="POLYLINE":
-                    if linecounter==0:
-                        SecDic[elset] = BeamSectionPoly( beamSecType,elset,mat,nRebar,bStiff_, [], ReinfName=reinf) # concrete cross section data
-                        SecDic[elset].AddPoint(float(z3[0]), float(z3[1]))
-                        linecounter = linecounter+1
-                    else:
-                        SecDic[elset].AddPoint(float(z3[0]), float(z3[1]))
-                else: raise NameError ("ConFemInOut::DataInput: unknown beam section type", beamSecType)
-            elif IType=="shellsection":                                     # data SHELL SECTION
-                if linecounter==0:
-                    SecDic[elset] = ShellSection( elset, mat, float(z3[0]), [] )
-                    linecounter = linecounter+1
+                        NStateVar = max(5, NStateVar)  # 1st for mises reinforcement, 2nd for bulk material -- both use different ip points, see SH4.__init__
                 else:
-                    SecDic[elset].Reinf += [[float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4])]] # reinforcement cross section and tension stiffening data, see also ConFemEelem::SH4.__init__
-            #  amplitude definition out of step
-            elif IType == 'amplitude':
-                AList_ = []
-                for i in range(0,len(z3),2): 
-                    try:     AList_ += [[float(z3[i]),float(z3[i+1])]]
-                    except:  break 
-                AmpDict[AmpName] = AList_                                   # AmpDict is a local dictionary
-            # step ##########################################################
-            elif IType=="step":
-                if z3[0].find("*")>-1 and IType2=="stepPrestress":
-                    if PreName not in Step.PreSDict:                        # underlined defined below 
-                        Step.PreSDict[PreName] = PreStress(PreType, L1, PList, AmpLbl) # PreSDict is common for all steps -- underlined defined below
-                                                                            # construct should work for multiple *prestress sections, current *PTRESTRESS is closed by new  
-#                Step_ = StepList[len(StepList)-1]                           # Step_ is a pointer to last entry of StepList -- in case of 1st step an initialized instance of object Step
-                if   z3[0].upper()=="*STATIC":
-                    IType2 = "static"
+                    raise NameError("ConFemInOut::DataInput: material type not implemented for SH* element", elset,Material.Type)
+            elif eltype in ['S1D2']:
+                if Material.Type in ['SPRING', 'ELASTIC']:
+                    NData = 2
+                else:
+                    raise NameError("ConFemInOut::DataInput: material type not implemented for S1D2 element", elset,Material.Type)
+            elif eltype in ['S2D6']:
+                if Material.Type in ["ElasticOrtho"]:
+                    NData = 6                                               # see Material::ElasticOrtho:Sig  dim 98
+                else:
+                    raise NameError("ConFemInOut::DataInput: material type not implemented for S2D6", elset, Material.Type)
+            # assign storage for data and state variables
+            el.InitData(el.nIntL, NData, NStateVar, RandDat)
+    # assigns list of elements to each Section
+    for i, e in enumerate(ElemList):
+        SecDic[e.Set].Elems += [i]
+    # assigns globally defined amplitudes to steps
+    for a in AmpDict:
+        AmpFlag = True
+        for s in StepList:
+            for sa in s.AmpDict:
+                if a == sa:
+                    AmpFlag = False
+                    break
+            if AmpFlag:
+                s.AmpDict[a] = AmpDict[a]
+            else:
+                Echo(f"global amplitude {a:s} overridden by step amplitude", ff)
+    # post ready
+    return ResultTypes
+
+def DataInput( f1, ff, Restart):
+    Header  = []
+    MatList = {}                                                            # returned to ConFem; dictionary for materials
+    NodeList  = []                                                          # returned to ConFem
+    NoLabToNoInd = {}                                                       # returned to ConFem; node label -> node index
+    SecDic  = {}                                                            # returned to ConFem; dictionary for sections
+    StepList  = []                                                          # returend to ConFem
+    BreiDic = {}                                                            # dictionary for beam reinforcement, local use only, key is a label, data is list of lists
+    BreiDic["DEFAULT"] = []                                                 # default value empty dic / no reinforcement
+    ElsetDicElems = {}                                                      # local
+    ElsetDicProps = {}                                                      # local
+    AmpDict = {}                                                            # local, also defined for steps where it is persistent -- both are combined in following post section
+    RandomData = {}                                                         # local -- random data for material property definition per element
+    IType  = ""
+    NoCounter = 0
+    StepCounter = 0
+    StepActive = False
+    ElemListBuilt = False
+    with ( f1 ) as ff_:
+        for z1 in ff_:
+            z2 = z1.strip()
+            z3 = z2.split(',')
+            z3 = [i.strip() for i in z3]
+            # PreSDict is common for all steps -- construct should work for multiple *prestress sections, current *PTRESTRESS is closed by new
+            if z3[0].find("*")>-1 and IType=="stepPrestress":               # 1st condition is comment or new keyword
+                    if PreName not in Step.PreSDict:                        # prestressing with name PreName has NOT been defined in previous steps
+                        Step.PreSDict[PreName] = PreStress(PreType, L1, PList, AmpLbl)
+            # goes on in default way
+            if   z3[0].find("**")>-1 :
+                continue
+            elif z3[0].find("*")>-1 and z3[0].upper() not in ["*HEADING","*NODE","*ELEMENT","*MATERIAL","*BEAM REINF","*BEAM SECTION","*SOLID SECTION","*SHELL SECTION","*STEP","*END STEP",
+                                       "*DENSITY","*RCBEAM","*TCTBAR","*ELASTIC","*ELASTICORTHO","*ELASTICLT","*RCSHELL","*ISODAMAGE","*SPRING","*MISES","*LUBLINER","*RESHEET","*NLSLAB","*MICRODAMAGE","*BOND","*ELASTIC_SDA","*ELASTICR1D","*ELASTICC1D",
+                                       "*CONTROLS","*STATIC","*DYNAMIC", "*DAMPING","*BUCKLING","*BOUNDARY","*DLOAD","*CLOAD","*TEMPERATURE","*EL FILE","*NODE FILE","*SOLUTION TECHNIQUE","*AMPLITUDE","*PRESTRESS","*ELSET","*NSET",
+                                       "*CONCRETE DAMAGED PLASTICITY","*CONCRETE COMPRESSION HARDENING","*CONCRETE TENSION STIFFENING","*CONCRETE COMPRESSION DAMAGE","*CONCRETE TENSION DAMAGE","*DEPVAR","*USER MATERIAL","*MISESBEAM",
+                                       "*PREPRINT","*PART","*END PART","*ASSEMBLY","*INSTANCE","*END INSTANCE","*END ASSEMBLY","*RESTART","*OUTPUT","*PREPRINT","*SYSTEM","*NODE OUTPUT","*ELEMENT OUTPUT","*MONITOR","*POLYBEAM","*RESTART FILE","*EIGENMODES"]:
+                raise NameError ("ConFemInOut::DataInput: unknown keyword", z3[0])
+            zLen = len(z3)
+            if   z3[0].upper()=="*HEADING":
+                IType = "heading"
+            elif z3[0].upper()=="*NODE":
+                IType = "node"
+#            elif z3[0].upper()=="*NSET":
+#                IType = "nset"
+#                generate = False
+#                for i in z3:
+#                    if i.upper().find("NSET=")>-1:    nset =i.split("=")[1]
+#                    if i.upper().find("GENERATE")>-1: generate = True
+#                    L1 = []
+            elif z3[0].upper()=="*ELEMENT":                                 # list built in ElemListBuild
+                IType = "element"
+                elset, bondl, eltype = None, None, None
+                for i in z3:                                                # eltype must be determined first
+                    if i.upper().find("TYPE")>-1:      eltype= i.split("=")[1].strip().upper()
+                    elif i.upper().find("ELSET")>-1:   elset = i.split("=")[1].strip()
+                    elif i.upper().find("BONDLAW")>-1: bondl = i.split("=")[1].strip().upper()
+                if elset in ElsetDicElems:
+                    raise NameError("ConFemInOut::DataInput: element set with same name already exists")
+                else:
+                    ElsetDicElems[elset] = []
+                    ElsetDicProps[elset] = [ eltype, bondl]
+#            elif z3[0].upper()=="*ELSET":
+#                IType = "elset"
+#                generate, internal = False, False
+#                for i in z3:
+#                    if i.upper().find("ELSET=")>-1:   elset =i.split("=")[1]
+#                    if i.upper().find("GENERATE")>-1: generate = True
+#                L1 = []
+
+            ### material stuff 1st phase
+            elif z3[0].upper() == "*MATERIAL":
+                for i in z3:
+                    if i.upper().find("NAME")>-1:
+                        matName=i.split("=")[1].upper()                     # !!! current matname is used as key for following element type data
+                        if MatList.get(matName)!=None: raise NameError ("ConFemInOut::DataInput: material with same name already exists")
+                mass  = 0.
+                RedInt, RotCrack, PrinStrain, S2ndCrack, S2ndCrackA, Visco, PhaseField, SDA, sval = False, False, True, False, 0., False, False, False, ""
+                ShearRetFac=-1                                              # see default value in init
+                L1 = []
+                LatBonTeFac = 1.0
+                TraPre = False
+            elif z3[0].upper() == "*DENSITY":
+                IType = "density"
+            elif z3[0].upper() == "*ELASTIC":
+                for i in z3:
+                    if i.upper().find("PHASE_FIELD") > -1:            PhaseField = True
+                for i in z3:
+                    if i.upper().find("VISCO") > -1:                  Visco = True
+                IType = "elastic"
+            elif z3[0].upper() == "*ELASTICR1D":
+                IType = "elastic1dr"
+            elif z3[0].upper() == "*ELASTICC1D":
+                IType = "elasticc1d"
+            elif z3[0].upper() == "*ELASTICLT":
+                IType = "elasticlt"
+                for i in z3:
+                    if i.upper().find("REDUCED_INTEGRATION") > -1:    RedInt = True
+                    if i.upper().find("ROTATING_CRACK") > -1:         RotCrack = True
+                    if i.upper().find("PRINCIPAL_STRESS") > -1:       PrinStrain = False
+                    if i.upper().find("2NDCRACK") > -1:
+                        S2ndCrack = True
+                        S2ndCrackA = i.split("=")[1]                        # minimum deviation of 2nd crack from 1st crack in degree
+                    if i.upper().find("SHEAR_RETENTION_FACTOR") > -1: ShearRetFac = i.split("=")[
+                        1]  # shear retention factor
+                    if i.upper().find("SDA") > -1:                    SDA = True
+                for i in z3:
+                    if SDA and i.upper().find("FULLINT") > -1:
+                        RedInt = False                                      # e.g. for one element systems
+                    else:
+                        RedInt = True  # default approach with reduced integration for SDA elements
+            elif z3[0].upper() == "*ELASTIC_SDA":
+                #        IType="elastic_sda"  be careful to activate original ELASTIC_SDA, input format changed for last items
+                SDA = True
+                for i in z3:
+                    if i.upper().find("REDUCED_INTEGRATION") > -1:    RedInt = True
+                    if i.upper().find("ROTATING_CRACK") > -1:         RotCrack = True
+                    if i.upper().find("PRINCIPAL_STRESS") > -1:       PrinStrain = False
+                    if i.upper().find("2NDCRACK") > -1:
+                        S2ndCrack = True
+                        S2ndCrackA = i.split("=")[1]                        # minimum deviation of 2nd crack from 1st crack in degree
+                    if i.upper().find("SHEAR_RETENTION_FACTOR") > -1: ShearRetFac = float(
+                        i.split("=")[1])                                    # shear retention factor
+            elif z3[0].upper() == "*ELASTICORTHO":
+                IType = "elasticOR"
+            elif z3[0].upper() == "*MISES":
+                IType = "mises"
+            elif z3[0].upper() == "*ISODAMAGE":
+                IType = "isodam"
+                for i in z3:
+                    if i.upper().find("REDUCED_INTEGRATION") > -1:    RedInt = True
+                    if i.upper().find("ROTATING_CRACK") > -1:         RotCrack = True
+                    if i.upper().find("PRINCIPAL_STRESS") > -1:       PrinStrain = False
+                    if i.upper().find("2NDCRACK") > -1:
+                        S2ndCrack = True
+                        S2ndCrackA = i.split("=")[1]                        # minimum deviation of 2nd crack from 1st crack in degree
+                    if i.upper().find("SHEAR_RETENTION_FACTOR") > -1: ShearRetFac = float(
+                        i.split("=")[1])                                    # shear retention factor
+            elif z3[0].upper() == "*BOND":
+                IType = "bond"
+                for i in z3:                                                # transverse pressure option - Ahmad
+                    if i.upper().find("TRANSVERSE_PRESSURE") > -1:
+                        TraPre = True
+                    else:
+                        TraPre = False
+                    if i.upper().find("LAT_BOND_TEN_FACTOR") > -1:
+                        LatBonTeFac = i.split("=")[1]                       # factor for lateral bond tension stiffness
+                    else:
+                        LatBonTeFac = 1.0
+                LineCounter = 0
+            elif z3[0].upper() == "*MICRODAMAGE":
+                IType = "mp_dam_"
+            elif z3[0].upper() == "*NLSLAB":
+                IType = "nlslab"
+            elif z3[0].upper() == "*RESHEET":
+                IType = "misesre"                                           # reinforcement membrane
+            elif z3[0].upper() == "*LUBLINER":
+                IType = "lubliner"
+            elif z3[0].upper() == "*SPRING":
+                IType = "spring"  # nonlinear spring - currently 1D
+            elif z3[0].upper() == "*RCSHELL":
+                IType = "rcshell"
+            elif z3[0].upper() == "*RCBEAM":  # sub-items MATERIAL
+                IType = "rcBeam"
+                LineCounter = 0  # more than one material data line
+            elif z3[0].upper() == "*POLYBEAM":
+                IType = "polyBeam"
+                LineCounter = 0  # more than one material line
+            elif z3[0].upper() in ["*CONCRETE DAMAGED PLASTICITY", "*CONCRETE COMPRESSION HARDENING","*CONCRETE TENSION STIFFENING"]:
+                IType = "AbaConc"
+                sval = z3[0]
+            elif z3[0].upper() == "*MISESBEAM":
+                IType = "misesbeam"
+            elif z3[0].upper()=="*BEAM REINF":                              # key BEAM REINFORCEMENT - another option for input of reinforcement geometry presumably if beam section is not RECT
+                IType = "beamreinforcement"
+                for i in range(1,zLen):                                     # loop starts with 1
+                    if z3[i].find("NAME")>-1:
+                        breiName=z3[i].split("=")[1]                        # set current reinforcement name
+                        if BreiDic.get(breiName)!=None: raise NameError ("ConFemInOut::DataInput: beam reinf with same name")
+                linecounter = 0
+            ### end material stuff 1st phase
+
+            elif z3[0].upper()=="*BEAM SECTION":                                # key BEAM SECTION
+                IType = "beamsection"
+                reinf = "DEFAULT"
+                nRebar = 1.0   #None
+                bStiff_ = None
+                for i in range(1,len(z3)):                                      # loop starts with 1
+                    if   z3[i].upper().find("SECTION")>-1:  beamSecType=z3[i].split("=")[1]
+                    elif z3[i].upper().find("ELSET")>-1:    elset=z3[i].split("=")[1]
+                    elif z3[i].upper().find("MATERIAL")>-1: mat=z3[i].split("=")[1].upper()
+                    elif z3[i].upper().find("REINF")>-1:    reinf=z3[i].split("=")[1]
+                    elif z3[i].upper().find("NREBAR") >-1:  nRebar = float(z3[i].split("=")[1])
+                    elif z3[i].upper().find("BSTIFF") >-1:  bStiff_ = float(z3[i].split("=")[1])
+                linecounter = 0
+            elif z3[0].upper()=="*SOLID SECTION":                               # key SOLID SECTION
+                IType = "solidsection"
+                nRebar = None
+                for i in z3:
+                    if   i.upper().find("ELSET")>-1:        elset   =i.split("=")[1]
+                    elif i.upper().find("MATERIAL")>-1:     mat     =i.split("=")[1].upper()
+                    elif i.upper().find("NREBAR") >-1:      nRebar = float(i.split("=")[1])
+            elif z3[0].upper()=="*SHELL SECTION":                               # key SHELL SECTION
+                IType = "shellsection"
+                for i in range(1,zLen):                                         # loop starts with 1
+                    if   z3[i].find("ELSET")>-1:    elset=z3[i].split("=")[1]
+                    elif z3[i].find("MATERIAL")>-1: mat=z3[i].split("=")[1].upper()
+                linecounter = 0
+            elif not StepActive and z3[0].upper()=="*AMPLITUDE":                # amplitude definition out of step
+                IType = "amplitude"
+                for i in z3:
+                    if i.upper().find("NAME")>-1:      AmpName= i.split("=")[1] # name of amplitude
+
+            ### step stuff - 1st phase #################################################################################
+            elif z3[0].upper()=="*STEP":
+                IType = ""
+                if StepActive:
+                    raise NameError("ConFemInOut::DataInput: previous step input not yet closed ")
+                # initialize step
+                StepActive = True
+                if not ElemListBuilt:
+                    ElemList = ElemListBuild( ElsetDicElems,ElsetDicProps, MatList, NodeList,NoLabToNoInd, SecDic )
+                    ElemListBuilt = True
+                StepCLoad  = []
+                StepBoundC = []
+                StepDLoad  = []
+                StepTemp   = []
+                StepCounter += 1
+                if len(StepList) == 0:                                          # 1st step
+                    StepList += [Step()]                                        # initializing step
+                    for i in range(1,zLen):                                     # loop starts with 1
+                        if z3[i].upper().find("NLGEOM")>-1:
+                            if z3[i].split("=")[1]=="YES": StepList[len(StepList)-1].NLGeom = True # acts on itself
+                        if z3[i].upper().find("SCALEMASS") > -1:
+                            StepList[len(StepList) - 1].ScaleMass = float(z3[i].split("=")[1])   # acts on itself
+                else:                                                           # further steps
+                    StepList += [copy.deepcopy(StepList[-1])]                   # take over everything for additional step from previous step
+                    StepList[-1].PrestList = []                                 # prestressing data may have different formats in subsequent step, are newly initialized for each step
+                    for i in range(1,zLen):                                     # loop starts with 1
+                        if z3[i].find("NLGEOM")>-1:
+                            if z3[i].split("=")[1]=="YES": StepList[len(StepList)-1].NLGeom = True # acts on last
+                Step_ = StepList[len(StepList)-1]                               # Step_ is a pointer to last entry of StepList -- in case of 1st step has an initialized instance of Step
+                # end initialize step
+            elif StepActive:
+                if z3[0].upper()=="*STATIC":
+                    IType = "static"
                     Step_.Dyn        = False
                     Step_.Damp       = False
                     Step_.Eigenmodes = False
                     Step_.Buckl      = False
                     for i in z3:
-                        if i.upper().find("ARCLENGTH")>-1: 
+                        if i.upper().find("ARCLENGTH")>-1:
                             Step_.ArcLen = True
                             if i.upper().find("=")>-1:
                                 Step_.ArcLenV = float(i.split("=")[1])
@@ -821,12 +741,12 @@ def DataInput( f1, ff, Restart):
                 elif z3[0].upper()=="*EIGENMODES":
                     Step_.Eigenmodes = True
                     Step_.Dyn = True
-                    IType2 = "eigenmodes"
-                elif z3[0].upper()=="*DYNAMIC":    
+                    IType = "eigenmodes"
+                elif z3[0].upper()=="*DYNAMIC":
                     Step_.Dyn = True
                     Step_.varTimeSteps = False
                     Step_.Eigenmodes = False
-                    IType2 = "dynamic"
+                    IType = "dynamic"
                     for i in z3:
                         if i.upper().find("EIGENMODE2TIMESTEP") > -1:
                             Step_.Eigenmode2TS = True
@@ -843,60 +763,60 @@ def DataInput( f1, ff, Restart):
                 elif z3[0]=="*BUCKLING":                                    # key STEP BUCKLE
                     Step_.Buckl = True
                 elif z3[0]=="*CONTROLS" and z3[1].strip().upper()=="PARAMETERS=FIELD":          # key STEP CONTROLS FIELD
-                    IType2 = "stepControls0"
+                    IType = "stepControls0"
                 elif z3[0]=="*CONTROLS" and z3[1].strip().upper()=="PARAMETERS=TIME INCREMENTATION":# key STEP CONTROLS TIME INCREMENTATION
-                    IType2 = "stepControls1"                
-                elif z3[0].upper()=="*CONTROLS":  
-                    for i in z3:  
+                    IType = "stepControls1"
+                elif z3[0].upper()=="*CONTROLS":
+                    for i in z3:
                         if i.upper().find("ITOL")>-1:  Step_.IterTol = float(i.split("=")[1])             # tolerance for equilibrium residuum
                         if i.upper().find("NITER")>-1: Step_.IterNum =  int(i.split("=")[1])   # maximum number of equilibrium iterations allowed
                 elif z3[0].upper()=="*AMPLITUDE":
-                    IType2 = "amplitude" 
-                    for i in z3:  
+                    IType = "amplitude"
+                    for i in z3:
                         if i.upper().find("NAME")>-1:      AmpName= i.split("=")[1]                     # name of amplitude
                     if AmpName in Step_.AmpDict: raise NameError ("ConFemInOut::DataInput: amplitude with same name already exists",AmpName)
-                elif z3[0].upper()=="*BOUNDARY":   
-                    IType2 = "boundary"
+                elif z3[0].upper()=="*BOUNDARY":
+                    IType = "boundary"
                     BoundAmp = "Default"                                                        # default amplitude initialized in Step.__init__
-                    AddVal = False                                                              # default                                          
-                    for i in z3:  
+                    AddVal = False                                                              # default
+                    for i in z3:
                         if i.upper().find("AMPLITUDE")>-1: BoundAmp = i.split("=")[1]                   # amplitude of current *BOUNDARY set
                     for i in z3:
                         if i.upper().find("OP")>-1:
                             if i.split("=")[1].upper()=="ADD": AddVal = True                    # add given value to final value of last step to get actual prescribed value
-                elif z3[0].upper()=="*CLOAD":      
-                    IType2 = "cload"
+                elif z3[0].upper()=="*CLOAD":
+                    IType = "cload"
                     CLoadAmp = "Default"                                                        # default amplitude initialized in Step.__init__
-                    for i in z3:  
+                    for i in z3:
                         if i.upper().find("AMPLITUDE")>-1: CLoadAmp = i.split("=")[1]           # amplitude of current *CLOAD set
                 elif z3[0].upper()=="*DLOAD":                   # key STEP DLOAD
-                    IType2 = "stepDLoad"
+                    IType = "stepDLoad"
                     DLoadAmp = "Default"
                     for i in z3:
                         if i.upper().find("AMPLITUDE")>-1: DLoadAmp=i.split("=")[1]
                 elif z3[0].upper()=="*TEMPERATURE":             # key STEP TEMPERATURE
-                    IType2 = "stepTemp"
+                    IType = "stepTemp"
                     TempAmp="Default"
                     for i in range(1,zLen):
                         if z3[i].find("AMPLITUDE")>-1: TempAmp=z3[i].split("=")[1]
                 elif z3[0].upper()=="*PRESTRESS":              # key STEP PRESTRESS
-                    IType2 = "stepPrestress"
+                    IType = "stepPrestress"
                     AmpLbl="Default"
                     for i in range(1,zLen):
                         if z3[i].upper().find("AMPLITUDE")>-1: AmpLbl=z3[i].split("=")[1]
                         if z3[i].upper().find("TYPE")>-1: PreType=(z3[i].split("=")[1])         # used above
                         if z3[i].upper().find("NAME")>-1: PreName=z3[i].split("=")[1]
                     Step_.PrestList += [PreStreSt(PreName, AmpLbl)]                             # collects all prestressing labels and amplitudes for current step
-                    PList = []
+                    PList = []                                                                  # for geometry data
                     linecounter = 0
-                elif z3[0].upper()=="*EL FILE":   
-                    IType2 = "stepElFile"
-                    for i in z3:  
+                elif z3[0].upper()=="*EL FILE":
+                    IType = "stepElFile"
+                    for i in z3:
                         if i.find("FREQUENCY")>-1:
                             Step_.ElFilList += [float(i.split("=")[1])]                         # element output interval
                 elif z3[0].upper()=="*NODE FILE":
-                    IType2 = "stepNoFile"
-                    for i in z3:  
+                    IType = "stepNoFile"
+                    for i in z3:
                         if i.find("FREQUENCY")>-1:
                             Step_.NoFilList += [float(i.split("=")[1])]                         # node output interval
                 elif z3[0].upper() == "*RESTART FILE":
@@ -904,9 +824,9 @@ def DataInput( f1, ff, Restart):
                         if i.find("FREQUENCY") > -1:
                             Step_.ReFilList += [float(i.split("=")[1])]                         # restart output interval
                 elif z3[0].upper()=="*NODE OUTPUT":
-                    IType2 = "stepNoOut"
+                    IType = "stepNoOut"
                 elif z3[0].upper()=="*ELEMENT OUTPUT":
-                    IType2 = "stepElOut"
+                    IType = "stepElOut"
                 elif z3[0].upper()=="*DAMPING":                                                 # key STEP DAMPING
                     Step_.Damp = True
                     for i in z3:
@@ -920,264 +840,327 @@ def DataInput( f1, ff, Restart):
                             Step_.ZetaBeta   = float(i.split("=")[1])                               # damping from stiffness related to critical damping
                         elif i.upper().find("BETA") > -1:
                             Step_.RaBeta = float(i.split("=")[1])
-                #
-                # IType -- finalizing current step
                 elif z3[0].upper().strip().replace(" ","")=="*ENDSTEP":
+                    IType = ""
                     if len(StepBoundC)> 0:                                  # already taken from previous step in case StepCounter>1 and len==0
                         bcKeys = []
-                        if StepCounter>1:                                   
+                        if StepCounter>1:
                             for bc in StepBoundC: bcKeys += [str(bc.NodeLabel)+str(bc.Dof)]
-                            for bc in StepList[-2].BoundList:               # check whether identical bc (node, dof) already defined in previous step -- if not append 
+                            for bc in StepList[-2].BoundList:               # check whether identical bc (node, dof) already defined in previous step -- if not append
                                 if str(bc.NodeLabel)+str(bc.Dof) not in bcKeys: StepBoundC += [bc]
                         else:
                             StepBoundC_ = []
                             for bc in StepBoundC:                           # check whether identical bc (node, dof) already defined in current step -- if not append
-                                if str(bc.NodeLabel)+str(bc.Dof) not in bcKeys: 
+                                if str(bc.NodeLabel)+str(bc.Dof) not in bcKeys:
                                     StepBoundC_ += [bc]
                                     bcKeys += [str(bc.NodeLabel)+str(bc.Dof)]
-                                else: 
+                                else:
                                     Echo(f"Boundary condition Node {bc.NodeLabel:d}, dof {bc.Dof:d} has already been defined for this step -- used the former one, skipped this current", ff)
                             StepBoundC = StepBoundC_
                         Step_.BoundList = StepBoundC                        # Step_ is current step
                     if len(StepCLoad) > 0: Step_.CLoadList = StepCLoad
                     if len(StepDLoad) > 0: Step_.DLoadList = StepDLoad
                     if len(StepTemp)  > 0: Step_.TempList  = StepTemp
-                # end finalizing current step
-                #
-                # all IType2 for IType "step"
-                elif IType2 in ["static"]:
-                    Step_.TimeStepVar, Step_.TimeTargVar =  [float(z3[0])], [float(z3[1])]
-#                    for i in range( 2, int(len(z3)/2) ):                    # following target decreases
-                    for i in range(1, int(len(z3) / 2)):                    # this loop should be active for more than one pair
-#                        if float(z3[2*i+1]) < Step_.TimeTargVar[-1]:
+                    StepActive = False
+                ### end step stuff - 1st phase #### start step stuff 2nd phase ########################################
+                elif IType in ["static"]:
+                    Step_.TimeStepVar, Step_.TimeTargVar = [float(z3[0])], [float(z3[1])]
+                    #                    for i in range( 2, int(len(z3)/2) ):                    # following target decreases
+                    for i in range(1, int(len(z3) / 2)):  # this loop should be active for more than one pair
+                        #                        if float(z3[2*i+1]) < Step_.TimeTargVar[-1]:
                         if float(z3[2 * i + 1]) > Step_.TimeTargVar[-1]:
-                            Step_.TimeTargVar += [float(z3[2*i+1])]
-                            Step_.TimeStepVar += [float(z3[2*i  ])]
-                        else: Echo(f"skipped time increment / target {z3[2*i]:s}/{z3[2*i+1]:s} as time target decreases", ff)
-                    if len(Step_.TimeStepVar) != len(Step_.TimeTargVar): raise NameError ("ConFemInOut::DataInput: fault in time step, time target definition")
+                            Step_.TimeTargVar += [float(z3[2 * i + 1])]
+                            Step_.TimeStepVar += [float(z3[2 * i])]
+                        else:
+                            Echo(
+                                f"skipped time increment / target {z3[2 * i]:s}/{z3[2 * i + 1]:s} as time target decreases",ff)
+                    if len(Step_.TimeStepVar) != len(Step_.TimeTargVar): raise NameError(
+                        "ConFemInOut::DataInput: fault in time step, time target definition")
                     if len(Step_.TimeStepVar) == 1:
                         Step_.TimeStep = Step_.TimeStepVar[0]
                         Step_.TimeTarg = Step_.TimeTargVar[0]
                     else:
                         Step_.varTimeSteps = True
-                elif IType2 == "eigenmodes":
+                elif IType == "eigenmodes":
                     Step_.EigenmodesN = int(z3[0])
-                elif IType2=="dynamic":                                     # variable time step not allowed within step as mass matrix is pre-determined
+                elif IType == "dynamic":  # variable time step not allowed within step as mass matrix is pre-determined
                     Step_.TimeStep = float(z3[0])
                     Step_.TimeTarg = float(z3[1])
-                elif IType2=="stepControls0":                              # data STEP CONTROLS
+                elif IType == "stepControls0":  # data STEP CONTROLS
                     Step_.IterTol = float(z3[0])
-                elif IType2=="stepControls1":                               # data STEP CONTROLS
+                elif IType == "stepControls1":  # data STEP CONTROLS
                     Step_.IterNum = int(z3[0])
-                elif IType2=="amplitude":
+                elif IType == "amplitude":
                     AList_ = []
-                    for i in range(0,len(z3),2): 
-                        try:     AList_ += [[float(z3[i]),float(z3[i+1])]]
-                        except:  break 
-                    Step_.AmpDict[AmpName] = AList_                         # AmpDict is a dictionary with key! More are allowed for this step.
-                elif IType2=="boundary":
-                    def AddToStepBoundC( z_, StepBoundC):
+                    for i in range(0, len(z3), 2):
+                        try:
+                            AList_ += [[float(z3[i]), float(z3[i + 1])]]
+                        except:
+                            break
+                    Step_.AmpDict[AmpName] = AList_  # AmpDict is a dictionary with key! More are allowed for this step.
+                elif IType == "boundary":
+                    def AddToStepBoundC(z_, StepBoundC):
                         i0 = FindIndexByLabel(NodeList, int(z_))
-                        if i0>-1:
-                            nDofRange =  int(z3[2])-int(z3[1])+1
-                            if   zLen==3:                                   # thats for omitted value indicating 0 but there should be no comments following
-                                for i in range(nDofRange): StepBoundC += [Boundary( int(z_), int(z3[1])+i, 0.,           NodeList, BoundAmp, AddVal)]
-                            else: 
-                                for i in range(nDofRange): StepBoundC += [Boundary( int(z_), int(z3[1])+i, float(z3[3]), NodeList, BoundAmp, AddVal)]
-                        else: raise NameError ("ConFemInOut::DataInput: boundary condition node not found")
-                    try:                                                    # for node number given
-                        AddToStepBoundC( int(z3[0]), StepBoundC)
-                    except:                                                 # for node set label given
-                        z4 = z3[0].split('.')                               # Abaqus may extend set labels xy with Part_a_b.xy
-                        if len(z4)>1: L = NSetDic[z4[1]]
-                        else:         L = NSetDic[z3[0]]                    # z3[0] is node set label
-                        for z in L: AddToStepBoundC( z, StepBoundC)
-                elif IType2=="cload":
-                    def AddToStepCLoad( z_, StepCLoad): 
-                        i0 = FindIndexByLabel(NodeList, int(z_))   # int(z3[0])
-                        if i0>-1: 
-                            StepCLoad += [CLoad( z_, int(z3[1]), float(z3[2]), NodeList, CLoadAmp)]
-                        else:     raise NameError ("ConFemInOut::DataInput: concentrated load node not found")
+                        if i0 > -1:
+                            nDofRange = int(z3[2]) - int(z3[1]) + 1
+                            if zLen == 3:  # thats for omitted value indicating 0 but there should be no comments following
+                                for i in range(nDofRange): StepBoundC += [Boundary(int(z_), int(z3[1]) + i, 0., NodeList, BoundAmp, AddVal)]
+                            else:
+                                for i in range(nDofRange): StepBoundC += [Boundary(int(z_), int(z3[1]) + i, float(z3[3]), NodeList, BoundAmp, AddVal)]
+                        else:
+                            raise NameError("ConFemInOut::DataInput: boundary condition node not found")
+
+                    try:  # for node number given
+                        AddToStepBoundC(int(z3[0]), StepBoundC)
+                    except:  # for node set label given
+                        z4 = z3[0].split('.')  # Abaqus may extend set labels xy with Part_a_b.xy
+                        if len(z4) > 1:
+                            L = NSetDic[z4[1]]
+                        else:
+                            L = NSetDic[z3[0]]  # z3[0] is node set label
+                        for z in L: AddToStepBoundC(z, StepBoundC)
+                elif IType == "cload":
+                    def AddToStepCLoad(z_, StepCLoad):
+                        i0 = FindIndexByLabel(NodeList, int(z_))  # int(z3[0])
+                        if i0 > -1:
+                            StepCLoad += [CLoad(z_, int(z3[1]), float(z3[2]), NodeList, CLoadAmp)]
+                        else:
+                            raise NameError("ConFemInOut::DataInput: concentrated load node not found")
                     try:
-                        AddToStepCLoad( int(z3[0]), StepCLoad)
-                    except: 
-                        z4 = z3[0].split('.')                               # Abaqus may extend set labels xy with Part_a_b.xy
-                        if len(z4)>1: L = NSetDic[z4[1]]
-                        else:         L = NSetDic[z3[0]]                    # z3[0] is node set label
-                        for z in L: AddToStepCLoad( z, StepCLoad)
-                elif IType2=="stepDLoad":                                   # data STEP DLOAD
+                        AddToStepCLoad(int(z3[0]), StepCLoad)
+                    except:
+                        z4 = z3[0].split('.')  # Abaqus may extend set labels xy with Part_a_b.xy
+                        if len(z4) > 1:
+                            L = NSetDic[z4[1]]
+                        else:
+                            L = NSetDic[z3[0]]  # z3[0] is node set label
+                        for z in L: AddToStepCLoad(z, StepCLoad)
+                elif IType == "stepDLoad":  # data STEP DLOAD
                     elset = z3[0]
                     DLoadFlag = False
                     for i in SecDic:
                         if i == elset:
                             DLoadFlag = True
                             break
-                    if not DLoadFlag: raise NameError ("ConFemInOut::DataInput: element set not found for *DLOAD definition",elset)
-                    StepDLoad += [DLoad( elset, int(z3[1]), float(z3[2]), DLoadAmp)]
-                elif IType2=="stepTemp":                 # data STEP TEMPERATURE
+                    if not DLoadFlag: raise NameError("ConFemInOut::DataInput: element set not found for *DLOAD definition", elset)
+                    StepDLoad += [DLoad(elset, int(z3[1]), float(z3[2]), DLoadAmp)]
+                elif IType == "stepTemp":  # data STEP TEMPERATURE
                     i0 = FindIndexByLabel(NodeList, int(z3[0]))
-                    if i0>-1: 
-                        StepTemp += [Temperature( int(z3[0]), [float(z3[i]) for i in range(1,len(z3))], NodeList, TempAmp)]                
-                    else:     raise NameError ("ConFemInOut::DataInput: temperature load node not found")
-                elif IType2=="stepPrestress":            # data STEP PRESTRESS
-                    if linecounter == 0:
-                        if   zLen==7: val = 0.
-                        elif zLen==8: val = float(z3[7])
-                        else: raise NameError ("ConFemInOut::ReadInputFile: number of reinforcement data")
-                        L1 = [float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]),float(z3[6]),val,mass] # prestressing parameter
-                        linecounter = linecounter +1
-                    else: PList += [[ FindIndexByLabel(ElemList, int(z3[0])), [float(z3[i]) for i in range(1,len(z3))] ]]
-                elif IType2=="stepElFile":               # data STEP EL File  -- for compatibility reasons
+                    if i0 > -1:
+                        StepTemp += [Temperature(int(z3[0]), [float(z3[i]) for i in range(1, len(z3))], NodeList, TempAmp)]
+                    else:
+                        raise NameError("ConFemInOut::DataInput: temperature load node not found")
+                elif IType == "stepPrestress":  # data STEP PRESTRESS
+                    if linecounter == 0:                                    # 1st data line of *PRESTRESS -- set to zero for each *PRESTRESS
+                        if zLen == 7:
+                            val = 0.
+                        elif zLen == 8:
+                            val = float(z3[7])
+                        else:                                               # further data lines
+                            raise NameError("ConFemInOut::ReadInputFile: number of reinforcement data")
+                        L1 = [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), val, mass]  # prestressing parameter
+                        linecounter = linecounter + 1
+                    else:
+                        PList += [[FindIndexByLabel(ElemList, int(z3[0])), [float(z3[i]) for i in range(1, len(z3))]]] # prestressing geometry
+                elif IType == "stepElFile":  # data STEP EL File  -- for compatibility reasons
                     pass
-                elif IType2=="stepNoFile":               # data STEP NODE File -- for compatibility reasons
+                elif IType == "stepNoFile":  # data STEP NODE File -- for compatibility reasons
                     pass
-                elif IType2=="stepNoOut":               # data STEP NODE File -- for compatibility reasons
+                elif IType == "stepNoOut":  # data STEP NODE File -- for compatibility reasons
                     Echo(f"ignored *Node Output", ff)
-                elif IType2=="stepElOut":               # data STEP NODE File -- for compatibility reasons
+                elif IType == "stepElOut":  # data STEP NODE File -- for compatibility reasons
                     Echo(f"ignored *Element Output", ff)
-            # end step ######################################################
-        #
-        z1 = f1.readline()
-        z2 = z1.strip()
-        if z2==",": 
-            z2 = "1.0"                                                      # might happen with Abaqus input  
-        z3 = z2.split(',')
-        zLen = len(z3)
-        if z3[-1].strip() == "": zLen=zLen-1                                # for blanks after last comma
-        z3 = [i.strip() for i in z3]
-    f1.close()
-    #
-    # post -- input data checks and completion
-    for elset in SecDic:
-        # checks for materials defined with sections
-        mat = SecDic[elset].Mat
-        try:    Material = MatList[mat]
-        except: raise NameError("ConFemInOut::DataInput: Material not defined",mat)
-        Material.Used = True
-        if SecDic[elset].bStiff != None:
-            Material.matbStiff = SecDic[elset].bStiff
-        if len(SecDic[elset].ElemTypes)>0: eltype = SecDic[elset].ElemTypes[0] 
-        else:
-            raise NameError("ConFemInOut::DataInput: seems to be no element for element set",elset)
-        # assigns result types to element sets
-        if eltype in _BeamsBernAll_:
-            if bondl!=None:                          ResultTypes[elset] = ('longitudinal strain','curvature','normal force','moment','sig_bottom','sig_top') # 4 more bond items in DataOutStress
-            elif isinstance( Material, RCBeam):      ResultTypes[elset] = ('longitudinal strain','curvature','normal force','moment','max reinf strain','min conc strain')
-            elif isinstance( Material, Elastic):     ResultTypes[elset] = ('longitudinal strain','curvature','normal force','moment')
-            elif isinstance( Material, Mises):       ResultTypes[elset] = ('longitudinal strain','curvature','normal force','moment')
-            elif isinstance(Material, MisesBeam2D):  ResultTypes[elset] = ('longitudinal strain', 'curvature', 'normal force', 'moment')
-            elif isinstance( Material, PolyBeam):    ResultTypes[elset] = ('longitudinal strain','curvature','normal force','moment')
-        elif eltype in _BeamsTimoAll_:
-            if isinstance( Material, RCBeam):        ResultTypes[elset]=('longitudinal strain','curvature','shear def','normal force','moment','shear force','max reinf strain','min conc strain')
-            elif isinstance( Material, Elastic):     ResultTypes[elset]=('longitudinal strain','curvature','shear def','normal force','moment','shear force')
-            elif isinstance( Material, MisesBeam2D): ResultTypes[elset]=('longitudinal strain', 'curvature','shear def', 'normal force', 'moment','shear force')
-        elif eltype in ['T1D2','T2D2','T3D2','T2D3','T3D3','T2D2I','T2D3I','T3D2I','T3D3I']:
-            ResultTypes[elset]=('strain','stress')
-            if isinstance( Material, Elastic):
-                if Material.PhaseField:              ResultTypes[elset]=('strain','stress','damage')
-        elif eltype in ['TAX2','TAX3','TAX2I','TAX3I']:
-            ResultTypes[elset] = ('eps_xx','eps_zz','sig_xx', 'sig_zz')
-        elif eltype=='S1D2':                         ResultTypes[elset]=('displ','stress')
-        elif eltype in ['CPE4','CPE4R','CPE3','CPE6','CPS4','CPS4R','CPS3','CPS6']: ResultTypes[elset]=('strain','stress')
-        elif eltype=='SB3':                          ResultTypes[elset]=('curv x','curv y','curv xy','mom x','mom y','mom xy')
-        elif eltype=='SH4':                          ResultTypes[elset]=('n_x','n_y','n_xy','m_x','m_y','m_xy','q_x','q_y')
-        elif eltype=='SH3':                          ResultTypes[elset]=('n_x','n_y','n_xy','m_x','m_y','m_xy','q_x','q_y')
-        elif eltype=='C3D8':                         ResultTypes[elset]=('strain','stress')
-        elif eltype=='CAX4':                         ResultTypes[elset] = ('strain', 'stress')
-        elif eltype=='S2D6':                         ResultTypes[elset]=('displ','force')
-        elif eltype in ["Bond2D2","Bond2D3","Bond3D2","Bond3D3"]: ResultTypes[elset]=('slip','bond stress') # ??? are never in input data
-        else: raise NameError ("no result types for this element defined", eltype)
-    #
-    for el in ElemList:
-        # assign material to elements
-        elset = el.Set
-        mat = SecDic[elset].Mat
-        eltype = el.Type
-        if eltype in ['T1D2','T2D2','T3D2','T2D3','T3D3','T2D2I','T2D3I','T3D2I','T3D3I']:
-            if isinstance( MatList[mat], Mises): mat = mat+'1'              # becomes uniaxial Mises, mat --> element definition --> Elem.MatN: seems to be a label only
-        if eltype in _BeamsBernAll_:                                             # mises not appropriate for B21,'B21E due to shear component
-            if isinstance( MatList[mat], Mises): mat = mat+'2'              # becomes Bernoulli beam Mises, mat --> element definition --> Elem.MatN: seems to be a label only, shows up in written output
-        el.MatN = mat 
-        el.Material = MatList[mat]
-        elLabel     = el.Label
-        Material    = el.Material                                           # material set here  !!!
-        NData       = Material.NData
-        NStateVar   = Material.StateVar
-        RandDat     = []
-        # init storage for data and state variables
-        if eltype in _BeamsAll_:
-            BeamSec = SecDic[elset]
-            ReinfName = BeamSec.ReinfName
-            if el.dim == 10:                                                # Bernoulli beam - NData size of filed Data, DatP
-                if   Material.Type in ['RCBEAM','MISES']:                           NData = 6
-                elif Material.Type in ['ELASTIC']:                                  NData = 6
-            else:                                                           # Timoshenko beam
-                if   Material.Type in ['RCBEAM']:                                   NData = 8
-                elif Material.Type in ['ELASTIC']:                                  NData = 6
-#                else: raise NameError("ConFemInOut::DataInput: material type not implemented for Timoshenko beam", elset,Material.Type)
-            el.IniBeam( BeamSec, BreiDic[ReinfName], NData, NStateVar, ff, Material) # defines also Data, StateVar
-        else:
-            if el.Type in ["T1D2","T2D2","T2D2I","T2D3","T2D3I","T3D2","T3D2I","T3D3","T3D3I"]:
-                if   Material.Type in ['ELASTICLT','ELASTIC','ELASTIC_VISCO','ELASTICC1D']:      NData = 2
-                elif Material.Type in ['ISODAMAGE','MISES','ELASTIC_PHASEFIELD']:   NData = 3
-                else: raise NameError("ConFemInOut::DataInput: material type not implemented for truss element", elset,Material.Type)
-            elif eltype in ['TAX2','TAX3',"TAX2I","TAX3I","TAX3E"]:
-                if Material.Type in ['ELASTIC','ELASTIC1DR','ELASTICC1D']:          NData = 4
-                else: raise NameError("ConFemInOut::DataInput: material type not implemented for axisym truss element", elset,Material.Type)
-            elif eltype in ['CPS4','CPE4','CPS3','CPE3','CPS6','CPE6','CAX4']:
-                if   Material.Type in ['ELASTIC']:                                  NData = 8
-                elif Material.Type in ['MISES','ISODAMAGE','MICRODAMAGE']:          NData = 10 # 9 # gradient damage ???
-                if Material.Type in ['ISODAMAGE'] and elLabel in RandomData:# prepare data for element initialization of random data
-                    RandData = RandomData[elLabel]                          # RandomData is local dictionary and holds random values for each integration point
-                    if len(RandData) != el.nIntL: raise NameError("ConFemInOut::DataInput: number of ip mismatch with random data",elset)
-                    for r in RandData:
-                        _,_,_,_,cc0,cc1,cc2,cc3 = Material.EvalPar_(Material.Emod, Material.nu,Material.fc,r,Material.beta, Material.ga,Material.a3)
-                        RandDat += [[cc0,cc1,cc2,cc3,r]]                    # RandDat is used for initialization of element data, see el.InitData
-            elif eltype in ['CPS4S','CPE4S','CPS3S','CPE3S','CPS6S','CPE6S']:   # strong discontinuity elements
-                pass                                                        # cannot yet be addressed 
-            elif eltype in ['C3D8']: 
-                if   Material.Type in ['ELASTIC','ELASTICLT_SDA']:                  NData = 12
-                elif Material.Type in ['MISES','ISODAMAGE','MICRODAMAGE']:          NData = 14  # gradient damage ???
-                else: raise NameError("ConFemInOut::DataInput: material type not implemented for C3D* element", elset,Material.Type)
-#                NData = NData+2                        # ???
-            elif eltype in ['SB3']: 
-                if   Material.Type in ['ELASTIC','NLSLAB']:                         NData = 8   # storage for element data, extra 2 for shear forces computed from moment derivatives
-                else: raise NameError("ConFemInOut::DataInput: material type not implemented for SB3 element", elset,Material.Type)
-            elif eltype in ['SH4','SH3']:
-                el.ShellRCFlag = False
-                if   Material.Type in ['ELASTIC','MISES']:                          NData = 6
-                elif isinstance( Material, WraRCShell):
-                    if eltype=='SH3': raise NameError('not yet implemented')
-                    nre = len(SecDic[elset].Reinf) 
-                    if nre>0: el.nIntL = el.nIntL+4*nre                     # for reinforcement integration points in base area
-                    NData = NData+6
-                    el.ShellRCFlag = True
-                    if Material.StateVar==None: NStateVar = 5               # for mises reinforcement, TR included (-> 1)
-                    else:                       NStateVar = max(5,NStateVar)# 1st for mises reinforcement, 2nd for bulk material -- both use different ip points, see SH4.__init__
-                else: raise NameError("ConFemInOut::DataInput: material type not implemented for SH* element", elset,Material.Type)
-            elif eltype in ['S1D2']: 
-                if   Material.Type in ['SPRING','ELASTIC']:                         NData = 2
-                else: raise NameError("ConFemInOut::DataInput: material type not implemented for S1D2 element", elset,Material.Type)
-            elif eltype in ['S2D6']: 
-                raise NameError("ConFemInOut::DataInput: S2D6 still under construction", elset,Material.Type)
-            # assign storage for data and state variables
-            el.InitData(el.nIntL, NData, NStateVar, RandDat)
-    # assigns list of elements to each Section
-    for i, e in enumerate(ElemList):
-        SecDic[e.Set].Elems += [i]
-    # assigns globally defined amplitudes to steps
-    for a in AmpDict:
-        AmpFlag = True
-        for s in StepList:
-            for sa in s.AmpDict:
-                if a == sa: 
-                    AmpFlag = False
-                    break
-            if AmpFlag: 
-                s.AmpDict[a] = AmpDict[a]
-            else:       
-                Echo(f"global amplitude {a:s} overridden by step amplitude", ff)
-    # post ready
+            ### end step stuff 2nd phase ###########################################################################
+
+            elif z3[0].upper() in ['*PREPRINT','*PART','*END PART','*ASSEMBLY','*INSTANCE','*END INSTANCE','*END ASSEMBLY','*RESTART','*OUTPUT','*SYSTEM']:
+                Echo(f"ignored {z3[0]:s}", ff)                                  # Abaqus stuff
+            elif z3[0]=="" or z3[0].find("**")>-1: # or (z3[0][0]=="*" and IType2==""):
+                pass                                                            # blank line / comment line / no secondary keyword
+
+            elif IType != "":
+                if   IType=="heading":
+                    Header += [z3[0]]
+                elif IType=="node":
+                    if zLen<3: raise NameError ("not enough nodal data")
+                    if zLen==3:   NodeList += [Node( int(z3[0]), float(z3[1]), float(z3[2]), 0., 0.,0.,0. )]
+                    elif zLen==4: NodeList += [Node( int(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), 0.,0.,0. )]
+                    elif zLen==7: NodeList += [Node( int(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]) )]
+                    NoLabToNoInd[ int(z3[0]) ] = NoCounter
+                    NoCounter += 1
+                elif IType=="element":
+                    ElsetDicElems[elset] += [z3]                            # collected for later processing
+
+                ### material stuff 2nd phase ###########################################################################
+                elif IType == "density":
+                    mass = float(z3[0])
+                elif IType == "elastic":
+                    if PhaseField and Visco: raise NameError("ConFemInOut::DataInput: *ELASTIC options PHASE_FIELD and VISCO not allowed simultaneously",
+                        matName)
+                    if PhaseField:
+                        if zLen < 6: raise NameError("ConFemInOut::DataInput: not enough data for *ELASTIC with PHASEFIELD option")
+                        MatList[matName] = Elastic(
+                            [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), 0., 0.,
+                             mass])
+                    elif Visco:
+                        if zLen < 5: raise NameError("ConFemInOut::DataInput: not enough data for *ELASTIC with VISCO option")
+                        #           MatList[matName] = ElasticLT([float(z3[0]),float(z3[1]),1.,1.,1.,float(z3[3]),1./float(z3[4]),0.,0.,0., mass] )
+                        MatList[matName] = Elastic([float(z3[0]), float(z3[1]), float(z3[2]), 0., 0., 0., float(z3[3]), float(z3[4]), mass])
+                    else:
+                        if zLen == 3:
+                            MatList[matName] = Elastic([float(z3[0]), float(z3[1]), float(z3[2]), 0., 0., 0., 0., 0., mass])
+                        else:
+                            MatList[matName] = Elastic([float(z3[0]), float(z3[1]), 0., 0., 0., 0., 0., 0., mass])
+                elif IType == "elastic1dr":
+                    MatList[matName] = ElasticR1D([float(z3[0]), float(z3[1]), float(z3[2]), mass])
+                elif IType == "elasticc1d":
+                    MatList[matName] = ElasticC1D([float(z3[0]), float(z3[1]), float(z3[2]), mass])
+                elif IType == "elasticlt":
+                    if SDA:
+                        if zLen < 8: raise NameError("ConFemInOut::DataInput: not enough data for *ELASTIC option SDA", matName)
+                        #           MatList[matName] = ElasticSDA( [float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]), mass],RedInt,RotCrack,PrinStrain, ShearRetFac, S2ndCrack,float(S2ndCrackA) )
+                        if float(z3[5]) > 0.:
+                            S2ndCrack = True
+                        else:
+                            S2ndCrack = False
+                        PrinStrain = False
+                        MatList[matName] = ElasticSDA([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[6]), float(z3[7]), mass], RedInt, RotCrack, PrinStrain, float(z3[4]), S2ndCrack, float(z3[5]))
+                    else:
+                        if zLen < 7: raise NameError("ConFemInOut::DataInput: not enough data for *ELASTICLT", matName)
+                        #           MatList[matName] = ElasticLT([float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4]),float(z3[5]),float(z3[6]),int(z3[7]),float(z3[8]),float(z3[9]), mass] )
+                        MatList[matName] = ElasticLT([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass])
+                elif IType == "elasticOR":  # data MATERIAL elastic
+                    MatList[matName] = ElasticOrtho([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), float(z3[7]), float(z3[8]), mass])
+                elif IType == "elastic_sda" and SDA:  # not addressed anymore above - replaced by ELASTICLT, SDA
+                    MatList[matName] = ElasticSDA([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), mass], RedInt, RotCrack, PrinStrain, ShearRetFac, S2ndCrack, float(S2ndCrackA))
+                elif IType == "mises":
+                    if zLen < 7: raise NameError("ConFemInOut::DataInput: not enough data for *MISES", matName, z3)
+                    MatList[matName] = Mises([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass], [0, 0])
+                    MatList[matName + '1'] = MisesUniaxial([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass], [0, 0])  # provision for uniaxial behavior
+                    MatList[matName + '2'] = MisesBeam2D_([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass], [0, 0])  # provision for uniaxial behavior with beams
+                elif IType == "misesre":
+                    if len(z3) == 6:
+                        val = 0.
+                    elif len(z3) == 7:
+                        val = float(z3[6])
+                    else:
+                        raise NameError("ConFemInOut::DataInput: number of mises reinforcement membrane data")
+                    MatList[matName] = WraMisesReMem([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), 0., val, mass], [0, 0])
+                elif IType == "isodam":
+                    if zLen < 12: raise NameError("ConFemInOut::DataInput: not enough data for *ISODAMAGE", zLen)
+                    iList = []
+                    iList = [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), int(z3[4]), float(z3[5]), float(z3[6]), float(z3[7]), int(z3[8]), float(z3[9]), float(z3[10]), float(z3[11]), 0.]
+                    iList.append(mass)
+                    MatList[matName] = IsoDamage(iList, RotCrack, PrinStrain, ShearRetFac, S2ndCrack, float(S2ndCrackA))
+                elif IType == "mp_dam_":
+                    if zLen < 11: raise NameError("ConFemInOut::DataInput: not enough data for *MICRODAMAGE")
+                    iList = []
+                    iList = [float(z3[0]), float(z3[1]), int(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), int(z3[7]), float(z3[8]), float(z3[9]), float(z3[10]), 0.]
+                    iList.append(mass)
+                    MatList[matName] = MicroPlaneDam(iList, None, None, None, None, None, ff)
+                elif IType == "lubliner":
+                    if zLen == 13:
+                        pass
+                    else:
+                        raise NameError("ConFemInOut::ReadInputFile: number of Lubliner data")
+                    MatList[matName] = Lubliner(
+                        [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), float(z3[7]), float(z3[8]), float(z3[9]), float(z3[10]), float(z3[11]), float(z3[12]), mass])
+                elif IType == "rcBeam":
+                    if LineCounter == 0:                                    # material data concrete
+                        if zLen < 10: raise NameError("ConFemInOut::DataInput: too less concrete material data", z3)
+                        L1 = [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), int(z3[5]), float(z3[6]), float(z3[7]), float(z3[8]), mass, float(z3[9])]  # material data concrete
+                        LineCounter = LineCounter + 1
+                    else:  # material data reinforcement of mises type
+                        if zLen < 7: raise NameError("ConFemInOut::DataInput: too less reinforcement material data")
+                        MatList[matName] = RCBeam([L1, [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass]])  # material data reinforcement
+                elif IType == "nlslab":
+                    IList = [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), float(z3[7]), float(z3[8])]
+                    if len(z3) > 9: IList += [float(z3[9]), float(z3[10]), float(z3[11]), float(z3[12]), float(z3[13]), float(z3[14]), float(z3[15]), float(z3[16])]
+                    MatList[matName] = NLSlab(IList)
+                elif IType == "rcshell":  # data MATERIAL wrapper for reinforced shell
+                    if zLen == 7:
+                        val, matn, matT = 0., z3[6].strip(), None
+                    elif zLen == 8:
+                        val, matn, matT = float(z3[6]), z3[7].strip(), None
+                    elif zLen == 9:
+                        val, matn, matT = float(z3[6]), z3[7].strip(), z3[8]  # to allow for a selection of reinforcement type: TR -> TextileR, otherwise -> MisesUniaxial
+                    if matn in MatList:
+                        L1 = MatList[matn].PropMat
+                    else:
+                        raise NameError("ConFemInOut::DataInput: unknown bulk for RC shell wrapper - maybe wrong sequence of materials in input", val, matn)
+                    L2 = [float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), val, mass]  # see mises:__init__ for meaning of parameters
+                    MatList[matName] = WraRCShell([L1, L2], MatList[matn], matT, ff)
+                elif IType == "spring":
+                    MatList[matName] = Spring([float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6])])
+                elif IType == "bond":
+                    if LineCounter == 0:
+                        L1 = [float(z3[0]), float(z3[1]), float(LatBonTeFac)]
+                        LineCounter += 1
+                    elif LineCounter == 1:
+                        L2 = [float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6])]
+                        MatList[matName] = Bond(L1, L2, TraPre)  # adding transverse pressure option to bond material - Ahmad
+                elif IType == "polyBeam":
+                    if LineCounter == 0:
+                        L1 = [[float(z3[0]), float(z3[1])]]
+                        LineCounter += 1
+                    elif LineCounter == 1:
+                        L1 += [[float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5])]]
+                        LineCounter += 1
+                    elif LineCounter == 2:
+                        L1 += [[float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5])]]
+                        MatList[matName] = PolyBeam(matName, L1[0][0], L1[0][1], L1[1], L1[2])
+                elif IType == "AbaConc":
+                    Echo(f"ignored {sval:s}", ff)
+                elif IType == "misesbeam":
+                    MatList[matName] = MisesBeam2D([float(z3[0]), float(z3[1]), float(z3[2]), float(z3[3]), float(z3[4]), float(z3[5]), float(z3[6]), mass], [0, 0])
+                ### end end material stuff 2nd phase ###################################################################
+
+                elif IType=="beamreinforcement":                            # reinforcement
+                    if zLen<4: raise NameError("ConFemInOut::DataInput: too less reinforcement data")
+                    if zLen>4 and z3[4][0:2]=='TC': RType='TC'              # textile or other reinforcement than ordinary rebars
+                    else:                           RType='RC'
+                    if linecounter==0:
+                        BreiDic[breiName] = [[float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),RType]] # reinforcement cross section and tension stiffening data
+                        linecounter = linecounter+1
+                    else:
+                        BreiDic[breiName] += [[float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),RType]] # reinforcement cross section and tension stiffening data
+                elif IType=="solidsection":                                     # data SOLID SECTION
+                    SecDic[elset] = SolidSection( elset, mat,nRebar, float(z3[0]))
+                elif IType=="beamsection":                                      # data BEAM SECTION
+                    if beamSecType=="RECT":
+                        if linecounter==0:
+                            SecDic[elset] = BeamSectionRect( beamSecType,elset,mat,nRebar,bStiff_, float(z3[0]), float(z3[1]), [], ReinfName=reinf) # concrete cross section data
+                            linecounter = linecounter+1
+                        else:
+                            if zLen<4: raise NameError ("ConFemInOut::DataInput: too less reinforcement data")
+                            if zLen>4 and z3[4][0:2]=='TC': RType='TC' # textile or other reinforcement than ordinary rebars
+                            else:                           RType='RC'
+                            SecDic[elset].Reinf += [[float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),RType]] # reinforcement cross section and tension stiffening data
+                    elif beamSecType.upper()=="CIRCLE":
+                        SecDic[elset] = BeamSectionCircle( beamSecType,elset,mat,nRebar,bStiff_, float(z3[0]), ReinfName=reinf) # concrete cross section data
+                    elif beamSecType.upper()=="POLYLINE":
+                        if linecounter==0:
+                            SecDic[elset] = BeamSectionPoly( beamSecType,elset,mat,nRebar,bStiff_, [], ReinfName=reinf) # concrete cross section data
+                            SecDic[elset].AddPoint(float(z3[0]), float(z3[1]))
+                            linecounter = linecounter+1
+                        else:
+                            SecDic[elset].AddPoint(float(z3[0]), float(z3[1]))
+                    else: raise NameError ("ConFemInOut::DataInput: unknown beam section type", beamSecType)
+                elif IType=="shellsection":                                     # data SHELL SECTION
+                    if linecounter==0:
+                        SecDic[elset] = ShellSection( elset, mat, float(z3[0]), [] )
+                        linecounter = linecounter+1
+                    else:
+                        SecDic[elset].Reinf += [[float(z3[0]),float(z3[1]),float(z3[2]),float(z3[3]),float(z3[4])]] # reinforcement cross section and tension stiffening data, see also ConFemEelem::SH4.__init__
+                #  amplitude definition out of step
+                elif IType == 'amplitude':
+                    AList_ = []
+                    for i in range(0,len(z3),2):
+                        try:     AList_ += [[float(z3[i]),float(z3[i+1])]]
+                        except:  break
+                    AmpDict[AmpName] = AList_                                   # AmpDict is a local dictionary
+
+    ResultTypes = ElemListPost(SecDic,BreiDic, ElsetDicProps, MatList, ElemList, AmpDict, StepList,RandomData, ff)
+
     if Restart: return MatList, StepList
     else:       return NodeList, ElemList, MatList, SecDic, NoLabToNoInd, StepList, ResultTypes, Header
 

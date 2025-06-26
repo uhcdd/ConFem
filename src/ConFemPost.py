@@ -1879,7 +1879,9 @@ def ReadResultsFromFile( MatList, ff, ffN):
                         "BAX23EI": [2, ["4:5", "8:8", "9:9"], True],
                         "BAX21E":  [2, ["3:3","4:4","5:5"], True],          # normal force, bending moment, shear force
                         "BAX21":   [2, ["3:3", "4:4", "5:5"], True],
-                        "B21":     [2, ["3:3", "4:4", "5:5"], True]
+                        "B21":     [2, ["3:3", "4:4", "5:5"], True],
+                        "BAX23":   [2, [], True],                # dummy
+                        "B23":     [2, [], True]
 #                        "BondAX3": [2, ["2:2", "3:3"], True]                # [] lateral, longitudinal bond stress
                      },
         "ELASTIC1DR":{  "TAX2I": [2, ["2:2", "6:6", "7:7"], True],
@@ -1903,6 +1905,7 @@ def ReadResultsFromFile( MatList, ff, ffN):
         "ELASTIC_PHASEFIELD": { "T1D2":  [2, ["1:1"], True]                    # uniaxial stress
 
                     },
+        "ElasticOrtho": {"S2D6": [2, [], True]},
         "ISODAMAGE": {  "CPS4":  [2, ["4:7"],  False],
                         "CPS3":  [2, ["4:7"],  False],
                         "CPS4S": [2, ["4:7"],  False],
@@ -2245,7 +2248,7 @@ if __name__ == "__main__":
 #    Name = "../_DataTmp/Deep_beam_AacNL"
 #    Name = "../_DataBenchmarks/Aachentests/Deep_beam"
 #    Name = "../_DataShellsSlabs/IuriisExamples/slab_SH4"
-    Name ="../DataExamples/E10-02/IsoDam/E10-02"
+#    Name ="../DataExamples/E10-02/IsoDam/E10-02"
 
 #    Name, VTK,VTK3D = "../_DataC3D/Cube8", True, True
 #    Name, VTK, VTK3D = "../_DataC3D/Deep_beam_SDA", True, True
@@ -2256,7 +2259,7 @@ if __name__ == "__main__":
 #    Name = "C:/Users/uhc/Desktop/Note_FlatSlab_Comp/ExpDataLandler_25-02-07/1-M0-25-1.23/1-M0-25-1.23"
 #    Name = "C:/Users/uhc/Desktop/Note_FlatSlab_Comp/ExpDataLandler_25-01-30/1-M0-25-1.23/1-M0-25-1.23"
 #    Name = "../_DataBond/PulloutAxiSym"
-#    Name = "../_DataAxisym/BAX23"
+    Name = "../_DataTmp/E10-02_20/E10-02"
 #    Name = "../_DataTmp/1-M0-25-1.23"
 
     DirName, FilName = DirFilFromName( Name )

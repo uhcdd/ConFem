@@ -10,7 +10,6 @@ from matplotlib.pylab import *
 from numpy import zeros, loadtxt, dot, transpose #, array, sqrt, double, fabs, ma
 from ConFemBasics import FindIndexByLabel
 import pickle
-import imp
 
 try:
     import LinAlg2

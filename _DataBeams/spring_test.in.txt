@@ -13,41 +13,41 @@ test file for testing the B23 element in combination with the S2D6 spring elemen
        10,        1.6,     0.0
        11,        1.8,     0.0
        12,        2.0,     0.0
-***************************Betonbalken1*********************************
-*BEAM SECTION, SECTION=RECT, ELSET=balken1, MATERIAL=MAT1
-    0.2, 0.4
-*MATERIAL, NAME=MAT1
-*ELASTIC
-     36000.0, 0.2
 *ELEMENT, TYPE=B23, ELSET=balken1
        1,       1,       2
        2,       2,       3
        3,       3,       4
        4,       4,       5
        5,       5,       6
-***************************Feder*******************************
-*SOLID SECTION, ELSET=Feder, MATERIAL=MAT3
-        5.03e-04
-*MATERIAL, NAME=MAT2
-*ELASTIC
-   5.000e+05, 0.
-*MATERIAL, NAME=MAT3
-*ELASTICORTHO
- 1., 1., 0., 0., 0., 0., 0., 0., 5.000e+05
-*ELEMENT, TYPE=S2D6, ELSET=Feder
-       6,       6,       7
-***************************Betonbalken2*********************************
-*BEAM SECTION, SECTION=RECT, ELSET=balken2, MATERIAL=MAT1
-    0.2, 0.4
 *ELEMENT, TYPE=B23, ELSET=balken2
        7,       7,       8
        8,       8,       9
        9,       9,      10
       10,      10,      11
       11,      11,      12
+*ELEMENT, TYPE=S2D6, ELSET=Feder
+       6,       6,       7
+***************************************************************
+*MATERIAL, NAME=MAT1
+*ELASTIC
+     36000.0, 0.2
+*MATERIAL, NAME=MAT2
+*ELASTIC
+   5.000e+05, 0.
+*MATERIAL, NAME=MAT3
+*ELASTICORTHO
+ 1., 1., 0., 0., 0., 0., 0., 0., 5.000e+05
+***************************Betonbalken1*********************************
+*BEAM SECTION, SECTION=RECT, ELSET=balken1, MATERIAL=MAT1
+    0.2, 0.4
+***************************Betonbalken2*********************************
+*BEAM SECTION, SECTION=RECT, ELSET=balken2, MATERIAL=MAT1
+    0.2, 0.4
+***************************Feder*******************************
+*SOLID SECTION, ELSET=Feder, MATERIAL=MAT3
+        5.03e-04
 ************************************************************
 *STEP
-  **100
 *STATIC
   1., 1.
 *BOUNDARY, OP=NEW
@@ -63,4 +63,5 @@ S
 E
 *NODE FILE, FREQUENCY=1.0
 U
-*ENDSTEP
+*END STEP
+************************************************************
